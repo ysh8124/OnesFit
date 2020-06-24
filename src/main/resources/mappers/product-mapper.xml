@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+
+	<insert id="addProduct">insert into product values(product_seq.nextval,#{pname},${price},#{category},default,#{content},#{img},default,default)</insert>
+
+<insert id="addImg">insert into product_img values(${img_seq},#{oriName},#{sysName})</insert>
+	
+	<select id="getSequence" resultType="int">select max(pseq) from product</select>
+
+
+
+</mapper>
