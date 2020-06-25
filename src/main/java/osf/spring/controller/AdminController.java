@@ -13,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import osf.spring.dto.MemberDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
+import osf.spring.service.MemberService;
 import osf.spring.service.ProductService;
 
 @Controller
@@ -64,6 +66,9 @@ public class AdminController {
 	private ProductService pservice;
 	
 	@Autowired
+	private MemberService mservice;
+	
+	@Autowired
 	private HttpSession session;
 
 	@RequestMapping("adminMain")
@@ -84,6 +89,14 @@ public class AdminController {
 	@RequestMapping("productAdd")
 	public String goProductAdd() {
 		return "/admin/productAdd";
+	}
+	
+	@RequestMapping("memberAdmin")
+	public String goMembers(Model model) {
+		List<MemberDTO> mdto = mservice.getMembers();
+		model.addAttribute("mdto",mdto);
+		System.out.println(mdto.size());
+		return "/admin/memberAdmin";
 	}
 	
 	

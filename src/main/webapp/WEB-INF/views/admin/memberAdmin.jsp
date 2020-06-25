@@ -14,6 +14,8 @@
 
         table{border: 1px solid #999;}
         table tr td{border: 1px solid #999;}
+        
+        tr td a{text-decoration: none; color:grey;}
 
         /*    모든 영역*/
         #container{height: 1000px;}
@@ -82,7 +84,7 @@
                                  <option>별명</option>
                                  </select>   
                                <input id="search" type="text">     
-                                <a href=""><img src="glass.png" style="width: 17px"></a>
+                                <a href=""><img src="../resources/img/search.png" style="width: 17px"></a>
                     </div>
                       
                     <table>   
@@ -98,20 +100,29 @@
                             <td style="width: 50px;font-size: 12px">블랙<br>리스트</td>
                             <td style="width: 140px">비고</td>
                         </tr>
+                        <c:choose>
+                        <c:when test="${!empty mdto }">
+                        	<c:forEach var="m" items="${mdto}">
                         <tr>
-                            <td>id1234</td>
-                            <td>유수헌</td>
-                            <td>경기도 고양시 덕양구 행신3동 <br> xx아파트 xxxx동 xxxx호</td>
-                            <td>010-7388-8124</td>
-                            <td>ysh8124@naver.com</td>
+                            <td>${m.id }</td>
+                            <td>${m.name }</td>
+                            <td>${m.address1 } <br> ${m.address2 }</td>
+                            <td>${m.phone }</td>
+                            <td>${m.email }</td>
+                            <td>${m.regist_date }</td>
                             <td>2020-06-22 08:48</td>
-                            <td>2020-06-22 08:48</td>
-                            <td><input type="text" name="point" value="2000" id="point"></td>
-                            <td align=center>N</td>
-                            <td><a href="#">삭제</a>
-                            <a href="#">블랙리스트</a>
+                            <td><input type="text" value="${m.point}" style="width:80px"></td>
+                            <td align=center>${m.blacklist_yn }</td>
+                            <td><a href="/admin/deleteMember?id='${m.id}'">삭제</a>
+                            <a href="/admin/blacklist?id='${m.id}'">블랙</a>
                             </td>
                         </tr>
+                        	</c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                        <td colspan=10 align=center>회원이 없습니다.
+                        </c:otherwise>
+                        </c:choose>
                        
                     </table>
                 </div>
