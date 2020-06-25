@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
 
 @Repository
@@ -15,6 +16,10 @@ public class ProductDAO {
 	
 	@Autowired
 	private SqlSessionTemplate mybatis;
+	
+	public List<ProductDTO> getProduct(){
+		return mybatis.selectList("product.getProduct");
+	}
 	
 	public int productAdd(String pname,int price,String content, String category,String sysname) {
 		Map<String,String> param = new HashMap();

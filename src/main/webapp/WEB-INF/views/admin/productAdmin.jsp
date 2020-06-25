@@ -73,7 +73,7 @@
                             <div class="position">
                                 <ul class="m-category">
                                     <li><a href="">Member</a></li>
-                                    <li><a href="">product</a></li>
+                                    <li><a href="#">product</a></li>
                                     <li><a href="">Qna</a></li>
                                     <li><a href="">cody</a></li>
                                     <li><a href="">order</a></li>
@@ -115,18 +115,25 @@
                         </tr>
                         
                         <!-- choose문 들어갈 자리 -->
-                        <tr align=center>
-
-                            <td align=center>1</td>
-
-                            <td class="text" align=left><a href="#">미니멀 반팔가디건</a>
+                        <c:choose>
+                        	<c:when test="${!empty pdto}">
+                        		<c:forEach var="p" items="${pdto}">
+                        			<tr align=center>
+                            <td align=center>${p.pseq }</td>
+                            <td class="text" align=left><a href="#">${p.pname }</a>
                             </td>
-                            <td class="text" align=center>상품가격</td>
-                            <td class="text">등록일자</td>
-                            <td class="text" align=center>상품분류</td>
-                            <td align=center class="text">N</td>
-                            <td class="text"><a href="product/toModify.proc">수정</a><a href="product/productDelete.proc?${pseq}" style="margin-left: 20px;">삭제</a></td>  
+                            <td class="text" align=center>${p.price}</td>
+                            <td class="text">${p.regist_date }</td>
+                            <td class="text" align=center>${p.category}</td>
+                            <td align=center class="text">${p.soldout_yn}</td>
+                            <td class="text"><a href="product/toModify.proc">수정</a><a href="product/productDelete.proc?${p.pseq}" style="margin-left: 20px;">삭제</a></td>  
                         </tr>
+                        		</c:forEach>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<tr><td align=center colspan=7>상품이 없습니다.</tr>
+                        		</c:otherwise>
+                        </c:choose>
                         <!-- 출력문 끝나고 지워야함 -->
                         
                     </table>

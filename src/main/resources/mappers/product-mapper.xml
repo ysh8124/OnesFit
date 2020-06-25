@@ -8,6 +8,6 @@
 	
 	<select id="getSequence" resultType="int">select max(pseq) from product</select>
 
-
+<select id="getProduct" resultType="osf.spring.dto.ProductDTO">select * from product</select>
 
 </mapper>
