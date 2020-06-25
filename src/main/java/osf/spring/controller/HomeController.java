@@ -14,12 +14,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-	@RequestMapping("/")
+	@RequestMapping("productAdd")
 	public String home() {
 		
 		return "/admin/productAdd";
 	}
 	
+	@RequestMapping("adminMain")
+	public String goAdmin() {
+		return "/admin/adminMain";
+	}
+	
+	@RequestMapping("productAdmin")
+	public String productAdmin() {
+		return "/admin/productAdmin";
+	}
 	
 	
 }

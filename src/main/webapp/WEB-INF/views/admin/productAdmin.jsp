@@ -7,6 +7,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Admin</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
          <style>
         *{box-sizing: border-box}
         div{border:1px solid black}
@@ -43,6 +44,13 @@
         }
         
     </style>
+    <script>
+    	$(function(){
+    		$("#add").on("click",function(){
+    		location.href="../admin/productAdd";
+    		})
+    	})
+    </script>
     </head>
     <body>
         <!--       전체 영역-->
@@ -88,7 +96,7 @@
                             </select> 
                             <input id="search" type="text">     
                             <a href="">
-                                <img src="KakaoTalk_20200619_164336668.png" style="width: 18px; position: relative; top: 4px"></a>
+                                <img src="../resources/img/search.png" style="width: 18px; position: relative; top: 4px"></a>
                      
                     </div>
 
@@ -105,6 +113,8 @@
                             <td style="width: 100px">품절</td>
                             <td style="width: 200px">비고</td>    
                         </tr>
+                        
+                        <!-- choose문 들어갈 자리 -->
                         <tr align=center>
 
                             <td align=center>1</td>
@@ -117,7 +127,11 @@
                             <td align=center class="text">N</td>
                             <td class="text"><a href="product/toModify.proc">수정</a><a href="product/productDelete.proc?${pseq}" style="margin-left: 20px;">삭제</a></td>  
                         </tr>
+                        <!-- 출력문 끝나고 지워야함 -->
+                        
                     </table>
+                    <div style="width:1268px;"><button id="add" style="margin-left: 1100px">상품등록</button></div>
+                    
                 </div>
 
             </div>

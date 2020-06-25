@@ -3,7 +3,6 @@ package osf.spring.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,15 +16,8 @@ import osf.spring.dto.ProductImgDTO;
 import osf.spring.service.ProductService;
 
 @Controller
-@RequestMapping("/product/")
-public class ProductController {
-	
-	
-	@Autowired
-	private ProductService pservice;
-	
-	@Autowired
-	private HttpSession session;
+@RequestMapping("/admin/")
+public class AdminController {
 	
 	public String filesUpload2(MultipartFile file,int seq) throws Exception {       
 		 String filePath = session.getServletContext().getRealPath("upload/product/title");
@@ -66,7 +58,30 @@ public class ProductController {
 	     }return pdto;
 	   }  
 	
+	@Autowired
+	private ProductService pservice;
+	
+	@Autowired
+	private HttpSession session;
+
+	@RequestMapping("adminMain")
+	public String goAdminMain() {
+		return "/admin/adminMain";
+	}
+	
+	@RequestMapping("productAdmin")
+	public String goProductAdmin() {
+		return "/admin/productAdmin";
+	}
+	
 	@RequestMapping("productAdd")
+	public String goProductAdd() {
+		return "/admin/productAdd";
+	}
+	
+	
+	
+	@RequestMapping("productAddProc")
 	public String productAdd(HttpServletRequest request,MultipartFile[] files,MultipartFile file) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		String pname = request.getParameter("pname");
@@ -81,4 +96,5 @@ public class ProductController {
 		pservice.productAdd(pname,price,content,category,sysname);
 		return "redirect:/admin/adminMain";
 	}
+	
 }

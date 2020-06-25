@@ -61,7 +61,7 @@
                             <div class="position">
                                 <ul class="m-category">
                                     <li><a href="">Member</a></li>
-                                    <li><a href="">product</a></li>
+                                    <li><a href="productAdmin">product</a></li>
                                     <li><a href="">Qna</a></li>
                                     <li><a href="">cody</a></li>
                                     <li><a href="">order</a></li>
@@ -83,7 +83,7 @@
                                  <option>별명</option>
                                  </select>   
                                <input id="search" type="text">     
-                                <a href=""><img src="glass.png" style="width: 17px"></a>
+                                <a href=""><img src="../resources/img/search.png" style="width: 17px"></a>
                     </div>
                       
                    
