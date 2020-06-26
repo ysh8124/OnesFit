@@ -51,5 +51,9 @@ public class ProductDAO {
 		mybatis.insert("product.addImg",param);
 		}
 	}
+	
+	public ProductDTO productDetail(int pseq) {
+		return mybatis.selectOne("product.productDetail",pseq);
+	}
 
 }

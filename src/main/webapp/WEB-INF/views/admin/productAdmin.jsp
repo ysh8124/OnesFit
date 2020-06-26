@@ -8,9 +8,44 @@
         <meta charset="UTF-8">
         <title>Admin</title>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
          <style>
-        *{box-sizing: border-box}
-        div{border:1px solid black}
+        
+ @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+            *{box-sizing: border-box;}
+    
+            .side-nav {
+                position: fixed;
+                top: 64px;
+                left: 225px;
+                width: 225px;
+                margin-left: -225px;
+                border: none;
+                border-radius: 0;
+                overflow-y: auto;
+                background-color: black;
+                bottom: 0;
+
+            }
+
+            .side-nav>li>a {
+                width: 225px;
+                border-bottom: 1px rgba(0,0,0,.3) solid;
+            }
+
+            .side-nav li a:hover,
+            .side-nav li a:focus {
+                outline: none;
+                background-color: dimgrey;
+            }
+            
+            .side-nav li a {
+                color: white;
+            }
+
+#shipping_info{border: 1px solid #dfdfdf; width: 800px; font-size: 11px;}
+            #shipping_info td{padding: 10px}
+            #shipping_info th{text-align: center; height: 50px;}
 
         table{border: 1px solid #d3d8e1}
         table tr td{border: 1px solid #d3d8e1}
@@ -18,19 +53,7 @@
         /*    모든 영역*/
         #container{height: 1000px;}
 
-        /*    왼쪽 메뉴*/
-        #sidemenu{float: left; width: 287px;  padding: 180px 0 10px 50px;}
-        #sidefix ul{list-style: none;}
-        #sidefix ul li a{text-decoration: none; 
-            color: black; 
-            position: relative;
-            display: inline-block;
-            margin: 0px 15px 5px 0;
-            color: #000;
-            font-size: 11px;
-            letter-spacing: 0;
-            text-transform: uppercase;    
-        }
+
         table tr img{width: 120px; height: 150px;}
 
 
@@ -59,31 +82,23 @@
             <div id="container">
 
                 <!--               사이드메뉴-->
-                <div id="sidemenu">
-
-                    <div id="sidefix">
-                        <h1 style="text-align: center">
-                            Manager
-                            <a href="">
-                                <img src="">
-                            </a>
-                        </h1>
-
-                        <div id="category">
-                            <div class="position">
-                                <ul class="m-category">
-                                    <li><a href="">Member</a></li>
-                                    <li><a href="#">product</a></li>
-                                    <li><a href="">Qna</a></li>
-                                    <li><a href="">cody</a></li>
-                                    <li><a href="">order</a></li>
-                                    <li><a href="">notice</a></li>
-                                    <li><a href="">popup</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                 <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div style="color: white; margin-left: 18px;"><h2>ADMIN</h2></div>
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <div>
+                    <ul class="nav side-nav">
+                        <li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
+                        <li> <a href="#"> 상품 관리 </a></li>
+                        <li> <a href="#"> 주문 관리 </a></li>
+                        <li><a href="">회원 관리</a></li>
+                        <li><a href="">Q&A 관리</a></li>
+                        <li><a href="">DAILY 게시판</a></li>
+                        <li><a href="">공지사항 </a></li>    
+                        <li><a href="">팝업 관리</a></li>  
+                        <li><a href=""><i class="fa fa-fw fa fa-question-circle"></i> 판매자 정보</a></li>
+                    </ul>
                 </div>
+            </nav>
 
                 <div id="contents">
                     <div style="width:100%">
@@ -126,7 +141,7 @@
                             <td class="text">${p.regist_date }</td>
                             <td class="text" align=center>${p.category}</td>
                             <td align=center class="text">${p.soldout_yn}</td>
-                            <td class="text"><a href="product/toModify.proc">수정</a><a href="product/productDelete.proc?${p.pseq}" style="margin-left: 20px;">삭제</a></td>  
+                            <td class="text"><a href="/admin/toModify?pseq=${p.pseq}">수정</a><a href="/admin/productDelete?pseq=${p.pseq}" style="margin-left: 20px;">삭제</a></td>  
                         </tr>
                         		</c:forEach>
                         		</c:when>

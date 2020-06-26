@@ -31,4 +31,8 @@ public class ProductService {
 		pdao.addImg(pdto,seq);
 	}
 	
+	public ProductDTO productDetail(int pseq) {
+		return pdao.productDetail(pseq);
+	}
+	
 }

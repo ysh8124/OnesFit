@@ -81,9 +81,16 @@ public class AdminController {
 		List<ProductDTO> pdto= pservice.getProduct();
 		System.out.println(pdto.size());
 		model.addAttribute("pdto",pdto);
-		
-		
+
 		return "/admin/productAdmin";
+	}
+	
+	@RequestMapping("toModify")
+	public String goProductModify(HttpServletRequest request,Model model) {
+		int pseq = Integer.parseInt(request.getParameter("pseq"));
+		ProductDTO pdto = pservice.productDetail(pseq);
+		model.addAttribute("pdto",pdto);
+		return "/admin/productModify";
 	}
 	
 	@RequestMapping("productAdd")

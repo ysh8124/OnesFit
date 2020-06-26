@@ -171,6 +171,8 @@
             }
 
             $(function(){
+            	$("input[value='${pdto.category}']").prop("checked",true);
+            	
                 $('#files').change(function(){
                     const target = document.getElementsByName('files');
 
@@ -255,16 +257,15 @@
                 <br>
                 <table id="shipping_info" border="1">
                     <tbody>
-                     <tr><th>상품명</th><td><input type="text" name="pname"></tr>
+                    <tr><th>PRODUCT</th><td><input type="text" name="pname" value="${pdto.pname}"></tr>
                         <tr>
-                            <th style="width: 150px">PRODUCT</th>
+                            <th style="width: 150px">CATEGORY</th>
                             <td>
                                 <div class="address">
                                     <input type="radio" value="outer" id="radio" name="category"> OURER
                                     <input type="radio" value="top" id="radio" name="category"> TOP
                                     <input type="radio" value="bottom" id="radio" name="category"> BOTTOM
                                     <input type="radio" value="acc" id="radio" name="category"> ACC
-
                                 </div>
                             </td>
                         </tr>
