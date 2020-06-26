@@ -84,6 +84,8 @@
                 border: 1px solid #c4c4c4; background-color: rgba(266,266,266,0); color: #c4c4c4; 
             }
             
+
+            
             #xbox2 img{width:200px;height:200px;}
             #xbox2 img:hover{cursor:pointer;}
 
@@ -189,8 +191,12 @@
                     });
 
                 });
+                
 
-
+				$("#optionAdd").on("click",function(){
+					$("#colorBox").append("<input type='text' name='color'><button type='button' class='minus'");
+				})
+                
 
                 $("#price").focusout(function(){
                     if($("#price").val() != ""){
@@ -260,7 +266,7 @@
                             <th style="width: 150px">PRODUCT</th>
                             <td>
                                 <div class="address">
-                                    <input type="radio" value="outer" id="radio" name="category"> OURER
+                                    <input type="radio" value="outer" id="radio" name="category"> OUTER
                                     <input type="radio" value="top" id="radio" name="category"> TOP
                                     <input type="radio" value="bottom" id="radio" name="category"> BOTTOM
                                     <input type="radio" value="acc" id="radio" name="category"> ACC
@@ -272,6 +278,16 @@
                             <th scope="row">PRICE</th>
                             <td><input id="input" style="border: 1px solid #dfdfdf;" name="price"></td>
                         </tr>
+                        <tr><th>Size</th><td>
+                    <input type=checkbox name="size" value="free">Free
+                    <input type=checkbox class="size" name="size" value="S">S
+                    <input type=checkbox class="size" name="size" value="M">M
+                    <input type=checkbox class="size" name="size" value="L">L
+                    <input type=checkbox class="size" name="size" value="XL">XL
+                    </tr>
+                    <tr><th>Color</th><td class="colorBox">
+                    <input type="text" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button>
+                    </tr>
                         <tr>
                             <th scope="row">
                                 Explanation</th>

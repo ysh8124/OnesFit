@@ -137,7 +137,7 @@
                             <td align=center>${p.pseq }</td>
                             <td class="text" align=left><a href="#">${p.pname }</a>
                             </td>
-                            <td class="text" align=center>${p.content}</td>
+                            <td class="text" align=center>${p.price}</td>
                             <td class="text">${p.regist_date }</td>
                             <td class="text" align=center>${p.category}</td>
                             <td align=center class="text">${p.soldout_yn}</td>

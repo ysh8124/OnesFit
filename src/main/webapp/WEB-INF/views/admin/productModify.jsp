@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Product Add</title>
+        <title>Product Modify</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -250,6 +250,7 @@
                     </ul>
                 </div>
             </nav>
+            
             <div id="product_contents">
                     <form action="/product/productAdd.proc" method="post" enctype="multipart/form-data" accept-charset="utf8">
                 <b style="font-size: 15px">상품정보</b>
@@ -258,6 +259,17 @@
                 <table id="shipping_info" border="1">
                     <tbody>
                     <tr><th>PRODUCT</th><td><input type="text" name="pname" value="${pdto.pname}"></tr>
+                    <tr><th>Size</th><td>
+                    <input type=checkbox value="free">Free
+                    <input type=checkbox value="S">S
+                    <input type=checkbox value="M">M
+                    <input type=checkbox value="L">L
+                    <input type=checkbox value="XL">XL
+                    </tr>
+                    <tr>
+                    
+                    </tr>
+                    <tr><th>Color</th><td><input type="text" name="color"></tr>
                         <tr>
                             <th style="width: 150px">CATEGORY</th>
                             <td>
