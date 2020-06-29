@@ -172,14 +172,7 @@
                 }
             }
             
-            function option(){
-            	var option = new Map();
-            	var color[] = $("input[name=color]");
-            	var size[] = $(".size");
-            	for(var i=0;i<color.length;i++){
-            		
-            	}
-            }
+
 
             $(function(){
                 $('#files').change(function(){
@@ -221,7 +214,7 @@
 				});
 
 				$("#optionAdd").on("click",function(){
-					$("#colorBox").append("<div style='width:100%;'><div class='subOption' style='width:30%;'><input type='text' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button></div><div class='extraOption'>"+$('#subSize').html()+"</div></div>");
+					$("#colorBox").append("<div style='width:100%;'><div class='subOption' style='width:30%;'><input type='text' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button></div><div class='extraOption opsize'>"+$('#subSize').html()+"</div></div>");
 				
 				})
                 
@@ -236,7 +229,7 @@
                             $("#input").focus();}
                     }
                 })
-
+// 여기 유찬이형 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 $("#submit").on("click",function(){
                 	var check = false;
                 	$("input[name=category]").each(function(){if($(this).is(":checked")){check = true;}});
@@ -245,15 +238,26 @@
                             if($("input[name=price]").val() != ""){
                                 if($("#textArea").val() != ""){
                                     if(document.getElementById("profile_pt").value != "" && $("#files").val() != ""){
-                                    	option = option();
-       	
-                                    	console.log(option.size());
+                                    	
+                                    	var option = new Map();
+                                    	var arr = new Array();
+                                    	$("input[name=color]").each(function(index1,item1){
+                                    		arr = [];
+                                    		$("input[value="+$(item1).val()+"] + checkbox").each(function(index2,item2){
+                                    			if($(item2).is(":checked")){arr.push($(item1).val()+"/"+$(item2).val());}
+                                    			alert($(item1).val()+"/"+$(item2).val());
+                                    		});
+                                    		alert(arr.size());
+                                    	})
+                                    	
                                     	var input = $("<input>");
-                                    	input.attr("type", "hidden") .attr("name", option).val(); 
+                                    	input.attr("type", "hidden");
+                                    	input.attr("name", "arr");
+                                    	input.val(arr); 
                                     	$('form').append(input);
 
                                         alert("상품 등록에 성공하였습니다.");
-                                       return false;
+                                       return true;
                                       
                                     }else{alert("사진을 등록해주세요.");return false;}
                                 }else{alert("상품 설명을 입력해주세요");return false;}
@@ -264,6 +268,7 @@
                         alert("상품명을 입력해주세요.");
                         return false;}
                 })
+        // 여기까지~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
             })
 
         </script>
@@ -320,7 +325,7 @@
                     <input type=checkbox class="size" name="size" value="XL">XL
                     </tr>
                     <tr><th>Color</th><td id="colorBox">
-                    <div style="width:100%"><div style="width:30%;float:left"><input type="text" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button></div><div id=subSize style="width:70%;"></div></div>
+                    <div style="width:100%"><div style="width:30%;float:left" class=subOption><input type="text" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button></div><div id=subSize class="opsize" style="width:70%;"></div></div>
                     </td>
                     </tr>
                         <tr>

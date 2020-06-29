@@ -3,6 +3,7 @@ package osf.spring.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import osf.spring.dto.MemberDTO;
@@ -24,18 +26,23 @@ import osf.spring.service.ProductService;
 public class AdminController {
 	
 	public String filesUpload2(MultipartFile file,int seq) throws Exception {       
-		 String filePath = session.getServletContext().getRealPath("upload/product/title");
+		 String filePath = session.getServletContext().getRealPath("upload");
 		 
 		String sysname = "";
 		 File tempFilePath = new File(filePath);
-		 System.out.println(tempFilePath);
+		 
 	      if(!tempFilePath.exists()) {
-	         File temp1 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload");
-	         temp1.mkdir();
-	         File temp2 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload\\product");
-	         temp2.mkdir();
-	         File temp3 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload\\product\\title");
-	         temp3.mkdir();
+	    	  tempFilePath.mkdir();
+	    	  filePath += "/product";
+	    	   File temp2 = new File(filePath);
+	    	   if(!temp2.exists()) {
+	 	    	  temp2.mkdir();
+	 	    	  filePath += "/title";
+	 	    	  File temp3 = new File(filePath);
+	 	    	 if(!temp3.exists()) {
+	 		    	  temp3.mkdir();
+	 		      }
+	 	      }
 	      }
 	      if(!file.isEmpty()) {
 		    	 String systemFileName = file.getOriginalFilename();
@@ -49,24 +56,23 @@ public class AdminController {
 	   }  
 	
 	public List<ProductImgDTO> filesUpload(MultipartFile[] files,int seq) throws Exception {       
-		 String filePath = session.getServletContext().getRealPath("upload/product/"+seq);
-		 System.out.println(filePath);
+		 String filePath = session.getServletContext().getRealPath("upload");
+		 
 		 List<ProductImgDTO> pdto=new ArrayList<>();
 		 File tempFilePath = new File(filePath);
 		 if(!tempFilePath.exists()) {
-	         File temp1 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload");
-	         if(!temp1.exists()) {
-	         temp1.mkdir();
-	         }
-	         File temp2 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload\\product");
-	         if(!temp2.exists()) {
-	         temp2.mkdir();
-	         }
-	         File temp3 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload\\product\\"+seq);
-	         if(!temp3.exists()) {
-	         temp3.mkdir();
-	         }
-		 }	     
+	    	  tempFilePath.mkdir();
+	    	  filePath += "/product";
+	    	   File temp2 = new File(filePath);
+	    	   if(!temp2.exists()) {
+	 	    	  temp2.mkdir();
+	 	    	  filePath += "/"+seq;
+	 	    	  File temp3 = new File(filePath);
+	 	    	 if(!temp3.exists()) {
+	 		    	  temp3.mkdir();
+	 		      }
+	 	      }
+	      }   
 	      
 
 	     for(MultipartFile file : files) {
@@ -126,15 +132,17 @@ public class AdminController {
 	
 	
 	@RequestMapping("productAddProc")
-	public String productAdd(HttpServletRequest request,MultipartFile[] files,MultipartFile file) throws Exception{
+	public String productAdd(@RequestParam Map<String,String[]> param,HttpServletRequest request,MultipartFile[] files,MultipartFile file) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		String pname = request.getParameter("pname");
 		int price = Integer.parseInt(request.getParameter("price"));
 		String content = request.getParameter("content");
 		String category = request.getParameter("category");
+		String[] arr = request.getParameterValues("arr");
+		System.out.println(arr.length);
+		
 		int seq = pservice.getProductSequence();
-		String[] size = request.getParameterValues("size");
-		String[] color = request.getParameterValues("color");
+
 		
 //		pservice.addOption(size,color);
 		String sysname = this.filesUpload2(file, seq);
