@@ -171,6 +171,15 @@
                     }
                 }
             }
+            
+            function option(){
+            	var option = new Map();
+            	var color[] = $("input[name=color]");
+            	var size[] = $(".size");
+            	for(var i=0;i<color.length;i++){
+            		
+            	}
+            }
 
             $(function(){
                 $('#files').change(function(){
@@ -190,47 +199,71 @@
                         $('#xbox2').html(html);
                     });
 
-                });
+                })
                 
+                $("input:checkbox").on("change",function() {
+                	var check = new Array();
+                	 $('input:checkbox[name=size]').each(function() {
+                         if($(this).is(':checked')){
+                        	 check.push($(this).val());
+                         }
+                      });
+                	 $("#subSize").html("");
+                	 $(".extraOption").html("");
+                	 for(var i in check){
+                		 $("#subSize").append("<input type=checkbox class='size' name='size' value="+check[i]+">"+check[i]+"");
+                		 $(".extraOption").append("<input type=checkbox class='size' name='size' value="+check[i]+">"+check[i]+"");
+                	 }
+                })
+                
+                $(document).on('click', '.minus', function() {
+ 					 $(this).parent().parent().remove();
+				});
 
 				$("#optionAdd").on("click",function(){
-					$("#colorBox").append("<input type='text' name='color'><button type='button' class='minus'");
+					$("#colorBox").append("<div style='width:100%;'><div class='subOption' style='width:30%;'><input type='text' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button></div><div class='extraOption'>"+$('#subSize').html()+"</div></div>");
+				
 				})
                 
 
-                $("#price").focusout(function(){
-                    if($("#price").val() != ""){
-                        var price=$("#price").val();
+                $("#input").focusout(function(){
+                    if($("#input").val() != ""){
+                        var price=$("#input").val();
                         var ctx = /^\d{1,100}$/g;
                         if(!ctx.test(price)){
-                            $("#price").val("");
+                            $("#input").val("");
                             alert("숫자만 입력해주세요.");
-                            $("#price").focus();}
+                            $("#input").focus();}
                     }
                 })
 
                 $("#submit").on("click",function(){
-                    if($("input[name=category]").val() != null){
-                        if($("#pname").val() != ""){
-                            if($("#price").val() != ""){
-                                if($("#content").val() != ""){
-                                    if($("input[name=file]").val() != null && $("input[name=files]").val() != null){
+                	var check = false;
+                	$("input[name=category]").each(function(){if($(this).is(":checked")){check = true;}});
+                        if($("input[name=pname]").val() != ""){
+                    if(check){
+                            if($("input[name=price]").val() != ""){
+                                if($("#textArea").val() != ""){
+                                    if(document.getElementById("profile_pt").value != "" && $("#files").val() != ""){
+                                    	option = option();
+       	
+                                    	console.log(option.size());
+                                    	var input = $("<input>");
+                                    	input.attr("type", "hidden") .attr("name", option).val(); 
+                                    	$('form').append(input);
+
                                         alert("상품 등록에 성공하였습니다.");
-                                        return true;
-                                        /* location.href="/product/productAdd.proc?pname="+$('#pname').html()+"&&price="+$('#price').html()+"&&content="+$('#content').val()+"&&category="+$('input[name=category]').val()+"&&file="+$('input[name=file]').val()+"&&files="+$('input[name=files]').val(); */
+                                       return false;
+                                      
                                     }else{alert("사진을 등록해주세요.");return false;}
                                 }else{alert("상품 설명을 입력해주세요");return false;}
-                            }else{alert("상품 가격을 입력해주세요.");return false;
-                                 }
-                        }else{alert("상품명을 입력해주세요.");
+                            }else{alert("상품 가격을 입력해주세요.");return false;}
+                        }else{alert("상품 분류를 선택해주세요.");
                               return false;}                                                                 
                     }else{
-                        alert("상품 분류를 선택해주세요.(체크박스)");
+                        alert("상품명을 입력해주세요.");
                         return false;}
-
                 })
-
-
             })
 
         </script>
@@ -255,7 +288,8 @@
                 </div>
             </nav>
             <div id="product_contents">
-                    <form action="/product/productAdd.proc" method="post" enctype="multipart/form-data" accept-charset="utf8">
+                    <form action="/admin/productAddProc" method="post" enctype="multipart/form-data" accept-charset="utf8">
+               
                 <b style="font-size: 15px">상품정보</b>
                 <br>
                 <br>
@@ -279,20 +313,21 @@
                             <td><input id="input" style="border: 1px solid #dfdfdf;" name="price"></td>
                         </tr>
                         <tr><th>Size</th><td>
-                    <input type=checkbox name="size" value="free">Free
+                    <input type=checkbox class="size" name="size" value="Free">Free
                     <input type=checkbox class="size" name="size" value="S">S
                     <input type=checkbox class="size" name="size" value="M">M
                     <input type=checkbox class="size" name="size" value="L">L
                     <input type=checkbox class="size" name="size" value="XL">XL
                     </tr>
-                    <tr><th>Color</th><td class="colorBox">
-                    <input type="text" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button>
+                    <tr><th>Color</th><td id="colorBox">
+                    <div style="width:100%"><div style="width:30%;float:left"><input type="text" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button></div><div id=subSize style="width:70%;"></div></div>
+                    </td>
                     </tr>
                         <tr>
                             <th scope="row">
                                 Explanation</th>
                             <td>
-                                <textarea style="width: 100%; height: 100px; border: 1px solid#dedede" name="content"></textarea> 
+                                <textarea id="textArea" style="width: 100%; height: 100px; border: 1px solid #dedede" name="content"></textarea> 
                             </td>
                         </tr>
                     </tbody>

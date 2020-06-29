@@ -41,6 +41,7 @@ public class MemberDTO {
 		this.blacklist_yn = blacklist_yn;
 		this.recent_contact = recent_contact;
 		this.regist_date = regist_date;
+		this.sDate = new SimpleDateFormat("yyyy-MM-dd").format(recent_contact);
 	}
 
 

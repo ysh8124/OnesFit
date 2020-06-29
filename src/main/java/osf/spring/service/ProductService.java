@@ -23,6 +23,10 @@ public class ProductService {
 		return pdao.productAdd(pname, price, content, category,sysname);
 	}
 	
+//	public int addOption(String[] size,String[] color) {
+//		return pdao.addOption(size,color);
+//	}
+	
 	public int getProductSequence() {
 		return pdao.getProductSequence();
 	}

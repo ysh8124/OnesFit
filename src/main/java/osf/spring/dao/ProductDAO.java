@@ -31,6 +31,10 @@ public class ProductDAO {
 		return mybatis.insert("product.addProduct",param);	
 	}
 	
+//	public int addOption(String[] size,String[] color) {
+//		
+//	}
+	
 	public int getProductSequence() {
 		int num;
 		try {

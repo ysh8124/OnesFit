@@ -32,8 +32,14 @@ public class ProductController {
 		 
 		String sysname = "";
 		 File tempFilePath = new File(filePath);
+		 System.out.println(tempFilePath);
 	      if(!tempFilePath.exists()) {
-	         tempFilePath.mkdir();
+	         File temp1 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload");
+	         temp1.mkdir();
+	         File temp2 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload\\product");
+	         temp2.mkdir();
+	         File temp3 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload\\product\\title");
+	         temp3.mkdir();
 	      }
 	      if(!file.isEmpty()) {
 		    	 String systemFileName = file.getOriginalFilename();
@@ -51,9 +57,20 @@ public class ProductController {
 		 System.out.println(filePath);
 		 List<ProductImgDTO> pdto=new ArrayList<>();
 		 File tempFilePath = new File(filePath);
-	      if(!tempFilePath.exists()) {
-	         tempFilePath.mkdir();
-	      }
+		 if(!tempFilePath.exists()) {
+	         File temp1 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload");
+	         if(!temp1.exists()) {
+	         temp1.mkdir();
+	         }
+	         File temp2 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload\\product");
+	         if(!temp2.exists()) {
+	         temp2.mkdir();
+	         }
+	         File temp3 = new File("D:\\Spring\\workspace_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\OnesFit\\upload\\product\\"+seq);
+	         if(!temp3.exists()) {
+	         temp3.mkdir();
+	         }
+		 }	     
 	      
 
 	     for(MultipartFile file : files) {

@@ -61,6 +61,14 @@
         #point{width: 100px;}
 
     </style>
+    
+    <script>
+    	function num(x) {
+    		alert("???");
+    	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    	}
+
+    </script>
     <body>
         <!--       전체 영역-->
         <div id=OSF_ALL>
@@ -97,8 +105,8 @@
                                  </select>   
                                <input id="search" type="text">     
                                 <a href=""><img src="../resources/img/search.png" style="width: 17px"></a>
-                    </div>
-                      
+                    </div>   
+                                   
                     <table>   
                         <tr align=center>
                             <td style="width:100px">아이디</td>
@@ -122,8 +130,8 @@
                             <td>${m.phone }</td>
                             <td>${m.email }</td>
                             <td>${m.regist_date }</td>
-                            <td>${m.sDate}</td>
-                            <td><input type="text" value="${m.point}" style="width:80px"></td>
+                            <td>${m.sDate}</td>         
+                            <td><input type="text" style="width:80px"></td>
                             <td align=center>${m.blacklist_yn }</td>
                             <td><a href="/admin/deleteMember?id='${m.id}'">삭제</a>
                             <a href="/admin/blacklist?id='${m.id}'">블랙</a>
@@ -134,11 +142,9 @@
                         <c:otherwise>
                         <td colspan=10 align=center>회원이 없습니다.
                         </c:otherwise>
-                        </c:choose>
-                       
+                        </c:choose>                 
                     </table>
                 </div>
-
             </div>
             <div id="footer">FOOTER</div> 
 
