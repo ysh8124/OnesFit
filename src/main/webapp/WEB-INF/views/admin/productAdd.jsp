@@ -196,7 +196,7 @@
                 
                 $("input:checkbox").on("change",function() {
                 	var check = new Array();
-                	 $('input:checkbox[name=size]').each(function() {
+                	 $('input:checkbox[name=psize]').each(function() {
                          if($(this).is(':checked')){
                         	 check.push($(this).val());
                          }
@@ -218,9 +218,9 @@
                 })
                 
                 $("input[name=color]").on("propertychange change keyup paste input",function(){
-                	if($("input[name=size]").is(":checked") == false){$("input[name=color]").val("");
+                	if($("input[name=psize]").is(":checked") == false){$("input[name=color]").val("");
                 	alert("사이즈를 선택해주세요.");
-                	$("input[name=size]").focus();}
+                	$("input[name=psize]").focus();}
                 })
                 
                 $(document).on('click', '.minus', function() {
@@ -345,11 +345,11 @@
                             <td><input id="input" style="border: 1px solid #dfdfdf;" name="price"></td>
                         </tr>
                   <tr><th>Size</th><td>
-                    <input type=checkbox class="size" name="size" value="Free">Free
-                    <input type=checkbox class="size" name="size" value="S">S
-                    <input type=checkbox class="size" name="size" value="M">M
-                    <input type=checkbox class="size" name="size" value="L">L
-                    <input type=checkbox class="size" name="size" value="XL">XL
+                    <input type=checkbox class="size" name="psize" value="Free">Free
+                    <input type=checkbox class="size" name="psize" value="S">S
+                    <input type=checkbox class="size" name="psize" value="M">M
+                    <input type=checkbox class="size" name="psize" value="L">L
+                    <input type=checkbox class="size" name="psize" value="XL">XL
                   </tr>
                     <tr><th>Color</th><td id="colorBox">
                     <div style="width:100%"><div style="width:30%;float:left" class=subOption><input type="text" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button></div><div id=subSize class="opsize" style="width:70%;"></div></div>

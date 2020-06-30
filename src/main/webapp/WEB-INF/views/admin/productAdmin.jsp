@@ -68,7 +68,25 @@
         
     </style>
     <script>
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    
     	$(function(){
+    		$(".del").on("click",function(){
+    			if(confirm("정말 삭제하시겠습니까?")){return true;
+    			}else{
+    			return false;
+    			}
+    		})
+    		
+    		$(".price").each(function(index,item){
+    			var num = $(item).html();
+    			var num2 = numberWithCommas(num);
+    			$(item).html(num2);
+    		})
+    		
     		$("#add").on("click",function(){
     		location.href="../admin/productAdd";
     		})
@@ -129,7 +147,7 @@
                             <td style="width: 200px">비고</td>    
                         </tr>
                         
-                        <!-- choose문 들어갈 자리 -->
+                        <!-- choose -->
                         <c:choose>
                         	<c:when test="${!empty pdto}">
                         		<c:forEach var="p" items="${pdto}">
@@ -137,11 +155,13 @@
                             <td align=center>${p.pseq }</td>
                             <td class="text" align=left><a href="#">${p.pname }</a>
                             </td>
-                            <td class="text" align=center>${p.price}</td>
+          					
+                            <td class="text price" align=center>${p.price}</td>
+                     
                             <td class="text">${p.regist_date }</td>
                             <td class="text" align=center>${p.category}</td>
                             <td align=center class="text">${p.soldout_yn}</td>
-                            <td class="text"><a href="/admin/toModify?pseq=${p.pseq}">수정</a><a href="/admin/productDelete?pseq=${p.pseq}" style="margin-left: 20px;">삭제</a></td>  
+                            <td class="text"><a href="/admin/productModify?pseq=${p.pseq}">수정</a><a href="/admin/productDelete?pseq=${p.pseq}" class=del style="margin-left: 20px;">삭제</a></td>  
                         </tr>
                         		</c:forEach>
                         		</c:when>
@@ -149,7 +169,7 @@
                         			<tr><td align=center colspan=7>상품이 없습니다.</tr>
                         		</c:otherwise>
                         </c:choose>
-                        <!-- 출력문 끝나고 지워야함 -->
+                     
                         
                     </table>
                     <div style="width:1268px;"><button id="add" style="margin-left: 1100px">상품등록</button></div>

@@ -4,4 +4,10 @@
 
 <select id="getMembers" resultType="osf.spring.dto.MemberDTO">select * from member</select>
 
+<delete id="memberDelete">delete from member where id=#{value}</delete>
+
+<update id="memberBlack">update member set blacklist_yn='Y' where id=#{value}</update>
+
+<update id="updatePoint">update member set point=${point} where id=#{id}</update>
+
 </mapper>

@@ -14,14 +14,14 @@ import osf.spring.dto.ProductImgDTO;
 
 @Repository
 public class ProductDAO {
-	
+
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	
+
 	public List<ProductDTO> getProduct(){
 		return mybatis.selectList("product.getProduct");
 	}
-	
+
 	public int productAdd(String pname,int price,String content, String category,String sysname) {
 		Map<String,String> param = new HashMap();
 		param.put("pname", pname);
@@ -31,42 +31,45 @@ public class ProductDAO {
 		param.put("img", sysname);
 		return mybatis.insert("product.addProduct",param);	
 	}
-	
-//	public int addOption(String[] size,String[] color) {
-//		
-//	}
-	
+
+	//	public int addOption(String[] size,String[] color) {
+	//		
+	//	}
+
 	public int getProductSequence() {
 		int num;
 		try {
-		num = mybatis.selectOne("product.getSequence");
+			num = mybatis.selectOne("product.getSequence");
 		}catch(Exception e) {
 			num = 1000;
 		}
-		
+
 		return num+1;
 	}
-	
+
 	public void addImg(List<ProductImgDTO> pdto,int seq) {
 		for(ProductImgDTO p : pdto) {
-		Map<String,String> param = new HashMap();
-		param.put("img_seq", ""+seq);
-		param.put("oriName", p.getOriName());
-		param.put("sysName", p.getSysName());
-		mybatis.insert("product.addImg",param);
+			Map<String,String> param = new HashMap();
+			param.put("img_seq", ""+seq);
+			param.put("oriName", p.getOriName());
+			param.put("sysName", p.getSysName());
+			mybatis.insert("product.addImg",param);
 		}
 	}
-	
-	public ProductDTO productDetail(int pseq) {
+
+	public ProductDTO productDetail(int pseq){
 		return mybatis.selectOne("product.productDetail",pseq);
 	}
+
+	public int addOption(OptionDTO odto) throws InterruptedException {
+		int result = 0;
+
+		result = mybatis.insert("product.addOption",odto);
+		return result;
+	}
 	
-	public int addOption(List<OptionDTO> odto) {
-		int result2 = 0;
-		for(OptionDTO o : odto) {
-		int result = mybatis.insert("product.addOption",o);
-		if(!(result>0)) {System.out.println("에러났쪙"); result2=0; break;}else {result2 = 1;}
-		}return result2;
-		}
+	public int productDelete(int seq) {
+		return mybatis.delete("product.productDelete",seq);
+	}
 
 }

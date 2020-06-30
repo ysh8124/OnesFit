@@ -1,6 +1,9 @@
 package osf.spring.controller;
 
 import java.io.File;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import osf.spring.dto.MemberDTO;
@@ -26,7 +29,6 @@ import osf.spring.service.ProductService;
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
-
 	public String filesUpload2(MultipartFile file,int seq) throws Exception {       
 		String filePath = session.getServletContext().getRealPath("upload");
 
@@ -110,13 +112,19 @@ public class AdminController {
 		return "/admin/productAdmin";
 	}
 
-	@RequestMapping("toModify")
+	@RequestMapping("productModify")
 	public String goProductModify(HttpServletRequest request,Model model) {
 		int pseq = Integer.parseInt(request.getParameter("pseq"));
 		ProductDTO pdto = pservice.productDetail(pseq);
 		model.addAttribute("pdto",pdto);
 		return "/admin/productModify";
 	}
+	
+	@RequestMapping("productModifyProc")
+	public void productModify() {
+		
+	}
+	
 
 	@RequestMapping("productAdd")
 	public String goProductAdd() {
@@ -124,8 +132,9 @@ public class AdminController {
 	}
 
 	@RequestMapping("memberAdmin")
-	public String goMembers(Model model) {
+	public String goMembers(Model model) throws Exception{
 		List<MemberDTO> mdto = mservice.getMembers();
+		
 		model.addAttribute("mdto",mdto);
 		System.out.println(mdto.size());
 		return "/admin/memberAdmin";
@@ -142,12 +151,12 @@ public class AdminController {
 		String category = request.getParameter("category");
 		String[] colors = request.getParameterValues("color");
 		int item_count = Integer.parseInt(request.getParameter("item_count"));
-		Map<String,String[]> map = new HashMap();
-		System.out.println(colors[0]);
-		System.out.println(colors[1]);
+		Map<String,String[]> map = new HashMap<>();
+
+		
 		for(int i=0;i<colors.length;i++) {
 			String color = colors[i];
-			String[] list = request.getParameterValues(colors[i]);
+			String[] list = request.getParameterValues(color);
 			map.put(color, list);
 		}
 
@@ -165,12 +174,45 @@ public class AdminController {
 			for(String key : map.keySet()) {
 				String[] list = map.get(key);
 				for(int i=0;i<list.length;i++) {
+					System.out.println(key);
+					System.out.println(list[i]);
 					odto.add(new OptionDTO(seq,key,list[i],item_count));
 				}
-				pservice.addOption(odto);
 			}
+			pservice.addOption(odto);
 		}
 		return "/admin/adminMain";
 
+	}
+	
+	@RequestMapping("productDelete")
+	public String productDelete(int pseq) {
+		int result = pservice.productDelete(pseq);
+		if(result>0) {
+			return "redirect:/admin/productAdmin";
+		}
+		return "error";
+	}
+	
+	@RequestMapping("memberDelete")
+	public String memberDelete(String id) {
+		System.out.println(id);
+		mservice.memberDelete(id);
+		return "redirect:/admin/memberAdmin";
+	}
+	
+	@RequestMapping("memberBlack")
+	public String memberBlack(String id) {
+		System.out.println(id);
+		mservice.memberBlack(id);
+		return "redirect:/admin/memberAdmin";
+	}
+	
+	@RequestMapping("updatePoint")
+	@ResponseBody
+	public Object updatePoint(String id,int point) {
+		System.out.println(id+"/"+point);
+		int result = mservice.updatePoint(id,point);
+		return result;
 	}
 }

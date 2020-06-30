@@ -14,4 +14,7 @@
 
 <insert id="addOption">insert into product_option values(${parent_seq},#{color},#{psize},${item_count})</insert>
 
+<delete id="productDelete">delete from product where pseq=${value}</delete>
+
+
 </mapper>

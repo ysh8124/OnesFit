@@ -7,9 +7,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Admin</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    </head>
-    <style>
+    
+    
+     <style>
        
  @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
             *{box-sizing: border-box;}
@@ -63,12 +65,39 @@
     </style>
     
     <script>
-    	function num(x) {
-    		alert("???");
-    	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    	}
+    $(function(){
+    	$(".point").keydown(function(key) {
+
+    		if (key.keyCode == 13) {    
+                    $.ajax(
+                                {
+                                   url : "/admin/updatePoint",
+                                   dataType : "Json",
+                                   data : {
+                                      id : $(this).closest("tr").children(":first").html(),
+                                      point : $(this).val()
+                                   }
+                                })
+                          .done(
+                                function(resp) {
+                                   if (resp > 0) {
+                                      alert("포인트 수정 완료.");
+                                   }
+                                })
+                 }
+              })
+    	
+    	$(".del").on("click",function(){
+    		if(!confirm("정말 삭제하시겠습니까?")){ return false;}
+    	})
+    	$(".black").on("click",function(){
+    		if(!confirm("블랙리스트에 추가하시겠습니까?")){return false;}
+    	})
+    })
+    	
 
     </script>
+    </head>
     <body>
         <!--       전체 영역-->
         <div id=OSF_ALL>
@@ -124,17 +153,17 @@
                         <c:when test="${!empty mdto }">
                         	<c:forEach var="m" items="${mdto}">
                         <tr>
-                            <td>${m.id }</td>
+                            <td class=id>${m.id }</td>
                             <td>${m.name }</td>
                             <td>${m.address1 } <br> ${m.address2 }</td>
                             <td>${m.phone }</td>
                             <td>${m.email }</td>
                             <td>${m.regist_date }</td>
                             <td>${m.sDate}</td>         
-                            <td><input type="text" style="width:80px"></td>
+                            <td><input type="text" class="point" value="${m.point }" style="width:80px"></td>
                             <td align=center>${m.blacklist_yn }</td>
-                            <td><a href="/admin/deleteMember?id='${m.id}'">삭제</a>
-                            <a href="/admin/blacklist?id='${m.id}'">블랙</a>
+                            <td><a href="/admin/memberDelete?id=${m.id}" class=del>삭제</a>
+                            <a href="/admin/memberBlack?id=${m.id}" class=black>블랙</a>
                             </td>
                         </tr>
                         	</c:forEach>

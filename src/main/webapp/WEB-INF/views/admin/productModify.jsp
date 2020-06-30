@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -83,6 +82,8 @@
                 height: 30px;
                 border: 1px solid #c4c4c4; background-color: rgba(266,266,266,0); color: #c4c4c4; 
             }
+            
+
             
             #xbox2 img{width:200px;height:200px;}
             #xbox2 img:hover{cursor:pointer;}
@@ -169,6 +170,8 @@
                     }
                 }
             }
+            
+
 
             $(function(){
             	$("input[value='${pdto.category}']").prop("checked",true);
@@ -190,43 +193,109 @@
                         $('#xbox2').html(html);
                     });
 
-                });
+                })
+                
+                $("input:checkbox").on("change",function() {
+                	var check = new Array();
+                	 $('input:checkbox[name=psize]').each(function() {
+                         if($(this).is(':checked')){
+                        	 check.push($(this).val());
+                         }
+                      });
+                	 $("#subSize").html("");
+                	 $(".extraOption").html("");
+                	 for(var i in check){
+                		 $("#subSize").append("<input type=checkbox class='size' name='size' value="+check[i]+">"+check[i]+"");
+                		 $(".extraOption").append("<input type=checkbox class='size' name='size' value="+check[i]+">"+check[i]+"");
+                	 }
+                })
+                
+                $("input[type=number]").on("input",function(){
+                	var regex = /^\d{1,1000}$/g;
+                	var count = $("input[type=number]").val();
+                	if(!regex.test(count)){$("input[type=number]").val("");
+                	alert("재고는 숫자만 입력 가능합니다.");
+                	$("input[type=number]").focus();}
+                })
+                
+                $("input[name=color]").on("propertychange change keyup paste input",function(){
+                	if($("input[name=psize]").is(":checked") == false){$("input[name=color]").val("");
+                	alert("사이즈를 선택해주세요.");
+                	$("input[name=psize]").focus();}
+                })
+                
+                $(document).on('click', '.minus', function() {
+ 					 $(this).parent().parent().remove();
+				});
 
+				$("#optionAdd").on("click",function(){
+					if($("input[name=color]").last().parent("div").next().children().is(":checked") == false){alert("옵션 사이즈를 선택해주세요."); return false;}
+					$("#colorBox").append("<div style='width:100%;'><div class='subOption' style='width:30%;'><input type='text' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button></div><div class='extraOption opsize'>"+$('#subSize').html()+"</div></div>");
+				
+				})
+                
 
-
-                $("#price").focusout(function(){
-                    if($("#price").val() != ""){
-                        var price=$("#price").val();
+                $("#input").focusout(function(){
+                    if($("#input").val() != ""){
+                        var price=$("#input").val();
                         var ctx = /^\d{1,100}$/g;
                         if(!ctx.test(price)){
-                            $("#price").val("");
+                            $("#input").val("");
                             alert("숫자만 입력해주세요.");
-                            $("#price").focus();}
+                            $("#input").focus();}
                     }
                 })
-
+// 여기 유찬이형 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 $("#submit").on("click",function(){
-                    if($("input[name=category]").val() != null){
-                        if($("#pname").val() != ""){
-                            if($("#price").val() != ""){
-                                if($("#content").val() != ""){
-                                    if($("input[name=file]").val() != null && $("input[name=files]").val() != null){
+                	var check = false;
+                	var checkEmpty = false;
+                	$("input[name=category]").each(function(){if($(this).is(":checked")){check = true;}});
+                        if($("input[name=pname]").val() != ""){
+                        	if($("input[type=number]").val() > 0){
+                    if(check){
+                    	$("input[name=color]").each(function(){if($(this).val() == ""){checkEmpty=true;}});
+                    	if(!checkEmpty){
+                            if($("input[name=price]").val() != ""){
+                            	
+                                if($("#textArea").val() != ""){
+                                    if(document.getElementById("profile_pt").value != "" && $("#files").val() != ""){
+                                    	
+
+                                    	$("input[name=color]").each(function(index1,item1){
+
+                                    	var item = $(item1).parent("div");
+                                    	
+                                    		$(item1).parent("div").next().children().each(function(index2,item2){
+                                    			if($(item2).is(":checked")){$(item2).attr("name",$(item1).val());}
+                                    			
+                                    		});
+                                    		
+                                    	})
+                                    	
+                                    	/* var input = $("<input>");
+                                    	input.attr("type", "hidden");
+                                    	input.attr("name", "arr");
+                                    	input.val(arr); 
+                                    	$('form').append(input); */
+
                                         alert("상품 등록에 성공하였습니다.");
-                                        return true;
-                                        /* location.href="/product/productAdd.proc?pname="+$('#pname').html()+"&&price="+$('#price').html()+"&&content="+$('#content').val()+"&&category="+$('input[name=category]').val()+"&&file="+$('input[name=file]').val()+"&&files="+$('input[name=files]').val(); */
+                                       return true;
+                                      
                                     }else{alert("사진을 등록해주세요.");return false;}
                                 }else{alert("상품 설명을 입력해주세요");return false;}
-                            }else{alert("상품 가격을 입력해주세요.");return false;
-                                 }
-                        }else{alert("상품명을 입력해주세요.");
+                            }else{alert("상품 가격을 입력해주세요.");return false;}
+                    	}else{alert("색상을 모두 채워주세요"); return false;}
+                        }else{alert("상품 분류를 선택해주세요.");
                               return false;}                                                                 
                     }else{
-                        alert("상품 분류를 선택해주세요.(체크박스)");
+                    	alert("재고는 최소 1개이상 가능합니다.");
+                    	return false;
+                    }
+                   }else{
+                        alert("상품명을 입력해주세요.");
                         return false;}
-
                 })
-
-
+        // 여기까지~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
             })
 
         </script>
@@ -250,46 +319,48 @@
                     </ul>
                 </div>
             </nav>
-            
             <div id="product_contents">
-                    <form action="/product/productAdd.proc" method="post" enctype="multipart/form-data" accept-charset="utf8">
+                    <form action="/admin/productAddProc" method="post" enctype="multipart/form-data" accept-charset="utf8">
+               
                 <b style="font-size: 15px">상품정보</b>
                 <br>
                 <br>
                 <table id="shipping_info" border="1">
                     <tbody>
-                    <tr><th>PRODUCT</th><td><input type="text" name="pname" value="${pdto.pname}"></tr>
-                    <tr><th>Size</th><td>
-                    <input type=checkbox value="free">Free
-                    <input type=checkbox value="S">S
-                    <input type=checkbox value="M">M
-                    <input type=checkbox value="L">L
-                    <input type=checkbox value="XL">XL
-                    </tr>
-                    <tr>
-                    
-                    </tr>
-                    <tr><th>Color</th><td><input type="text" name="color"></tr>
+                     <tr><th>상품명</th><td><input type="text" value="${pdto.pname }" name="pname"></tr>
+                     <tr><th>재고</th><td><input type="number" value="" name="item_count"></tr>
                         <tr>
-                            <th style="width: 150px">CATEGORY</th>
+                            <th style="width: 150px">PRODUCT</th>
                             <td>
                                 <div class="address">
-                                    <input type="radio" value="outer" id="radio" name="category"> OURER
+                                    <input type="radio" value="outer" id="radio" name="category"> OUTER
                                     <input type="radio" value="top" id="radio" name="category"> TOP
                                     <input type="radio" value="bottom" id="radio" name="category"> BOTTOM
                                     <input type="radio" value="acc" id="radio" name="category"> ACC
+
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">PRICE</th>
-                            <td><input id="input" style="border: 1px solid #dfdfdf;" name="price"></td>
+                            <td><input id="input" value="${pdto.price}" style="border: 1px solid #dfdfdf;" name="price"></td>
                         </tr>
+                  <tr><th>Size</th><td>
+                    <input type=checkbox class="size" name="psize" value="Free">Free
+                    <input type=checkbox class="size" name="psize" value="S">S
+                    <input type=checkbox class="size" name="psize" value="M">M
+                    <input type=checkbox class="size" name="psize" value="L">L
+                    <input type=checkbox class="size" name="psize" value="XL">XL
+                  </tr>
+                    <tr><th>Color</th><td id="colorBox">
+                    <div style="width:100%"><div style="width:30%;float:left" class=subOption><input type="text" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button></div><div id=subSize class="opsize" style="width:70%;"></div></div>
+                    </td>
+                    </tr>
                         <tr>
                             <th scope="row">
                                 Explanation</th>
                             <td>
-                                <textarea style="width: 100%; height: 100px; border: 1px solid#dedede" name="content"></textarea> 
+                                <textarea id="textArea" value="${pdto.content }" style="width: 100%; height: 100px; border: 1px solid #dedede" name="content"></textarea> 
                             </td>
                         </tr>
                     </tbody>
@@ -302,7 +373,7 @@
                                     <a onclick=document.all.profile_pt.click(); id=atag
                                        style="width: 200px; height: 200px; display: block; line-height: 200px; text-decoration: none; color: gray; font-size: 70px; opacity: 30%">+</a>
                                 </div>
-                                <input type="file" name="file" id="profile_pt" onchange="previewImage(this,'View_area')" style="display: none;"/>
+                                <input type="file" name="file" value="" id="profile_pt" onchange="previewImage(this,'View_area')" style="display: none;"/>
                                 <div class="img_notice">1000 x 1000 권장</div>
                                 <br> <br> 이미지
                                 <div class="xbox" id=xbox2 align=center>
