@@ -12,4 +12,6 @@
 
  <select id="productDetail" resultType="osf.spring.dto.ProductDTO">select * from product where pseq=#{value}</select>
 
+<insert id="addOption">insert into product_option values(${parent_seq},#{color},#{psize},${item_count})</insert>
+
 </mapper>

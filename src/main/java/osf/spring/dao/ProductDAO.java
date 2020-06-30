@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import osf.spring.dto.OptionDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
 
@@ -59,5 +60,13 @@ public class ProductDAO {
 	public ProductDTO productDetail(int pseq) {
 		return mybatis.selectOne("product.productDetail",pseq);
 	}
+	
+	public int addOption(List<OptionDTO> odto) {
+		int result2 = 0;
+		for(OptionDTO o : odto) {
+		int result = mybatis.insert("product.addOption",o);
+		if(!(result>0)) {System.out.println("에러났쪙"); result2=0; break;}else {result2 = 1;}
+		}return result2;
+		}
 
 }

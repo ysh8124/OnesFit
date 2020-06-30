@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import osf.spring.dao.ProductDAO;
+import osf.spring.dto.OptionDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
 
@@ -37,6 +38,10 @@ public class ProductService {
 	
 	public ProductDTO productDetail(int pseq) {
 		return pdao.productDetail(pseq);
+	}
+	
+	public int addOption(List<OptionDTO> odto) {
+		return pdao.addOption(odto);
 	}
 	
 }
