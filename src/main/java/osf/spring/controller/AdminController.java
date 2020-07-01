@@ -68,19 +68,19 @@ public class AdminController {
 		System.out.println("tempFilePath : "+tempFilePath);
 		if(!tempFilePath.exists()) {
 			tempFilePath.mkdir();
-			filePath += "/product";
 		}
+		filePath += "/product";
 		File temp2 = new File(filePath);
 		if(!temp2.exists()) {
 			System.out.println(temp2);
 			temp2.mkdir();
-			filePath += "/title";
 		}
+		filePath += "/title";
 		File temp3 = new File(filePath);
 		if(!temp3.exists()) {
 			System.out.println(temp3);
-			temp3.mkdir();
 		}
+		temp3.mkdir();
 		if(!file.isEmpty()) {
 			String systemFileName = file.getOriginalFilename();
 			File targetLoc = new File(filePath + "/" + systemFileName);

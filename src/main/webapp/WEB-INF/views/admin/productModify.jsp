@@ -254,12 +254,7 @@
  					 $(this).parent().parent().remove();
 				});
 
-				$("#optionAdd").on("click",function(){
-					if($("input[name=color]").last().parent("div").next().children().is(":checked") == false){alert("옵션 사이즈를 선택해주세요."); return false;}
-					$("#colorBox").append("<div style='width:100%; height: 25px;'><div class='subOption' style='width:80%;'><input type='text' placeholder='ex) red' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button>&nbsp&nbsp<input type='number' class='number' placeholder='재고' name='count'></div><div class='extraOption opsize' style='width:50%; position: relative; bottom: 20px; left : 345px;'>"+$('#subSize').html()+"</div></div>");
-				
-				})
-                
+
 
                 $("#input").focusout(function(){
                     if($("#input").val() != ""){
@@ -386,7 +381,7 @@
 						<td id="colorBox">
 							<div style="width: 100%">
 								<div style="width: 70%; float: left" class=subOption>
-									<input type="text" placeholder="ex) red" name="color">
+									<input type="text" id='color' placeholder="ex) red" name="color">
 									<button type="button" class="plus" id="optionAdd"
 										style="margin-left: 5px">+</button>
 									&nbsp;&nbsp;<input type='number' class="number"
@@ -439,25 +434,36 @@
 				style="margin-left: 350px">
 		</form>
 	</div>
+	<script>
+	$("input:checkbox").on("change",function checked() {
+    	var check = new Array();
+    	 $('input:checkbox[name=psize]').each(function() {
+             if($(this).is(':checked')){
+            	 check.push($(this).val());
+             }
+          });
+    	 $("#subSize").html("");
+    	 $(".extraOption").html("");
+    	 for(var i in check){
+    		 $("#subSize").append("<input type=checkbox class='size' name='size' value="+check[i]+">"+check[i]+"");
+    		 $(".extraOption").append("<input type=checkbox class='size' name='size' value="+check[i]+">"+check[i]+"");
+    	 }
+    })
+    
+    $("#optionAdd").on("click",function(){
+    	console.log("설마");
+			if($("input[name=color]").last().parent("div").next().children().is(":checked") == false){alert("옵션 사이즈를 선택해주세요."); return false;}
+			$("#colorBox").append("<div style='width:100%; height: 25px;'><div class='subOption' style='width:80%;'><input type='text' placeholder='ex) red' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button>&nbsp&nbsp<input type='number' class='number' placeholder='재고' name='count'></div><div class='extraOption opsize' style='width:50%; position: relative; bottom: 20px; left : 345px;'>"+$('#subSize').html()+"</div></div>");
+		
+		})
+	</script>
+	
 	<c:choose>
 		<c:when test="${!empty odto }">
-		<c:forEach var="o" items="${odto}">
+		<script>var colorCheck = [];</script>
+		<c:forEach var="o" items="${odto}" varStatus="s">
 			<script>
-			$("input:checkbox").on("change",function checked() {
-            	var check = new Array();
-            	 $('input:checkbox[name=psize]').each(function() {
-                     if($(this).is(':checked')){
-                    	 check.push($(this).val());
-                     }
-                  });
-            	 $("#subSize").html("");
-            	 $(".extraOption").html("");
-            	 for(var i in check){
-            		 $("#subSize").append("<input type=checkbox class='size' name='size' value="+check[i]+">"+check[i]+"");
-            		 $(".extraOption").append("<input type=checkbox class='size' name='size' value="+check[i]+">"+check[i]+"");
-            	 }
-            })
-            
+
 			var psize= [];
 			$("input[name=psize]").each(function(){
         		if($(this).val() == "${o.psize}"){
@@ -474,13 +480,28 @@
         	for(var a=0;a<psize.length;a++){
         		$("input[value="+psize[a]+"]").attr("checked","true");
         		$("input[value="+psize[a]+"]").trigger("change");
+        		if(psize[a] == "${o.psize}"){$("input[value="+psize[a]+"]").last().attr("checked","true");}
         	}
+			
+			if(colorCheck.indexOf("${o.color}") == -1){
+				console.log("indexOf접근");
+				colorCheck.push("${o.color}");
+				if("${s.index}" == 0){
+					console.log("first접근");
+				$("#color").val("${o.color}");
+				}else{
+					console.log("${s.index}");
+					$("#optionAdd").trigger("click");
+				$("input[name=color]").last().val("${o.color}");}
+				$("input[type=number]").last().val("${o.item_count}");
+			}
 
 			</script>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<script>$("#sizeBox").html("선택한 사이즈가 없습니다.");</script>
+			<script>$("#sizeBox").html("선택한 사이즈가 없습니다.");
+			</script>
 		</c:otherwise>
 	</c:choose>
 </body>
