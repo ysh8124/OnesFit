@@ -71,11 +71,11 @@
                     <ul class="nav side-nav">
                         <li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
                         <li> <a href="/admin/productAdmin"> 상품 관리 </a></li>
-                        <li> <a href="#"> 주문 관리 </a></li>
+                        <li> <a href="/admin/buyList"> 주문 관리 </a></li>
                         <li><a href="/admin/memberAdmin">회원 관리</a></li>
-                        <li><a href="">Q&A 관리</a></li>
+                        <li><a href="/admin/question">Q&A 관리</a></li>
                         <li><a href="">DAILY 게시판</a></li>
-                        <li><a href="">공지사항 </a></li>    
+                        <li><a href="/admin/notice">공지사항 </a></li>    
                         <li><a href="">팝업 관리</a></li>  
                         <li><a href=""><i class="fa fa-fw fa fa-question-circle"></i> 판매자 정보</a></li>
                     </ul>

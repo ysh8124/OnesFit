@@ -71,5 +71,40 @@ public class ProductDAO {
 	public int productDelete(int seq) {
 		return mybatis.delete("product.productDelete",seq);
 	}
+	
+	public List<String> getImg(int pseq) {
+		return mybatis.selectList("product.getImg",pseq);
+	}
+
+	public void modifyImg(List<ProductImgDTO> pdto, int seq) {
+		mybatis.delete("product.deleteImg",seq);
+		for(ProductImgDTO p : pdto) {
+			Map<String,String> param = new HashMap();
+			param.put("img_seq", ""+seq);
+			param.put("oriName", p.getOriName());
+			param.put("sysName", p.getSysName());
+			mybatis.insert("product.addImg",param);
+		}
+	}
+	
+	public void deleteOption(int seq) {
+		mybatis.delete("product.deleteOption",seq);
+	}
+
+	public int productModify(int pseq,String pname, int price, String content, String category, String sysname) {
+		Map<String,String> param = new HashMap();
+		param.put("pname", pname);
+		param.put("price", ""+price);
+		param.put("content", content);
+		param.put("category", category);
+		param.put("img", sysname);
+		return mybatis.update("product.productModify");
+	}
+
+	public List<OptionDTO> getOption(int pseq) {
+		return mybatis.selectList("product.getOption",pseq);
+	}
+	
+	
 
 }

@@ -175,6 +175,8 @@
 
 
             $(function(){
+            	
+            	
                 $('#files').change(function(){
                     const target = document.getElementsByName('files');
 
@@ -209,12 +211,12 @@
                 	 }
                 })
                 
-                $("input[type=number]").on("input",function(){
+                $(document).on("input",".number",function(){
                 	var regex = /^\d{1,1000}$/g;
-                	var count = $("input[type=number]").val();
-                	if(!regex.test(count)){$("input[type=number]").val("");
-                	alert("재고는 숫자만 입력 가능합니다.");
-                	$("input[type=number]").focus();}
+                	var count = $(this).val();
+                	if(!regex.test(count)||count < 0){$(this).val("");
+                	alert("재고는 양수인 숫자만 입력 가능합니다.");
+                	$(this).focus();}
                 })
                 
                 $("input[name=color]").on("propertychange change keyup paste input",function(){
@@ -229,11 +231,9 @@
 
 				$("#optionAdd").on("click",function(){
 					if($("input[name=color]").last().parent("div").next().children().is(":checked") == false){alert("옵션 사이즈를 선택해주세요."); return false;}
-					$("#colorBox").append("<div style='width:100%;'><div class='subOption' style='width:30%;'><input type='text' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button></div><div class='extraOption opsize'>"+$('#subSize').html()+"</div></div>");
-				
+					$("#colorBox").append("<div style='width:100%; height: 25px;'><div class='subOption' style='width:80%;'><input type='text' placeholder='ex) red' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button>&nbsp&nbsp<input type='number' class='number' placeholder='재고' name='count'></div><div class='extraOption opsize' style='width:50%; position: relative; bottom: 20px; left : 345px;'>"+$('#subSize').html()+"</div></div>");
 				})
                 
-
                 $("#input").focusout(function(){
                     if($("#input").val() != ""){
                         var price=$("#input").val();
@@ -307,12 +307,12 @@
                 <div>
                     <ul class="nav side-nav">
                         <li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
-                        <li> <a href="#"> 상품 관리 </a></li>
-                        <li> <a href="#"> 주문 관리 </a></li>
-                        <li><a href="">회원 관리</a></li>
-                        <li><a href="">Q&A 관리</a></li>
+                        <li> <a href="/admin/productAdmin"> 상품 관리 </a></li>
+                        <li> <a href="/admin/buyList"> 주문 관리 </a></li>
+                        <li><a href="/admin/memberAdmin">회원 관리</a></li>
+                        <li><a href="/admin/question">Q&A 관리</a></li>
                         <li><a href="">DAILY 게시판</a></li>
-                        <li><a href="">공지사항 </a></li>    
+                        <li><a href="/admin/notice">공지사항 </a></li>    
                         <li><a href="">팝업 관리</a></li>  
                         <li><a href=""><i class="fa fa-fw fa fa-question-circle"></i> 판매자 정보</a></li>
                     </ul>
@@ -327,7 +327,6 @@
                 <table id="shipping_info" border="1">
                     <tbody>
                      <tr><th>상품명</th><td><input type="text" name="pname"></tr>
-                     <tr><th>재고</th><td><input type="number" name="item_count"></tr>
                         <tr>
                             <th style="width: 150px">PRODUCT</th>
                             <td>
@@ -352,7 +351,7 @@
                     <input type=checkbox class="size" name="psize" value="XL">XL
                   </tr>
                     <tr><th>Color</th><td id="colorBox">
-                    <div style="width:100%"><div style="width:30%;float:left" class=subOption><input type="text" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button></div><div id=subSize class="opsize" style="width:70%;"></div></div>
+                    <div style="width:100%"><div style="width:70%;float:left" class=subOption><input type="text" placeholder="ex) red" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button>&nbsp;&nbsp;<input type='number' class="number" placeholder="재고" name='count'></div><div id=subSize class="opsize" style="width:20%; position: relative; bottom: 20px; left: 345px; height: 20px"></div></div>
                     </td>
                     </tr>
                         <tr>

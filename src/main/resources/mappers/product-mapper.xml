@@ -16,5 +16,14 @@
 
 <delete id="productDelete">delete from product where pseq=${value}</delete>
 
-
+<select id="getImg" resultType="String">select sysname from product_img where product_seq=${value}</select>
+ 
+ <delete id="deleteImg">delete from product_img where product_seq=${value}</delete>
+ 
+ <delete id="deleteOption">delete from product_option where parent_seq=${value}</delete>
+ 
+ <update id="productModify">update product set pname=#{pname} price=${price} content=#{content} category=#{category} title_img=#{img} where pseq=${pseq} </update>
+ 
+ <select id="getOption" resultType="osf.spring.dto.OptionDTO">select * from product_option where parent_seq=${value}</select>
+ 
 </mapper>

@@ -90,6 +90,7 @@
     	$(".del").on("click",function(){
     		if(!confirm("정말 삭제하시겠습니까?")){ return false;}
     	})
+    	
     	$(".black").on("click",function(){
     		if(!confirm("블랙리스트에 추가하시겠습니까?")){return false;}
     	})
@@ -105,18 +106,18 @@
             <div id="container">
 
                 <!--               사이드메뉴-->
-                 <nav class="navbar navbar-inverse navbar-fixed-top">
+                <nav class="navbar navbar-inverse navbar-fixed-top">
                 <div style="color: white; margin-left: 18px;"><h2>ADMIN</h2></div>
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div>
                     <ul class="nav side-nav">
                         <li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
-                        <li> <a href="#"> 상품 관리 </a></li>
-                        <li> <a href="#"> 주문 관리 </a></li>
-                        <li><a href="">회원 관리</a></li>
-                        <li><a href="">Q&A 관리</a></li>
+                        <li> <a href="/admin/productAdmin"> 상품 관리 </a></li>
+                        <li> <a href="/admin/buyList"> 주문 관리 </a></li>
+                        <li><a href="/admin/memberAdmin">회원 관리</a></li>
+                        <li><a href="/admin/question">Q&A 관리</a></li>
                         <li><a href="">DAILY 게시판</a></li>
-                        <li><a href="">공지사항 </a></li>    
+                        <li><a href="/admin/notice">공지사항 </a></li>    
                         <li><a href="">팝업 관리</a></li>  
                         <li><a href=""><i class="fa fa-fw fa fa-question-circle"></i> 판매자 정보</a></li>
                     </ul>
