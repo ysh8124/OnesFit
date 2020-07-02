@@ -46,7 +46,7 @@ public class AdminController {
 	}
 
 	public void deleteFile(int seq) {
-		String filePath = session.getServletContext().getRealPath("upload/product"+seq);
+		String filePath = session.getServletContext().getRealPath("upload/product/"+seq);
 		File folder = new File(filePath);
 
 		File[] folder_list = folder.listFiles(); //파일리스트 얻어오기
@@ -149,7 +149,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("productModifyProc")
-	public void productModify(HttpServletRequest request,MultipartFile[] files,MultipartFile file) throws Exception{
+	public String productModify(HttpServletRequest request,MultipartFile[] files,MultipartFile file) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		String pname = request.getParameter("pname");
 		int price = Integer.parseInt(request.getParameter("price"));
@@ -167,14 +167,17 @@ public class AdminController {
 			System.out.println(count[i]);
 		}
 
-		int seq = Integer.parseInt(request.getParameter("seq"));
+		int seq = Integer.parseInt(request.getParameter("pseq"));
+		System.out.println("상품번호 : "+seq);
 		String title_img = request.getParameter("title_img");
 		String sysname="";
-		if(file != null) {
+		System.out.println(file.getSize());
+		System.out.println(files.length);
+		if(!file.isEmpty()) {
 			this.deleteFile2(seq,title_img);
 			sysname = this.filesUpload2(file, seq);
 		}else {sysname = title_img;}
-		if(files != null) {
+		if(files.length > 0) {
 			this.deleteFile(seq);
 			List<ProductImgDTO> pdto = this.filesUpload(files,seq);
 			pservice.modifyImg(pdto,seq);
@@ -196,6 +199,7 @@ public class AdminController {
 			}
 			pservice.modifyOption(odto,seq);
 		}
+		return "redirect:/admin/adminMain";
 	}
 
 
@@ -224,7 +228,7 @@ public class AdminController {
 		String category = request.getParameter("category");
 		String[] colors = request.getParameterValues("color");
 		Map<String,String[]> map = new HashMap<>();
-
+		System.out.println("색상 개수는 : " + colors.length);
 		String[] count = null;
 		for(int i=0;i<colors.length;i++) {
 			count = request.getParameterValues("count");
@@ -251,6 +255,7 @@ public class AdminController {
 				for(int i=0;i<list.length;i++) {
 					System.out.println(key);
 					System.out.println(list[i]);
+					System.out.println(count[index]);
 					odto.add(new OptionDTO(seq,key,list[i],Integer.parseInt(count[index])));
 				}
 				index++;
@@ -281,7 +286,7 @@ public class AdminController {
 	public String memberBlack(String id) {
 		System.out.println(id);
 		mservice.memberBlack(id);
-		return "redirect:/admin/memberAdmin";
+		return "/admin/memberAdmin";
 	}
 
 	@RequestMapping("updatePoint")

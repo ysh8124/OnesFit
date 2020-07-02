@@ -22,7 +22,7 @@
  
  <delete id="deleteOption">delete from product_option where parent_seq=${value}</delete>
  
- <update id="productModify">update product set pname=#{pname} price=${price} content=#{content} category=#{category} title_img=#{img} where pseq=${pseq} </update>
+ <update id="productModify">update product set pname=#{pname}, price=${price}, content=#{content}, category=#{category}, title_img=#{img} where pseq=${pseq} </update>
  
  <select id="getOption" resultType="osf.spring.dto.OptionDTO">select * from product_option where parent_seq=${value}</select>
  

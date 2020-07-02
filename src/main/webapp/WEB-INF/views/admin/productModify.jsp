@@ -279,7 +279,6 @@
                             if($("input[name=price]").val() != ""){
                             	
                                 if($("#textArea").val() != ""){
-                                    if(document.getElementById("profile_pt").value != "" && $("#files").val() != ""){
                                     	
 
                                     	$("input[name=color]").each(function(index1,item1){
@@ -296,7 +295,7 @@
                                         alert("상품 등록에 성공하였습니다.");
                                        return true;
                                       
-                                    }else{alert("사진을 등록해주세요.");return false;}
+
                                 }else{alert("상품 설명을 입력해주세요");return false;}
                             }else{alert("상품 가격을 입력해주세요.");return false;}
                     	}else{alert("색상을 모두 채워주세요"); return false;}
@@ -325,7 +324,6 @@
 		<div>
 			<ul class="nav side-nav">
 				<li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>
-				<input type="hidden" name="seq" value="${pdto.pseq}">
 				<li><a href="/admin/productAdmin"> 상품 관리 </a></li>
 				<li><a href="/admin/buyList"> 주문 관리 </a></li>
 				<li><a href="/admin/memberAdmin">회원 관리</a></li>
@@ -339,8 +337,9 @@
 		</div>
 	</nav>
 	<div id="product_contents">
-		<form action="/admin/productAddProc" method="post"
+		<form action="/admin/productModifyProc" method="post"
 			enctype="multipart/form-data" accept-charset="utf8">
+				<input type="hidden" name="pseq" value="${pdto.pseq}">
 
 			<b style="font-size: 15px">상품정보</b> <br> <br>
 			<table id="shipping_info" border="1">
@@ -369,10 +368,10 @@
 					</tr>
 					<tr>
 						<th>Size</th>
-						<td id="sizeBox"><input type=checkbox class="size" name="psize"
-							value="Free">Free <input type=checkbox class="size"
-							name="psize" value="S">S <input type=checkbox
-							class="size" name="psize" value="M">M <input
+						<td id="sizeBox"><input type=checkbox class="size"
+							name="psize" value="Free">Free <input type=checkbox
+							class="size" name="psize" value="S">S <input
+							type=checkbox class="size" name="psize" value="M">M <input
 							type=checkbox class="size" name="psize" value="L">L <input
 							type=checkbox class="size" name="psize" value="XL">XL
 					</tr>
@@ -381,7 +380,8 @@
 						<td id="colorBox">
 							<div style="width: 100%">
 								<div style="width: 70%; float: left" class=subOption>
-									<input type="text" id='color' placeholder="ex) red" name="color">
+									<input type="text" id='color' placeholder="ex) red"
+										name="color">
 									<button type="button" class="plus" id="optionAdd"
 										style="margin-left: 5px">+</button>
 									&nbsp;&nbsp;<input type='number' class="number"
@@ -435,6 +435,7 @@
 		</form>
 	</div>
 	<script>
+	
 	$("input:checkbox").on("change",function checked() {
     	var check = new Array();
     	 $('input:checkbox[name=psize]').each(function() {
@@ -451,18 +452,17 @@
     })
     
     $("#optionAdd").on("click",function(){
-    	console.log("설마");
 			if($("input[name=color]").last().parent("div").next().children().is(":checked") == false){alert("옵션 사이즈를 선택해주세요."); return false;}
 			$("#colorBox").append("<div style='width:100%; height: 25px;'><div class='subOption' style='width:80%;'><input type='text' placeholder='ex) red' name='color'><button type='button' class='minus' style='margin-left: 10px; margin-top:5px'>-</button>&nbsp&nbsp<input type='number' class='number' placeholder='재고' name='count'></div><div class='extraOption opsize' style='width:50%; position: relative; bottom: 20px; left : 345px;'>"+$('#subSize').html()+"</div></div>");
-		
+			$(".extraOption").last().children().attr("checked",false);
 		})
 	</script>
-	
+
 	<c:choose>
 		<c:when test="${!empty odto }">
-		<script>var colorCheck = [];</script>
-		<c:forEach var="o" items="${odto}" varStatus="s">
-			<script>
+			<script>var colorCheck = []; var sizes= [];</script>
+			<c:forEach var="o" items="${odto}" varStatus="s">
+				<script>
 
 			var psize= [];
 			$("input[name=psize]").each(function(){
@@ -477,26 +477,57 @@
         			if(!checkflag){psize.push($(this).val());}
         		}
         	})
+        	var c = false;
         	for(var a=0;a<psize.length;a++){
         		$("input[value="+psize[a]+"]").attr("checked","true");
         		$("input[value="+psize[a]+"]").trigger("change");
+        		
         		if(psize[a] == "${o.psize}"){$("input[value="+psize[a]+"]").last().attr("checked","true");}
+
         	}
 			
 			if(colorCheck.indexOf("${o.color}") == -1){
 				console.log("indexOf접근");
 				colorCheck.push("${o.color}");
 				if("${s.index}" == 0){
-					console.log("first접근");
+				console.log("first접근");
 				$("#color").val("${o.color}");
 				}else{
-					console.log("${s.index}");
-					$("#optionAdd").trigger("click");
+				console.log("${s.index}");
+				$("#optionAdd").trigger("click");
 				$("input[name=color]").last().val("${o.color}");}
 				$("input[type=number]").last().val("${o.item_count}");
 			}
 
+			var ss = [];
+			var col = [];
 			</script>
+			</c:forEach>
+			<script>$("input[name=size]").each(function(){$(this).attr("checked",false); })</script>
+			<c:forEach var="c" items="${odto}">
+			<script>
+			if(col.indexOf("${c.color}",0) == -1){ss = [];}
+			col.push("${c.color}");
+			$("input[name=color]").each(function(){
+					if($(this).val() == "${c.color}"){
+					$(this).parent().next("div").children().each(function(index,item){
+						
+						
+							console.log("사이즈1 : " + ss[0]);
+							console.log("사이즈2 : "+ss[1]);
+						if($(item).val() == "${c.psize}"){
+							$(item).attr("checked","true"); 
+							ss.push($(item).val());
+						}else{
+							if(ss.indexOf($(item).val(),0) != -1){
+							/* $(item).attr("checked",false); */
+							}
+							}
+									
+						})
+				}
+			})
+				</script>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>

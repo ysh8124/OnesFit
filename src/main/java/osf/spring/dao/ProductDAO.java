@@ -93,12 +93,17 @@ public class ProductDAO {
 
 	public int productModify(int pseq,String pname, int price, String content, String category, String sysname) {
 		Map<String,String> param = new HashMap();
+//		ProductDTO pdto = new ProductDTO(pseq,pname,price,category, null,content,sysname, null, null);
+		param.put("pseq", ""+pseq);
 		param.put("pname", pname);
 		param.put("price", ""+price);
 		param.put("content", content);
 		param.put("category", category);
 		param.put("img", sysname);
-		return mybatis.update("product.productModify");
+		for(String key : param.keySet()) {
+			System.out.println(param.get(key));
+		}
+		return mybatis.update("product.productModify",param);
 	}
 
 	public List<OptionDTO> getOption(int pseq) {

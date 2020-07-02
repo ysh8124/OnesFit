@@ -65,6 +65,17 @@
     </style>
     
     <script>
+    function dateFormat(argDate){
+
+        if(argDate !== undefined){
+			var a = argDate;
+			var setA = a.substring(0,16);
+
+        }
+
+        return setA;
+   }
+    
     $(function(){
     	$(".point").keydown(function(key) {
 
@@ -86,6 +97,12 @@
                                 })
                  }
               })
+              
+          $(".date").each(function(){
+    			var date1 = $(this).html();
+    			var date2 = dateFormat(date1);
+    			$(this).html(date2);
+    		})
     	
     	$(".del").on("click",function(){
     		if(!confirm("정말 삭제하시겠습니까?")){ return false;}
@@ -153,13 +170,13 @@
                         <c:choose>
                         <c:when test="${!empty mdto }">
                         	<c:forEach var="m" items="${mdto}">
-                        <tr>
+                        <tr align=center>
                             <td class=id>${m.id }</td>
                             <td>${m.name }</td>
-                            <td>${m.address1 } <br> ${m.address2 }</td>
+                            <td align=left>${m.address1 } <br> ${m.address2 }</td>
                             <td>${m.phone }</td>
                             <td>${m.email }</td>
-                            <td>${m.regist_date }</td>
+                            <td class="date">${m.regist_date }</td>
                             <td>${m.sDate}</td>         
                             <td><input type="text" class="point" value="${m.point }" style="width:80px"></td>
                             <td align=center>${m.blacklist_yn }</td>
