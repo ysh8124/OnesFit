@@ -1,10 +1,8 @@
 package osf.spring.controller;
 
 import java.io.File;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +21,7 @@ import osf.spring.dto.MemberDTO;
 import osf.spring.dto.OptionDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
+import osf.spring.service.AdminService;
 import osf.spring.service.MemberService;
 import osf.spring.service.ProductService;
 
@@ -86,7 +85,6 @@ public class AdminController {
 			File targetLoc = new File(filePath + "/" + systemFileName);
 			file.transferTo(targetLoc);
 			sysname = systemFileName;
-
 		}
 		return sysname;
 
@@ -118,19 +116,27 @@ public class AdminController {
 
 	@Autowired
 	private MemberService mservice;
+	
+	@Autowired
+	private AdminService aservice;
 
 	@Autowired
 	private HttpSession session;
 
 	@RequestMapping("adminMain")
-	public String goAdminMain() {
+	public String goAdminMain(Model model) {
+		
+		List<Integer> num = aservice.getSales();
+		int totalSale = aservice.totalSale();
+		model.addAttribute("sales",num);
+		model.addAttribute("totalSale",totalSale);
 		return "/admin/adminMain";
 	}
 
 	@RequestMapping("productAdmin")
 	public String goProductAdmin(Model model) {
 		List<ProductDTO> pdto= pservice.getProduct();
-		System.out.println(pdto.size());
+		
 		model.addAttribute("pdto",pdto);
 
 		return "/admin/productAdmin";

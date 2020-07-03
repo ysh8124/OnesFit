@@ -46,13 +46,13 @@
             }
 
 	table{border: 1px solid #d3d8e1}
-        table tr td{border: 1px solid #d3d8e1}
+        table tr td{border: 1px solid #d3d8e1;border-right: none; border-left:none;}
 
         
         tr td a{text-decoration: none; color:grey;}
 
         /*    모든 영역*/
-        #container{height: 1000px;}
+        #container{height: 800px;}
 
 
         
@@ -61,6 +61,8 @@
         #contents{width: 1598px; height: 900px; margin-left: 287px;
             padding : 100px}
         #point{width: 100px;}
+        
+        #searchBtn:hover{cursor: pointer;}
 
     </style>
     
@@ -111,6 +113,27 @@
     	$(".black").on("click",function(){
     		if(!confirm("블랙리스트에 추가하시겠습니까?")){return false;}
     	})
+    	
+    	$("#searchBtn").on("click",function(){
+    			$("tr").css("display","table-row");
+    			$(".addtr").remove();
+    			if($("#search").val() != ""){
+    			var flag = $("#selectBox option:selected").val();
+    			var input = $("#search").val().toLowerCase();
+    			$("#search").val("");
+    			var count = 0;
+    			$("."+flag).each(function(){
+    				if($(this).html().toLowerCase().indexOf(input) == -1){
+    					$(this).closest("tr").css("display","none");
+    				}else{count++;}
+    			})
+    			if(count == 0){
+    				$("table").append("<tr align=center class='addtr'><td colspan='10'>검색된 회원이 없습니다.</tr>");
+    			}
+    			}
+    		})
+    	
+    	
     })
     	
 
@@ -128,7 +151,7 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div>
                     <ul class="nav side-nav">
-                        <li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
+                        <li><a href="/admin/adminMain"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
                         <li> <a href="/admin/productAdmin"> 상품 관리 </a></li>
                         <li> <a href="/admin/buyList"> 주문 관리 </a></li>
                         <li><a href="/admin/memberAdmin">회원 관리</a></li>
@@ -145,14 +168,14 @@
                     <div id="contents">
                     <div style="width:100%">
                               <b>Member Management</b>    
-                              <select style="margin-left: 900px;">
-                                 <option>아이디</option>
-                                 <option>이름</option>
-                                 <option>별명</option>
+                              <select id="selectBox" style="margin-left: 900px;">
+                                 <option value="id">아이디</option>
+                                 <option value="name">이름</option>
+                                 <option value="phone">핸드폰</option>
                                  </select>   
                                <input id="search" type="text">     
-                                <a href=""><img src="../resources/img/search.png" style="width: 17px"></a>
-                    </div>   
+                               <img id="searchBtn" src="../resources/img/search.png" style="width: 17px">
+                    </div>
                                    
                     <table>   
                         <tr align=center>
@@ -171,10 +194,10 @@
                         <c:when test="${!empty mdto }">
                         	<c:forEach var="m" items="${mdto}">
                         <tr align=center>
-                            <td class=id>${m.id }</td>
-                            <td>${m.name }</td>
+                            <td class="id">${m.id }</td>
+                            <td class="name">${m.name }</td>
                             <td align=left>${m.address1 } <br> ${m.address2 }</td>
-                            <td>${m.phone }</td>
+                            <td class="phone">${m.phone }</td>
                             <td>${m.email }</td>
                             <td class="date">${m.regist_date }</td>
                             <td>${m.sDate}</td>         

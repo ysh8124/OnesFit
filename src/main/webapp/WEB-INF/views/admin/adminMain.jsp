@@ -69,7 +69,7 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div>
                     <ul class="nav side-nav">
-                        <li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
+                        <li><a href="/admin/adminMain"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
                         <li> <a href="/admin/productAdmin"> 상품 관리 </a></li>
                         <li> <a href="/admin/buyList"> 주문 관리 </a></li>
                         <li><a href="/admin/memberAdmin">회원 관리</a></li>
@@ -100,17 +100,37 @@
             <div id="footer">FOOTER</div> 
 
         </div>
+       <script>var sale = [];</script>
+        <c:forEach var="s" items="${sales}" varStatus="now">
+        <script>
+        var ctx = document.getElementById('myChart');
+        var ctx2 = document.getElementById('myChart2');
+        console.log("현재 값은 : " + ${s} );
+        if(${now.last}){
+        if(${now.index} < 3){
+        	sale.push(${s});
+        	sale.push(0);
+        	sale.push(0);
+        }else if(${now.index} < 4){
+        	sale.push(${s});
+        	sale.push(0);
+        }else{sale.push(${s});}
+        }else{sale.push(${s});}
+        </script>
+        </c:forEach>
         <script>
             /* bar, line, Polar Area  */
-	var ctx = document.getElementById('myChart');
-            var ctx2 = document.getElementById('myChart2');
+	
+            
+            var date = new Date().getMonth()+1;
+            console.log(date);
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: ['0', '15','30','15','30'],
+			labels: [date-4, date-3,date-2,date-1,date],
 			datasets: [{
 				label: '이번 달 매출',
-				data: [3, 5, 3, 8,10],
+				data: [sale[4],sale[3],sale[2],sale[1],sale[0]],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
@@ -127,7 +147,7 @@
 			},
             {
 				label: '총 매출',
-				data: [8, 15, 15, 20,17],
+				data: [${totalSale}-sale[0]-sale[1]-sale[2]-sale[3], ${totalSale}-sale[0]-sale[1]-sale[2], ${totalSale}-sale[0]-sale[1], ${totalSale}-sale[0],${totalSale}],
 				backgroundColor: [
 					'rgba(20, 150, 132, 0.2)',
 					'rgba(20, 112, 205, 0.2)',
@@ -190,6 +210,8 @@
 			},
 		}
 	});
+            
+            
 </script>
     </body>
 </html>

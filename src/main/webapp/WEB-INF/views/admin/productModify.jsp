@@ -323,7 +323,7 @@
 		<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 		<div>
 			<ul class="nav side-nav">
-				<li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>
+				<li><a href="/admin/adminMain"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>
 				<li><a href="/admin/productAdmin"> 상품 관리 </a></li>
 				<li><a href="/admin/buyList"> 주문 관리 </a></li>
 				<li><a href="/admin/memberAdmin">회원 관리</a></li>

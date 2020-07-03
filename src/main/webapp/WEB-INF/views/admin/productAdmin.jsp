@@ -66,6 +66,8 @@
         table a{text-decoration: none; color: black;
         }
         
+        #searchBtn:hover{cursor: pointer;}
+        
     </style>
     <script>
     function numberWithCommas(x) {
@@ -107,6 +109,26 @@
     		$("#add").on("click",function(){
     		location.href="../admin/productAdd";
     		})
+    		
+    		$("#searchBtn").on("click",function(){
+    			$("tr").css("display","table-row");
+    			$(".addtr").remove();
+    			if($("#search").val() != ""){
+    			var flag = $("#selectBox option:selected").val();
+    			var input = $("#search").val().toLowerCase();
+    			$("#search").val("");
+    			var count = 0;
+    			$("."+flag).each(function(){
+    				if($(this).html().indexOf(input) == -1){
+    					$(this).closest("tr").css("display","none");
+    				}else{count++;}
+    			})
+    			if(count == 0){
+    				$("table").append("<tr align=center class='addtr'><td colspan='7'>검색된 상품이 없습니다.</tr>");
+    			}
+    			}else{ $("tr").css("display", "table-row");}
+    		})
+    		
     	})
     </script>
     </head>
@@ -122,7 +144,7 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div>
                     <ul class="nav side-nav">
-                        <li><a href="#"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
+                        <li><a href="/admin/adminMain"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
                         <li> <a href="/admin/productAdmin"> 상품 관리 </a></li>
                         <li> <a href="/admin/buyList"> 주문 관리 </a></li>
                         <li><a href="/admin/memberAdmin">회원 관리</a></li>
@@ -139,14 +161,14 @@
                     <div style="width:100%">
                         <b>Product Management</b> 
                        
-                            <select style="position: relative; top: 3px; margin-left: 810px;">
-                                <option>상품번호</option>
-                                <option>상품명</option>
-                                <option>상품분류</option>
+                            <select id="selectBox" style="position: relative; top: 3px; margin-left: 810px;">
+                                <option value="seq">상품번호</option>
+                                <option value="pname">상품명</option>
+                                <option value="category">상품분류</option>
                             </select> 
                             <input id="search" type="text">     
-                            <a href="">
-                                <img src="../resources/img/search.png" style="width: 18px; position: relative; top: 4px"></a>
+                         
+                                <img id="searchBtn" src="../resources/img/search.png" style="width: 17px; position: relative; top: 2px">
                      
                     </div>
 
@@ -154,11 +176,11 @@
 
                     <table>   
                         <tr align=center>
-                            <td style="width:50px">상품번호</td>
+                            <td style="width:60px">상품<br>번호</td>
 
                             <td style="width:300px">상품명</td>
                             <td style="width:100px">상품가격</td>
-                            <td style="width:300px">등록일자</td>
+                            <td style="width:280px">등록일자</td>
                             <td style="width:200px">상품분류</td>
                             <td style="width: 100px">품절</td>
                             <td style="width: 200px">비고</td>    
@@ -168,15 +190,15 @@
                         <c:choose>
                         	<c:when test="${!empty pdto}">
                         		<c:forEach var="p" items="${pdto}">
-                        			<tr align=center>
-                            <td align=center>${p.pseq }</td>
-                            <td class="text" align=left><a href="#">${p.pname }</a>
+                        			<tr align=center class="print">
+                            <td align=center class="seq">${p.pseq }</td>
+                            <td class="text pname" align=left><a href="#">${p.pname }</a>
                             </td>
           					
                             <td class="text price" align=center>${p.price}</td>
                      
                             <td class="text date">${p.regist_date }</td>
-                            <td class="text" align=center>${p.category}</td>
+                            <td class="text category" align=center>${p.category}</td>
                             <td align=center class="text">${p.soldout_yn}</td>
                             <td class="text"><a href="/admin/productModify?pseq=${p.pseq}">수정</a><a href="/admin/productDelete?pseq=${p.pseq}" class=del style="margin-left: 20px;">삭제</a></td>  
                         </tr>

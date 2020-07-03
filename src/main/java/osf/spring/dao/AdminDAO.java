@@ -8,16 +8,37 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import osf.spring.dto.MemberDTO;
 import osf.spring.dto.OptionDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
 
 @Repository
-public class ProductDAO {
+public class AdminDAO {
 
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
+	public List<MemberDTO> getMembers(){
+		return mybatis.selectList("admin.getMembers");
+	}
+	
+	public int memberDelete(String id) {
+		return mybatis.delete("admin.memberDelete",id);
+	}
+	
+	public int memberBlack(String id) {
+		return mybatis.update("admin.memberBlack",id);
+	}
+	
+	public int updatePoint(String id,int point) {
+		Map<String,String> param = new HashMap();
+		param.put("id", id);
+		param.put("point", ""+point);
+		System.out.println(id+"/"+point);
+		return mybatis.update("admin.updatePoint",param);
+	}
+	
 	public List<ProductDTO> getProduct(){
 		return mybatis.selectList("product.getProduct");
 	}
@@ -93,7 +114,6 @@ public class ProductDAO {
 
 	public int productModify(int pseq,String pname, int price, String content, String category, String sysname) {
 		Map<String,String> param = new HashMap();
-//		ProductDTO pdto = new ProductDTO(pseq,pname,price,category, null,content,sysname, null, null);
 		param.put("pseq", ""+pseq);
 		param.put("pname", pname);
 		param.put("price", ""+price);
@@ -118,6 +138,4 @@ public class ProductDAO {
 		return mybatis.selectOne("product.totalSale");
 	}
 	
-	
-
 }
