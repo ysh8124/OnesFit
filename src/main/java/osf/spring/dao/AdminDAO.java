@@ -137,5 +137,6 @@ public class AdminDAO {
 	public int totalSale() {
 		return mybatis.selectOne("product.totalSale");
 	}
+
 	
 }
