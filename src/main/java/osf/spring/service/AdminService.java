@@ -1,11 +1,13 @@
 package osf.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import osf.spring.dao.AdminDAO;
+import osf.spring.dto.BestProductDTO;
 import osf.spring.dto.MemberDTO;
 import osf.spring.dto.OptionDTO;
 import osf.spring.dto.ProductDTO;
@@ -97,6 +99,24 @@ public class AdminService {
 
 	public List<OptionDTO> getOption(int pseq) {
 		return adao.getOption(pseq);
+	}
+	
+	public List<BestProductDTO> itemRank(){
+		
+		return adao.itemRank();
+	}
+	
+	public List<ProductDTO> bestProduct(List<BestProductDTO> best){
+		List<ProductDTO> bestList = new ArrayList<>();
+		for(BestProductDTO b : best) {
+			bestList.add(adao.bestProduct(b.getProduct_num()));
+		}
+		return bestList;
+	}
+
+	public int setBest(int pseq) {
+		return adao.setBest(pseq);
+		
 	}
 	
 }

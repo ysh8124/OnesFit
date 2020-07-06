@@ -48,13 +48,13 @@
 }
 
 #shipping_info {
-	border: 1px solid #dfdfdf;
+	border: px solid #dfdfdf;
 	width: 800px;
 	font-size: 11px;
 }
 
 #shipping_info td {
-	padding: 10px
+	padding: 1px;
 }
 
 #shipping_info th {
@@ -67,7 +67,8 @@ table {
 }
 
 table tr td {
-	border: 1px solid #d3d8e1
+margin-top:5px;
+	border: px solid #d3d8e1;
 }
 
 /*    모든 영역*/
@@ -100,6 +101,8 @@ table a {
 #searchBtn:hover {
 	cursor: pointer;
 }
+
+.print{height:40px;}
 </style>
 <script>
     function numberWithCommas(x) {
@@ -195,7 +198,7 @@ table a {
 			<div id="contents">
 				<div style="width: 100%">
 					<b>Product Management</b> <select id="selectBox"
-						style="position: relative; top: 3px; margin-left: 810px;">
+						style="position: relative; top: 3px; margin-left: 780px;">
 						<option value="seq">상품번호</option>
 						<option value="pname">상품명</option>
 						<option value="category">상품분류</option>
@@ -214,7 +217,7 @@ table a {
 
 						<td style="width: 300px">상품명</td>
 						<td style="width: 100px">상품가격</td>
-						<td style="width: 280px">등록일자</td>
+						<td style="width: 250px">등록일자</td>
 						<td style="width: 200px">상품분류</td>
 						<td style="width: 100px">품절</td>
 						<td style="width: 200px">비고</td>
@@ -226,7 +229,13 @@ table a {
 							<c:forEach var="p" items="${pdto}">
 								<tr align=center class="print">
 									<td align=center class="seq">${p.pseq }</td>
-									<td class="text pname" align=left><a href="#">${p.pname }</a>
+									<c:choose>
+									<c:when test="${p.best == 'Y'}">
+									<td class="text pname" align=left><a href="#">${p.pname }</a>&nbsp; 
+									<span class="badge badge-danger">BEST</span> <a href="/admin/unBest?pseq=${p.pseq}" style="color:gray;">UnBest</a>
+									</c:when>
+									<c:otherwise><td class="text pname" align=left><a href="#">${p.pname }</a></c:otherwise>
+									</c:choose>
 									</td>
 
 									<td class="text price" align=center>${p.price}</td>

@@ -43,4 +43,10 @@ union select nvl(sum(price),0),5 from buy_list where trunc(buy_date,'MM')=trunc(
 
 <select id="totalSale" resultType="int">select sum(price) from buy_list</select>
 
+<select id="itemRank" resultType="osf.spring.dto.BestProductDTO">select * from (select product_num,sum(price) as price,rank() OVER (ORDER BY sum(price) DESC) rank from buy_list b group by rollup(product_num) HAVING GROUPING_ID(product_num) IN (0, 2))where rank between 1 and 10</select>
+
+<select id="bestProduct" resultType="osf.spring.dto.ProductDTO">select * from product where pseq=${value}</select>
+
+<update id="setBest">update product set best='Y' where pseq=${value}</update>
+
 </mapper>

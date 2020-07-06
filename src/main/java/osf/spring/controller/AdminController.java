@@ -2,7 +2,6 @@ package osf.spring.controller;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import osf.spring.dto.BestProductDTO;
 import osf.spring.dto.MemberDTO;
 import osf.spring.dto.OptionDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
 import osf.spring.service.AdminService;
-import osf.spring.service.MemberService;
-import osf.spring.service.ProductService;
 
 @Controller
 @RequestMapping("/admin/")
@@ -111,11 +109,7 @@ public class AdminController {
 		}return pdto;
 	}  
 
-	@Autowired
-	private ProductService pservice;
 
-	@Autowired
-	private MemberService mservice;
 	
 	@Autowired
 	private AdminService aservice;
@@ -128,6 +122,14 @@ public class AdminController {
 		
 		List<Integer> num = aservice.getSales();
 		int totalSale = aservice.totalSale();
+		List<BestProductDTO> buyRank = aservice.itemRank();
+		List<ProductDTO> topProduct = aservice.bestProduct(buyRank);
+		for(BestProductDTO b : buyRank) {
+			System.out.println(b.getPrice());
+			System.out.println(b.getRank());
+		}
+		model.addAttribute("ranklist",buyRank);
+		model.addAttribute("topProduct",topProduct);
 		model.addAttribute("sales",num);
 		model.addAttribute("totalSale",totalSale);
 		return "/admin/adminMain";
@@ -135,7 +137,7 @@ public class AdminController {
 
 	@RequestMapping("productAdmin")
 	public String goProductAdmin(Model model) {
-		List<ProductDTO> pdto= pservice.getProduct();
+		List<ProductDTO> pdto= aservice.getProduct();
 		
 		model.addAttribute("pdto",pdto);
 
@@ -145,9 +147,9 @@ public class AdminController {
 	@RequestMapping("productModify")
 	public String goProductModify(HttpServletRequest request,Model model) {
 		int pseq = Integer.parseInt(request.getParameter("pseq"));
-		ProductDTO pdto = pservice.productDetail(pseq);
-		List<String> img = pservice.getImg(pseq);
-		List<OptionDTO> odto = pservice.getOption(pseq);
+		ProductDTO pdto = aservice.productDetail(pseq);
+		List<String> img = aservice.getImg(pseq);
+		List<OptionDTO> odto = aservice.getOption(pseq);
 		model.addAttribute("pdto",pdto);
 		model.addAttribute("img",img);
 		model.addAttribute("odto",odto);
@@ -186,10 +188,10 @@ public class AdminController {
 		if(files.length > 0) {
 			this.deleteFile(seq);
 			List<ProductImgDTO> pdto = this.filesUpload(files,seq);
-			pservice.modifyImg(pdto,seq);
+			aservice.modifyImg(pdto,seq);
 		}
 
-		int result = pservice.productModify(seq,pname,price,content,category,sysname);
+		int result = aservice.productModify(seq,pname,price,content,category,sysname);
 		if(result > 0) {
 			List<OptionDTO> odto = new ArrayList<>();
 			int index=0;
@@ -203,7 +205,7 @@ public class AdminController {
 				}
 				index++;
 			}
-			pservice.modifyOption(odto,seq);
+			aservice.modifyOption(odto,seq);
 		}
 		return "redirect:/admin/adminMain";
 	}
@@ -216,7 +218,7 @@ public class AdminController {
 
 	@RequestMapping("memberAdmin")
 	public String goMembers(Model model) throws Exception{
-		List<MemberDTO> mdto = mservice.getMembers();
+		List<MemberDTO> mdto = aservice.getMembers();
 
 		model.addAttribute("mdto",mdto);
 		System.out.println(mdto.size());
@@ -244,14 +246,14 @@ public class AdminController {
 			System.out.println(count[i]);
 		}
 
-		int seq = pservice.getProductSequence();
+		int seq = aservice.getProductSequence();
 
 
 		String sysname = this.filesUpload2(file, seq);
 		List<ProductImgDTO> pdto = this.filesUpload(files,seq);
-		pservice.addImg(pdto,seq);
+		aservice.addImg(pdto,seq);
 
-		int result = pservice.productAdd(pname,price,content,category,sysname);
+		int result = aservice.productAdd(pname,price,content,category,sysname);
 		if(result > 0) {
 			List<OptionDTO> odto = new ArrayList<>();
 			int index=0;
@@ -266,7 +268,7 @@ public class AdminController {
 				}
 				index++;
 			}
-			pservice.addOption(odto);
+			aservice.addOption(odto);
 		}
 		return "/admin/adminMain";
 
@@ -274,7 +276,7 @@ public class AdminController {
 
 	@RequestMapping("productDelete")
 	public String productDelete(int pseq) {
-		int result = pservice.productDelete(pseq);
+		int result = aservice.productDelete(pseq);
 		if(result>0) {
 			return "redirect:/admin/productAdmin";
 		}
@@ -284,14 +286,14 @@ public class AdminController {
 	@RequestMapping("memberDelete")
 	public String memberDelete(String id) {
 		System.out.println(id);
-		mservice.memberDelete(id);
+		aservice.memberDelete(id);
 		return "redirect:/admin/memberAdmin";
 	}
 
 	@RequestMapping("memberBlack")
 	public String memberBlack(String id) {
 		System.out.println(id);
-		mservice.memberBlack(id);
+		aservice.memberBlack(id);
 		return "/admin/memberAdmin";
 	}
 
@@ -299,7 +301,13 @@ public class AdminController {
 	@ResponseBody
 	public Object updatePoint(String id,int point) {
 		System.out.println(id+"/"+point);
-		int result = mservice.updatePoint(id,point);
+		int result = aservice.updatePoint(id,point);
 		return result;
+	}
+	
+	@RequestMapping("setBest")
+	public String setBest(int pseq) {
+		aservice.setBest(pseq);
+		return "redirect:/admin/adminMain";
 	}
 }

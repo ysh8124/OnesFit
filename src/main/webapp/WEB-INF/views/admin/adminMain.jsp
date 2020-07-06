@@ -1,108 +1,236 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Admin</title>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-   
-    </head>
-    <style>    
- @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
-            *{box-sizing: border-box;}
-    
-            .side-nav {
-                position: fixed;
-                top: 64px;
-                left: 225px;
-                width: 225px;
-                margin-left: -225px;
-                border: none;
-                border-radius: 0;
-                overflow-y: auto;
-                background-color: black;
-                bottom: 0;
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script>
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+	$(function(){
+        if(${totalSale} != undefined){
+			var sum = ${totalSale};
+			var avg = ${totalSale/12};
+			var setA = Math.floor(avg);
+			var sum2 = numberWithCommas(sum);
+			var setA2 = numberWithCommas(setA);
+        }
+var text = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;총 매출 : "+sum2+" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월 평균 매출 : "+setA2;
+	$("#myChart").after(text);
+	
+	$(".count").each(function(){
+		var num = $(this).html();
+		var num2 = Math.floor(num);
+		$(this).html(num2);
+	})
+	})
+	
+	$(function(){
+		
+		
+		$(document).on("click",".bestBtn",function(){
+			alert("베스트 상품 등록 완료. 해제는 상품관리 에서 가능합니다.");
+		})
+		
+		$("#allcheck").on("change",function(){
+			if($("#allcheck").is(":checked")){
+				$(".check").prop("checked",true);
+			}else{
+				$(".check").prop("checked",false);
+			}
+		})
+		
+		$(".check").on("change",function(){
+			
+		})
+		
+	})
+</script>
+</head>
+<style>
+@import
+	url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
+	;
 
-            }
+* {
+	box-sizing: border-box;
+}
 
-            .side-nav>li>a {
-                width: 225px;
-                border-bottom: 1px rgba(0,0,0,.3) solid;
-            }
+.side-nav {
+	position: fixed;
+	top: 64px;
+	left: 225px;
+	width: 225px;
+	margin-left: -225px;
+	border: none;
+	border-radius: 0;
+	overflow-y: auto;
+	background-color: black;
+	bottom: 0;
+}
 
-            .side-nav li a:hover,
-            .side-nav li a:focus {
-                outline: none;
-                background-color: dimgrey;
-            }
-            
-            .side-nav li a {
-                color: white;
-            }
+.side-nav>li>a {
+	width: 225px;
+	border-bottom: 1px rgba(0, 0, 0, .3) solid;
+}
 
-#shipping_info{border: 1px solid #dfdfdf; width: 800px; font-size: 11px;}
-            #shipping_info td{padding: 10px}
-            #shipping_info th{text-align: center; height: 50px;}
-        
+.side-nav li a:hover, .side-nav li a:focus {
+	outline: none;
+	background-color: dimgrey;
+}
 
-        /*    중앙 내용*/
-        #contents{width: 1598px; height: 900px; margin-left: 287px;
-            padding : 100px}
-        #point{width: 100px;}
+.side-nav li a {
+	color: white;
+}
 
-    </style>
-    <body>
-        <!--       전체 영역-->
-        <div id=OSF_ALL>
-            <!--           왼쪽메뉴, 중앙 내용, 오른쪽 메뉴 -->
-            <div id="container">
+#shipping_info {
+	border: 1px solid #dfdfdf;
+	width: 800px;
+	font-size: 11px;
+}
 
-                <!--               사이드메뉴-->
-               <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div style="color: white; margin-left: 18px;"><h2>ADMIN</h2></div>
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <div>
-                    <ul class="nav side-nav">
-                        <li><a href="/admin/adminMain"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
-                        <li> <a href="/admin/productAdmin"> 상품 관리 </a></li>
-                        <li> <a href="/admin/buyList"> 주문 관리 </a></li>
-                        <li><a href="/admin/memberAdmin">회원 관리</a></li>
-                        <li><a href="/admin/question">Q&A 관리</a></li>
-                        <li><a href="">DAILY 게시판</a></li>
-                        <li><a href="/admin/notice">공지사항 </a></li>    
-                        <li><a href="">팝업 관리</a></li>  
-                        <li><a href=""><i class="fa fa-fw fa fa-question-circle"></i> 판매자 정보</a></li>
-                    </ul>
-                </div>
-            </nav>
+#shipping_info td {
+	padding: 10px
+}
+
+#shipping_info th {
+	text-align: center;
+	height: 50px;
+}
+
+#orderList {
+	padding: 0px;
+	margin-left: 225px;
+	width: 1695px;
+}
+
+table {
+	width: 800px;
+}
+
+table td {
+	border: 1px solid black;
+}
+
+/*    중앙 내용*/
+#contents {
+	width: 1598px;
+	height: 700px;
+	margin-left: 287px;
+	padding: 100px
+}
+
+#point {
+	width: 100px;
+}
+</style>
+<body>
+	<!--       전체 영역-->
+	<div id=OSF_ALL>
+		<!--           왼쪽메뉴, 중앙 내용, 오른쪽 메뉴 -->
+		<div id="container">
+
+			<!--               사이드메뉴-->
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div style="color: white; margin-left: 18px;">
+					<h2>ADMIN</h2>
+				</div>
+				<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+				<div>
+					<ul class="nav side-nav">
+						<li><a href="/admin/adminMain"><i
+								class="fa fa-fw fa-star"></i> DASH BOARD</a></li>
+						<li><a href="/admin/productAdmin"> 상품 관리 </a></li>
+						<li><a href="/admin/buyList"> 주문 관리 </a></li>
+						<li><a href="/admin/memberAdmin">회원 관리</a></li>
+						<li><a href="/admin/question">Q&A 관리</a></li>
+						<li><a href="">DAILY 게시판</a></li>
+						<li><a href="/admin/notice">공지사항 </a></li>
+						<li><a href="">팝업 관리</a></li>
+						<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>
+								판매자 정보</a></li>
+					</ul>
+				</div>
+			</nav>
 
 
-                    <div id="contents">
-                    <div style="width:100%">
-                              <b>OneSFit_Admin</b>    
-                              
-                    </div>
-                    <div id=chart>
-                    <div style="float: left; padding: 50px;">
-                     <canvas id="myChart" width="400" height="400"></canvas>
-                     </div>
-                     
-                     <div style="float: left;padding: 50px;"><canvas id="myChart2" width="400" height="400"></canvas></div>
-                   
-                        </div>
-            </div>
-            <div id="footer">FOOTER</div> 
+			<div id="contents">
+				<div style="width: 100%">
+					<b>OneSFit_Admin</b>
 
-        </div>
-       <script>var sale = [];</script>
-        <c:forEach var="s" items="${sales}" varStatus="now">
-        <script>
+				</div>
+				<div id=chart>
+					<div style="float: left; padding: 50px;">
+						<canvas id="myChart" width="400" height="400"></canvas>
+					</div>
+
+					<div style="float: left; padding: 50px;">
+						<canvas id="myChart2" width="400" height="400"></canvas>
+					</div>
+
+				</div>
+
+			</div>
+			<div id="orderList" style="border: 1px solid black;">
+				<div>
+					<b>제품별 판매 현황</b>
+				</div>
+				<table style="width: 100%;">
+					<tr align=center>
+						<td style="width: 2%"><input type="checkbox" class="check"
+							id="allcheck">
+						<td style="width: 5%">판매순위
+						<td style="width: 5%">상품<br>번호
+						<td style="width: 25%">상품명
+						<td style="width: 10%">상품가격
+						<td style="width: 10%">상품분류
+						<td style="width: 5%">판매수량
+						<td style="width: 15%">품목매출
+						<td style="width: 10%">비고
+					</tr>
+					<script>var check=0;</script>
+					<c:forEach var="i" items="${ranklist}" varStatus="s">
+					<c:forEach var="j" items="${topProduct}">
+					
+					<c:choose>
+					<c:when test="${i.product_num == j.pseq}">
+					<script>check++;</script>
+						<tr align=center class="print">
+							<td><input type="checkbox" class="check">
+							<td>${s.index+1}
+							<td class="pseq">${j.pseq}
+							<td>${j.pname }
+							<td class="onePrice">${j.price }
+							<td>${j.category }
+							<td class="count">${i.price/j.price }
+							<td class="totalPrice">${i.price}
+							<td class="best"><a href="/admin/setBest?pseq=${i.product_num }" class="bestBtn">best</a>
+						</tr>
+						</c:when>
+						</c:choose>
+					</c:forEach>
+					</c:forEach>
+					<script>if(check == 0){$("table").append("<tr align=center><td colspan=9>판매 품목이 없습니다.</tr>");}</script>
+				</table>
+			</div>
+			<div id="footer">FOOTER</div>
+
+		</div>
+		<script>var sale = [];</script>
+		<c:forEach var="s" items="${sales}" varStatus="now">
+			<script>
         var ctx = document.getElementById('myChart');
         var ctx2 = document.getElementById('myChart2');
         console.log("현재 값은 : " + ${s} );
@@ -117,8 +245,8 @@
         }else{sale.push(${s});}
         }else{sale.push(${s});}
         </script>
-        </c:forEach>
-        <script>
+		</c:forEach>
+		<script>
             /* bar, line, Polar Area  */
 	
             
@@ -213,5 +341,5 @@
             
             
 </script>
-    </body>
+</body>
 </html>
