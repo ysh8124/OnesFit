@@ -247,6 +247,7 @@
 // 여기 유찬이형 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 $("#submit").on("click",function(){
                 	var check = false;
+                	var numbercheck=true;
                 	var checkEmpty = false;
                 	$("input[name=category]").each(function(){if($(this).is(":checked")){check = true;}});
                         if($("input[name=pname]").val() != ""){
@@ -259,17 +260,26 @@
                                 if($("#textArea").val() != ""){
                                     if(document.getElementById("profile_pt").value != "" && $("#files").val() != ""){
                                     	
-
+                                    	$(".number").each(function(){if($(this).val() == ""){numbercheck=false;}});	
+					if(numbercheck){
+						var returnVal = true;
                                     	$("input[name=color]").each(function(index1,item1){
-
                                     	var item = $(item1).parent("div");
                                     	
                                     		$(item1).parent("div").next().children().each(function(index2,item2){
                                     			if($(item2).is(":checked")){$(item2).attr("name",$(item1).val());}
-                                    			
+                                    			var col = 0;
+                                    			$(item2).parent().children().each(function(index3,item3){
+                                    				if($(item3).is(":checked")){
+                                    					col++;
+                                    				}
+                                    			})
+                                    			if(col == 0){alert("각 항목별 사이즈를 체크해주세요."); 
+                                    			returnVal = false;}
                                     		});
-                                    		
                                     	})
+                                    			return returnVal;
+					}else{alert("재고를 입력해주세요.");return false;}
                                     	
                                     	/* var input = $("<input>");
                                     	input.attr("type", "hidden");
@@ -312,7 +322,7 @@
                         <li><a href="/admin/memberAdmin">회원 관리</a></li>
                         <li><a href="/admin/question">Q&A 관리</a></li>
                         <li><a href="">DAILY 게시판</a></li>
-                        <li><a href="/admin/notice">공지사항 </a></li>    
+                        <li><a href="/notice/notice_list?page=1">공지사항 </a></li>    
                         <li><a href="">팝업 관리</a></li>  
                         <li><a href=""><i class="fa fa-fw fa fa-question-circle"></i> 판매자 정보</a></li>
                     </ul>

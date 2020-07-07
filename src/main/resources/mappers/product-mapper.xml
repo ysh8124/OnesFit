@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="product">
-
-	<insert id="addProduct">insert into product values(product_seq.nextval,#{pname},${price},#{category},default,#{content},#{img},default,default)</insert>
-
-<insert id="addImg">insert into product_img values(${img_seq},#{oriName},#{sysName})</insert>
-	
-	<select id="getSequence" resultType="int">select max(pseq) from product</select>
-
-<select id="getProduct" resultType="osf.spring.dto.ProductDTO">select * from product</select>
-
- <select id="productDetail" resultType="osf.spring.dto.ProductDTO">select * from product where pseq=#{value}</select>
-
-<insert id="addOption">insert into product_option values(${parent_seq},#{color},#{psize},${item_count})</insert>
-
-<delete id="productDelete">delete from product where pseq=${value}</delete>
-
-<select id="getImg" resultType="String">select sysname from product_img where product_seq=${value}</select>
- 
- <delete id="deleteImg">delete from product_img where product_seq=${value}</delete>
- 
- <delete id="deleteOption">delete from product_option where parent_seq=${value}</delete>
- 
- <update id="productModify">update product set pname=#{pname}, price=${price}, content=#{content}, category=#{category}, title_img=#{img} where pseq=${pseq} </update>
- 
- <select id="getOption" resultType="osf.spring.dto.OptionDTO">select * from product_option where parent_seq=${value}</select>
- 
- <select id="getSales" resultType="Integer">
- select * from(select sum(price),1 sort from buy_list where trunc(buy_date,'MM')=trunc(sysdate,'MM') group by 1
-union select sum(price),2 sort from buy_list where trunc(buy_date,'MM')=trunc(ADD_MONTHS(sysdate, -1),'MM') group by 2
-union select sum(price),3 sort from buy_list where trunc(buy_date,'MM')=trunc(ADD_MONTHS(sysdate, -2),'MM') group by 3
-union select sum(price),4 sort from buy_list where trunc(buy_date,'MM')=trunc(ADD_MONTHS(sysdate, -3),'MM') group by 4
-union select nvl(sum(price),0),5 from buy_list where trunc(buy_date,'MM')=trunc(ADD_MONTHS(sysdate, -4),'MM') group by 5) order by sort</select>
-
-<select id="totalSale" resultType="int">select sum(price) from buy_list</select>
- 
+<mapper namespace="Product">
+	<select id="product_nextval" resultType='int'>
+		select
+		product_seq.nextval from dual
+	</select>
+	<update id="productRegist">
+		insert into product
+		values(#{pseq},#{pname},#{price},'t',null,#{content},#{title_img},'N',sysdate)
+	</update>
+	<update id="imageRegist">
+		insert into product_img
+		values(#{product_seq},#{oriname},#{sysname})
+	</update>
+	<select id="productSelect"
+		resultType="osf.spring.dto.ProductDTO">
+		select *from product
+	</select>
+	<select id="productSelectByPseq"
+		resultType="osf.spring.dto.ProductDTO">
+		select *from product where pseq=#{value}
+	</select>
+	<select id="imageSelectByPseq"
+		resultType="osf.spring.dto.ImageDTO">
+		select *from product_img where product_seq=#{value}
+	</select>
+	<update id="cartAdd">
+		insert into cart
+		values(cart_seq.nextval,#{parent_id},#{pseq},#{title_img},#{pname},#{option1},#{option2},#{count_item},#{price})
+	</update>
+	<select id="optionSelect" resultType="osf.spring.dto.OptionDTO">
+		select *from product_option
+		where parent_seq=#{pseq}
+	</select>
+	<select id="colorSelect" resultType="osf.spring.dto.OptionDTO">
+		select *from product_option
+		where parent_seq=#{pseq} and color=#{color}
+	</select>
+	<insert id="buyList">insert into buy_list
+		values(#{parent_id},#{pname},${price},#{psize},#{pcolor},${amount},#{recipient},${zipcode},#{address1},#{address2},#{phone},#{msg},default,${buy_num},sysdate,default,default)
+	</insert>
+	<insert id="review">
+   	  insert into review values(review_seq.nextval,${pseq},#{img},#{title},#{content},#{writer},sysdate)
+   </insert>
+   <select id="reviewSelectByPseq" resultType="osf.spring.dto.ReviewDTO">
+      select *from review where pseq=${value}
+   </select>
 </mapper>

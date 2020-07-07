@@ -38,6 +38,20 @@ var text = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;총 매출 : "+sum2+" &nbsp;&nbsp;&nbs
 	})
 	
 	$(function(){
+		$(document).on("click",".best",function(index,item){
+			var arr = [];
+			var url = "/admin/setBest?"
+			$(".check").each(function(index2,item2){
+				if($(item2).is(":checked")){
+					var seq = $(item2).parent().next().next().text();
+					url += "pseq="+seq+"&&";
+				}
+				
+			})
+			if(confirm("베스트 상품을 등록하시겠습니까?")){
+			location.href=url;
+			}else{return false;}
+		})
 		
 		
 		$(document).on("click",".bestBtn",function(){
@@ -53,7 +67,17 @@ var text = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;총 매출 : "+sum2+" &nbsp;&nbsp;&nbs
 		})
 		
 		$(".check").on("change",function(){
-			
+			var checkbox = true;
+			$(".check").each(function(){
+				if(!$(this).is(":checked")){
+					checkbox = false;
+				}
+			})
+			if(checkbox){
+				$("#allcheck").prop("checked",true);
+			}else{
+				$("#allcheck").prop("checked",false);
+			}
 		})
 		
 	})
@@ -135,6 +159,8 @@ table td {
 #point {
 	width: 100px;
 }
+
+.best:hover{cursor:pointer;}
 </style>
 <body>
 	<!--       전체 영역-->
@@ -157,7 +183,7 @@ table td {
 						<li><a href="/admin/memberAdmin">회원 관리</a></li>
 						<li><a href="/admin/question">Q&A 관리</a></li>
 						<li><a href="">DAILY 게시판</a></li>
-						<li><a href="/admin/notice">공지사항 </a></li>
+						<li><a href="/notice/notice_list?page=1">공지사항 </a></li>
 						<li><a href="">팝업 관리</a></li>
 						<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>
 								판매자 정보</a></li>
@@ -189,7 +215,7 @@ table td {
 				</div>
 				<table style="width: 100%;">
 					<tr align=center>
-						<td style="width: 2%"><input type="checkbox" class="check"
+						<td style="width: 2%"><input type="checkbox"
 							id="allcheck">
 						<td style="width: 5%">판매순위
 						<td style="width: 5%">상품<br>번호
@@ -210,13 +236,13 @@ table td {
 						<tr align=center class="print">
 							<td><input type="checkbox" class="check">
 							<td>${s.index+1}
-							<td class="pseq">${j.pseq}
+							<td class="pseq">${j.pseq}</td>
 							<td>${j.pname }
 							<td class="onePrice">${j.price }
 							<td>${j.category }
 							<td class="count">${i.price/j.price }
 							<td class="totalPrice">${i.price}
-							<td class="best"><a href="/admin/setBest?pseq=${i.product_num }" class="bestBtn">best</a>
+							<td class="best">best
 						</tr>
 						</c:when>
 						</c:choose>

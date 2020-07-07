@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Comments">
+<insert id="insert">
+	insert into OSF_DailyLook_C values(OSF_DailyLook_C_seq.nextval,#{d_seq},#{writer},#{contents},default)
+</insert>
+<delete id="delete">
+	delete OSF_DailyLook_C where c_seq=#{c_seq} and d_seq=#{d_seq}
+</delete>
+<select id="select" resultType="osf.spring.dto.DailyLookCommentsDTO">
+	select * from OSF_DailyLook_C where d_seq=#{d_seq} order by c_seq desc
+</select>
+</mapper>

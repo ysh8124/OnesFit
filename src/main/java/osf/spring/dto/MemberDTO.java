@@ -16,8 +16,8 @@ public class MemberDTO {
 	private String address2;
 	private int point;
 	private String blacklist_yn;
-	private Timestamp recent_contact;
 	private Timestamp regist_date;
+	private Timestamp recent_contact;
 	private String sDate;
 	
 	

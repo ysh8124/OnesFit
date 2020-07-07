@@ -122,6 +122,13 @@ table a {
 
     
     	$(function(){
+    		
+    		$(".unbest").on("click",function(){
+    			if(confirm("베스트 항목에서 제외하시겠습니까? 등록은 DASH BOARD에서 가능합니다.")){
+    				return true;
+    			}return false;
+    		})
+    		
     		$(".del").on("click",function(){
     			if(confirm("정말 삭제하시겠습니까?")){return true;
     			}else{
@@ -187,7 +194,7 @@ table a {
 						<li><a href="/admin/memberAdmin">회원 관리</a></li>
 						<li><a href="/admin/question">Q&A 관리</a></li>
 						<li><a href="">DAILY 게시판</a></li>
-						<li><a href="/admin/notice">공지사항 </a></li>
+						<li><a href="/notice/notice_list?page=1">공지사항 </a></li>
 						<li><a href="">팝업 관리</a></li>
 						<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>
 								판매자 정보</a></li>
@@ -232,7 +239,7 @@ table a {
 									<c:choose>
 									<c:when test="${p.best == 'Y'}">
 									<td class="text pname" align=left><a href="#">${p.pname }</a>&nbsp; 
-									<span class="badge badge-danger">BEST</span> <a href="/admin/unBest?pseq=${p.pseq}" style="color:gray;">UnBest</a>
+									<span class="badge badge-danger">BEST</span> <a href="/admin/unBest?pseq=${p.pseq}" class="unbest" style="color:gray;">UnBest</a>
 									</c:when>
 									<c:otherwise><td class="text pname" align=left><a href="#">${p.pname }</a></c:otherwise>
 									</c:choose>
@@ -244,9 +251,9 @@ table a {
 									<td class="text category" align=center>${p.category}</td>
 									<td align=center class="text">${p.soldout_yn}</td>
 									<td class="text"><a
-										href="/admin/productModify?pseq=${p.pseq}">수정</a><a
+										href="/admin/productModify?pseq=${p.pseq}" style="color:gray">수정</a><a
 										href="/admin/productDelete?pseq=${p.pseq}" class=del
-										style="margin-left: 20px;">삭제</a></td>
+										style="margin-left: 20px;color:gray;">삭제</a></td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -256,8 +263,6 @@ table a {
 							</tr>
 						</c:otherwise>
 					</c:choose>
-
-
 				</table>
 				<div style="width: 1268px;">
 					<button id="add" style="margin-left: 1100px">상품등록</button>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Daily">
+<select id="select" resultType="osf.spring.dto.DailyLookDTO">
+	select * from (select OSF_DailyLook.* , row_number() over(order by d_seq desc)rnum from OSF_DailyLook) where rnum between ${start} and ${end}
+</select>
+<select id="selectOne" resultType="osf.spring.dto.DailyLookDTO">
+	select * from OSF_DailyLook where d_seq=#{d_seq}
+</select>
+<select id="ArticleCount" resultType="int">
+	select count(*) from OSF_DailyLook
+</select>
+<insert id="insert">
+	insert into OSF_DailyLook values(OSF_DailyLook_seq.nextval,#{writer},#{instargram},#{contents},default,default,#{sysname},#{oriname})
+</insert>
+<delete id="delete">
+	delete OSF_DailyLook where d_seq=#{d_seq}
+</delete>
+<update id="update">
+	update OSF_DailyLook set sysname=#{sysname},oriname=#{oriname},contents=#{contents} where d_seq=#{d_seq}
+</update>
+</mapper>

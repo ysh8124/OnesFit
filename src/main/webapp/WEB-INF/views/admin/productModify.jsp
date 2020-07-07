@@ -329,7 +329,7 @@
 				<li><a href="/admin/memberAdmin">회원 관리</a></li>
 				<li><a href="/admin/question">Q&A 관리</a></li>
 				<li><a href="">DAILY 게시판</a></li>
-				<li><a href="/admin/notice">공지사항 </a></li>
+				<li><a href="/notice/notice_list?page=1">공지사항 </a></li>
 				<li><a href="">팝업 관리</a></li>
 				<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>
 						판매자 정보</a></li>
@@ -408,7 +408,7 @@
 								<img id="prev_View_area" class="obj"
 									onclick="document.all.file.click();"
 									style="width: 200px; height: 200px;"
-									src="/upload/product/title/${pdto.title_img}"> <input
+									src="/title/${pdto.title_img}"> <input
 									type="hidden" value="${pdto.title_img}" name=title_img>
 							</div> <input type="file" name="file" id="profile_pt"
 							onchange="previewImage(this,'View_area')" style="display: none;" />
@@ -419,10 +419,16 @@
 									<c:when test="${!empty img}">
 										<script>$("#xbox2").css("border","none");</script>
 										<c:forEach var="i" items="${img }">
-											<img src="/upload/product/${pdto.pseq}/${i}"
+											<img src="/product/${pdto.pseq}/${i}"
 												onclick=document.all.files.click();>
 										</c:forEach>
 									</c:when>
+									<c:otherwise>
+
+                                    <a onclick=document.all.files.click();
+                                       style="width: 200px; height: 200px; display: block; line-height: 200px; text-decoration: none; color: gray; font-size: 70px; opacity: 30%">+</a>
+
+									</c:otherwise>
 								</c:choose>
 							</div> <input multiple="multiple" name="files" id="files" type="file"
 							style="display: none;" />
@@ -430,7 +436,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<br> <input type=submit value="등록하기" id=submit
+			<br> <input type=submit value="상품수정" id=submit
 				style="margin-left: 350px">
 		</form>
 	</div>

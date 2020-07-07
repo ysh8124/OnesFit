@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Notice">
+<select id="select" resultType="osf.spring.dto.NoticeBoardDTO">
+	select * from (select notice_board.* , row_number() over(order by n_seq desc)rnum from notice_board) where rnum between ${start} and ${end}
+</select>
+<select id="ArticleCount" resultType="int">
+	select count(*) from notice_board
+</select>
+<select id="selectOne" resultType="osf.spring.dto.NoticeBoardDTO">
+	select * from notice_board where n_seq = #{n_seq}
+</select>
+<insert id="insert">
+	insert into notice_board values(notice_board_seq.nextval,#{writer},#{title},#{contents},default,default)
+</insert>
+<update id="update">
+	update notice_board set view_count = view_count+1 where n_seq = #{n_seq}
+</update>
+<delete id="delete">
+	delete notice_board where n_seq=#{n_seq}
+</delete>
+<update id="modify">
+	update notice_board set n_seq=#{n_seq},title=#{title},contents=#{contents} where n_seq=#{n_seq}
+</update>
+</mapper>

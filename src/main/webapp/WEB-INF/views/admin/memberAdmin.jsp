@@ -58,8 +58,8 @@
         
 
         /*    중앙 내용*/
-        #contents{width: 1598px; height: 900px; margin-left: 287px;
-            padding : 100px}
+        #contents{width: 1598px; height: 900px; margin-left: 207px;
+            padding : 140px}
         #point{width: 100px;}
         
         #searchBtn:hover{cursor: pointer;}
@@ -114,6 +114,10 @@
     		if(!confirm("블랙리스트에 추가하시겠습니까?")){return false;}
     	})
     	
+    	$(".unBlack").on("click",function(){
+    		if(!confirm("블랙리스트에서 제외하시겠습니까?")){return false;}
+    	})
+    	
     	$("#searchBtn").on("click",function(){
     			$("tr").css("display","table-row");
     			$(".addtr").remove();
@@ -157,7 +161,7 @@
                         <li><a href="/admin/memberAdmin">회원 관리</a></li>
                         <li><a href="/admin/question">Q&A 관리</a></li>
                         <li><a href="">DAILY 게시판</a></li>
-                        <li><a href="/admin/notice">공지사항 </a></li>    
+                        <li><a href="/notice/notice_list?page=1">공지사항 </a></li>    
                         <li><a href="">팝업 관리</a></li>  
                         <li><a href=""><i class="fa fa-fw fa fa-question-circle"></i> 판매자 정보</a></li>
                     </ul>
@@ -204,7 +208,14 @@
                             <td><input type="text" class="point" value="${m.point }" style="width:80px"></td>
                             <td align=center>${m.blacklist_yn }</td>
                             <td><a href="/admin/memberDelete?id=${m.id}" class=del>삭제</a>
+                            <c:choose>
+                            <c:when test="${m.blacklist_yn eq 'Y' }">
+                            <a href="/admin/unBlack?id=${m.id}" class=unBlack>블랙해제</a>
+                            </c:when>
+                            <c:otherwise>
                             <a href="/admin/memberBlack?id=${m.id}" class=black>블랙</a>
+                            </c:otherwise>
+                            </c:choose>
                             </td>
                         </tr>
                         	</c:forEach>

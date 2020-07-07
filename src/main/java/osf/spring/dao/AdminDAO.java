@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import osf.spring.dto.BestProductDTO;
+import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.MemberDTO;
 import osf.spring.dto.OptionDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
+import osf.spring.dto.QuestionDTO;
+import osf.spring.statics.Statics;
 
 @Repository
 public class AdminDAO {
@@ -30,6 +33,10 @@ public class AdminDAO {
 	
 	public int memberBlack(String id) {
 		return mybatis.update("admin.memberBlack",id);
+	}
+	
+	public void unBlack(String id) {
+		mybatis.update("admin.unBlack",id);
 	}
 	
 	public int updatePoint(String id,int point) {
@@ -151,6 +158,50 @@ public class AdminDAO {
 		
 		return mybatis.update("admin.setBest",pseq);
 	}
+	
+	/////////////////////영재씨파트 ////////////////////////////////
+	//buyList
+		public List<BuyListDTO> selectByPageNo(int page){
+			int start = page * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE-1);
+			int end = start + (Statics.RECORD_COUNT_PER_PAGE-1);
+			Map<String, Integer> param = new HashMap<>();
+			param.put("start",start);
+			param.put("end", end);
+			
+			return mybatis.selectList("admin.selectList",param);
+			
+		}
+		
+		public int getArticleCount() {
+			return mybatis.selectOne("admin.getArticleCount");
+		}
+
+		public Object updateWhenStatusN(Map<String, Object> updateParam) {
+			return mybatis.update("admin.updateWhenStatusN", updateParam);
+		}
+
+		public Object updateWhenStatusY0(Map<String, Object> updateParam) {
+			return mybatis.update("admin.updateWhenStatusY0", updateParam);
+		}
+
+		public Object updateWhenStatusYX(Map<String, Object> updateParam) {
+			return mybatis.update("admin.updateWhenStatusYX", updateParam);
+		}
+
+		
+		//Question
+		public List<QuestionDTO> qSelectAll() {
+			return mybatis.selectList("admin.qSelectAll");
+		}
+
+		public int getQuestionArticleCount() {
+			return mybatis.selectOne("admin.getQuestionArticleCount");
+		}
+
+		public int answerInput(Map<String, Object> inputParam) {
+			mybatis.update("admin.answerUpdate", inputParam);
+			return mybatis.insert("admin.answerInput", inputParam);
+		}
 
 	
 }
