@@ -13,7 +13,7 @@
 	<script>
 	$(function() {
 		alert("로그인 후 이용 가능합니다.")
-		location.href = "/daily/daily_list?page=1";
+		location.href = "../member/toLogin"
 	})
 	</script>
 </body>

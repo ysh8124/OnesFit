@@ -287,7 +287,7 @@ textarea {
 			<!--               사이드메뉴-->
 			<div id="sidemenu">
 				<div id="sidefix">
-					<a href=""> <img src="/img/logo.png"
+					<a href="/"> <img src="/img/logo.png"
 						style="width: 130px; position: relative; left: 45px">
 					</a>
 					<div class="memberpage"> 
@@ -295,21 +295,16 @@ textarea {
                                 <li>
                                 <c:choose>
                                 	<c:when test="${loginid eq 'pzlogin'}">
-                                		<a href="/member/loginInfo">login</a>
-                                		<a href="">join us</a>
-                                </li>
-                                <li>
-                                    <a href="">my page</a>
-                                    <a href="">cart </a>
-                                    <a href="">order</a>                                  
+                                		<a href="/member/toLogin">login</a>
+                                		<a href="/member/toSignup">join us</a>
                                 </li>
                                 	</c:when>
                                 	<c:otherwise>
-                                		<a href="/member/logout">logout</a>
-                                		<a href="">join us</a>
+                                		<a href="/member/logout">logout</a> <a
+										href="/member/toProfile?id=${loginInfo}">PROFILE</a>
                                 </li>
                                 <li>
-                                    <a href="">my page</a>
+                                    <a href="/member/tomyPage">my page</a>
                                     <a href="/member/cart?parent_id=${loginid}">cart </a>
                                     <a href="">order</a>                                  
                                 </li>
@@ -327,7 +322,8 @@ textarea {
 							<li><a href="">TOP</a></li>
 							<li><a href="">PANTS</a></li>
 							<li><a href="">ACC</a></li>
-							<li><a href="" style="font-size: 11px;">OSF DAILY BOOK</a></li>
+							<li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
+							<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li>
 
 						</ul>
 					</div>
@@ -356,7 +352,7 @@ textarea {
 				<div id='mainpic'
 					 style="padding: 20px; margin: auto; text-align: center; width: 500px; height: 500px; position: relative; left: 42px;">
 					
-					<img src="/mainpic/${pdto.title_img }"
+					<img src="/title/${pdto.title_img }"
 						style="width: 100%; height: 100%;" id='mainimage'>
 				</div>
 				<div id='maindetail'
@@ -374,7 +370,7 @@ textarea {
 							<div>
 								<b>COLOR</b>&nbsp; &nbsp; <select id='color'
 									onchange="changeColor()" style="width: 50%">
-									<option>[필수] 옵션을 선택해주세요.</option>
+									<option>[필수] 색상을 선택해주세요.</option>
 									<c:forEach var='i' items='${color }'>
 										<option>${i}</option>
 									</c:forEach>
@@ -384,7 +380,7 @@ textarea {
 							<div>
 								<b>SIZE</b> &nbsp; &nbsp; &nbsp; &nbsp; <select id='size'
 									style="width: 50%" onchange="selectSize()">
-									<option>[필수] 색상을 선택해주세요.</option>
+									<option>[필수] 색상을 먼저 선택해주세요.</option>
 								</select> <br> <br>
 							</div>
 							<div id='add'></div>
@@ -412,7 +408,7 @@ textarea {
 							<c:forEach var='i' items='${idto }'>
 								<div
 									style="width: 500px; height: 500px; float: left; padding: 20px">
-									<img src="/subpic/${i.sysname }" style="width: 100%;">
+									<img src="/product/${pdto.pseq}/${i.sysname}" style="width: 100%;">
 								</div>
 							</c:forEach>
 						</div>
@@ -591,7 +587,7 @@ textarea {
                             
                             if("${loginId}" == "pzlogin"){
                             	alert("로그인 후 이용가능합니다.");
-                            	location.href = "../member/loginInfo"
+                            	location.href = "../member/toLogin"
                             }
                             
                             else if(length !=0){

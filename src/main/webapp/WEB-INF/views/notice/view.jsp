@@ -134,7 +134,7 @@
                 <!--               사이드메뉴-->
                 <div id="sidemenu">
                     <div id="sidefix">                
-                        <a href="">
+                        <a href="/">
                             <img src="/img/logo.png" style="width: 130px;
                                                                             position: relative; left: 45px">
                         </a>                          
@@ -143,21 +143,16 @@
                                 <li>
                                 <c:choose>
                                 	<c:when test="${loginid eq 'pzlogin'}">
-                                		<a href="/member/loginInfo">login</a>
-                                		<a href="">join us</a>
-                                </li>
-                                <li>
-                                    <a href="">my page</a>
-                                    <a href="">cart </a>
-                                    <a href="">order</a>                                  
+                                		<a href="/member/toLogin">login</a>
+                                		<a href="/member/toSignup">join us</a>
                                 </li>
                                 	</c:when>
                                 	<c:otherwise>
-                                		<a href="/member/logout">logout</a>
-                                		<a href="">join us</a>
+                                		<a href="/member/logout">logout</a> <a
+										href="/member/toProfile?id=${loginInfo}">PROFILE</a>
                                 </li>
                                 <li>
-                                    <a href="">my page</a>
+                                    <a href="/member/tomyPage">my page</a>
                                     <a href="/member/cart?parent_id=${loginid}">cart </a>
                                     <a href="">order</a>                                  
                                 </li>
@@ -174,7 +169,8 @@
                                 <li><a href="">TOP</a></li>
                                 <li><a href="">PANTS</a></li>
                                 <li><a href="">ACC</a></li>
-                                <li><a href="" style="font-size: 11px;">OSF DAILY BOOK</a> </li> 
+                                <li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
+								<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li>
 
                             </ul>
                         </div>

@@ -153,7 +153,7 @@
                 <!--               사이드메뉴-->
                 <div id="sidemenu">
                     <div id="sidefix">                
-                        <a href="">
+                        <a href="/">
                             <img src="/img/logo.png" style="width: 130px;
                                                                             position: relative; left: 45px">
                         </a>                          
@@ -163,18 +163,22 @@
                                 <c:choose>
                                 	<c:when test="${loginInfo eq 'pzlogin'}">
                                 		<a href="/member/loginInfo">login</a>
+                                		<a href="">join us</a>
+                                </li>
                                 	</c:when>
                                 	<c:otherwise>
                                 		<a href="/member/logout">logout</a>
-                                	</c:otherwise>
-                                </c:choose>
-                                    <a href="">join us</a>
+                                		<a
+										href="/member/toProfile?id=${loginInfo}">PROFILE</a>
                                 </li>
                                 <li>
-                                    <a href="">my page</a>
+                                    <a href="/member/tomyPage">my page</a>
                                     <a href="">cart </a>
                                     <a href="">order</a>                                  
                                 </li>
+                                	</c:otherwise>
+                                </c:choose>
+                                    
 
                             </ul>                       
                         </div>
@@ -187,7 +191,8 @@
                                 <li><a href="">TOP</a></li>
                                 <li><a href="">PANTS</a></li>
                                 <li><a href="">ACC</a></li>
-                                <li><a href="" style="font-size: 11px;">OSF DAILY BOOK</a> </li> 
+                                <li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
+								<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li> 
 
                             </ul>
                         </div>
@@ -231,7 +236,7 @@
                 
 					<div style="width: 20%; float: left;">
 					<a href="/product/productDetail?pseq=${i.pseq}">
-					<img src="/mainpic/${i.title_img}" style="width: 70px; height: 70px;">
+					<img src="/title/${i.title_img}" style="width: 70px; height: 70px;">
 					</a>
 					</div>
 					<div style="width: 15%; float: left; margin-top: 27px;" class='t'><a href="/product/productDetail?pseq=${i.pseq}" style="text-decoration: none; color:#a1a1a1;">

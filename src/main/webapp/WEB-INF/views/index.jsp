@@ -160,15 +160,12 @@ div {
 				<c:when test="${loginInfo eq 'pzlogin'}">
 					<div id="sidemenu">
 						<div id="sidefix">
-							<a href=""> <img src="/img/logo.png"
+							<a href="/"> <img src="/img/logo.png"
 								style="width: 130px; position: relative; left: 45px">
 							</a>
 							<div class="memberpage">
 								<ul>
 									<li><a href="/member/toLogin">login</a> <a href="/member/toSignup">join us</a></li>
-									<li><a href="">my page</a> <a href="">cart </a> <a href="">order</a>
-									</li>
-
 								</ul>
 							</div>
 
@@ -180,10 +177,8 @@ div {
 									<li><a href="">TOP</a></li>
 									<li><a href="">PANTS</a></li>
 									<li><a href="">ACC</a></li>
-									<li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a>
-									<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a>
-									</li>
-									<li><a href="/admin/productAdd">상품등록</a>
+									<li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
+									<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li>
 								</ul>
 							</div>
 
@@ -191,7 +186,6 @@ div {
 								<ul>
 									<li><a href=""><img src="/img/search.png"
 											style="width: 15px"></a> <input id="search" type="text">
-
 									</li>
 								</ul>
 								<ul>
@@ -217,8 +211,9 @@ div {
 							</a>
 							<div class="memberpage">
 								<ul>
-									<li><a href="/member/logout">logout</a> <a href="">join us</a></li>
-									<li><a href="">my page</a> <a href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a href="">order</a>
+									<li><a href="/member/logout">logout</a> <a
+										href="/member/toProfile?id=${loginInfo}">PROFILE</a></li>
+									<li><a href="/member/tomyPage">my page</a> <a href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a href="">order</a>
 									</li>
 
 								</ul>
@@ -235,7 +230,15 @@ div {
 									<li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a>
 									<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a>
 									</li>
-									<li><a href="/admin/productAdd">상품등록</a>
+									<c:choose>
+										<c:when test="${loginInfo.id eq 'OSF'}">
+										<li><a href="/admin/productAdd">상품등록</a>
+									</c:when>
+									<c:otherwise>
+									
+									</c:otherwise>
+									</c:choose>
+									
 								</ul>
 							</div>
 
@@ -271,7 +274,7 @@ div {
 									<li class="box_li">
 										<div class="box_div">
 											<a href="/product/productDetail?pseq=${i.pseq}"><img
-												src="/mainpic/${i.title_img }"></a>
+												src="/title/${i.title_img}"></a>
 											<ul class="product_info">
 												<li>${i.pname}</li>
 												<li>${i.price}</li>

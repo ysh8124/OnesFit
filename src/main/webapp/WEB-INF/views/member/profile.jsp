@@ -251,36 +251,16 @@ div {
 			<!--               사이드메뉴-->
 			<div id="sidemenu">
 				<div id="sidefix">
-					<a href=""> <img
-						src="/resources/image/KakaoTalk_20200622_165007357.png"
-						style="width: 130px; position: relative; left: 45px">
-					</a>
+					<a href="/"> <img src="/img/logo.png" style="width: 130px; position: relative; left: 45px"></a>
 
-					<c:choose>
-						<c:when test="${empty loginInfo}">
-							<div class="memberpage">
-								<ul>
-									<li><a href="/member/toLogin">login</a> <a
-										href="/member/toSignup">join us</a></li>
-									<li><a href="/member/tomyPage">my page</a> <a href="">cart
-									</a> <a href="">order</a></li>
-								</ul>
-							</div>
-						</c:when>
-
-						<c:otherwise>
 							<div class="memberpage">
 								<ul>
 									<li><a href="/member/logout">logout</a> <a
 										href="/member/toProfile?id=${loginInfo}">PROFILE</a></li>
-									<li><a href="/member/tomyPage">my page</a> <a href="">cart
+									<li><a href="/member/tomyPage">my page</a> <a href="/member/cart?parent_id=${loginInfo.id}">cart
 									</a> <a href="">order</a></li>
 								</ul>
 							</div>
-						</c:otherwise>
-					</c:choose>
-
-
 					<div id="category">
 						<ul>
 							<li><a href="">NEW ARRIVAL</a></li>
@@ -289,24 +269,20 @@ div {
 							<li><a href="">TOP</a></li>
 							<li><a href="">PANTS</a></li>
 							<li><a href="">ACC</a></li>
-							<li><a href="" style="font-size: 11px;">OSF DAILY BOOK</a></li>
+							<li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
+							<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li>
 
 						</ul>
 					</div>
 
 					<div>
 						<ul>
-                                <li>
-                                    <a href=""><img src="/resources/image/KakaoTalk_20200622_165007715.png" style="width: 15px"></a>
-                                    <input id="search" type="text">
-
-                                </li>
+                               <li><a href=""><img src="/img/search.png" style="width: 15px"></a> <input id="search" type="text"></li>
                             </ul>
                             <ul>
-                                <li> 
-                                    <a href=""><img src="/resources/image/KakaoTalk_20200622_165007554.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a> 
-                                    <a href=""><img src="/resources/image/KakaoTalk_20200626_164739381.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a>
-                                </li>
+                               <li><a href="https://www.instagram.com/onesfit__official/?hl=ko" onclick="window.open(this.href,'_blank'); return false;"><img src="/img/instar.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a> 
+									<a href=""><img src="/img/kakao.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a>
+								</li>
                             </ul>
 
 

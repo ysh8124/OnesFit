@@ -317,6 +317,8 @@ public class AdminController {
 		aservice.setBest(pseq);
 		return "redirect:/admin/adminMain";
 	}
+	
+	
 	/////////////////////////영재씨파트 ///////////////////////////////////////
 	@RequestMapping("/buyList")
 	public String buyList(HttpServletRequest req, Model model) throws Exception {
