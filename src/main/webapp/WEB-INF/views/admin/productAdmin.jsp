@@ -122,7 +122,7 @@ table a {
 
     
     	$(function(){
-    		
+
     		$(".unbest").on("click",function(){
     			if(confirm("베스트 항목에서 제외하시겠습니까? 등록은 DASH BOARD에서 가능합니다.")){
     				return true;
@@ -241,7 +241,7 @@ table a {
 									<td class="text pname" align=left><a href="#">${p.pname }</a>&nbsp; 
 									<span class="badge badge-danger">BEST</span> <a href="/admin/unBest?pseq=${p.pseq}" class="unbest" style="color:gray;">UnBest</a>
 									</c:when>
-									<c:otherwise><td class="text pname" align=left><a href="#">${p.pname }</a></c:otherwise>
+									<c:otherwise><td class="text pname" align=left><a href="#">${p.pname }</a> <a href="/admin/setBest?pseq=${p.pseq }" style="color: gray;">best</a></c:otherwise>
 									</c:choose>
 									</td>
 

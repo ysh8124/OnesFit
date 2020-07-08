@@ -12,7 +12,7 @@
 <update id="updatePoint">update member set point=${point} where id=#{id}</update>
 
 
-<insert id="addProduct">insert into product values(product_seq.nextval,#{pname},${price},#{category},default,#{content},#{img},default,default)</insert>
+<insert id="addProduct">insert into product values(product_seq.nextval,#{pname},${price},#{category},default,#{content},#{img},default,default,default)</insert>
 
 <insert id="addImg">insert into product_img values(${img_seq},#{oriName},#{sysName})</insert>
 	
@@ -50,6 +50,12 @@ union select nvl(sum(price),0),5 from buy_list where trunc(buy_date,'MM')=trunc(
 <select id="bestProduct" resultType="osf.spring.dto.ProductDTO">select * from product where pseq=${value}</select>
 
 <update id="setBest">update product set best='Y' where pseq=${value}</update>
+
+<select id="visit" resultType="Integer">select * from(select nvl(count(*),0),1 sort from visit where <![CDATA[trunc(vdate,'MM')<=trunc(sysdate,'MM')]]>
+union select nvl(count(*),0),2 sort from visit where <![CDATA[trunc(vdate,'MM')<=trunc(ADD_MONTHS(sysdate, -1),'MM')]]>
+union select nvl(count(*),0),3 sort from visit where <![CDATA[trunc(vdate,'MM')<=trunc(ADD_MONTHS(sysdate, -2),'MM')]]>
+union select nvl(count(*),0),4 sort from visit where <![CDATA[trunc(vdate,'MM')<=trunc(ADD_MONTHS(sysdate, -3),'MM')]]>
+union select nvl(count(*),0),5 sort from visit where <![CDATA[trunc(vdate,'MM')<=trunc(ADD_MONTHS(sysdate, -4),'MM')]]>) order by sort</select>
 
 
 

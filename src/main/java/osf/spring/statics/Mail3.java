@@ -36,7 +36,7 @@ public class Mail3 {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail)); 
 
             // Subject
-            message.setSubject("비밀번호 찾기 인증 코드입니다."); 
+            message.setSubject("ONESFIT 비밀번호 찾기 인증 코드입니다."); 
             code = (int)((Math.random()*10000)+1000);
             // Text
             message.setText("인증 코드 : "+code);   

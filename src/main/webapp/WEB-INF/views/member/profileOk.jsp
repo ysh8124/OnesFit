@@ -11,7 +11,7 @@
 <body>
 <script>
    alert("정보 수정 성공 ");
-   location.href="/member/toProfile?id=${loginInfo}";
+   location.href="/member/toProfile?id=${loginInfo.id}";
 </script>
 </body>
 </html>

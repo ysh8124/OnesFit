@@ -134,8 +134,7 @@ $returnURL = /member/id/find_id_result.html
                                     <br>
                                     <ul style="font-size: 11px;">
                                         <li>비밀번호 찾기 후 비밀번호 재설정해 주시기 바랍니다. <br>
-                                           <input type="radio" name="pwradio" style="width: 12px; position: relative; top: 13px;">이메일
-                                            <input type="radio" name="pwradio" style="width: 12px; position: relative; top: 13px">휴대폰 번호  </li> 
+                                          </li> 
 
                                     </ul>
                                     <div></div>

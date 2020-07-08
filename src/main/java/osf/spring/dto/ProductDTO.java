@@ -13,10 +13,11 @@ public class ProductDTO {
     private String title_img;
     private String soldout_yn;
     private Timestamp regist_date;
+    private int sale;
     
     public ProductDTO() {}
 	public ProductDTO(int pseq, String pname, int price, String category, String best, String content, String title_img,
-			String soldout_yn, Timestamp regist_date) {
+			String soldout_yn, Timestamp regist_date, int sale) {
 		super();
 		this.pseq = pseq;
 		this.pname = pname;
@@ -27,6 +28,7 @@ public class ProductDTO {
 		this.title_img = title_img;
 		this.soldout_yn = soldout_yn;
 		this.regist_date = regist_date;
+		this.sale = sale;
 	}
 	public int getPseq() {
 		return pseq;
@@ -82,7 +84,14 @@ public class ProductDTO {
 	public void setRegist_date(Timestamp regist_date) {
 		this.regist_date = regist_date;
 	}
+	public int getSale() {
+		return sale;
+	}
+	public void setSale(int sale) {
+		this.sale = sale;
+	}
     
+   
     
 	
 }

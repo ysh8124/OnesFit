@@ -178,6 +178,7 @@ table td {
 					<ul class="nav side-nav">
 						<li><a href="/admin/adminMain"><i
 								class="fa fa-fw fa-star"></i> DASH BOARD</a></li>
+					<li><a href="/">메인으로</a></li>
 						<li><a href="/admin/productAdmin"> 상품 관리 </a></li>
 						<li><a href="/admin/buyList"> 주문 관리 </a></li>
 						<li><a href="/admin/memberAdmin">회원 관리</a></li>
@@ -273,6 +274,25 @@ table td {
         </script>
 		</c:forEach>
 		<script>
+		var visit = [];</script>
+		<c:forEach var="v" items="${visit}" varStatus="now2">
+			<script>
+        var ctx = document.getElementById('myChart');
+        var ctx2 = document.getElementById('myChart2');
+        console.log("현재 값은 : " + ${v} );
+        if(${now2.last}){
+        if(${now2.index} < 3){
+        	visit.push(${v});
+        	visit.push(0);
+        	visit.push(0);
+        }else if(${now2.index} < 4){
+        	visit.push(${v});
+        	visit.push(0);
+        }else{visit.push(${v});}
+        }else{visit.push(${v});}
+        </script>
+		</c:forEach>
+		<script>
             /* bar, line, Polar Area  */
 	
             
@@ -333,10 +353,10 @@ table td {
             var myChart2 = new Chart(ctx2, {
 		type: 'line',
 		data: {
-			labels: ['0', '15','30','15','30'],
+			labels: [date-4, date-3,date-2,date-1,date],
 			datasets: [{
 				label: '방문자 수',
-				data: [3, 5, 7, 8,10],
+				data: [visit[4], visit[3],visit[2],visit[1],visit[0]],
 				backgroundColor: [
 					'rgba(0, 200, 0, 0.2)',
 					'rgba(0, 200, 0, 0.2)',

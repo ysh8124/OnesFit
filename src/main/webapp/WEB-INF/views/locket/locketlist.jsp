@@ -152,13 +152,13 @@
 		</tr>
 		
 		<tr style="text-align: center;">
-		    <td><input type="checkbox" style="width: 10%"></td>
-			<td style="width: 5%">배송지명</td>
-			<td style="width: 5%">수령인</td>
-			<td style="width: 10%">휴대전화</td>
-			<td style="width: 30%">주소</td>
-			<td style="width: 10%">수정</td>
-			<td style="width: 10%">삭제</td>
+		
+		    <td style="width: 10%">번호</td>
+			<td style="width: 10%">배송지명</td>
+			<td style="width: 10%">수령인</td>
+			<td style="width: 15%">휴대전화</td>
+			<td style="width: 35%">주소</td>
+			<td style="width: 15%">삭제</td>
 			
 			
 		</tr>
@@ -181,10 +181,6 @@
 						<td style="width: 10%">${ i.phone}</td>
 						<td style="width: 5%">${i.zipcode},${i.address1},${i.address2}					
 						</td>
-					
-						
-						<td style="width:10%">
-						<button type=submit value="수정">수정</button>
 						
 						</td>
 						<td style="width: 10%"><a id=delete href="/member/delete?seq=${i.seq}">X</a>
@@ -194,6 +190,7 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+		
 		<tr>
 			<td colspan="6" align=center>${navi}
 			<td colspan="1" style="text-align: right">
@@ -201,6 +198,10 @@
 			</td>
 		</tr>
 	</table>
+	
+
+	
+	
                 
                 </div>
                 <div id="rightmenu">

@@ -2,77 +2,94 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
 
-<select resultType="osf.spring.dto.MemberDTO" id="mypage">select *from member where id=#{value} </select>
+	<select resultType="osf.spring.dto.MemberDTO" id="mypage">select *from
+		member where id=#{value} </select>
 
-<select id="cart" resultType="osf.spring.dto.CartDTO">
-	select * from cart where parent_id = #{parent_id}
-</select>
-<delete id="deleteCart">
-	delete cart where parent_id = #{parent_id} and c_seq = #{c_seq}
-</delete>
-<delete id="deleteAll">
-	delete cart where parent_id = #{parent_id}
-</delete>
+	<select id="cart" resultType="osf.spring.dto.CartDTO">
+		select * from cart where parent_id = #{parent_id}
+	</select>
+	<delete id="deleteCart">
+		delete cart where parent_id = #{parent_id} and c_seq = #{c_seq}
+	</delete>
+	<delete id="deleteAll">
+		delete cart where parent_id = #{parent_id}
+	</delete>
 
-<insert id="joinCount">insert into visit values(default)</insert>
+	<insert id="joinCount">insert into visit values(default)</insert>
 
-<!--                           영웅이형파트                                          -->
-<insert id="addmember">
+	<!-- 영웅이형파트 -->
+	<insert id="addmember">
 		insert into member
 		values(member_seq.nextval,#{id},#{pw},#{name},#{email},#{phone},#{zipcode},#{address1},#{address2},default,default,default,default)
 	</insert>
-	
+
 	<insert id="locketwrite">
-		insert into locketlist values(locketlist_seq.nextval,0,#{homename},#{takename},#{phone},#{zipcode},#{address1},#{address2})
+		insert into locketlist
+		values(locketlist_seq.nextval,0,#{homename},#{takename},#{phone},#{zipcode},#{address1},#{address2})
 	</insert>
 
 	<select id="duplcheck" resultType="int">
-		select count(*) from member where id=#{value}
+		select count(*) from member
+		where id=#{value}
 	</select>
 
 	<select id="login" resultType="int">
 		select count(*) from member where
 		id=#{id} and pw=#{pw}
 	</select>
-	
+
 	<select id="emailcode" resultType="int">
-		select count(*) from member where email=#{email}
+		select count(*) from member
+		where email=#{email}
 	</select>
-	
+
 	<select id="findid" resultType="String">
 		select id from member where
 		name=#{name} and email=#{email}
 	</select>
-	
+
 	<select id="findpw" resultType="String">
 		select id from member where
 		id=#{id} and email=#{email}
 	</select>
-	
+
 	<select id="profilego" resultType="osf.spring.dto.MemberDTO">
-	select * from member where id=#{id}
+		select * from member where id=#{id}
 	</select>
-	
+
 	<update id="updatePw">
-	 update member set pw=#{pw} where id=#{id}
+		update member set pw=#{pw} where id=#{id}
 	</update>
 
-	
+
 	<update id="memberupdate">
-	 update member set  phone=#{phone}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2}, email=#{email}
-	 where id=#{id} and name=#{name}
+		update member set pw=#{pw}, phone=#{phone}, zipcode=#{zipcode}, address1=#{address1},
+		address2=#{address2}, email=#{email}
+		where id=#{id} and name=#{name}
 	</update>
-	
+
+	<select id="pwcheck" resultType="int">select count(*) from member
+		where id=#{id} and pw=#{pw} </select>
+
+	<delete id="leave">delete from member where id=#{value} </delete>
+
 	<delete id="delete">
 		delete locketlist where seq=${value}
 	</delete>
-	
-	
-	<select id="locketlist" resultType="osf.spring.dto.LocketListDTO">
-		select * from (select locketlist.*,row_number() over(order by homename desc) rnum from locketlist) where rnum between ${start} and ${end}
+
+
+	<select id="locketlist"
+		resultType="osf.spring.dto.LocketListDTO">
+		select * from (select locketlist.*,row_number() over(order
+		by homename desc) rnum from locketlist) where rnum between ${start}
+		and ${end}
 	</select>
-	
+
 	<select id="countArticle" resultType="int">
-		select count(*) from locketlist
+		select count(*) from
+		locketlist
 	</select>
+
+	<select id="getUseMoney" resultType="int">select nvl(sum(price),0)
+		from buy_list where parent_id=#{value}</select>
 </mapper>

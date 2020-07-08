@@ -110,14 +110,29 @@ public class MemberService {
 		return mdao.updatePw(pw2,id);	
 	}
 	
-	public int memberupdate(String id ,String name, String phone , String zipcode ,String address1, String address2, String email) throws Exception{
+	public int memberupdate(String id , String pw ,String name, String phone , String zipcode ,String address1, String address2, String email) throws Exception{
 	
-		/* String pw2 = this.getSHA512(pw); */
+	 String pw2 = this.getSHA512(pw);
 		
-		return mdao.memberupdate(id,name,phone,zipcode,address1,address2,email);
+		return mdao.memberupdate(id,pw2,name,phone,zipcode,address1,address2,email);
 		
-	
 	}
+	
+	public boolean pwcheck(String id,String pw) throws Exception {
+		String pw2 = this.getSHA512(pw);
+		System.out.println("아이디 나오나 : "+id);
+		System.out.println(pw2);
+		boolean result = mdao.pwcheck(id,pw2);
+		return result;
+	}
+	
+	public int leaveMember(String id) throws Exception{
+
+		int result = mdao.leaveMember(id);
+		return result;
+	}
+	
+	
 	
 	public int delete(int seq) throws Exception{
 		int result = mdao.delete(seq);
@@ -176,5 +191,10 @@ public class MemberService {
 	      }
 	      return sb.toString();
 	   }
+
+	public int getUseMoney(String id) {
+		return mdao.getUseMoney(id);
+		
+	}
 	
 }

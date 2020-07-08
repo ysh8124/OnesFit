@@ -15,38 +15,38 @@ import osf.spring.statics.Statics;
 
 @Repository
 public class MemberDAO {
-	
+
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	
+
 	public boolean login(Map<String,String> param) {
 		int result= mybatis.selectOne("Member.login",param);
-		
+
 		if(result>0) return true;
 		else return false;
 	}
-	
+
 	public MemberDTO mypage(String id){
 		MemberDTO dto = mybatis.selectOne("Member.mypage", id);
 		return dto;
 	}	
-	
+
 	public List<CartDTO> cart(CartDTO cdto) {
 		return mybatis.selectList("Member.cart", cdto);
 	}
-	
+
 	public int productDelete(CartDTO cdto) {
 		return mybatis.delete("Member.deleteCart",cdto);
 	}
-	
+
 	public int productDeleteAll(CartDTO cdto) {
 		return mybatis.delete("Member.deleteAll",cdto);
 	}
-	
+
 	public void joinCount() {
 		mybatis.insert("Member.joinCount");
 	}
-	
+
 	////영웅이형 파트//////////
 	public int addMember(MemberDTO mdto) throws Exception{
 		return mybatis.insert("Member.addmember",mdto);
@@ -57,7 +57,7 @@ public class MemberDAO {
 		return  mybatis.insert("Member.locketwrite",dto);
 
 	}
-	
+
 	public boolean isIdAble(String id) throws Exception{
 		int result = mybatis.selectOne("Member.duplcheck",id);
 		if(result > 0) {return false;}
@@ -103,12 +103,12 @@ public class MemberDAO {
 		return mybatis.update("Member.updatePw",map);
 
 	}
-	public int memberupdate(String id,  String name, String phone , String zipcode, String address1, String address2, String email) throws Exception{
+	public int memberupdate(String id, String pw ,String name, String phone , String zipcode, String address1, String address2, String email) throws Exception{
 
 		Map<String,String> map = new HashMap();
 
 		map.put("id", id);
-		/* map.put("pw", pw); */
+		map.put("pw", pw);
 		map.put("name", name);
 		map.put("phone", phone);
 		map.put("zipcode", zipcode);
@@ -119,6 +119,23 @@ public class MemberDAO {
 
 		return mybatis.update("Member.memberupdate",map);
 
+	}
+
+	public boolean pwcheck(String id,String pw) throws Exception {
+		Map<String,String> param = new HashMap();
+		param.put("id", id);
+		param.put("pw", pw);
+		int result = mybatis.selectOne("Member.pwcheck",param);
+		System.out.println(result);
+		if(result > 0) {return true;}
+		else {return false;}
+	}
+
+	public int leaveMember(String id) throws Exception{
+
+		int result = mybatis.delete("Member.leave",id);
+
+		return result;
 	}
 
 	public int getArticleCount() throws Exception{
@@ -136,6 +153,11 @@ public class MemberDAO {
 		param.put("start", start);
 		param.put("end", end);
 		return mybatis.selectList("Member.locketlist", param);
+	}
+
+	public int getUseMoney(String id) {
+
+		return mybatis.selectOne("Member.getUseMoney",id);
 	}
 
 }

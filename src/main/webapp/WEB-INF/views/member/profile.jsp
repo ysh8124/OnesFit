@@ -240,7 +240,6 @@ div {
 	border: hidden;
 	text-align: center;
 }
-
 </style>
 <body>
 	<!--       전체 영역-->
@@ -251,16 +250,18 @@ div {
 			<!--               사이드메뉴-->
 			<div id="sidemenu">
 				<div id="sidefix">
-					<a href="/"> <img src="/img/logo.png" style="width: 130px; position: relative; left: 45px"></a>
+					<a href="/"> <img src="/img/logo.png"
+						style="width: 130px; position: relative; left: 45px"></a>
 
-							<div class="memberpage">
-								<ul>
-									<li><a href="/member/logout">logout</a> <a
-										href="/member/toProfile?id=${loginInfo}">PROFILE</a></li>
-									<li><a href="/member/tomyPage">my page</a> <a href="/member/cart?parent_id=${loginInfo.id}">cart
-									</a> <a href="">order</a></li>
-								</ul>
-							</div>
+					<div class="memberpage">
+						<ul>
+							<li><a href="/member/logout">logout</a> <a
+								href="#">PROFILE</a></li>
+							<li><a href="/member/tomyPage">my page</a> <a
+								href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a
+								href="">order</a></li>
+						</ul>
+					</div>
 					<div id="category">
 						<ul>
 							<li><a href="">NEW ARRIVAL</a></li>
@@ -269,21 +270,29 @@ div {
 							<li><a href="">TOP</a></li>
 							<li><a href="">PANTS</a></li>
 							<li><a href="">ACC</a></li>
-							<li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
-							<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li>
+							<li><a href="/daily/daily_list?page=1"
+								style="font-size: 11px;">OSF DAILY LOOK</a></li>
+							<li><a href="/notice/notice_list?page=1"
+								style="font-size: 11px;">NOTICE</a></li>
 
 						</ul>
 					</div>
 
 					<div>
 						<ul>
-                               <li><a href=""><img src="/img/search.png" style="width: 15px"></a> <input id="search" type="text"></li>
-                            </ul>
-                            <ul>
-                               <li><a href="https://www.instagram.com/onesfit__official/?hl=ko" onclick="window.open(this.href,'_blank'); return false;"><img src="/img/instar.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a> 
-									<a href=""><img src="/img/kakao.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a>
-								</li>
-                            </ul>
+							<li><a href=""><img src="/img/search.png"
+									style="width: 15px"></a> <input id="search" type="text"></li>
+						</ul>
+						<ul>
+							<li><a
+								href="https://www.instagram.com/onesfit__official/?hl=ko"
+								onclick="window.open(this.href,'_blank'); return false;"><img
+									src="/img/instar.png" width="20px"
+									style="position: relative; top: 6px; border-radius: 9px"></a>
+								<a href=""><img src="/img/kakao.png" width="20px"
+									style="position: relative; top: 6px; border-radius: 9px"></a>
+							</li>
+						</ul>
 
 
 					</div>
@@ -302,7 +311,7 @@ div {
 								<b style="font-size: 15px">회원정보 수정 </b>
 							</div>
 							<br>
-				
+
 
 							<div>
 								<table id="shipping_info" border="1">
@@ -315,7 +324,7 @@ div {
 												value="${mdto.id}"></td>
 										</tr>
 
-										<!--  <tr>
+										<tr>
 											<th scope="row">NEW PASSWORD</th>
 											<td><input type=password id="pw1"
 												style="border: 1px solid #dedede;" name="pw1"> <br>
@@ -334,7 +343,7 @@ div {
 											<td><input type="password" id="pw2"
 												style="border: 1px solid #dedede;" name="pw2"> <br>
 												<span id="pwreMsg"></span></td>
-										</tr> -->
+										</tr>
 
 										<tr>
 											<th scope="row">NAME</th>
@@ -345,7 +354,8 @@ div {
 
 										<tr>
 											<th scope="row"><label for="phone">PHONE</label>
-											<td><input type="text" id="phone" name="phone" value="${mdto.phone}"
+											<td><input type="text" id="phone" name="phone"
+												value="${mdto.phone}"
 												style="border: 1px solid #dedede; width: 150px;"> <br>
 												<span id="phoneMsg"></span></td>
 
@@ -353,14 +363,16 @@ div {
 
 										<tr>
 											<th scope="row">ADDRESS</th>
-											<td><input type=text readonly id="zipcode" value="${mdto.zipcode}"
-												name="zipcode" width="100px"> <input type="button"
-												id=btn onclick="sample4_execDaumPostcode()" value="찾기">
-												우편번호 <br> <input type="text" readonly id="add1" 
+											<td><input type=text readonly id="zipcode"
+												value="${mdto.zipcode}" name="zipcode" width="100px">
+												<input type="button" id=btn
+												onclick="sample4_execDaumPostcode()" value="찾기">
+												우편번호 <br> <input type="text" readonly id="add1"
 												name="address1" name="address1" value="${mdto.address1}"
 												style="margin-bottom: 3px; margin-top: 3px; width: 250px">
 												기본주소<br> <input type="text" id="add2" placeholder
-												name=address2  value="${mdto.address2}" style="width: 250px"> 상세주소</td>
+												name=address2 value="${mdto.address2}" style="width: 250px">
+												상세주소</td>
 										</tr>
 
 
@@ -371,8 +383,8 @@ div {
 										class="email ec-orderform-emailRow ec-shop-deliverySimpleForm">
 										<tr>
 											<th scope="row">EMAIL</th>
-											<td><input type="text" id="email" name="email" value="${mdto.email}"
-												style="width: 200px;"></td>
+											<td><input type="text" id="email" name="email"
+												value="${mdto.email}" style="width: 200px;"></td>
 										</tr>
 									</tbody>
 
@@ -381,27 +393,27 @@ div {
 									</tbody>
 
 								</table>
-								
-			
+
+
 
 							</div>
 
 							<br> <br>
-							
+
 							<div class="login_btn" style="width: 1000px; text-align: right;">
-							
+
 								<ul>
 									<button type="submit" class="btn btn-dark"
 										style="font-size: 11px;" id="mprofilelog" value="회원정보수정 ">회원정보수정</button>
 									</a>
-									<button type="button" class="btn btn-dark" id="back"
-										style="font-size: 11px;" id="mprofilelog" value="회원정보수정 ">뒤로가기</button>
+									<button type="button" class="btn btn-dark"
+										style="font-size: 11px;" id="leave" value="회원탈퇴 ">회원탈퇴</button>
 									</a>
 								</ul>
-								
+
 							</div>
 
-							
+
 
 							<br> <br> <br> <br> <br>
 
@@ -448,140 +460,134 @@ div {
 	</div>
 
 	<script>
-      function sample4_execDaumPostcode() {
-         new daum.Postcode({
-            oncomplete : function(data) {
+		function sample4_execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete : function(data) {
 
-               var addr = '';
-               var extraAddr = '';
+					var addr = '';
+					var extraAddr = '';
 
-               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                  addr = data.roadAddress;
-               } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                  addr = data.jibunAddress;
-               }
+					if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						addr = data.roadAddress;
+					} else { // 사용자가 지번 주소를 선택했을 경우(J)
+						addr = data.jibunAddress;
+					}
 
-               var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
 
-               document.getElementById('zipcode').value = data.zonecode;
-               document.getElementById("add1").value = addr;
-            }
-         }).open();
-      }
-      
-   /*  $("#mprofilelog").on("click",function(){
-    	  
-        	 if($("#pw1").val()==""){
-        		 alert("비밀번호를 입력해주세요.")
-        		 return false;
-        	 }
-        	if($("#pw2").val()==""){
-       		 alert("비밀번호를 확인해주세요.")
-       		 return false;
-       	     }
-        	if($("#phone").val()==""){
-          		 alert("휴대폰 번호를 입력해주세요.")
-          		 return false;
-          	 }
-        	if ($("#zipcode").val()=="") {
-			alert("주소를 확인해주세요.");
-			return false;
-		 }
-        if ($("#add2").val()=="") {
-	        alert("상세주소를 확인해주세요.");
-	        return false;
-       }
-        if($("#email").val()==""){
-     		 alert("이메일을  입력해주세요.")
-     		 return false;
-     	 }
-        	
-        	 return true;
-         })   */
-      
-      
-      
-      $(document)
-		.ready(
+					document.getElementById('zipcode').value = data.zonecode;
+					document.getElementById("add1").value = addr;
+				}
+			}).open();
+		}
+
+		$("#mprofilelog").on("click", function() {
+
+			if ($("#phone").val() == "") {
+				alert("휴대폰 번호를 입력해주세요.")
+				return false;
+			}
+			if ($("#zipcode").val() == "") {
+				alert("주소를 확인해주세요.");
+				return false;
+			}
+			if ($("#add2").val() == "") {
+				alert("상세주소를 확인해주세요.");
+				return false;
+			}
+			if ($("#email").val() == "") {
+				alert("이메일을  입력해주세요.")
+				return false;
+			}
+
+			return true;
+		})
+
+		$(document)
+				.ready(
+						function() {
+
+							var pw1 = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+							var phone = /^[0-9]*$/;
+
+							// 비밀번호 검사
+							$('#pw1')
+									.focusout(
+											function() {
+												if (!pw1.test($('#pw1').val())) {
+													$('#pwMsg').css("color",
+															"red");
+													$('#pwMsg')
+															.text(
+																	"[사용불가] 비밀번호 기준에 맞지 않습니다.");
+													$(this).val("");
+												} else if (pw1.test($('#pw1')
+														.val())
+														&& $('#pw1').val().length > 10) {
+													$('#pwMsg').css("color",
+															"blue");
+													$('#pwMsg')
+															.text(
+																	"[안전] 사용 가능 비밀번호입니다.");
+												} else {
+													$('#pwMsg').css("color",
+															"gray");
+													$('#pwMsg')
+															.text(
+																	"[보통] 적정수준의 비밀번호입니다.");
+												}
+											});
+
+							// 비밀번호1 = 비밀번호2
+							$('#pw2').focusout(
+									function() {
+										if ($('#pw2').val() == $('#pw1').val()
+												&& !($('#pw2').val() == "")) {
+											$('#pwreMsg').css("color", "blue");
+											$('#pwreMsg').text(
+													"입력한 비밀번호가 일치합니다.");
+										} else {
+											$('#pwreMsg').css("color", "red");
+											$('#pwreMsg').text(
+													"비밀번호가 일치하지 않습니다.");
+											$(this).val("");
+										}
+									});
+
+							//휴대폰1 검사
+							$("#phone")
+									.focusout(
+											function() {
+												if (!phone.test($('#phone')
+														.val())
+														|| $("#phone").val().length < 11) {
+													$('#phoneMsg').css("color",
+															"red");
+													$('#phoneMsg').text(
+															"재확인 해주십시오.");
+													$(this).val("");
+												} else if (!phone.test($(
+														'#phone').val())
+														|| $("#phone").val().length > 11) {
+													$('#phoneMsg').css("color",
+															"red");
+													$('#phoneMsg').text(
+															"재확인 해주십시오.");
+													$(this).val("");
+												}
+
+												else {
+													$('#phoneMsg').text("");
+												}
+											});
+
+						});
+		$("#leave").on(
+				"click",
 				function() {
-					
-					var pw1 = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-					var phone = /^[0-9]*$/;
-
-					// 비밀번호 검사
-						$('#pw1')
-							.focusout(
-									function() {
-										if (!pw1.test($(
-												'#pw1').val())) {
-											$('#pwMsg').css("color",
-													"red");
-											$('#pwMsg')
-													.text(
-															"[사용불가] 비밀번호 기준에 맞지 않습니다.");
-											$(this).val("");
-										} else if (pw1.test($(
-												'#pw1').val())
-												&& $('#pw1')
-														.val().length > 10) {
-											$('#pwMsg').css("color",
-													"blue");
-											$('#pwMsg')
-													.text(
-															"[안전] 사용 가능 비밀번호입니다.");
-										} else {
-											$('#pwMsg').css("color",
-													"gray");
-											$('#pwMsg')
-													.text(
-															"[보통] 적정수준의 비밀번호입니다.");
-										}
-									});
-
-					
-					// 비밀번호1 = 비밀번호2
-						$('#pw2')
-						.focusout(
-								function() {
-									if ($('#pw2').val() == $(
-											'#pw1').val()
-											&& !($('#pw2')
-													.val() == "")) {
-										$('#pwreMsg').css("color",
-												"blue");
-										$('#pwreMsg').text(
-												"입력한 비밀번호가 일치합니다.");
-									} else {
-										$('#pwreMsg').css("color",
-												"red");
-										$('#pwreMsg').text(
-												"비밀번호가 일치하지 않습니다.");
-										$(this).val("");
-									}
-								});	
-					
-					//휴대폰1 검사
-					$("#phone")
-							.focusout(
-									function() {
-										if (!phone.test($('#phone')
-												.val())
-												|| $("#phone").val().length < 11) {
-											$('#phoneMsg').css("color",
-													"red");
-											$('#phoneMsg').text(
-													"재확인 해주십시오.");
-											$(this).val("");
-										} else {
-											$('#phoneMsg').text("");
-										}
-									});
-					
+					window.open("/member/pwcheckok?id=${loginid}", "",
+							"width=500,height=200");
 				});
-   $("#back").on("click",function(){
-	   location.href="/member/tomyPage";
-   })
- 
-   </script>
+	</script>
 </body>
 </html>

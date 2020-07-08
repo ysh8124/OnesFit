@@ -226,5 +226,9 @@ public class AdminService {
 			
 		}
 
+		public List<Integer> visit() {
+			return adao.visit();
+		}
+
 	
 }

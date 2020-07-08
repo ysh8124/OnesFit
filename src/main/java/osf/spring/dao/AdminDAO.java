@@ -203,5 +203,9 @@ public class AdminDAO {
 			return mybatis.insert("admin.answerInput", inputParam);
 		}
 
+		public List<Integer> visit() {
+			return mybatis.selectList("admin.visit");
+		}
+
 	
 }

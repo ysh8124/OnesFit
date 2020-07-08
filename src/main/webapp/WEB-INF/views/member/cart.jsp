@@ -21,12 +21,20 @@
    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
    crossorigin="anonymous"></script>
+   
+   <script>
+      $(function() {
+      $("#buybtn").on("click", function () {
+         location.href = "../product/payMent2?parent_id=${loginid}";
+      })
+   })
+   </script>
     </head>
     <style>
     @font-face { font-family: 'S-CoreDream-6Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff'); font-weight: normal; font-style: normal; }
         *{box-sizing: border-box}
         div{border: 0px solid black}
-		
+      
 
         /*    모든 영역*/
         #container{height: 740px}
@@ -83,65 +91,72 @@
         .footer {font-size: 11px; text-align: center;}
         .footer a{text-decoration: none; color: black;}
          .nheader{
-		 float: left;
-		 text-align: center;
-		 margin-top: 20px;
-		 background-color: #f6f6f6;
-		 height: 25px;
-		 line-height: 24px;
-	 	 }
-	 
-	     .ncontents{
-		 float: left;
-		 text-align: center;
-		 line-height: 24px;
-		 margin-bottom: 12px;
-	 	 }
-	 	 .ncontents>a{
-	 	 padding: 10px;
-	 	
-	 	 }
-	 	 .ncontents>a>img{
-	 	 width : 400px;
-	 	 height: 430px;
-	 	 }
-	     .grid-container {
-		 display: grid;
-		 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		 grid-gap: 1em;
-		 }
-	     .location-listing{
-	     margin-left : 12px;
-	     position : absolute;
-	     width: 400px;
-	     height: 430px;
-	     color: white;
-	     }
-	     .location-title{
-	     align-items: center;
-	     display:block;
-	     width: 100%;
-	     height: 100%;
-	     font-size: 22px;
-  		 font-family: 'S-CoreDream-6Bold';
-  		 color: white;
-	     background: rgba(167,167,167,0.4);
-	     opacity: 0;
-		 transition: opacity .5s;
-		 line-height: 400px;
-	     }
-	     .location-listing:hover .location-title{
-  		 opacity: 1;
-  		 text-decoration: none;
-  		 color: white;
-  		 line-height: 400px;
-		 }
-		 #btn{
-		 border: 1px solid #c4c4c4; background-color: rgba(125,125,125,0); color: #7d7d7d; padding: 5px; width: 130px; height: 35px;
-		 }
-		 #btn:hover{
-	 	 opacity: 50%;
-	     }
+       float: left;
+       text-align: center;
+       margin-top: 20px;
+       background-color: #f6f6f6;
+       height: 25px;
+       line-height: 24px;
+        }
+    
+        .ncontents{
+       float: left;
+       text-align: center;
+       line-height: 24px;
+       margin-bottom: 12px;
+        }
+        .ncontents>a{
+        padding: 10px;
+       
+        }
+        .ncontents>a>img{
+        width : 400px;
+        height: 430px;
+        }
+        .grid-container {
+       display: grid;
+       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+       grid-gap: 1em;
+       }
+        .location-listing{
+        margin-left : 12px;
+        position : absolute;
+        width: 400px;
+        height: 430px;
+        color: white;
+        }
+        .location-title{
+        align-items: center;
+        display:block;
+        width: 100%;
+        height: 100%;
+        font-size: 22px;
+         font-family: 'S-CoreDream-6Bold';
+         color: white;
+        background: rgba(167,167,167,0.4);
+        opacity: 0;
+       transition: opacity .5s;
+       line-height: 400px;
+        }
+        .location-listing:hover .location-title{
+         opacity: 1;
+         text-decoration: none;
+         color: white;
+         line-height: 400px;
+       }
+       #btn{
+       border: 1px solid #c4c4c4; background-color: rgba(125,125,125,0); color: #7d7d7d; padding: 5px; width: 130px; height: 35px;
+       }
+       #btn:hover{
+        opacity: 50%;
+        }
+        
+        #buybtn{
+       border: 1px solid #c4c4c4; background-color: rgba(125,125,125,0); color: #7d7d7d; padding: 5px; width: 130px; height: 35px;
+       }
+       #buybtn:hover{
+        opacity: 50%;
+        }
 
     </style>
     <body>
@@ -161,22 +176,22 @@
                             <ul>
                                 <li>
                                 <c:choose>
-                                	<c:when test="${loginInfo eq 'pzlogin'}">
-                                		<a href="/member/loginInfo">login</a>
-                                		<a href="">join us</a>
+                                   <c:when test="${loginid eq 'pzlogin'}">
+                                      <a href="/member/loginInfo">login</a>
+                                      <a href="">join us</a>
                                 </li>
-                                	</c:when>
-                                	<c:otherwise>
-                                		<a href="/member/logout">logout</a>
-                                		<a
-										href="/member/toProfile?id=${loginInfo}">PROFILE</a>
+                                   </c:when>
+                                   <c:otherwise>
+                                      <a href="/member/logout">logout</a>
+                                      <a
+                              href="/member/toProfile?id=${loginInfo}">PROFILE</a>
                                 </li>
                                 <li>
                                     <a href="/member/tomyPage">my page</a>
                                     <a href="">cart </a>
                                     <a href="">order</a>                                  
                                 </li>
-                                	</c:otherwise>
+                                   </c:otherwise>
                                 </c:choose>
                                     
 
@@ -192,7 +207,7 @@
                                 <li><a href="">PANTS</a></li>
                                 <li><a href="">ACC</a></li>
                                 <li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
-								<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li> 
+                        <li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li> 
 
                             </ul>
                         </div>
@@ -218,44 +233,49 @@
                 </div>
 
                  <!--               중앙 내용-->
+                
                 <div id="contents">
                 <div style="font-size: 15px;"><b>Shopping Basket</b></div>
                 
                 <div style="width: 1000px; text-align: center; margin-top: 20px; float: left; font-size: 13px;">
-                	<div style="width: 20%; float: left;">IMAGE</div>
-                	<div style="width: 15%; float: left;">NAME</div>
-                	<div style="width: 15%; float: left;">SIZE</div>
-					<div style="width: 15%; float: left;">COLOR</div>
-					<div style="width: 15%; float: left;">QTY</div>
-					<div style="width: 10%; float: left;">PRICE</div>
+                   <div style="width: 20%; float: left;">IMAGE</div>
+                   <div style="width: 15%; float: left;">NAME</div>
+                   <div style="width: 15%; float: left;">SIZE</div>
+               <div style="width: 15%; float: left;">COLOR</div>
+               <div style="width: 15%; float: left;">QTY</div>
+               <div style="width: 10%; float: left;">PRICE</div>
                 </div>
                 
                 <div style="width: 1000px; text-align: center; color:#a1a1a1;">
                 <c:forEach items="${list}" var="i">
-                	<hr style="width: 95%; margin-left: 1px; margin-bottom: 18px; float: left;">
+                   <hr style="width: 95%; margin-left: 1px; margin-bottom: 18px; float: left;">
                 
-					<div style="width: 20%; float: left;">
-					<a href="/product/productDetail?pseq=${i.pseq}">
-					<img src="/title/${i.title_img}" style="width: 70px; height: 70px;">
-					</a>
-					</div>
-					<div style="width: 15%; float: left; margin-top: 27px;" class='t'><a href="/product/productDetail?pseq=${i.pseq}" style="text-decoration: none; color:#a1a1a1;">
-					${i.pname}</a></div>
-					<div style="width: 15%; float: left; margin-top: 27px;">${i.option1}</div>
-					<div style="width: 15%; float: left; margin-top: 27px;">${i.option2}</div>
-					<div style="width: 15%; float: left; margin-top: 27px;">${i.count_item}</div>
-					<div style="width: 10%; float: left; margin-top: 27px;">${i.price}</div>
-					<div style="width: 5%; float: left; margin-top: 27px;"><a href="/member/productDelete?parent_id=${i.parent_id}&pseq=${i.pseq}&c_seq=${i.c_seq}" style="color: #d43b3b; text-decoration: none;">x</a></div>
-				</c:forEach>
-        		</div>
-        		
-        		<div style="width: 1000px; float: left; margin-bottom: 50px; ">
-        		<hr style="width: 95%; margin-left: 1px; float: left;">
-        		<input type="button" value="장바구니 비우기" id="btn" style="margin-left: 82.2%;">
-        		</div>
-        		
-        		<div style="width: 1000px; float: left;">
-        		<div class="footer" style="width: 100%;  margin-bottom: 30px; margin-top: 20px; padding-right: 17%;">
+               <div style="width: 20%; float: left;">
+               <a href="/product/productDetail?pseq=${i.pseq}">
+               <img src="/title/${i.title_img}" style="width: 70px; height: 70px;">
+               </a>
+               </div>
+               <div style="width: 15%; float: left; margin-top: 27px;" class='t'><a href="/product/productDetail?pseq=${i.pseq}" style="text-decoration: none; color:#a1a1a1;">
+               ${i.pname}</a></div>
+               <div style="width: 15%; float: left; margin-top: 27px;">${i.option1}</div>
+               <div style="width: 15%; float: left; margin-top: 27px;">${i.option2}</div>
+               <div style="width: 15%; float: left; margin-top: 27px;">${i.count_item}</div>
+               <div style="width: 10%; float: left; margin-top: 27px;">${i.price}</div>
+               <div style="width: 5%; float: left; margin-top: 27px;"><a href="/member/productDelete?parent_id=${i.parent_id}&pseq=${i.pseq}&c_seq=${i.c_seq}" style="color: #d43b3b; text-decoration: none;">x</a></div>
+            </c:forEach>
+              </div>
+              
+              <div style="width: 1000px; float: left; margin-bottom: 50px; ">
+              <hr style="width: 95%; margin-left: 1px; float: left;">
+              </div>
+              
+              <div style="width: 1000px; float: left; margin-bottom: 50px; margin-left: 83.5%;">
+              <div style=" float: left; margin-right: 5px;"><input type="button" value="구매하기" id="buybtn"></div>
+              <div style="float: left;"><input type="button" value="장바구니 비우기" id="btn"></div>
+              </div>
+              
+              <div style="width: 1000px; float: left;">
+              <div class="footer" style="width: 100%;  margin-bottom: 30px; margin-top: 20px; padding-right: 17%;">
                 <a href="">사이트 소개</a> |
                 <a href="">이용약관</a> |
                 <a href="">개인정보취급방침</a> |
@@ -305,6 +325,6 @@
     <script>
         $("#btn").on("click", function() {
         location.href = "../member/productDeleteAll";
-		})
+      })
      </script>
 </html>

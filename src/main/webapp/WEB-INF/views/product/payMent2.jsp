@@ -29,7 +29,7 @@
 <script>
    window.onload = function() { //실행될 코드 }
       $(".sum").val(${sum});
-      $(".totalPrice").val(${sum}+3000);
+         $(".totalPrice").val(${sum}+3000);
       var point = Math.round($(".point").val());
       $(".point").val(point);
       
@@ -289,7 +289,7 @@ div {
                <a href="/"> <img src="/img/logo.png"
                   style="width: 130px; position: relative; left: 45px">
                </a>
-                <div class="memberpage"> 
+               <div class="memberpage"> 
                             <ul>
                                 <li>
                                 <c:choose>
@@ -348,8 +348,7 @@ div {
 
          <!--               중앙 내용-->
          <form action="Makepayment" method="post" id="Makepayment">
-            <input type="text" name="buy_num" value="${pdto.pseq }"
-               style="width: 0px; border: hidden">
+           
             <div id="contents">
                <div class="orderListArea">
                   <!-- 기본배송 -->
@@ -378,32 +377,34 @@ div {
                         </thead>
 
                         <tbody>
-                           <c:forEach var="list1" items="${list1 }" varStatus="status">
+                           <c:forEach var="i" items="${list}" varStatus="status">
+                           <input type="text" name="buy_num" value="${i.pseq}"
+                        style="width: 0px; border: hidden">
                               <tr>
                                  <td><input type="checkbox" class='selectPro'></td>
                                  <td>
                                     <div>
-                                       <img src="/title/${pdto.title_img}" style="width: 100%">
+                                       <img src="/title/${i.title_img}" style="width: 100%">
                                     </div>
                                  </td>
                                  <td><input type="text" class="pinput" name="pname"
-                                    value="${pdto.pname}" style="width: 50px;"
+                                    value="${i.pname}" style="width: 50px;"
                                     readonly="readonly"> <br> <br> Size : <input
                                     type="text" class="pinput" name="psize"
-                                    value="${list2[status.index]}" style="width: 15px"
+                                    value="${i.option1}" style="width: 15px"
                                     readonly="readonly"><br> Color : <input
-                                    type="text" class="pinput" name="pcolor" value="${list1}"
+                                    type="text" class="pinput" name="pcolor" value="${i.option2}"
                                     style="width: 30px" readonly="readonly"></td>
                                  <td><input type="text" class="pinput" name="price"
-                                    value="${pdto.price }" style="width: 40px"
+                                    value="${i.price}" style="width: 40px"
                                     readonly="readonly"></td>
                                  <td><input type="text" class="pinput" name="amount"
-                                    value="${list3[status.index]}" style="width: 30px"
-                                    readonly="readonly"></td>
+                                    value="${i.count_item}" style="width: 30px"
+                                    readonly="readonly">${i.count_item}</td>
                                  <td><input type="text" class="pinput point" name="point"
-                                    value="${pdto.price*0.02 }" style="width: 30px"
+                                    value="${i.price*0.02 }" style="width: 30px"
                                     readonly="readonly"></td>
-                                 <td class='amount'>${list3[status.index] *pdto.price }</td>
+                                 <td class='amount'>${i.price * i.count_item}</td>
                               </tr>
                            </c:forEach>
                         </tbody>

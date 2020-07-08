@@ -213,12 +213,7 @@ $returnURL = /member/id/find_id_result.html
 									<br>
 									<ul style="font-size: 11px;">
 
-										<li>EMAIL과 PHONE을 통해 아이디 찾기가 가능 합니다. <br> <input
-											type="radio" name="idradio"
-											style="width: 12px; position: relative; top: 13px;">이메일
-											<input type="radio" name="idradio"
-											style="width: 12px; position: relative; top: 13px">휴대폰
-											번호
+										<li>EMAIL을 통해 아이디 찾기가 가능 합니다. <br>
 										</li>
 
 									</ul>

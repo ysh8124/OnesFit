@@ -104,10 +104,10 @@
                             <ul>
                                 <li>
                                     <a href="/member/logout">logout</a>
-                                    <a href="/member/toProfile?id=${loginInfo}">PROFILE</a>
+                                    <a href="/member/toProfile?id=${loginInfo.id}">PROFILE</a>
                                 </li>
                                 <li>
-                                    <a href="/member/tomyPage">my page</a>
+                                    <a href="/member/tomyPage?id=${loginInfo.id}">my page</a>
                                     <a href="/member/cart?parent_id=${loginInfo.id}">cart </a>
                                     <a href="">order</a>                                  
                                 </li>
@@ -157,8 +157,8 @@
 
                                         </li>
                                         <li style="width: 40%;">
-                                            0,000 원 &nbsp;
-                                            <input type="button" value="조회" style="background-color: white;">
+                                            ${loginInfo.point } 원 &nbsp;
+                                           
                                         </li>
                                     </ul>
                                     <ul>
@@ -173,22 +173,14 @@
 
                                 </td>
                                 <td>
-                                    <ul>
-                                        <li style="width: 50%; text-align: left;">
-                                            > 총 적립금 
 
-                                        </li>
-                                        <li style="width: 50%">
-                                            0,000 원
-                                        </li>
-                                    </ul>
                                     <ul>
                                         <li style="width: 50%; text-align: left;">
                                             > 총주문 
 
                                         </li>
                                         <li style="width: 50%">
-                                            0,000 원
+                                            ${useMoney } 원
                                         </li>
                                     </ul>
                                 </td>
@@ -260,25 +252,16 @@
                             <p><a href="" style="color: #999">고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.<br>비회원의 경우, 주문서의 주문번호와 비밀번호로 주문조회가 가능합니다.</a></p>
                         </div>
                         <div>
-                             <a href="/member/toProfile?id=${loginInfo}"><h7><b>PROFILE</b>&nbsp; 회원 정보 및 수정</h7></a>
+                             <a href="/member/toProfile?id=${loginInfo.id}"><h7><b>PROFILE</b>&nbsp; 회원 정보 및 수정</h7></a>
                             <br><br>
                             <p><a href="">회원이신 고객님의 개인정보를 관리하는 공간입니다.<br>개인정보를 최신 정보로 유지하시면 보다 간편히 쇼핑을 즐기실 수 있습니다.</a></p>
-                        </div>
-                          <div>
-                             <a href=""><h7><b>WISHLIST</b>&nbsp; 관심 상품</h7></a>
-                            <br><br>
-                            <p><a href="">관심상품으로 등록하신 상품의 목록을 보여드립니다.</a></p>
                         </div>
                           <div>
                              <a href=""><h7><b>MILEAGE</b>&nbsp; 적립금</h7></a>
                             <br><br>
                             <p><a href="">적립금은 상품 구매 시 사용하실 수 있습니다.<br>적립된 금액은 현금으로 환불되지 않습니다.</a></p>
                         </div>
-                          <div>
-                             <a href=""><h7><b>BOARD</b>&nbsp; 게시물 관리</h7></a>
-                            <br><br>
-                            <p><a href="">고객님께서 작성하신 게시물을 관리하는 공간입니다.<br>고객님께서 작성하신 글을 한눈에 관리하실 수 있습니다.</a></p>
-                        </div>
+
                           <div>
                              <a href="/member/toLocketlist?page=1"><h7><b>ADDRESS</b>&nbsp; 배송 주소록 관리</h7></a>
                             <br><br>

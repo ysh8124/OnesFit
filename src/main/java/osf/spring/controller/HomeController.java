@@ -27,12 +27,14 @@ public class HomeController {
 		List<ProductDTO> products = pservice.productSelectAll();
 		
 		if(session.getAttribute("loginInfo") == null) {
+			session.invalidate();
 			String a = "pzlogin";
 			session.setAttribute("loginInfo", a);
 			System.out.println(session.getAttribute("loginInfo"));
 		}
 		
 		if(session.getAttribute("loginid") == null) {
+			session.invalidate();
 			session.setAttribute("loginid", "pzlogin");
 			System.out.println("loginid : " + session.getAttribute("loginid")); 
 		}

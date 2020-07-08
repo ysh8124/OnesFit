@@ -250,18 +250,18 @@ div {
 			<!--               사이드메뉴-->
 			<div id="sidemenu">
 				<div id="sidefix">
-					<a href="/"> <img
-						src="/img/logo.png"
+					<a href="/"> <img src="/img/logo.png"
 						style="width: 130px; position: relative; left: 45px">
 					</a>
-							<div class="memberpage">
-								<ul>
-									<li><a href="/member/logout">logout</a> <a
-										href="/member/toProfile?id=${loginInfo}">PROFILE</a></li>
-									<li><a href="/member/tomyPage">my page</a> <a href="/member/cart?parent_id=${loginInfo.id}">cart
-									</a> <a href="">order</a></li>
-								</ul>
-							</div>
+					<div class="memberpage">
+						<ul>
+							<li><a href="/member/logout">logout</a> <a
+								href="/member/toProfile?id=${loginInfo}">PROFILE</a></li>
+							<li><a href="/member/tomyPage">my page</a> <a
+								href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a
+								href="">order</a></li>
+						</ul>
+					</div>
 
 
 
@@ -273,24 +273,30 @@ div {
 							<li><a href="">TOP</a></li>
 							<li><a href="">PANTS</a></li>
 							<li><a href="">ACC</a></li>
-							<li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
-							<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li>
+							<li><a href="/daily/daily_list?page=1"
+								style="font-size: 11px;">OSF DAILY LOOK</a></li>
+							<li><a href="/notice/notice_list?page=1"
+								style="font-size: 11px;">NOTICE</a></li>
 
 						</ul>
 					</div>
 
 					<div>
 						<ul>
-                                <li>
-                                    <a href=""><img src="/img/search.png" style="width: 15px"></a>
-                                    <input id="search" type="text">
+							<li><a href=""><img src="/img/search.png"
+									style="width: 15px"></a> <input id="search" type="text">
 
-                                </li>
-                            </ul>
-                            <ul>
-                                <li><a href="https://www.instagram.com/onesfit__official/?hl=ko" onclick="window.open(this.href,'_blank'); return false;"><img src="/img/instar.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a> 
-<a href=""><img src="/img/kakao.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a></li>
-                            </ul>
+							</li>
+						</ul>
+						<ul>
+							<li><a
+								href="https://www.instagram.com/onesfit__official/?hl=ko"
+								onclick="window.open(this.href,'_blank'); return false;"><img
+									src="/img/instar.png" width="20px"
+									style="position: relative; top: 6px; border-radius: 9px"></a>
+								<a href=""><img src="/img/kakao.png" width="20px"
+									style="position: relative; top: 6px; border-radius: 9px"></a></li>
+						</ul>
 
 
 					</div>
@@ -301,17 +307,15 @@ div {
 			<form action="/member/locketwriteProc" method="post">
 
 				<div id="contents">
-					<div class="orderListArea">
+				
+					<div class="orderListArea" style="padding-top:30px;">
 						<!-- 배송지 목록   -->
 
-						<div>
+						
 							<div>
 								<b style="font-size: 15px">배송지 추가 </b>
 							</div>
-							<br>
-						
-							
-							<br>
+							<br> 
 
 							<div>
 								<table id="shipping_info" border="1">
@@ -320,13 +324,12 @@ div {
 										<tr>
 											<th style="width: 150px">배송지명</th>
 											<td><input id="homename"
-												style="border: 1px solid #dedede;" name="homename" 
-												value=""></td>
+												style="border: 1px solid #dedede;" name="homename" value=""></td>
 										</tr>
 
 										<tr>
 											<th scope="row">수령인</th>
-											<td><input type="text" id="takename" name="takename" 
+											<td><input type="text" id="takename" name="takename"
 												value="" style="border: 1px solid #dedede;">
 										</tr>
 
@@ -344,7 +347,7 @@ div {
 											<td><input type=text readonly id="zipcode" value=""
 												name="zipcode" width="100px"> <input type="button"
 												id=btn onclick="sample4_execDaumPostcode()" value="찾기">
-												우편번호 <br> <input type="text" readonly id="add1" 
+												우편번호 <br> <input type="text" readonly id="add1"
 												name="address1" name="address1" value=""
 												style="margin-bottom: 3px; margin-top: 3px; width: 250px">
 												기본주소<br> <input type="text" id="add2" placeholder
@@ -355,7 +358,7 @@ div {
 
 									</tbody>
 
-						
+
 
 									<tbody>
 
@@ -365,12 +368,12 @@ div {
 
 							</div>
 
-							<br> <br>
+							<br> 
 
-							<div class="login_btn">
+							<div class="login_btn" style="width: 1000px; text-align: right;">
 								<ul>
 									<button type="submit" class="btn btn-dark"
-										style="font-size: 11px" id="mprofilelog" value="등록 ">등록</button>
+										style="font-size: 12px;" id="mprofilelog" value="등록 ">추가하기</button>
 									</a>
 								</ul>
 							</div>
@@ -388,7 +391,7 @@ div {
 
 								</div>
 							</div>
-						</div>
+						
 
 					</div>
 				</div>
@@ -420,76 +423,75 @@ div {
 	</div>
 
 	<script>
-      function sample4_execDaumPostcode() {
-         new daum.Postcode({
-            oncomplete : function(data) {
+		function sample4_execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete : function(data) {
 
-               var addr = '';
-               var extraAddr = '';
+					var addr = '';
+					var extraAddr = '';
 
-               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                  addr = data.roadAddress;
-               } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                  addr = data.jibunAddress;
-               }
+					if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						addr = data.roadAddress;
+					} else { // 사용자가 지번 주소를 선택했을 경우(J)
+						addr = data.jibunAddress;
+					}
 
-               var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
 
-               document.getElementById('zipcode').value = data.zonecode;
-               document.getElementById("add1").value = addr;
-            }
-         }).open();
-      }
-      
-      $("#mprofilelog").on("click",function(){
-    	  
-        	if($("#phone").val()==""){
-          		 alert("휴대폰 번호를 입력해주세요.")
-          		 return false;
-          	 }
-        	if ($("#zipcode").val()=="") {
-			alert("주소를 확인해주세요.");
-			return false;
-		 }
-        if ($("#add2").val()=="") {
-	        alert("상세주소를 확인해주세요.");
-	        return false;
-       }
-        if($("#email").val()==""){
-     		 alert("이메일을  입력해주세요.")
-     		 return false;
-     	 }
-        	
-        	 return true;
-         })  
-      
-      
-      
-      $(document)
-		.ready(
+					document.getElementById('zipcode').value = data.zonecode;
+					document.getElementById("add1").value = addr;
+				}
+			}).open();
+		}
+
+		$("#mprofilelog").on("click", function() {
+
+			if ($("#homename").val() == "") {
+				alert("배송지명을 입력해주세요.");
+				return false;
+			}
+
+			if ($("#takename").val() == "") {
+				alert("수령인을 입력해주세요.");
+				return false;
+			}
+
+			if ($("#phone").val() == "") {
+				alert("휴대폰 번호를 입력해주세요.")
+				return false;
+			}
+
+			if ($("#add2").val() == "") {
+				alert("상세주소를 확인해주세요.");
+				return false;
+			}
+
+			return true;
+		})
+
+		$(document).ready(
 				function() {
 					var phone = /^[0-9]*$/;
 
-					
 					//휴대폰1 검사
-					$("#phone")
-							.focusout(
-									function() {
-										if (!phone.test($('#phone')
-												.val())
-												|| $("#phone").val().length < 11) {
-											$('#phoneMsg').css("color",
-													"red");
-											$('#phoneMsg').text(
-													"재확인 해주십시오.");
-											$(this).val("");
-										} else {
-											$('#phoneMsg').text("");
-										}
-									});
-					
+					$("#phone").focusout(
+							function() {
+								if (!phone.test($('#phone').val())
+										|| $("#phone").val().length < 11) {
+									$('#phoneMsg').css("color", "red");
+									$('#phoneMsg').text("재확인 해주십시오.");
+									$(this).val("");
+								} else if (!phone.test($('#phone').val())
+										|| $("#phone").val().length > 11) {
+									$('#phoneMsg').css("color", "red");
+									$('#phoneMsg').text("재확인 해주십시오.");
+									$(this).val("");
+								} else {
+									$('#phoneMsg').text("");
+								}
+							});
+
 				});
- 
-   </script>
+	</script>
 </body>
 </html>

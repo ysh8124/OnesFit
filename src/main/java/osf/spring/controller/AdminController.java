@@ -126,7 +126,10 @@ public class AdminController {
 		int totalSale = aservice.totalSale();
 		List<BestProductDTO> buyRank = aservice.itemRank();
 		List<ProductDTO> topProduct = aservice.bestProduct(buyRank);
+		List<Integer> visit = aservice.visit();
+		System.out.println("방문자 : "+visit.size());
 
+		model.addAttribute("visit",visit);
 		model.addAttribute("ranklist",buyRank);
 		model.addAttribute("topProduct",topProduct);
 		model.addAttribute("sales",num);
