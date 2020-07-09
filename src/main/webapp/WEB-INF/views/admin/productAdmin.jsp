@@ -11,6 +11,7 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
+	<link rel="shortcut icon" href="/img/onesfitcon.png">
 <style>
 @import
 	url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
@@ -47,131 +48,134 @@
 	color: white;
 }
 
-#shipping_info {
-	border: px solid #dfdfdf;
-	width: 800px;
-	font-size: 11px;
-}
-
-#shipping_info td {
-	padding: 1px;
-}
-
-#shipping_info th {
-	text-align: center;
-	height: 50px;
-}
-
-table {
-	border: 1px solid #d3d8e1
-}
-
-table tr td {
-margin-top:5px;
-	border: px solid #d3d8e1;
-}
-
 /*    모든 영역*/
 #container {
 	height: 1000px;
 }
 
-table tr img {
-	width: 120px;
-	height: 150px;
-}
-
 /*    중앙 내용*/
-#contents {
-	width: 1598px;
-	height: 900px;
-	margin-left: 287px;
-	padding: 100px
-}
-
 #point {
 	width: 100px;
-}
-
-table a {
-	text-decoration: none;
-	color: black;
 }
 
 #searchBtn:hover {
 	cursor: pointer;
 }
 
-.print{height:40px;}
+.print {
+	height: 40px;
+}
+
+#search {
+	border: 1px solid #dfdfdf;
+}
+
+#selectBox {
+	border: 1px solid #dfdfdf;
+}
+
+#product_management {
+	border: 1px solid #dfdfdf;
+	width: 1300px;
+	margin-left: 400px;
+	width: 1300px;
+}
+
+#product_management td {
+	border: 1px solid #dfdfdf;
+	border-right: 0px;
+	height: 30px;
+}
+
+#product_management a {
+	text-decoration: none;
+	color: black;
+}
 </style>
 <script>
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    
-    function dateFormat(argDate){
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 
-         if(argDate !== undefined){
+	function dateFormat(argDate) {
+
+		if (argDate !== undefined) {
 			var a = argDate;
-			var setA = a.substring(0,16);
+			var setA = a.substring(0, 16);
 
-         }
+		}
 
-         return setA;
-    }
+		return setA;
+	}
 
-    
-    	$(function(){
+	$(function() {
 
-    		$(".unbest").on("click",function(){
-    			if(confirm("베스트 항목에서 제외하시겠습니까? 등록은 DASH BOARD에서 가능합니다.")){
-    				return true;
-    			}return false;
-    		})
-    		
-    		$(".del").on("click",function(){
-    			if(confirm("정말 삭제하시겠습니까?")){return true;
-    			}else{
-    			return false;
-    			}
-    		})
-    		
-    		$(".price").each(function(index,item){
-    			var num = $(item).html();
-    			var num2 = numberWithCommas(num);
-    			$(item).html(num2);
-    		})
-    		
-    		$(".date").each(function(){
-    			var date1 = $(this).html();
-    			var date2 = dateFormat(date1);
-    			$(this).html(date2);
-    		})
-    		
-    		$("#add").on("click",function(){
-    		location.href="../admin/productAdd";
-    		})
-    		
-    		$("#searchBtn").on("click",function(){
-    			$("tr").css("display","table-row");
-    			$(".addtr").remove();
-    			if($("#search").val() != ""){
-    			var flag = $("#selectBox option:selected").val();
-    			var input = $("#search").val().toLowerCase();
-    			$("#search").val("");
-    			var count = 0;
-    			$("."+flag).each(function(){
-    				if($(this).html().indexOf(input) == -1){
-    					$(this).closest("tr").css("display","none");
-    				}else{count++;}
-    			})
-    			if(count == 0){
-    				$("table").append("<tr align=center class='addtr'><td colspan='7'>검색된 상품이 없습니다.</tr>");
-    			}
-    			}else{ $("tr").css("display", "table-row");}
-    		})
-    	})
-    </script>
+		$(".unbest").on("click", function() {
+			if (confirm("베스트 항목에서 제외하시겠습니까? 등록은 DASH BOARD에서 가능합니다.")) {
+				return true;
+			}
+			return false;
+		})
+
+		$(".del").on("click", function() {
+			if (confirm("정말 삭제하시겠습니까?")) {
+				return true;
+			} else {
+				return false;
+			}
+		})
+
+		$(".price").each(function(index, item) {
+			var num = $(item).html();
+			var num2 = numberWithCommas(num);
+			$(item).html(num2);
+		})
+
+		$(".date").each(function() {
+			var date1 = $(this).html();
+			var date2 = dateFormat(date1);
+			$(this).html(date2);
+		})
+
+		$("#add").on("click", function() {
+			location.href = "../admin/productAdd";
+		})
+
+		$("#searchBtn")
+				.on(
+						"click",
+						function() {
+							$("tr").css("display", "table-row");
+							$(".addtr").remove();
+							if ($("#search").val() != "") {
+								var flag = $("#selectBox option:selected")
+										.val();
+								var input = $("#search").val().toLowerCase();
+								$("#search").val("");
+								var count = 0;
+								$("." + flag)
+										.each(
+												function() {
+													if ($(this).html().indexOf(
+															input) == -1) {
+														$(this).closest("tr")
+																.css("display",
+																		"none");
+													} else {
+														count++;
+													}
+												})
+								if (count == 0) {
+									$("table")
+											.append(
+													"<tr align=center class='addtr'><td colspan='7'>검색된 상품이 없습니다.</tr>");
+								}
+							} else {
+								$("tr").css("display", "table-row");
+							}
+						})
+	})
+</script>
 </head>
 <body>
 	<!--       전체 영역-->
@@ -202,73 +206,72 @@ table a {
 				</div>
 			</nav>
 
-			<div id="contents">
-				<div style="width: 100%">
-					<b>Product Management</b> <select id="selectBox"
-						style="position: relative; top: 3px; margin-left: 780px;">
-						<option value="seq">상품번호</option>
-						<option value="pname">상품명</option>
-						<option value="category">상품분류</option>
-					</select> <input id="search" type="text"> <img id="searchBtn"
-						src="../resources/img/search.png"
-						style="width: 17px; position: relative; top: 2px">
-
-				</div>
-
-				<br>
-
-				<table>
-					<tr align=center>
-						<td style="width: 60px">상품<br>번호
-						</td>
-
-						<td style="width: 300px">상품명</td>
-						<td style="width: 100px">상품가격</td>
-						<td style="width: 250px">등록일자</td>
-						<td style="width: 200px">상품분류</td>
-						<td style="width: 100px">품절</td>
-						<td style="width: 200px">비고</td>
-					</tr>
-
-					<!-- choose -->
-					<c:choose>
-						<c:when test="${!empty pdto}">
-							<c:forEach var="p" items="${pdto}">
-								<tr align=center class="print">
-									<td align=center class="seq">${p.pseq }</td>
-									<c:choose>
-									<c:when test="${p.best == 'Y'}">
-									<td class="text pname" align=left><a href="#">${p.pname }</a>&nbsp; 
-									<span class="badge badge-danger">BEST</span> <a href="/admin/unBest?pseq=${p.pseq}" class="unbest" style="color:gray;">UnBest</a>
-									</c:when>
-									<c:otherwise><td class="text pname" align=left><a href="#">${p.pname }</a> <a href="/admin/setBest?pseq=${p.pseq }" style="color: gray;">best</a></c:otherwise>
-									</c:choose>
-									</td>
-
-									<td class="text price" align=center>${p.price}</td>
-
-									<td class="text date">${p.regist_date }</td>
-									<td class="text category" align=center>${p.category}</td>
-									<td align=center class="text">${p.soldout_yn}</td>
-									<td class="text"><a
-										href="/admin/productModify?pseq=${p.pseq}" style="color:gray">수정</a><a
-										href="/admin/productDelete?pseq=${p.pseq}" class=del
-										style="margin-left: 20px;color:gray;">삭제</a></td>
-								</tr>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<tr>
-								<td align=center colspan=7>상품이 없습니다.
-							</tr>
-						</c:otherwise>
-					</c:choose>
-				</table>
-				<div style="width: 1268px;">
-					<button id="add" style="margin-left: 1100px">상품등록</button>
-				</div>
-
+			<div style="margin-top: 100px; padding-left: 100px;">
+				<h2 style="font-size: 15px; text-align: center; line-height: 30px">
+					<b>PRODUCT MANAGEMENT</b>
 			</div>
+
+			<select id="selectBox"
+				style="position: relative; top: 2px; margin-left: 1405px; margin-bottom: 30px; height: 25px;">
+				<option value="seq">상품번호</option>
+				<option value="pname">상품명</option>
+				<option value="category">상품분류</option>
+			</select> &nbsp; <input id="search" type="text"> <img id="searchBtn"
+				src="../resources/img/search.png" style="width: 20px;"> <br>
+
+			<table id="product_management">
+				<tr align=center>
+					<td style="width: 60px;  border-right: hidden;">상품 번호</td>
+					<td style="width: 300px; border-right: hidden;">상품명</td>
+					<td style="width: 100px; border-right: hidden;">상품가격</td>
+					<td style="width: 250px; border-right: hidden;">등록일자</td>
+					<td style="width: 200px; border-right: hidden;">상품분류</td>
+					<td style="width: 100px; border-right: hidden;">품절</td>
+					<td style="width: 200px">비고</td>
+				</tr>
+
+				<!-- choose -->
+				<c:choose>
+					<c:when test="${!empty pdto}">
+						<c:forEach var="p" items="${pdto}">
+							<tr align=center class="print">
+								<td align=center class="seq">${p.pseq }</td>
+								<c:choose>
+									<c:when test="${p.best == 'Y'}">
+										<td class="text pname" align=left><a href="#">${p.pname }</a>&nbsp;
+											<span class="badge badge-danger">BEST</span> <a
+											href="/admin/unBest?pseq=${p.pseq}" class="unbest"
+											style="color: gray;">UnBest</a>
+									</c:when>
+									<c:otherwise>
+										<td class="text pname" align=left><a href="#">${p.pname }</a>
+											<a href="/admin/setBest?pseq=${p.pseq }" style="color: gray;">best</a>
+									</c:otherwise>
+								</c:choose>
+								</td>
+
+								<td class="text price" align=center>${p.price}</td>
+
+								<td class="text date">${p.regist_date }</td>
+								<td class="text category" align=center>${p.category}</td>
+								<td align=center class="text">${p.soldout_yn}</td>
+								<td class="text"><a
+									href="/admin/productModify?pseq=${p.pseq}" style="color: gray">수정</a><a
+									href="/admin/productDelete?pseq=${p.pseq}" class=del
+									style="margin-left: 20px; color: gray;">삭제</a></td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td align=center colspan=7>상품이 없습니다.
+						</tr>
+					</c:otherwise>
+				</c:choose>
+			</table>
+			<button id="add"
+				style="margin-left: 1630px; margin-top: 20px; background-color: white; border: 1px solid #dfdfdf;">상품등록</button>
+
 
 		</div>
 		<div id="footer">FOOTER</div>

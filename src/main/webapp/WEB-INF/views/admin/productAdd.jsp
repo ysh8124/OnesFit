@@ -9,6 +9,7 @@
         <title>Product Add</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+       <link rel="shortcut icon" href="/img/onesfitcon.png">
 
         <style>
             @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
@@ -44,7 +45,7 @@
             }
             
             #product_contents{
-               position: relative; top: 120px; left: 350px; width: 1500px
+               position: relative; top: 100px; left: 550px; width: 1500px
             }
             
             #radio{position: relative; top: 3px;}
@@ -94,7 +95,7 @@
          #View_area a:hover{cursor:pointer;}
          #xbox2 a:hover{cursor:pointer;}
          
-            #shipping_info{border: 1px solid #dfdfdf; width: 800px; font-size: 11px;}
+            #shipping_info{border: 1px solid #dfdfdf; width: 1000px; font-size: 12px;}
             #shipping_info td{padding: 10px}
             #shipping_info th{text-align: center; height: 50px;}
         </style>
@@ -330,13 +331,9 @@
             </nav>
             <div id="product_contents">
                     <form action="/admin/productAddProc" method="post" enctype="multipart/form-data" accept-charset="utf8">
-               
-                <b style="font-size: 15px">상품정보</b>
-                <br>
-                <br>
                 <table id="shipping_info" border="1">
                     <tbody>
-                     <tr><th>상품명</th><td><input type="text" name="pname"></tr>
+                     <tr><th>상품명</th><td><input type="text" name="pname" style="border: 1px solid #dfdfdf;"></tr>
                         <tr>
                             <th style="width: 150px">PRODUCT</th>
                             <td>
@@ -361,7 +358,7 @@
                     <input type=checkbox class="size" name="psize" value="XL">XL
                   </tr>
                     <tr><th>Color</th><td id="colorBox">
-                    <div style="width:100%"><div style="width:70%;float:left" class=subOption><input type="text" placeholder="ex) red" name="color"><button type="button" class="plus" id="optionAdd" style="margin-left:10px">+</button>&nbsp;&nbsp;<input type='number' class="number" placeholder="재고" name='count'></div><div id=subSize class="opsize" style="width:20%; position: relative; bottom: 20px; left: 345px; height: 20px"></div></div>
+                    <div style="width:100%"><div style="width:70%;float:left" class=subOption><input type="text" placeholder="ex) red" name="color" style="border: 1px solid #dfdfdf;"><button type="button" class="plus" id="optionAdd" style="margin-left:10px;">+</button>&nbsp;&nbsp;<input type='number' class="number" placeholder="재고" name='count' style="border: 1px solid #dfdfdf";></div><div id=subSize class="opsize" style="width:20%; position: relative; bottom: 20px; left: 345px; height: 20px"></div></div>
                     </td>
                     </tr>
                         <tr>
@@ -396,7 +393,7 @@
                 </table>
                 <br>
                 <input type=submit value="등록하기" id=submit
-                            style="margin-left: 350px">
+                            style="margin-left: 450px; color: black;">
             </form>
                 </div>    
     </body>

@@ -39,7 +39,7 @@ div {
 
 /*    모든 영역*/
 #container {
-   height: 1400px
+   height: px
 }
 
 /*    왼쪽 메뉴*/
@@ -329,6 +329,22 @@ textarea {
 .review:hover, .answer:hover {
    cursor: pointer;
 }
+
+.goods_component3 th, span {
+   font-size: 12px;
+   color: #5f5f5f;
+}
+
+.goods_component3 th {
+   padding: 15px;
+   background-color: #ededed;
+}
+
+.inner {
+   margin-left: 10px;
+}
+
+
 </style>
 </head>
 <body>
@@ -338,7 +354,7 @@ textarea {
       <!--           왼쪽메뉴, 중앙 내용, 오른쪽 메뉴 -->
       <div id="container">
 
-         <!--               사이드메뉴-->
+       <!--               사이드메뉴-->
          <div id="sidemenu">
             <div id="sidefix">
                <a href="/"> <img src="/img/logo.png"
@@ -355,7 +371,7 @@ textarea {
                                    </c:when>
                                    <c:otherwise>
                                       <a href="/member/logout">logout</a> <a
-                              href="/member/toProfile?id=${loginInfo}">PROFILE</a>
+                              href="/member/toProfile?id=${loginInfo.id}">PROFILE</a>
                                 </li>
                                 <li>
                                     <a href="/member/tomyPage">my page</a>
@@ -462,17 +478,510 @@ textarea {
                      <c:forEach var='i' items='${idto }'>
                         <div
                            style="width: 500px; height: 500px; float: left; padding: 20px">
-                           <img src="/product/${pdto.pseq}/${i.sysname }" style="width: 100%;">
+                           <img src="/product/${i.product_seq}/${i.sysname }" style="width: 100%;">
                         </div>
                      </c:forEach>
                   </div>
+               </div>
+
+               <div
+                  style="float: left; position: relative; left: 40px; font-size: 13px; text-align: center; width: 1000px;">
+                  <hr>
+               </div>
+
+
+               <div class="se-module se-module-text"
+                  style="float: left; position: relative; left: 40px; font-size: 13px; text-align: center; width: 1000px;">
+
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-173206ae-3e04-4cf9-b210-2ef96fa88c20">
+                     <span style="color: #000000;"
+                        class="se-fs-fs11 se-ff-system  se-style-unset "
+                        id="SE-d3626277-0b67-4dea-9564-17103a1e7e36"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-85983948-7155-4725-9398-6d58ec533804">
+                     <span style="color: #000000;"
+                        class="se-fs-fs19 se-ff-system  se-style-unset "
+                        id="SE-38357678-c4ea-4c53-b640-03732b6c4353"><h5>배송안내</h5></span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-17f1791f-fb22-47ed-a304-a6878de23ebf">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-18ef8436-4451-45fc-9511-ad75d88d65ea">출고일 기준 으로 </span><span
+                        style="color: #f12f22;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-5b1d6626-da8c-44a4-8eb8-f3cc0a5124e5">1~5일</span><span
+                        style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-02ad4304-c893-4efc-9cc1-fe8675037176"> 정도 소요됩니다.</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-874ff192-16c2-42bb-a645-ea35b6a56d04">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-7f041d7d-98b2-45ce-bd16-0685c5d36fae">배송비는 기본
+                        3000원 , 10만원 이상 구매 시 무료배송 해드립니다.</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-aed5168b-0c4c-4379-bd7d-d10beb028ac4">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-e9df353b-54a7-4b15-a367-04c9632edb6b">배송이 지연되는 경우
+                        주문자분 연락처로 개별연락 드리겠습니다.</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-236f9b82-e044-4970-9770-573821c071ef">
+                     <span style="color: #000000;"
+                        class="se-fs-fs19 se-ff-system  se-style-unset "
+                        id="SE-d6b8fac5-401b-459f-b9e6-e1e8f8161e6f"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-6c45745f-4fa8-4180-9e07-984fe5db1e84">
+                     <span style="color: #000000;"
+                        class="se-fs-fs19 se-ff-system  se-style-unset "
+                        id="SE-c56223b6-0f73-439a-a085-a7837a017a47"><h5>교환
+                           / 반품 안내</h5></span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-9a75697d-e69b-44a7-aac9-7f0768079f3d">
+                     <span style="color: #000000;"
+                        class="se-fs-fs19 se-ff-system  se-style-unset "
+                        id="SE-3b035216-c948-435b-9bb3-e3a867c1da0f"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-4cb753ea-b84c-48f2-8475-3bbc89d04ae7">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-260e3ed5-eebe-494d-b231-e6221eec501c">교환/반품 주소 -
+                        강원도 원주시 우산동 상지대길 9 (402호)</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-f9f96bf2-484c-4f88-b4c4-71b46f402185">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-6f7b3af0-0291-4af3-bdbc-43c49df5e313">교환/반품 방법 -
+                        상품수령 </span><span style="color: #f12f22;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-97cd2f3d-5339-41d6-b513-9d027f47ab5b">1일</span><span
+                        style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-0c4ffbba-e838-453d-aa1d-420707ca05c9"> </span><span
+                        style="color: #f12f22;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-cfd84015-1ef3-4bf8-ba0c-81515d0d9afd">이내에</span><span
+                        style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-916e18da-644b-45e5-9f74-a993519bd3a2"> 원에스핏 QnA
+                        게시판 </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-d9196a89-f526-4062-b18d-3afc90a9993d">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-f936e592-c35a-4ec0-a006-0038c9a77e40">인스타 -
+                        8_8__st </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-ad98af3d-db3e-43d5-900f-4cfa67c3bc7b">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-726e3e99-57b3-4e3c-8454-21b0deae2975">
+                        -010-8450-7648 으로 교환/반품 신청 </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-7299c25e-625e-4fab-8743-ad25c6029920">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-0f90cb51-83a5-4229-82c6-b58fd86f1f27">상품 수령일로 부터 </span><span
+                        style="color: #f12f22;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-f6e94b2a-4a42-4315-947f-39da8cae12b4">7일</span><span
+                        style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-9b953ece-e14e-4659-a39e-c29bf4aa9e31"> </span><span
+                        style="color: #f12f22;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-ed015740-fe1b-491d-bb02-53df7934303f">이내에</span><span
+                        style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-9986b4c2-44fe-4b34-93c3-2b437201a099"> 원에스핏으로 상품이
+                        도착해야됩니다.</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-279e14f1-ba71-46c3-ab48-cf043ce0a221">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-bcd0427d-d786-408f-acaa-1c677673d389"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-8c64ca5c-04ee-4fcf-9c34-766de0cff2cf">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-b5e988f5-8f7f-48eb-b7a1-660f087af9d5">단순변심으로 인한
+                        교환/환불의 경우는 택배비 </span><span style="color: #f12f22;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-8a374cc1-c5c2-4eb6-b7f7-728dd2488ec8">3000원</span><span
+                        style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-bdd78d52-fd59-4128-a9f2-d89c4422b66f"> 동봉 </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-5e2639d3-030c-4172-81b8-c0b07580e5eb">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-1344334e-d045-462e-891d-83bc8e84a461">무료배송의 경우 </span><span
+                        style="color: #f12f22;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-c55b199d-4609-496f-8362-e34e800ca6c8">6000원</span><span
+                        style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-f853cd12-ebde-400c-896a-4a03ce328f49"> 동봉후 선불로
+                        보내주시기 바랍니다. </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-b078c113-40d5-4c62-b756-3adc3be1e99e">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-e36ee086-55a3-43f6-af2f-f736e0f29f27"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-412a8de0-1de9-421f-8c4c-79225f99e7ce">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-a83880b8-bb38-4df1-ace1-f018a22b0ae2">불량상품 교환일경우
+                        배송비는 원에스핏에서 부담합니다.</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-adc140c6-ff4f-44a8-8631-4431a2b0e43f">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-032af8c4-a5a7-4744-95d9-926a1063d6cf"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-01c5494e-865c-459b-ae95-dbe78dc4e8d4">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-76447dc9-d144-42f6-9419-66211b96c4fc">교환/반품이 </span><span
+                        style="color: #f12f22;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-fef03737-72a5-455b-8450-baa4a088bee5">불가능한</span><span
+                        style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-6c814928-f4f9-48af-8b4e-d77d9db82dc7"> 경우</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-5a454211-cb2c-43ff-982a-b58394d47d73">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-9a9ba544-8a44-4085-b14a-9c77f61c035d"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-c08db81d-b2e0-4c97-b4b3-8b85ba18daae">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-76cd45d9-a8cf-478b-b84f-c5d33b6152a1">-제품착용 흔적이
+                        있을경우 (얼룩 , 화장품 , 탈취제 , 향수)</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-32e6a138-8919-4548-9ea3-28102b27c378">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-e454c977-f756-49e7-891e-0f29a1275dd6">-세탁이나 수선으로
+                        인해 상품이 변질된 경우 </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-ec49dfdb-2461-4b04-a704-81e71b55600f">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-874d3d3f-9959-47d7-a5b1-ba4a6fa13dfb">-악세사리 ,수제화 등
+                        주문제작 상품일 경우 </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-26207e6c-dda4-4176-b612-1e7e67d5a17f">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-ea69f988-cc81-45f8-8bc5-9bc74f302eaa">-상품의 택/라벨 이
+                        손상된 경우 </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-64102d63-c4c0-42fe-9a52-83911acbb960">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-d3b69116-3897-4c92-84ee-2f66f5d732fe">-포장 부주위로
+                        반품/교환 배송중 상품이 훼손될 경우</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-cd44bbb6-c6dc-47c8-9948-b6a047a162cc">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-9f81def7-7f9a-459f-9ffb-e9d50538fd8e">-고의적인 상품훼손
+                        흔적이 발견될경우</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-f351798a-9266-4e57-a901-e42575605a4d">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-c15428ea-0719-4644-a66a-5843da13b172"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-79208c0f-7409-47e1-9126-18848b387ea0">
+                     <span style="color: #000000;"
+                        class="se-fs-fs19 se-ff-system  se-style-unset "
+                        id="SE-08f37a58-1a41-44b4-9e0b-4cd9ee4e8d8e"><h5>유의사항
+                           안내</h5></span><span style="color: #000; background-color: #fff;"
+                        class="se-fs- se-ff-system  se-style-unset "
+                        id="SE-85798f9d-cf34-4d33-849f-698596ad1d35"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-78c3a779-7b75-488e-abfe-ead00ca6159c">
+                     <span style="color: #000000;"
+                        class="se-fs-fs19 se-ff-system  se-style-unset "
+                        id="SE-6c01b4b5-e721-4559-b556-5dc2b85b6c6c"> </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-d496bde9-fe58-416f-8739-3dcd631d63c8">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-6c7c3066-1ef2-45ec-95af-9026624f90dc">-모든 제품의 첫
+                        세탁은 드라이클리닝을 권장합니다.</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-f643ef66-e613-452a-805d-ff1978a275f8">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-dff9ab44-0c0c-4240-9b4d-5a8cac76aa3a">-상품의 색상은
+                        모니터와 화면의 밝기에 따라 미세한 차이가 있을 수 있습니다.</span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-fef56bb7-7050-44b5-afa1-267954dce1c1">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-6461add7-d90a-4051-8772-6029ea36d226">-측정방법에 따라서
+                        1~2cm의 오차가 있을수 있습니다. </span>
+                  </p>
+                  <!-- } SE-TEXT -->
+                  <!-- SE-TEXT { -->
+                  <p class="se-text-paragraph se-text-paragraph-align-center "
+                     style="" id="SE-4559bc61-fab7-47c5-b140-47513ddc011c">
+                     <span style="color: #000000;"
+                        class="se-fs-fs13 se-ff-system  se-style-unset "
+                        id="SE-ebe47696-7feb-4bc2-8406-d002493fd808"> </span>
+                  </p>
+                  
+               </div>
+
+               <div class="goods_component3"
+                  style="float: left; font-size: 11px; position: relative; left: 40px; margin-bottom: 30px;">
+                  <dl class="notice">
+                     <dt style="font-size:13px"><b>상품정보 제공고시</b></dt>
+                     <br>
+                     <dd class="editor_content">
+                        <table cellspacing="0" border="1" class="tb_view2 tb_view2_v1"
+                           style="width: 995px; border-left: hidden; border-right: hidden; border-top: #ededed; border-bottom: #ededed">
+                           <colgroup>
+                              <col width="135">
+                              <col>
+                           </colgroup>
+                           <tbody>
+
+                              <tr>
+                                 <th scope="row"><span class="block">종류</span></th>
+                                 <td><span class="inner">상품상세참조</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">소재</span></th>
+                                 <td><span class="inner">상품상세참조</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">치수</span></th>
+                                 <td><span class="inner">상품상세참조</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">제조자</span></th>
+                                 <td><span class="inner">상품상세참조</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">제조국</span></th>
+                                 <td><span class="inner">상품상세참조</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">취급시 주의사항</span></th>
+                                 <td><span class="inner">상품상세참조</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">품질보증기준</span></th>
+                                 <td><span class="inner">상품상세참조</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">A/S 책임자와 전화번호</span></th>
+                                 <td><span class="inner">상품상세참조 (01084507648)</span></td>
+                              </tr>
+
+                           </tbody>
+                        </table>
+                     </dd>
+                  </dl>
+               </div>
+
+               <div class="goods_component3"
+                  style="float: left; position: relative; left: 40px; width: 93%; margin-bottom: 30px;">
+                  <dl class="notice">
+                     <dt style="font-size: 13px;"><b>거래조건에 관한 정보</b></dt>
+                     <br>
+                     <dd class="editor_content">
+                        <table cellspacing="0" border="1" class="tb_view2 tb_view2_v2" style="border-left: hidden; border-right: hidden; border-top: #ededed; border-bottom: #ededed">
+                           <colgroup>
+                              <col width="345">
+                              <col>
+                           </colgroup>
+                           <tbody>
+                              <tr>
+                                 <th scope="row"><span class="block">재화등의 배송방법에 관한
+                                       정보</span></th>
+                                 <td><span class="inner">택배</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">주문 이후 예상되는
+                                       배송기간</span></th>
+                                 <td><span class="inner">대금 지급일로부터 3일 이내에 발송</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">제품하자·오배송 등에
+                                       따른 청약철회 등의 경우 청약철회 등을 할 수 있는 기간 및 통신판매업자가 부담하는 반품비용 등에 관한
+                                       정보</span></th>
+                                 <td><span class="inner">전자상거래등에서의소비자보호에관한법률 등에 의한
+                                       제품의 하자 또는 오배송 등으로 인한 청약철회의 경우에는 상품 수령 후 3개월 이내, 그 사실을 안 날
+                                       또는 알 수 있었던 날로부터 30일 이내에 청약철회를 할 수 있으며, 반품 비용은 통신판매업자가
+                                       부담합니다.</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">제품하자가 아닌 소비자의
+                                       단순변심, 착오구매에 따른 청약철회 시 소비자가 부담하는 반품비용 등에 관한 정보</span></th>
+                                 <td><span class="inner">편도 3000원 (최초 배송비 무료인 경우
+                                       6000원 부과)</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">제품하자가 아닌 소비자의
+                                       단순변심, 착오구매에 따른 청약철회가 불가능한 경우 그 구체적 사유와 근거</span></th>
+                                 <td><span class="inner">전자상거래등에서의소비자보호에관한법률 등에 의한
+                                       청약철회 제한 사유에 해당하는 경우 및 기타 객관적으로 이에 준하는 것으로 인정되는 경우 청약철회가 제한될
+                                       수 있습니다.</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">재화등의 교환·반품·보증
+                                       조건 및 품질보증기준</span></th>
+                                 <td><span class="inner">소비자분쟁해결기준(공정거래위원회 고시) 및
+                                       관계법령에 따릅니다.</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">재화등의 A/S 관련
+                                       전화번호</span></th>
+                                 <td><span class="inner">01084507648</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">대금을 환불받기 위한
+                                       방법과 환불이 지연될 경우 지연에 따른 배상금을 지급받을 수 있다는 사실 및 배상금 지급의 구체적 조건 및
+                                       절차</span></th>
+                                 <td><span class="inner">주문취소 및 대금의 환불은 네이버 페이
+                                       마이페이지에서 신청할 수 있으며, 전자상거래 등에서의 소비자보호에 관한 법률에 따라 소비자의 청약철회 후
+                                       판매자가 재화 등을 반환 받은 날로부터 3영업일 이내에 지급받은 대금의 환급을 정당한 사유 없이 지연하는
+                                       때에는 소비자는 지연기간에 대해서 연 20%의 지연배상금을 판매자에게 청구할 수 있습니다.</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">소비자피해보상의 처리,
+                                       재화등에 대한 불만 처리 및 소비자와 사업자 사이의 분쟁처리에 관한 사항</span></th>
+                                 <td><span class="inner">소비자분쟁해결기준(공정거래위원회 고시) 및
+                                       관계법령에 따릅니다.</span></td>
+                              </tr>
+                              <tr>
+                                 <th scope="row"><span class="block">거래에 관한 약관의 내용
+                                       또는 확인할 수 있는 방법</span></th>
+                                 <td><span class="inner">상품상세 페이지 및 페이지 하단의 이용약관
+                                       링크를 통해 확인할 수 있습니다.</span></td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </dd>
+                  </dl>
+               </div>
+
+               <div
+                  style="float: left; position: relative; left: 40px; font-size: 13px; text-align: center; width: 1000px;">
+                  <hr>
                </div>
 
 
 
                <input type='hidden' name='pseq' value="${pdto.pseq }">
                <table id="reviewtable"
-                  style="position: relative; left: 40px; font-size: 11px">
+                  style="position: relative; left: 40px; font-size: 11px;">
                   <colgroup>
                      <col style="width: 15%">
                      <col style="width: 50%">
@@ -671,10 +1180,12 @@ textarea {
                                     </tr>
                                  </c:when>
                                  <c:otherwise>
-                                    <tr class="answer answer2" style="height: 30px; padding: 10px;"
-                                       onclick="return false">
+                                    <tr class="answer answer2"
+                                       style="height: 30px; padding: 10px;" onclick="return false">
                                        <td style="border-right: hidden">${i.bno }</td>
-                                       <td style="border-right: hidden">상문 문의 드립니다. &nbsp;<img src="/img/lock.png" style="position: relative; bottom: 2px;"></td>
+                                       <td style="border-right: hidden">상문 문의 드립니다. &nbsp;<img
+                                          src="/img/lock.png"
+                                          style="position: relative; bottom: 2px;"></td>
                                        <td style="border-right: hidden">${i.writer }</td>
                                        <td>${i.write_date }</td>
                                     </tr>
@@ -783,7 +1294,7 @@ textarea {
          </div>
       </div>
 
-      <input type='hidden' value='${loginId }' id='loginId'> <input
+      <input type='hidden' value='${loginid }' id='loginId'> <input
          type='hidden' value='${pdto.pseq }' id='pseq'>
    </div>
    <script>
@@ -821,7 +1332,7 @@ textarea {
                                            $("#totalPrice").css("display","none");
                                             var check = confirm("장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?");
                                             if (check) {
-                                                location.href = "#";
+                                                location.href = "/member/cart?parent_id=${loginid}";
                                             }
                                         } else {
                                             alert("알수 없는 오류로 장바구니에 담기지 않았습니다.");

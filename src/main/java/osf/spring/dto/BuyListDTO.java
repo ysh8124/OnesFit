@@ -3,6 +3,7 @@ package osf.spring.dto;
 import java.sql.Timestamp;
 
 public class BuyListDTO {
+   private int bseq;
    private String parent_id;
    private String pname;
    private int price;
@@ -16,7 +17,7 @@ public class BuyListDTO {
    private String phone;
    private String msg;
    private String status;
-   private int buy_num;
+   private int product_num;
    private Timestamp buy_date;
    private String send_money_yn;
    private int send_number;
@@ -25,184 +26,193 @@ public class BuyListDTO {
    
    public BuyListDTO() {}
 
-   public BuyListDTO(String parent_id, String pname, int price, String psize, String pcolor, int amount,
-         String recipient, int zipcode, String address1, String address2, String phone, String msg, String status,
-         int buy_num, Timestamp buy_date, String send_money_yn, int send_number,int addpoint,int oseq) {
-      super();
-      this.parent_id = parent_id;
-      this.pname = pname;
-      this.price = price;
-      this.psize = psize;
-      this.pcolor = pcolor;
-      this.amount = amount;
-      this.recipient = recipient;
-      this.zipcode = zipcode;
-      this.address1 = address1;
-      this.address2 = address2;
-      this.phone = phone;
-      this.msg = msg;
-      this.status = status;
-      this.buy_num = buy_num;
-      this.buy_date = buy_date;
-      this.send_money_yn = send_money_yn;
-      this.send_number = send_number;
-      this.addpoint= addpoint;
-      this.oseq = oseq;
-   }
+public BuyListDTO(int bseq, String parent_id, String pname, int price, String psize, String pcolor, int amount,
+		String recipient, int zipcode, String address1, String address2, String phone, String msg, String status,
+		int product_num, Timestamp buy_date, String send_money_yn, int send_number, int addpoint, int oseq) {
+	super();
+	this.bseq = bseq;
+	this.parent_id = parent_id;
+	this.pname = pname;
+	this.price = price;
+	this.psize = psize;
+	this.pcolor = pcolor;
+	this.amount = amount;
+	this.recipient = recipient;
+	this.zipcode = zipcode;
+	this.address1 = address1;
+	this.address2 = address2;
+	this.phone = phone;
+	this.msg = msg;
+	this.status = status;
+	this.product_num = product_num;
+	this.buy_date = buy_date;
+	this.send_money_yn = send_money_yn;
+	this.send_number = send_number;
+	this.addpoint = addpoint;
+	this.oseq = oseq;
+}
 
-   public String getParent_id() {
-      return parent_id;
-   }
+public int getBseq() {
+	return bseq;
+}
 
-   public void setParent_id(String parent_id) {
-      this.parent_id = parent_id;
-   }
+public void setBseq(int bseq) {
+	this.bseq = bseq;
+}
 
-   public String getPname() {
-      return pname;
-   }
+public String getParent_id() {
+	return parent_id;
+}
 
-   public void setPname(String pname) {
-      this.pname = pname;
-   }
+public void setParent_id(String parent_id) {
+	this.parent_id = parent_id;
+}
 
-   public int getPrice() {
-      return price;
-   }
+public String getPname() {
+	return pname;
+}
 
-   public void setPrice(int price) {
-      this.price = price;
-   }
+public void setPname(String pname) {
+	this.pname = pname;
+}
 
-   public String getPsize() {
-      return psize;
-   }
+public int getPrice() {
+	return price;
+}
 
-   public void setPsize(String psize) {
-      this.psize = psize;
-   }
+public void setPrice(int price) {
+	this.price = price;
+}
 
-   public String getPcolor() {
-      return pcolor;
-   }
+public String getPsize() {
+	return psize;
+}
 
-   public void setPcolor(String pcolor) {
-      this.pcolor = pcolor;
-   }
+public void setPsize(String psize) {
+	this.psize = psize;
+}
 
-   public int getAmount() {
-      return amount;
-   }
+public String getPcolor() {
+	return pcolor;
+}
 
-   public void setAmount(int amount) {
-      this.amount = amount;
-   }
+public void setPcolor(String pcolor) {
+	this.pcolor = pcolor;
+}
 
-   public String getRecipient() {
-      return recipient;
-   }
+public int getAmount() {
+	return amount;
+}
 
-   public void setRecipient(String recipient) {
-      this.recipient = recipient;
-   }
+public void setAmount(int amount) {
+	this.amount = amount;
+}
 
-   public int getZipcode() {
-      return zipcode;
-   }
+public String getRecipient() {
+	return recipient;
+}
 
-   public void setZipcode(int zipcode) {
-      this.zipcode = zipcode;
-   }
+public void setRecipient(String recipient) {
+	this.recipient = recipient;
+}
 
-   public String getAddress1() {
-      return address1;
-   }
+public int getZipcode() {
+	return zipcode;
+}
 
-   public void setAddress1(String address1) {
-      this.address1 = address1;
-   }
+public void setZipcode(int zipcode) {
+	this.zipcode = zipcode;
+}
 
-   public String getAddress2() {
-      return address2;
-   }
+public String getAddress1() {
+	return address1;
+}
 
-   public void setAddress2(String address2) {
-      this.address2 = address2;
-   }
+public void setAddress1(String address1) {
+	this.address1 = address1;
+}
 
-   public String getPhone() {
-      return phone;
-   }
+public String getAddress2() {
+	return address2;
+}
 
-   public void setPhone(String phone) {
-      this.phone = phone;
-   }
+public void setAddress2(String address2) {
+	this.address2 = address2;
+}
 
-   public String getMsg() {
-      return msg;
-   }
+public String getPhone() {
+	return phone;
+}
 
-   public void setMsg(String msg) {
-      this.msg = msg;
-   }
+public void setPhone(String phone) {
+	this.phone = phone;
+}
 
-   public String getStatus() {
-      return status;
-   }
+public String getMsg() {
+	return msg;
+}
 
-   public void setStatus(String status) {
-      this.status = status;
-   }
+public void setMsg(String msg) {
+	this.msg = msg;
+}
 
-   public int getBuy_num() {
-      return buy_num;
-   }
+public String getStatus() {
+	return status;
+}
 
-   public void setBuy_num(int buy_num) {
-      this.buy_num = buy_num;
-   }
+public void setStatus(String status) {
+	this.status = status;
+}
 
-   public Timestamp getBuy_date() {
-      return buy_date;
-   }
+public int getProduct_num() {
+	return product_num;
+}
 
-   public void setBuy_date(Timestamp buy_date) {
-      this.buy_date = buy_date;
-   }
+public void setProduct_num(int product_num) {
+	this.product_num = product_num;
+}
 
-   public String getSend_money_yn() {
-      return send_money_yn;
-   }
+public Timestamp getBuy_date() {
+	return buy_date;
+}
 
-   public void setSend_money_yn(String send_money_yn) {
-      this.send_money_yn = send_money_yn;
-   }
+public void setBuy_date(Timestamp buy_date) {
+	this.buy_date = buy_date;
+}
 
-   public int getSend_number() {
-      return send_number;
-   }
+public String getSend_money_yn() {
+	return send_money_yn;
+}
 
-   public void setSend_number(int send_number) {
-      this.send_number = send_number;
-   }
+public void setSend_money_yn(String send_money_yn) {
+	this.send_money_yn = send_money_yn;
+}
 
-   public int getAddpoint() {
-      return addpoint;
-   }
+public int getSend_number() {
+	return send_number;
+}
 
-   public void setAddpoint(int addpoint) {
-      this.addpoint = addpoint;
-   }
+public void setSend_number(int send_number) {
+	this.send_number = send_number;
+}
 
-   public int getOseq() {
-      return oseq;
-   }
+public int getAddpoint() {
+	return addpoint;
+}
 
-   public void setOseq(int oseq) {
-      this.oseq = oseq;
-   }
-   
-   
+public void setAddpoint(int addpoint) {
+	this.addpoint = addpoint;
+}
+
+public int getOseq() {
+	return oseq;
+}
+
+public void setOseq(int oseq) {
+	this.oseq = oseq;
+}
+
+  
    
    
 }

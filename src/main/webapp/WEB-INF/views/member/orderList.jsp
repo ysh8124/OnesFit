@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Order List</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
    crossorigin="anonymous"></script>
 <script
@@ -236,33 +236,45 @@
                  <!--               중앙 내용-->
                 
                 <div id="contents">
-                <div style="font-size: 15px;"><b>Shopping Basket</b></div>
+                <div style="font-size: 15px;"><b>Order List</b></div>
                 
                 <div style="width: 1000px; text-align: center; margin-top: 20px; float: left; font-size: 13px;">
-                   <div style="width: 20%; float: left;">IMAGE</div>
-                   <div style="width: 15%; float: left;">NAME</div>
-                   <div style="width: 15%; float: left;">SIZE</div>
-               <div style="width: 15%; float: left;">COLOR</div>
-               <div style="width: 15%; float: left;">QTY</div>
-               <div style="width: 10%; float: left;">PRICE</div>
+                   <div style="width: 20%; float: left;">이미지</div>
+                   <div style="width: 25%; float: left;">상품정보</div>
+               <div style="width: 10%; float: left;">상품수량</div>
+               <div style="width: 10%; float: left;">결제금액</div>
+              	<div style="width: 20%; float:left">주문처리상태</div>
+              	<div style="width: 10%; float:left">취소/환불 신청</div>
                 </div>
                 
                 <div style="width: 1000px; text-align: center; color:#a1a1a1;">
-                <c:forEach items="${list}" var="i">
+                <c:forEach items="${blist}" var="i" varStatus="b">
                    <hr style="width: 95%; margin-left: 1px; margin-bottom: 18px; float: left;">
                 
                <div style="width: 20%; float: left;">
-               <a href="/product/productDetail?pseq=${i.pseq}">
-               <img src="/title/${i.title_img}" style="width: 70px; height: 70px;">
+
+				<c:forEach var="img" items="${imgs}" varStatus="m">
+				<c:choose>
+				<c:when test="${m.index == b.index}">
+               <a href="">
+               <img src="/title/${img}" style="width: 70px; height: 70px;">
                </a>
+               </c:when>
+               </c:choose>
+               </c:forEach>
+	
                </div>
-               <div style="width: 15%; float: left; margin-top: 27px;" class='t'><a href="/product/productDetail?pseq=${i.pseq}" style="text-decoration: none; color:#a1a1a1;">
-               ${i.pname}</a></div>
-               <div style="width: 15%; float: left; margin-top: 27px;">${i.option1}</div>
-               <div style="width: 15%; float: left; margin-top: 27px;">${i.option2}</div>
-               <div style="width: 15%; float: left; margin-top: 27px;">${i.count_item}</div>
+               <div style="width: 25%; float: left; margin-top: 27px;line-height: 10px;" class='t'><a href="" style="text-decoration: none; color:#a1a1a1;">
+               ${i.pname}</a><br>옵션 : ${i.pcolor}/${i.psize}</div>
+               <div style="width: 10%; float: left; margin-top: 27px;">${i.amount}</div>
                <div style="width: 10%; float: left; margin-top: 27px;">${i.price}</div>
-               <div style="width: 5%; float: left; margin-top: 27px;"><a href="/member/productDelete?parent_id=${i.parent_id}&pseq=${i.pseq}&c_seq=${i.c_seq}" style="color: #d43b3b; text-decoration: none;">x</a></div>
+               <c:choose>
+               <c:when test="${i.status eq '입금전'}">
+               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="cancel">주문취소</button></div>
+               <div style="width: 10%; float: left; margin-top: 27px;"><a href="" style="color: #d43b3b; text-decoration: none;">x</a></div>
+               </c:when>
+               <c:when test="${i.status eq ''}"
+               </c:choose>
             </c:forEach>
               </div>
               

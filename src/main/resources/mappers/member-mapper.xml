@@ -6,8 +6,8 @@
 		member where id=#{value} </select>
 
 	<select id="cart" resultType="osf.spring.dto.CartDTO">
-		select * from cart where parent_id = #{parent_id}
-	</select>
+   select * from cart where parent_id = #{parent_id} order by c_seq desc
+</select>
 	<delete id="deleteCart">
 		delete cart where parent_id = #{parent_id} and c_seq = #{c_seq}
 	</delete>
@@ -63,7 +63,7 @@
 
 
 	<update id="memberupdate">
-		update member set pw=#{pw}, phone=#{phone}, zipcode=#{zipcode}, address1=#{address1},
+		update member set phone=#{phone}, zipcode=#{zipcode}, address1=#{address1},
 		address2=#{address2}, email=#{email}
 		where id=#{id} and name=#{name}
 	</update>
@@ -86,10 +86,15 @@
 	</select>
 
 	<select id="countArticle" resultType="int">
-		select count(*) from
-		locketlist
+		select nvl(count(*),0) from locketlist
 	</select>
 
 	<select id="getUseMoney" resultType="int">select nvl(sum(price),0)
 		from buy_list where parent_id=#{value}</select>
+		
+	<select id="orderList" resultType="osf.spring.dto.BuyListDTO">select * from buy_list where parent_id=#{value}</select>
+
+	<select id="orderImg" resultType="String">select nvl(title_img,'이미지없음') from product where pseq=${value}</select>
+
+<select resultType="osf.spring.dto.LocketListDTO" id="selectAddressList">select *from locketlist where id=#{id} </select>
 </mapper>

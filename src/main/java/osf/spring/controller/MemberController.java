@@ -1,5 +1,6 @@
 package osf.spring.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonObject;
 
+import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.LocketListDTO;
 import osf.spring.dto.MemberDTO;
@@ -156,28 +158,47 @@ public class MemberController {
 
 
 	@RequestMapping("signup")
-	public String toSignup(MemberDTO mdto) throws Exception{
+	public String toSignup(HttpServletRequest req) throws Exception{
+		MemberDTO mdto = new MemberDTO();
+		String id = req.getParameter("id");
+		String pw = req.getParameter("pw");
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		String phone = req.getParameter("phone");
+		String zipcode = req.getParameter("zipcode");
+		String address1 = req.getParameter("address1");
+		String address2 = req.getParameter("address2");
+		String phone1 = req.getParameter("phone1");
+		String phone2 = req.getParameter("phone2");
+		String phone3 = req.getParameter("phone3");
+		StringBuilder sb = new StringBuilder(phone1+phone2+phone3);
+		System.out.println(sb.toString());
+		mdto.setId(id);
+		mdto.setPw(pw);
+		mdto.setName(name);
+		mdto.setEmail(email);
+		mdto.setPhone(sb.toString());
+		mdto.setZipcode(zipcode);
+		mdto.setAddress1(address1);
+		mdto.setAddress2(address2);
 		int result = mservice.addMember(mdto);
 		if(result > 0) {
-
+			
 			return "redirect:/";
 		}
 		return "redirect:/";
 	}
 
-	@ResponseBody
-	@RequestMapping("duplcheck")
-	public String duplcheck(MemberDTO mdto) throws Exception{
-		String id = mdto.getId();
-		JsonObject obj = new JsonObject();
-
-		boolean result = mservice.isIdAble(id);
-
-		System.out.println(result);
-		obj.addProperty("check", result);
-		System.out.println(obj.toString());
-		return obj.toString();
-	}
+	   @ResponseBody
+	   @RequestMapping("duplcheck")
+	   public Object duplcheck(MemberDTO mdto) throws Exception{
+	      String id = mdto.getId();
+//	      JsonObject obj = new JsonObject();
+	      
+	      boolean result = mservice.isIdAble(id);
+//	         obj.addProperty("check", result);
+	      return result;
+	   }
 
 
 
@@ -248,7 +269,6 @@ public class MemberController {
 	public String profile(HttpServletRequest request) throws Exception{
 
 		String id = request.getParameter("id");
-		String pw = request.getParameter("pw1");
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String zipcode = request.getParameter("zipcode");
@@ -258,7 +278,6 @@ public class MemberController {
 
 
 		System.out.println(id);
-		System.out.println(pw);
 		System.out.println(name);
 		System.out.println(phone);
 		System.out.println(zipcode);
@@ -266,7 +285,7 @@ public class MemberController {
 		System.out.println(address2);
 		System.out.println(email);
 
-		int result = mservice.memberupdate(id,pw,name,phone,zipcode,address1,address2,email);
+		int result = mservice.memberupdate(id,name,phone,zipcode,address1,address2,email);
 
 		if(result>0) {
 			return "member/profileOk";
@@ -274,6 +293,11 @@ public class MemberController {
 			return  "member/findidNo";
 		}	
 	}
+	
+	@RequestMapping("pwcheckok")
+	   public String pwcheckok() {
+	      return "member/pwCheckView";
+	   }
 
 	@ResponseBody
 	@RequestMapping("pwcheck")
@@ -295,6 +319,8 @@ public class MemberController {
 
 		int result = mservice.leaveMember(id);
 		if(result > 0) {
+			session.invalidate();
+            session.invalidate();
 			return "redirect:/";
 		}
 		return "redirect:/";
@@ -353,6 +379,35 @@ public class MemberController {
 		System.out.println(obj.toString()); 
 		return obj.toString();
 	}
+	
+	@RequestMapping("orderList")
+	public String orderList(String id,Model model) {
+		List<BuyListDTO> blist = mservice.orderList(id);
+		List<Integer> pseq = new ArrayList<>();
+		int index = 0;
+		
+		for(BuyListDTO b : blist) {
+			System.out.println(b.getProduct_num());
+			pseq.add(b.getProduct_num());
+			index++;
+		}
+		
+		model.addAttribute("imgs",mservice.orderImg(pseq));
+		
+		model.addAttribute("blist",blist);
+		return "/member/orderList";
+	}
+	
+	@RequestMapping("addressList")
+	public String addressList(Model model) throws Exception{
+		MemberDTO dto = (MemberDTO)session.getAttribute("loginInfo");
+		List<LocketListDTO> list=mservice.selectAddressList(dto.getId());
+		
+		model.addAttribute("list",list);
+		
+		return "product/addressList";
+	}
+	
 
 
 }

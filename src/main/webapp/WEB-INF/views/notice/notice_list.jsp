@@ -14,13 +14,14 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <link rel="shortcut icon" href="/img/onesfitcon.png">
     <script>
-	$(function() {
-		$("#btn").on("click", function() {
-			location.href = "../notice/write";
-		});
-	});
-	</script>
+   $(function() {
+      $("#btn").on("click", function() {
+         location.href = "../notice/write";
+      });
+   });
+   </script>
     </head>
     <style>
         *{box-sizing: border-box}
@@ -82,28 +83,28 @@
         .footer {font-size: 11px; text-align: center;}
         .footer a{text-decoration: none; color: black;}
          .nheader{
-		 float: left;
-		 text-align: center;
-		 margin-top: 20px;
-		 background-color: #f6f6f6;
-		 height: 25px;
-		 line-height: 24px;
-	 	 }
-	 
-	     .ncontents{
-		 float: left;
-		 text-align: center;
-		 line-height: 24px;
-	 	 }
-	 	 #n_hover:hover{
-	 	opacity: 50%;
-	     }
-	     #btn{
-	     border: 1px solid #c4c4c4; background-color: rgba(266,266,266,0); color: #c4c4c4; padding: 5px;
-	     }
-	     #btn:hover{
-	 	 opacity: 50%;
-	     }
+       float: left;
+       text-align: center;
+       margin-top: 20px;
+       background-color: #f6f6f6;
+       height: 25px;
+       line-height: 24px;
+        }
+    
+        .ncontents{
+       float: left;
+       text-align: center;
+       line-height: 24px;
+        }
+        #n_hover:hover{
+       opacity: 50%;
+        }
+        #btn{
+        border: 1px solid #c4c4c4; background-color: rgba(266,266,266,0); color: #c4c4c4; padding: 5px;
+        }
+        #btn:hover{
+        opacity: 50%;
+        }
 
     </style>
     <body>
@@ -123,21 +124,21 @@
                             <ul>
                                 <li>
                                 <c:choose>
-                                	<c:when test="${loginid eq 'pzlogin'}">
-                                		<a href="/member/toLogin">login</a>
-                                		<a href="/member/toSignup">join us</a>
+                                   <c:when test="${loginid eq 'pzlogin'}">
+                                      <a href="/member/toLogin">login</a>
+                                      <a href="/member/toSignup">join us</a>
                                 </li>
-                                	</c:when>
-                                	<c:otherwise>
-                                		<a href="/member/logout">logout</a> <a
-										href="/member/toProfile?id=${loginInfo}">PROFILE</a>
+                                   </c:when>
+                                   <c:otherwise>
+                                      <a href="/member/logout">logout</a> <a
+                              href="/member/toProfile?id=${loginInfo}">PROFILE</a>
                                 </li>
                                 <li>
                                     <a href="/member/tomyPage">my page</a>
                                     <a href="/member/cart?parent_id=${loginid}">cart </a>
                                     <a href="">order</a>                                  
                                 </li>
-                                	</c:otherwise>
+                                   </c:otherwise>
                                 </c:choose>
                             </ul>                       
                         </div>
@@ -151,23 +152,19 @@
                                 <li><a href="">PANTS</a></li>
                                 <li><a href="">ACC</a></li>
                                 <li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
-								<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li>
+                        <li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li>
 
                             </ul>
                         </div>
 
                         <div>
-                            <ul>
-                                <li>
-                                    <a href=""><img src="/img/search.png" style="width: 15px"></a>
-                                    <input id="search" type="text">
 
-                                </li>
-                            </ul>
                             <ul>
                                 <li> 
                                     <a href="https://www.instagram.com/onesfit__official/?hl=ko" onclick="window.open(this.href,'_blank'); return false;"><img src="/img/instar.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a> 
                                     <a href=""><img src="/img/kakao.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a>
+                                    <a href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"onclick="window.open(this.href,'_blank'); return false;" ><img src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
                                 </li>
                             </ul>
 
@@ -186,25 +183,38 @@
                 <div class="nheader" style="width: 15%; border-right: 0.5px solid #eeeeee;">작성일</div>
                 <div class="nheader" style="width: 10%;">조회수</div>
                 </div>
+                <c:choose>
+                   <c:when test="${empty list}">
+                   <div style="width: 1050px;">
+                      <div style="text-align: center; color:##595959; margin-top: 20px;">등록된 글이 없습니다.</div>
+                   </div>
+                   </c:when>
+                   <c:otherwise>
+                   
+                   
                 <c:forEach var="i" items="${list}">
-         		<div style="width: 1050px;">
-         		<div class="ncontents" style="width:  5%; border: 0.5px solid #eeeeee;">${i.n_seq}</div>
-         		<div class="ncontents" style="width: 60%; border: 0.5px solid #eeeeee;"><a href="view?n_seq=${i.n_seq}&page=${page}" id="n_hover" style="text-decoration: none; color: #585858">${i.title}</a></div>
-         		<div class="ncontents" style="width: 10%; border: 0.5px solid #eeeeee;">${i.writer}</div>
-         		<div class="ncontents" style="width: 15%; border: 0.5px solid #eeeeee;">${i.sDate}</div>
-         		<div class="ncontents" style="width: 10%; border: 0.5px solid #eeeeee;">${i.view_count}</div>
-         		</div>
-        		</c:forEach>
-        		<div style="width: 1050px;">
-        		<div style="text-align: left; float: left;"></div>
-        		<div style="text-align: center; width: 100%; line-height: 50px;">${navi}</div>
-        		<div style="text-align: right; float: left;"></div>
+               <div style="width: 1050px;">
+               <div class="ncontents" style="width:  5%; border: 0.5px solid #eeeeee;">${i.n_seq}</div>
+               <div class="ncontents" style="width: 60%; border: 0.5px solid #eeeeee;"><a href="view?n_seq=${i.n_seq}&page=${page}" id="n_hover" style="text-decoration: none; color: #585858">${i.title}</a></div>
+               <div class="ncontents" style="width: 10%; border: 0.5px solid #eeeeee;">${i.writer}</div>
+               <div class="ncontents" style="width: 15%; border: 0.5px solid #eeeeee;">${i.sDate}</div>
+               <div class="ncontents" style="width: 10%; border: 0.5px solid #eeeeee;">${i.view_count}</div>
+               </div>
+              </c:forEach>
+              
+              </c:otherwise>
+                </c:choose>
+                
+              <div style="width: 1050px;">
+              <div style="text-align: left; float: left;"></div>
+              <div style="text-align: center; width: 100%; line-height: 50px;">${navi}</div>
+              <div style="text-align: right; float: left;"></div>
                 </div>
                 <c:choose>
                 <c:when test="${loginInfo2 eq 'OSF'}">
-          		<div style="width: 1050px;">
-        		<div style="width: 100%; text-align: right;"><input type="button" id="btn" value="글쓰기"></div>
-                </div>      	
+                <div style="width: 1050px;">
+              <div style="width: 100%; text-align: right;"><input type="button" id="btn" value="글쓰기"></div>
+                </div>         
                 </c:when>
                 <c:otherwise>
                 

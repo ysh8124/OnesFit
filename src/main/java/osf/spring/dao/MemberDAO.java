@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.LocketListDTO;
 import osf.spring.dto.MemberDTO;
@@ -103,12 +104,11 @@ public class MemberDAO {
 		return mybatis.update("Member.updatePw",map);
 
 	}
-	public int memberupdate(String id, String pw ,String name, String phone , String zipcode, String address1, String address2, String email) throws Exception{
+	public int memberupdate(String id,String name, String phone , String zipcode, String address1, String address2, String email) throws Exception{
 
 		Map<String,String> map = new HashMap();
 
 		map.put("id", id);
-		map.put("pw", pw);
 		map.put("name", name);
 		map.put("phone", phone);
 		map.put("zipcode", zipcode);
@@ -158,6 +158,17 @@ public class MemberDAO {
 	public int getUseMoney(String id) {
 
 		return mybatis.selectOne("Member.getUseMoney",id);
+	}
+	
+	public List<BuyListDTO> orderList(String id){
+		return mybatis.selectList("Member.orderList",id);
+	}
+
+	public String orderImg(int pseq) {
+		return mybatis.selectOne("Member.orderImg",pseq);
+	}
+	public List<LocketListDTO> selectAddressList(String id){
+		return mybatis.selectList("Member.selectAddressList",id);
 	}
 
 }

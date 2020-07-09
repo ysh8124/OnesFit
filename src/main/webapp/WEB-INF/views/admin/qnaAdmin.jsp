@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>qnaAdmin</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="shortcut icon" href="/img/onesfitcon.png">
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">

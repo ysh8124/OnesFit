@@ -26,6 +26,7 @@
    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script
    src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   <link rel="shortcut icon" href="/img/onesfitcon.png">
 <script>
    window.onload = function() { //실행될 코드 }
       $(".sum").val(${sum});

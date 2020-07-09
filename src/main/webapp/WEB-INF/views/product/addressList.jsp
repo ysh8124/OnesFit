@@ -24,9 +24,7 @@
    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
    crossorigin="anonymous"></script>
-   <link rel="shortcut icon" href="/img/onesfitcon.png">
 </head>
-
 <style>
 * {
    box-sizing: border-box;
@@ -46,7 +44,7 @@ div {
 
 /*    모든 영역*/
 #container {
-   height: 800px
+   /* height: 800px */
 }
 
 /*    왼쪽 메뉴*/
@@ -94,12 +92,12 @@ div {
 /*    중앙 내용*/
 #contents {
    float: left;
-   width: 1212px;
-   height: 524px;
-   margin-left: 340px;
+   /* width: 1212px;
+   height: 524px; */
+   /* margin-left: 340px; */
    font-size: 11px;
    text-align: center;
-   margin-top: 51px;
+  /*  margin-top: 51px; */
 }
 
 #contents li {
@@ -163,61 +161,7 @@ div {
    <div id=OSF_ALL>
       <!--           왼쪽메뉴, 중앙 내용, 오른쪽 메뉴 -->
       <div id="container">
-
-         <!--               사이드메뉴-->
-         <div id="sidemenu">
-            <div id="sidefix">
-               <a href="/"> <img src="/img/logo.png"
-                  style="width: 130px; position: relative; left: 45px">
-               </a>
-               <div class="memberpage">
-                  <ul>
-                     <li><a href="/member/logout">logout</a> <a
-                        href="/member/toProfile?id=${loginInfo}">PROFILE</a></li>
-                     <li><a href="/member/tomyPage">my page</a> <a
-                        href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a
-                        href="">order</a></li>
-                  </ul>
-               </div>
-
-               <div id="category">
-                  <ul>
-                     <li><a href="">NEW ARRIVAL</a></li>
-                     <li><a href="">BEST ITEM</a></li>
-                     <li><a href="">OUTERWEAR</a></li>
-                     <li><a href="">TOP</a></li>
-                     <li><a href="">PANTS</a></li>
-                     <li><a href="">ACC</a></li>
-                     <li><a href="/daily/daily_list?page=1"
-                        style="font-size: 11px;">OSF DAILY LOOK</a></li>
-                     <li><a href="/notice/notice_list?page=1"
-                        style="font-size: 11px;">NOTICE</a></li>
-
-                  </ul>
-               </div>
-
-               <div>
-                  <ul>
-                     <li><a href=""><img src="/img/search.png"
-                           style="width: 15px"></a> <input id="search" type="text">
-
-                     </li>
-                  </ul>
-                  <ul>
-                     <li><a
-                        href="https://www.instagram.com/onesfit__official/?hl=ko"
-                        onclick="window.open(this.href,'_blank'); return false;"><img
-                           src="/img/instar.png" width="20px"
-                           style="position: relative; top: 6px; border-radius: 9px"></a>
-                        <a href=""><img src="/img/kakao.png" width="20px"
-                           style="position: relative; top: 6px; border-radius: 9px"></a>
-                     </li>
-                  </ul>
-
-
-               </div>
-            </div>
-         </div>
+         
 
          <!--               중앙 내용-->
          <div id="contents">
@@ -248,7 +192,7 @@ div {
                         <th scope="col">수령인</th>
                         <th scope="col">휴대전화</th>
                         <th scope="col">주소</th>
-                        <th scope="col" style="border-right: 1px solid #dfdfdf">삭제</th>
+                        <th scope="col" style="border-right: 1px solid #dfdfdf">선택</th>
                      </tr>
                   </thead>
 
@@ -268,37 +212,24 @@ div {
                               <tr style="height: 40px;">
                                  <td>${ i.seq}</td>
                                  <td>${ i.homename}</td>
-                                 <td>${ i.takename}</td>
+                                 <td id="takename">${ i.takename}</td>
                                  <td>${ i.phone}</td>
-                                 <td>${i.zipcode},${i.address1},${i.address2}</td>
-                                 <td><a href="/member/delete?seq=${i.seq}" id=delete>
-                                       <button type="button" class="btn btn-outline-secondary"
-                                          style="width: 70px; height: 28px; font-size: 11px;">삭제하기</button>
-                                 </a></td>
+                                 <td>${i.zipcode},${i.address1},${i.address2}</td>      
+                                 <td><input type="radio" name="address" class='select'></td>                          
                               </tr>
-
-
                            </c:forEach>
                         </c:otherwise>
                      </c:choose>
-
-
-                     <tr>
+                    <%--  <tr>
                         <td colspan="6" align=center>${navi}</td>
                      </tr>
-
+ --%>
                      <tr>
                         <td colspan="6"
-                           style="text-align: right; border: hidden; border-top: 1px; height: 80px">
-                           <div>
-                              <a href="/member/locketwrite">
-                                 <button type="button" class="btn btn-dark" 
-                                    style="font-size: 11px;">배송지등록</button>
-                              </a>
-                           </div>
+                           style="text-align: right; border: hidden; border-top: 1px; height: 80px">   
+                           <input type='button' value='적용' id='input'>                       
                         </td>
                      </tr>
-
                   </tbody>
                </table>
 
@@ -336,55 +267,28 @@ div {
                      </tr>
                   </tbody>
                </table>
-
             </div>
          </div>
-         <div id="rightmenu">
-            <ul>
-               <li><b>OPENING</b></li>
-               <br>
-               <li class="phone">T. 02-777-7777</li>
-               <li class="font10">MON-FRI / 11AM - 5PM</li>
-               <li class="font10">lunch / 1AM - 2PM</li>
-               <li class="font10">(close, sat sun holiday)</li>
-            </ul>
-
-
-            <ul>
-
-            </ul>
-            <ul>
-               <li><b>BANK INFO</b></li>
-               <br>
-               <li>국민 5591-010-4168-906</li>
-               <li>ONESFIT (권성택)</li>
-            </ul>
-         </div>
-      </div>
-
       <br>
-
-      <div class="footer">
-         <a href="">사이트 소개</a> | <a href="">이용약관</a> | <a href="">개인정보취급방침</a>
-         | <a href="">이메일 무단수집거부</a> | <a href="">책임의 한계와 법적고지</a> | <a
-            href="">이용안내</a> | <a href="">모바일 버전</a> <br> <br>
-         <div>
-            COMPANY : ONESFIT <br> PHONE : 010-7777-7777 <br> 사업자 번호 :
-            145-51-00571 <br> 주소 : 강원도 원주시 우산동 상지대길 9 (402호) <br>
-            OWNER : 원에스핏 | WEB MANAGER : 잊재웡 <br> @ OSF ONESFIT
-
-         </div>
-      </div>
-
    </div>
-   
-     <!-- <script>
-       $(function(){
-          $("#write").on("click",function(){
-             location.href="/member/locketwrite";
-          })
-       })
-       </script>   -->
-   
+   <script>
+   		$("#input").on("click",function(){
+   			$(".select").each(function(){
+   				if($(this).is(":checked")){
+   					var takename=$(this).closest("tr").children().eq(2).text();
+   					var phone =$(this).closest("tr").children().eq(3).text();
+   					var address = $(this).closest("tr").children().eq(4).text();
+   					var add = address.split(",");
+   					$(".recipient",opener.document).val(takename);
+   					$(".phone",opener.document).val(phone);
+   					$("#zipcode",opener.document).val(add[0]);
+   					$("#add1",opener.document).val(add[1]);
+   					$("#add2",opener.document).val(add[2]);
+   					window.close();
+   				}
+   			})
+   		})
+   </script>
+  
 </body>
 </html>

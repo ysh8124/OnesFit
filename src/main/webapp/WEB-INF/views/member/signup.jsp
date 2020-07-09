@@ -35,6 +35,7 @@
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 	crossorigin="anonymous"></script>
+	<link rel="shortcut icon" href="/img/onesfitcon.png">
 </head>
 <style>
 * {
@@ -324,17 +325,17 @@ ul.join_box {
 									<th scope="row">PHONE</th>
 									<td style="padding-top: 10px; padding-bottom: 10px;">
 									<input type="text"
-										name="phone" id="phone" maxlength="3" style="width: 100px; height: 20px;">
+										name="phone1" id="phone" maxlength="3" style="width: 100px; height: 20px;">
 										
 										<span style="margin: 0 5px 0 5px; color: black;"> - </span>
 										
 										<input
-										 type="text" id="phone1" oninput='maxLengthCheck(this)'; maxlength="4" name="phone" style="width: 100px; height: 20px;">
+										 type="text" id="phone1" oninput='maxLengthCheck(this)'; maxlength="4" name="phone2" style="width: 100px; height: 20px;">
 										
 											<span style="margin: 0 5px 0 5px; color: black;"> - </span>
 											
 											<input
-										type="text" id="phone2" name="phone" maxlength="4" style="width: 100px; height: 20px;">
+										type="text" id="phone2" name="phone3" maxlength="4" style="width: 100px; height: 20px;">
 										<br> <span id="phoneMsg"></span>
 										
 										
@@ -718,28 +719,35 @@ o 로그 기록
             }
         })
 
-	$(function() {
+	$("#idChk").on("click", function() {
+         var customerId = /^[a-zA-Z0-9]{6,12}$/;
+         if(!customerId.test($("#customerId").val())||$("#customerId").val()==""){
+            $('#idbox').text(
+            "영문+숫자 6~12자리 조건에 맞지않습니다.");
+            $("#customerId").val("");
+         }else{
+         $.ajax({
+            url : "/member/duplcheck",
+            data : {
+               id : $("#customerId").val()
+            }
+         }).done(function(resp) {
+            console.log(resp);
+            
+            if (resp){
+               $('#idbox').css("color", "blue");
+               $("#idbox").html("사용가능 한 아이디 입니다.");
+            }else if(!resp){
 
-		$("#idChk").on("click", function() {
-			$.ajax({
-				url : "/member/duplcheck",
-				dataType : "json",
-				data : {
-					id : $("#customerId").val()
-				}
-			}).done(function(resp) {
-				console.log(resp);
-				if (resp.check) {
-					$('#idbox').css("color", "blue");
-					$("#idbox").html("사용가능 한 아이디 입니다.");
-				} else {
-					$('#idbox').css("color", "red");
-					$("#idbox").html("이미 존재하는 아이디 입니다.");
-				}
-			})
-		})
-		
-	})
+               $('#idbox').css("color", "red");
+               $("#idbox").html("이미 존재하는 아이디 입니다.");
+            }
+         
+            
+         })
+         }
+      
+   })
 	
 	
 	//유효성검사

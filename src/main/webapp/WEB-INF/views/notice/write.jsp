@@ -21,6 +21,7 @@
 
         <!-- include summernote-ko-KR -->
         <script src="lang/summernote-ko-KR.js"></script>
+        <link rel="shortcut icon" href="/img/onesfitcon.png">
 
         <script>
             $(function() {

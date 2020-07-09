@@ -2,6 +2,7 @@ package osf.spring.service;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import osf.spring.dao.MemberDAO;
+import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.LocketListDTO;
 import osf.spring.dto.MemberDTO;
@@ -110,11 +112,11 @@ public class MemberService {
 		return mdao.updatePw(pw2,id);	
 	}
 	
-	public int memberupdate(String id , String pw ,String name, String phone , String zipcode ,String address1, String address2, String email) throws Exception{
+	public int memberupdate(String id ,String name, String phone , String zipcode ,String address1, String address2, String email) throws Exception{
 	
-	 String pw2 = this.getSHA512(pw);
+		/* String pw2 = this.getSHA512(pw); */
 		
-		return mdao.memberupdate(id,pw2,name,phone,zipcode,address1,address2,email);
+		return mdao.memberupdate(id,name,phone,zipcode,address1,address2,email);
 		
 	}
 	
@@ -195,6 +197,21 @@ public class MemberService {
 	public int getUseMoney(String id) {
 		return mdao.getUseMoney(id);
 		
+	}
+
+	public List<BuyListDTO> orderList(String id) {
+		return mdao.orderList(id);
+	}
+
+	public List<String> orderImg(List<Integer> pseq) {
+		List<String> imgs = new ArrayList<>();
+		for(Integer p : pseq) {
+			imgs.add(mdao.orderImg(p));
+		}
+		return imgs;
+	}
+	public List<LocketListDTO> selectAddressList(String id){
+		return mdao.selectAddressList(id);
 	}
 	
 }

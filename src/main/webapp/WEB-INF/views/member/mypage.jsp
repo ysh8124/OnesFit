@@ -13,6 +13,7 @@
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/img/onesfitcon.png">
     </head>
     <style>
         *{box-sizing: border-box;}
@@ -22,7 +23,7 @@
 
 
         /*    모든 영역*/
-        #container{height: 1000px}
+        #container{height: 800px}
 
         /*    왼쪽 메뉴*/
         #sidemenu{float: left; width: 271px; position: fixed; left: 50px; padding: 32px 0 10px 50px; border: 0px;}
@@ -31,7 +32,7 @@
         #sidefix ul li a{
             text-decoration: none; 
             color: black; 
-            position: relative;
+            position: relative; 
             display: inline-block;
             margin: 7px;
             color: #000;
@@ -50,7 +51,7 @@
         }
 
         /*    중앙 내용*/
-        #contents{float: left; width: 1000px; height: 524px; margin-left: 430px; font-size: 11px; text-align: center; margin-top: 58px;}
+        #contents{float: left; width: 1000px; height: 500px; margin-left: 430px; font-size: 11px; text-align: center; margin-top: 58px;}
         #contents li{list-style: none;}
 
         #reservestable, #ordertable{

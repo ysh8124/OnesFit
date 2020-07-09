@@ -28,51 +28,53 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 <script>
-	$(function(){
-		var date = new Date();
-		var month = date.getMonth()+1;
-		$(".regist_date").each(function(){
-			
-			var time = new Date($(this).val());
-			var dateDiff = Math.ceil((date.getTime()-time.getTime())/(1000*3600*24));
-			if((dateDiff-1)<30){
-				$(this).closest("li").addClass('new');
-			}
-			
-		})
-		
-		$(".tab").on("click",function(){
-			$(".box_li").css("display","block");
-			var tab = $(this).val();
-			var tab2 = "";
-			if(tab == 1){
-				tab2 = "new";
-			}
-			if(tab == 2){
-				tab2 = 'Y';
-			}
-			if(tab == 3){
-				tab2 = "outer";
-			}
-			if(tab == 4){
-				tab2 = "top";
-			}
-			if(tab == 5){
-				tab2 = "bottom";
-			}
-			if(tab == 6){
-				tab2 = "acc";
-			}
+	$(
+			function() {
+				var date = new Date();
+				var month = date.getMonth() + 1;
+				$(".regist_date").each(
+						function() {
 
-			
-			$(".box_li").each(function(){
-				$(this).not("."+tab2).css("display","none");
+							var time = new Date($(this).val());
+							var dateDiff = Math.ceil((date.getTime() - time
+									.getTime())
+									/ (1000 * 3600 * 24));
+							if ((dateDiff - 1) < 30) {
+								$(this).closest("li").addClass('new');
+							}
+
+						})
+
+				$(".tab").on("click", function() {
+					$(".box_li").css("display", "block");
+					var tab = $(this).val();
+					var tab2 = "";
+					if (tab == 1) {
+						tab2 = "new";
+					}
+					if (tab == 2) {
+						tab2 = 'Y';
+					}
+					if (tab == 3) {
+						tab2 = "outer";
+					}
+					if (tab == 4) {
+						tab2 = "top";
+					}
+					if (tab == 5) {
+						tab2 = "bottom";
+					}
+					if (tab == 6) {
+						tab2 = "acc";
+					}
+
+					$(".box_li").each(function() {
+						$(this).not("." + tab2).css("display", "none");
+					})
+				})
+
 			})
-		})
-		
-		
-	})
-	</script>
+</script>
 </head>
 <style>
 * {
@@ -82,12 +84,10 @@
 div {
 	border: 0px solid black
 }
-
 /*    모든 영역*/
 #container {
 	height: 1500px
 }
-
 /*    왼쪽 메뉴*/
 #sidemenu {
 	float: left;
@@ -133,7 +133,6 @@ div {
 	background: none;
 	border-bottom: 1px solid #3e3e3e;
 }
-
 /*    중앙 내용*/
 #contents {
 	float: left;
@@ -148,24 +147,23 @@ div {
 }
 
 .product_info {
-	list-style: none;
-	font-size: 12px;
+   list-style: none;
+   font-size: 11px;
+   margin-bottom: 10px;
 }
-
 .box_div img {
-	width: 375px;
-	height: 400px;
-	padding: 8px
+   width: 375px;
+   height: 430px;
+   padding: 8px;
+   transition-duration: 0.5s;
 }
 
 .box_div img:hover {
-	opacity: 50%
+   opacity: 50%;
 }
-
 .box_li {
 	float: left;
 }
-
 /*    오른쪽 메뉴*/
 #rightmenu {
 	float: left;
@@ -184,7 +182,6 @@ div {
 	font-size: 11px;
 	text-transform: uppercase;
 }
-
 /*        FOOTER*/
 .footer {
 	font-size: 11px;
@@ -237,13 +234,15 @@ div {
 									<li><a
 										href="https://www.instagram.com/onesfit__official/?hl=ko"
 										onclick="window.open(this.href,'_blank'); return false;">
-										<img
-											src="/img/instar.png" width="20px"
+											<img src="/img/instar.png" width="20px"
+											style="position: relative; top: 6px; border-radius: 9px">
+									</a> <a href=""><img src="/img/kakao.png" width="20px"
 											style="position: relative; top: 6px; border-radius: 9px"></a>
-										<a href=""><img src="/img/kakao.png" width="20px"
+										<a
+										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+										onclick="window.open(this.href,'_blank'); return false;"><img
+											src="/img/naver.png" width="20px"
 											style="position: relative; top: 6px; border-radius: 9px"></a>
-											<a href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"onclick="window.open(this.href,'_blank'); return false;" ><img src="/img/naver.png" width="20px"
-                                 style="position: relative; top: 6px; border-radius: 9px"></a>
 									</li>
 								</ul>
 
@@ -325,21 +324,20 @@ div {
 						<c:forEach var='i' items='${products}'>
 							<li class="box_li ${i.category} ${i.best}">
 								<div class="box_div">
-								<input type="text" class="regist_date" style="display:none" value="${i.regist_date }">
-									<a href="/product/productDetail?pseq=${i.pseq}"><img
+									<input type="text" class="regist_date" style="display: none"
+										value="${i.regist_date }"> <a
+										href="/product/productDetail?pseq=${i.pseq}"><img
 										src="/title/${i.title_img}"></a>
 									<ul class="product_info">
-										<li>${i.pname}</li>
-										<li>${i.price}</li>
+										<li style="color: #868686; font-family: 'BlinkMacSystemFont';">${i.pname}</li>
+                              <li class="nums" style="font-family: 'BlinkMacSystemFont'; color: #868686;"><B>${i.price}</B></li>
 									</ul>
 								</div>
 							</li>
 						</c:forEach>
 					</ul>
 				</div>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br>
 				<hr>
 				<div class="footer">
 					<a href="">사이트 소개</a> | <a href="">이용약관</a> | <a href="">개인정보취급방침</a>
@@ -379,8 +377,18 @@ div {
 			</div>
 
 		</div>
-
-
 	</div>
+	<script>
+   $(function(){
+      $(".nums").each(function(){
+         var num1 = $(this).html();
+         var num2 = numberWithCommas(num1);
+         $(this).html("KRW "+num2);
+      })
+   })
+   function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   }
+   </script>
 </body>
 </html>

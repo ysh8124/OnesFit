@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/index.css">
+<link rel="shortcut icon" href="/img/onesfitcon.png">
 </head>
 <body>
 <script>

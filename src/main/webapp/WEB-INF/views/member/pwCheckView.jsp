@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="shortcut icon" href="/img/onesfitcon.png">
 <title>Insert title here</title>
 </head>
 
