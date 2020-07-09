@@ -158,6 +158,8 @@
        #buybtn:hover{
         opacity: 50%;
         }
+        
+        .cancel,.cancelRequest,.refund,.confirm{ border: 1px solid #c4c4c4; background-color: rgba(125,125,125,0); color: #7d7d7d; padding: 5px; width: 70px; height: 35px;}
 
     </style>
     <body>
@@ -270,10 +272,17 @@
                <div style="width: 10%; float: left; margin-top: 27px;">${i.price}</div>
                <c:choose>
                <c:when test="${i.status eq '입금전'}">
-               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="cancel">주문취소</button></div>
-               <div style="width: 10%; float: left; margin-top: 27px;"><a href="" style="color: #d43b3b; text-decoration: none;">x</a></div>
+               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br></div>
+               <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="cancel">주문취소</button></div>
                </c:when>
-               <c:when test="${i.status eq ''}"
+               <c:when test="${i.status eq '입금완료/배송준비중'}">
+               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="cancelRequest">취소요청</button></div>
+                <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="cancelRequest">취소요청</button></div>
+               </c:when>
+               <c:when test="${i.status eq '배송중'}">
+               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="confirm">구매확정</button></div>
+                <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="refund">환불요청</button></div>
+               </c:when>
                </c:choose>
             </c:forEach>
               </div>

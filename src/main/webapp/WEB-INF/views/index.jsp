@@ -192,6 +192,8 @@ div {
 	text-decoration: none;
 	color: black;
 }
+
+
 </style>
 <body>
 	<!--       전체 영역-->
@@ -263,7 +265,7 @@ div {
 										href="/member/toProfile?id=${loginInfo.id}">PROFILE</a></li>
 									<li><a href="/member/tomyPage">my page</a> <a
 										href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a
-										href="">order</a></li>
+										href="/member/orderList?id=${loginid }">order</a></li>
 
 								</ul>
 							</div>
