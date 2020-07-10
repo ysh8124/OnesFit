@@ -73,13 +73,15 @@
    		insert into order_bill values(#{oseq},#{id},#{usepoint},#{amount})
    </insert>
    
-   	<update id="addpoint">
-		update member set point=point+${addpoint} where id=#{parent_id}
-	</update>
 	<update id="usepoint">
 		update member set point=point-${usepoint} where id=#{id}
 	</update>
+	
 	<select id="selectPoint" resultType="int">
 		select point from member where id=#{id}
 	</select>
+	
+	<select id="color" resultType="osf.spring.dto.OptionDTO">
+      select distinct parent_seq, color from product_option order by parent_seq
+   </select>
 </mapper>

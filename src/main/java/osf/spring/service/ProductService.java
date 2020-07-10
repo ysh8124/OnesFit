@@ -58,7 +58,6 @@ public class ProductService {
 	}
 	@Transactional("txManager")
 	public int BuyList(BuyListDTO bdto) {
-		pdao.addPoint(bdto);
 		return pdao.buyList(bdto);		
 	}	
 	
@@ -92,4 +91,9 @@ public class ProductService {
 	public int ReviewUpdate(ReviewDTO rdto) {
 		return pdao.reviewupdate(rdto);
 	}
+	
+	 @Transactional("txManager")
+	   public List<ProductDTO> color() {
+	      return pdao.color();
+	   }
 }

@@ -25,8 +25,26 @@
    
    <script>
       $(function() {
+    	  $(".cancel").on("click",function(){
+    		  if(confirm("주문을 취소하시겠습니까? 되돌릴 수 없습니다.")){
+    			  var bseq = $(this).parent().prev().html();
+    			  var amount = "";
+    			  var oseq = "";
+    			 	$(this).parent().prevAll().each(function(index,item){
+    			 		if($(item).attr("class") == "amount"){
+    			 			amount = $(item).html();
+    			 		}else if($(item).attr("class") == "oseq"){
+    			 			oseq = $(item).html();
+    			 			alert(oseq);
+    			 		}
+    			 	})
+    			 	
+    			  location.href="/member/orderCancel?bseq="+bseq+"&&amount="+amount+"&&oseq="+oseq;
+    		  }
+    	  })
+    	  
       $("#buybtn").on("click", function () {
-         location.href = "../product/payMent2?parent_id=${loginid}";
+         location.href = "/product/payMent2?parent_id=${loginid}";
       })
    })
    </script>
@@ -242,8 +260,9 @@
                 
                 <div style="width: 1000px; text-align: center; margin-top: 20px; float: left; font-size: 13px;">
                    <div style="width: 20%; float: left;">이미지</div>
+                   <div style="width: 5%; float:left;">빌지<br>번호</div>
                    <div style="width: 25%; float: left;">상품정보</div>
-               <div style="width: 10%; float: left;">상품수량</div>
+               <div style="width: 5%; float: left;">상품<br>수량</div>
                <div style="width: 10%; float: left;">결제금액</div>
               	<div style="width: 20%; float:left">주문처리상태</div>
               	<div style="width: 10%; float:left">취소/환불 신청</div>
@@ -266,20 +285,30 @@
                </c:forEach>
 	
                </div>
+               <div style="width: 5%; float: left; margin-top: 27px;" class="oseq">${i.oseq}</div>
                <div style="width: 25%; float: left; margin-top: 27px;line-height: 10px;" class='t'><a href="" style="text-decoration: none; color:#a1a1a1;">
                ${i.pname}</a><br>옵션 : ${i.pcolor}/${i.psize}</div>
-               <div style="width: 10%; float: left; margin-top: 27px;">${i.amount}</div>
-               <div style="width: 10%; float: left; margin-top: 27px;">${i.price}</div>
+               <div style="width: 5%; float: left; margin-top: 27px;">${i.amount}</div>
+               <c:forEach var="o" items="${olist }">
+               <c:choose>
+               <c:when test="${o.oseq == i.oseq}">
+               <div style="width: 10%; float: left; margin-top: 27px;" class="amount">${i.price * i.amount - o.usepoint}</div>
+               </c:when>
+               </c:choose>
+               </c:forEach>
                <c:choose>
                <c:when test="${i.status eq '입금전'}">
-               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br></div>
+               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}</div>
+               <div style="display:none;">${i.bseq}</div>
                <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="cancel">주문취소</button></div>
                </c:when>
                <c:when test="${i.status eq '입금완료/배송준비중'}">
+               <div style="display:none;">${i.bseq}</div>
                <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="cancelRequest">취소요청</button></div>
                 <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="cancelRequest">취소요청</button></div>
                </c:when>
                <c:when test="${i.status eq '배송중'}">
+               <div style="display:none;">${i.bseq}</div>
                <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="confirm">구매확정</button></div>
                 <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="refund">환불요청</button></div>
                </c:when>
@@ -292,8 +321,7 @@
               </div>
               
               <div style="width: 1000px; float: left; margin-bottom: 50px; margin-left: 83.5%;">
-              <div style=" float: left; margin-right: 5px;"><input type="button" value="구매하기" id="buybtn"></div>
-              <div style="float: left;"><input type="button" value="장바구니 비우기" id="btn"></div>
+       
               </div>
               
               <div style="width: 1000px; float: left;">

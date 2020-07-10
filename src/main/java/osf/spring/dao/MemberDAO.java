@@ -12,6 +12,7 @@ import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.LocketListDTO;
 import osf.spring.dto.MemberDTO;
+import osf.spring.dto.OrderBillDTO;
 import osf.spring.statics.Statics;
 
 @Repository
@@ -169,6 +170,59 @@ public class MemberDAO {
 	}
 	public List<LocketListDTO> selectAddressList(String id){
 		return mybatis.selectList("Member.selectAddressList",id);
+	}
+	
+	public int orderCancel(int bseq) {
+		return mybatis.delete("Member.orderCancel",bseq);
+	}
+
+	public int getOseq(int bseq) {
+		return mybatis.selectOne("Member.getOseq",bseq);
+	}
+
+	public int getUsePoint(int oseq) {
+		System.out.println("DAO : " + oseq);
+		return mybatis.selectOne("Member.getUsePoint",oseq);
+	}
+	
+	
+	public int billCancel(int oseq) {
+		return mybatis.delete("Member.billCancel",oseq);
+	}
+	
+	public int returnPoint(String id,int usePoint) {
+		Map<String,String> map = new HashMap();
+		map.put("id", id);
+		map.put("usePoint", ""+usePoint);
+		return mybatis.update("Member.returnPoint",map);
+	}
+
+	public String getYN(int bseq) {
+		return mybatis.selectOne("Member.getYN",bseq);
+	}
+
+	public boolean buylistYN(int oseq) {
+		int result = mybatis.selectOne("Member.buylistYN",oseq);
+		if(result > 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public OrderBillDTO getOrderBill(int oseq) {
+		return mybatis.selectOne("Member.getOrderBill",oseq);
+	}
+
+	public BuyListDTO getBuyList(int bseq) {
+		return mybatis.selectOne("Member.getBuyList",bseq);
+	}
+
+	public int minusBill(int oseq, int price) {
+		Map<String,Integer> map = new HashMap();
+		map.put("oseq", oseq);
+		map.put("price", price);
+		return mybatis.update("Member.minusBill",map);
 	}
 
 }

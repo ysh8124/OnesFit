@@ -18,6 +18,7 @@ import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.LocketListDTO;
 import osf.spring.dto.MemberDTO;
+import osf.spring.dto.OrderBillDTO;
 import osf.spring.service.MemberService;
 import osf.spring.service.ProductService;
 import osf.spring.statics.Mail;
@@ -381,17 +382,23 @@ public class MemberController {
 	}
 	
 	@RequestMapping("orderList")
-	public String orderList(String id,Model model) {
+	public String orderList(Model model) {
+		String id = (String)session.getAttribute("loginid");
 		List<BuyListDTO> blist = mservice.orderList(id);
 		List<Integer> pseq = new ArrayList<>();
-		int index = 0;
-		
+		List<Integer> oseq = new ArrayList<>();
 		for(BuyListDTO b : blist) {
 			System.out.println(b.getProduct_num());
 			pseq.add(b.getProduct_num());
-			index++;
+			if(!oseq.contains(b.getOseq())) {
+			oseq.add(b.getOseq());
+			}
 		}
-		
+		List<OrderBillDTO> olist = new ArrayList<>();
+		for(Integer i : oseq) {
+			olist.add(mservice.getOrderBill(i));
+		}
+		model.addAttribute("olist",olist);
 		model.addAttribute("imgs",mservice.orderImg(pseq));
 		
 		model.addAttribute("blist",blist);
@@ -406,6 +413,17 @@ public class MemberController {
 		model.addAttribute("list",list);
 		
 		return "product/addressList";
+	}
+	
+	@RequestMapping("orderCancel")
+	public String orderCancel(int bseq,int amount,int oseq) {
+		System.out.println(oseq);
+		int result = mservice.orderCancel(bseq,amount,oseq);
+		if(result > 0) {
+			return "redirect:/member/orderList";
+		}else {
+			return "notice/error";
+		}
 	}
 	
 

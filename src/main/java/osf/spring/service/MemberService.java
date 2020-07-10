@@ -7,20 +7,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import osf.spring.dao.MemberDAO;
+import osf.spring.dao.ProductDAO;
 import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.LocketListDTO;
 import osf.spring.dto.MemberDTO;
+import osf.spring.dto.OrderBillDTO;
+import osf.spring.dto.ProductDTO;
 import osf.spring.statics.Statics;
 
 @Service
 public class MemberService {
 	@Autowired
 	private MemberDAO mdao;
+	
+	@Autowired
+	private ProductDAO pdao;
+	
+	@Autowired
+	private HttpSession session;
 	
 	public static String getSHA512(String input){
 
@@ -202,6 +214,10 @@ public class MemberService {
 	public List<BuyListDTO> orderList(String id) {
 		return mdao.orderList(id);
 	}
+	
+	public OrderBillDTO getOrderBill(int oseq) {
+		return mdao.getOrderBill(oseq);
+	}
 
 	public List<String> orderImg(List<Integer> pseq) {
 		List<String> imgs = new ArrayList<>();
@@ -212,6 +228,34 @@ public class MemberService {
 	}
 	public List<LocketListDTO> selectAddressList(String id){
 		return mdao.selectAddressList(id);
+	}
+
+	@Transactional("txManager")
+	public int orderCancel(int bseq,int amount,int oseq) {
+		String id = (String)session.getAttribute("loginid");
+		String YN = mdao.getYN(bseq);
+		int result = 0;
+		int usePoint = 0;
+		int price = 0;
+		if(YN.contentEquals("N")) {
+			boolean buylistYN = mdao.buylistYN(oseq);
+			usePoint = mdao.getUsePoint(oseq); // 사용포인트 가져오기
+			if(usePoint != 0) {
+				mdao.returnPoint(id,usePoint);//포인트 돌려주기	
+				
+			}
+			if(buylistYN) {
+				BuyListDTO bdto = mdao.getBuyList(bseq);
+				int product_num = bdto.getProduct_num();
+				ProductDTO pdto = pdao.productSelectByPseq(product_num);
+				price = pdto.getPrice();
+				result = mdao.minusBill(oseq,price);
+			}else {
+			mdao.billCancel(oseq);//빌지삭제
+			}
+			result = mdao.orderCancel(bseq);//바이리스트삭제
+		}
+		return result;
 	}
 	
 }

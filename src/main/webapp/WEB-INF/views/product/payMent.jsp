@@ -414,7 +414,7 @@ div {
 
 								<tfoot>
 									<tr>
-										<td colspan="7" style='text-align:right'>[적립금 사용]<input type=text id='point' name='usepoint' maxlength="5" > 보유 적립금 : ${mdto.point } 원
+										<td colspan="7" style='text-align:right'>[적립금 사용]<input type=text id='point' name='usepoint' maxlength="5" value="0" > 보유 적립금 : ${mdto.point } 원
 									</tr>
 									<tr>
 										<td colspan="7" style="text-align: right;">[기본배송] 상품구매금액

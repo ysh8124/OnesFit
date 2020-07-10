@@ -39,6 +39,8 @@ public class HomeController {
 			System.out.println("loginid : " + session.getAttribute("loginid")); 
 		}
 		
+		List<ProductDTO> color = pservice.color();
+		model.addAttribute("color",color);
 		model.addAttribute("products", products);
 		return "index";
 	}

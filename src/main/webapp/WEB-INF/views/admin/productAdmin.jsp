@@ -11,7 +11,7 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-	<link rel="shortcut icon" href="/img/onesfitcon.png">
+<link rel="shortcut icon" href="/img/onesfitcon.png">
 <style>
 @import
 	url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
@@ -153,22 +153,15 @@
 								var input = $("#search").val().toLowerCase();
 								$("#search").val("");
 								var count = 0;
-								$("." + flag)
-										.each(
-												function() {
-													if ($(this).html().indexOf(
-															input) == -1) {
-														$(this).closest("tr")
-																.css("display",
-																		"none");
-													} else {
-														count++;
-													}
-												})
+								$("." + flag).each(function() {
+							if ($(this).html().indexOf(input) == -1) {
+							$(this).closest("tr").css("display","none");
+									} else {
+										count++;
+									}
+								})
 								if (count == 0) {
-									$("table")
-											.append(
-													"<tr align=center class='addtr'><td colspan='7'>검색된 상품이 없습니다.</tr>");
+									$("table").append("<tr align=center class='addtr'><td colspan='7'>검색된 상품이 없습니다.</tr>");
 								}
 							} else {
 								$("tr").css("display", "table-row");
@@ -221,7 +214,7 @@
 
 			<table id="product_management">
 				<tr align=center>
-					<td style="width: 60px;  border-right: hidden;">상품 번호</td>
+					<td style="width: 60px; border-right: hidden;">상품 번호</td>
 					<td style="width: 300px; border-right: hidden;">상품명</td>
 					<td style="width: 100px; border-right: hidden;">상품가격</td>
 					<td style="width: 250px; border-right: hidden;">등록일자</td>

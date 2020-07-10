@@ -65,9 +65,7 @@ public class ProductDAO {
 	public int buyList(BuyListDTO bdto) {
 		return mybatis.insert("Product.buyList", bdto);
 	}
-	public int addPoint(BuyListDTO bdto) {
-		return mybatis.insert("Product.addpoint", bdto);
-	}
+
 	public int orderInsert(OrderDTO odto) {
 		return mybatis.insert("Product.orderInsert",odto);
 	}
@@ -98,4 +96,8 @@ public class ProductDAO {
 	public int reviewupdate(ReviewDTO rdto) {
 		return mybatis.update("Product.reviewupdate", rdto);
 	}
+	
+	  public List<ProductDTO> color(){
+	      return mybatis.selectList("Product.color");
+	   }
 }

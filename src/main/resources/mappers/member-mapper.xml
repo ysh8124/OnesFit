@@ -3,13 +3,15 @@
 <mapper namespace="Member">
 
 	<select resultType="osf.spring.dto.MemberDTO" id="mypage">select *from
-		member where id=#{value} </select>
+		member where id=#{value}
+	</select>
 
 	<select id="cart" resultType="osf.spring.dto.CartDTO">
-   select * from cart where parent_id = #{parent_id} order by c_seq desc
-</select>
+		select * from cart where parent_id = #{parent_id} order by c_seq desc
+	</select>
 	<delete id="deleteCart">
-		delete cart where parent_id = #{parent_id} and c_seq = #{c_seq}
+		delete cart where parent_id = #{parent_id} and c_seq
+		= #{c_seq}
 	</delete>
 	<delete id="deleteAll">
 		delete cart where parent_id = #{parent_id}
@@ -54,7 +56,8 @@
 	</select>
 
 	<select id="profilego" resultType="osf.spring.dto.MemberDTO">
-		select * from member where id=#{id}
+		select * from member where
+		id=#{id}
 	</select>
 
 	<update id="updatePw">
@@ -63,13 +66,16 @@
 
 
 	<update id="memberupdate">
-		update member set phone=#{phone}, zipcode=#{zipcode}, address1=#{address1},
+		update member set phone=#{phone}, zipcode=#{zipcode},
+		address1=#{address1},
 		address2=#{address2}, email=#{email}
-		where id=#{id} and name=#{name}
+		where
+		id=#{id} and name=#{name}
 	</update>
 
 	<select id="pwcheck" resultType="int">select count(*) from member
-		where id=#{id} and pw=#{pw} </select>
+		where id=#{id} and pw=#{pw}
+	</select>
 
 	<delete id="leave">delete from member where id=#{value} </delete>
 
@@ -86,15 +92,39 @@
 	</select>
 
 	<select id="countArticle" resultType="int">
-		select nvl(count(*),0) from locketlist
+		select nvl(count(*),0) from
+		locketlist
 	</select>
 
 	<select id="getUseMoney" resultType="int">select nvl(sum(price),0)
-		from buy_list where parent_id=#{value}</select>
-		
-	<select id="orderList" resultType="osf.spring.dto.BuyListDTO">select * from buy_list where parent_id=#{value}</select>
+		from buy_list where parent_id=#{value}
+	</select>
 
-	<select id="orderImg" resultType="String">select nvl(title_img,'이미지없음') from product where pseq=${value}</select>
+	<select id="orderList" resultType="osf.spring.dto.BuyListDTO">select * from buy_list where
+		parent_id=#{value}</select>
 
-<select resultType="osf.spring.dto.LocketListDTO" id="selectAddressList">select *from locketlist where id=#{id} </select>
+	<select id="orderImg" resultType="String">select nvl(title_img,'이미지없음')
+		from product where pseq=${value}</select>
+
+	<select resultType="osf.spring.dto.LocketListDTO"
+		id="selectAddressList">select *from locketlist where id=#{id}</select>
+
+	<select id="getOseq" resultType="int">select oseq from buy_list where bseq=${value}</select>
+	
+	<select id="getUsePoint" resultType="int">select nvl(usepoint,0) from order_bill where oseq=${value}</select>
+	
+	<delete id="orderCancel">delete buy_list where bseq=${value}</delete>
+	
+	<delete id="billCancel">delete order_bill where oseq=${value}</delete>
+	
+	<select id="getYN" resultType="String">select send_money_YN from buy_list where bseq=${value}</select>
+	
+	<select id="buylistYN" resultType="int">select count(*) from buy_list where oseq=${value}</select>
+	
+	<select id="getOrderBill" resultType="osf.spring.dto.OrderBillDTO">select * from order_bill where oseq=${value}</select>
+
+	<select id="getBuyList" resultType="osf.spring.dto.BuyListDTO">select * from buy_list where bseq=${value}</select>	
+
+	<update id="minusBill">update order_bill set amount=amount-${price} where oseq=${oseq}</update>
+
 </mapper>
