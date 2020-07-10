@@ -88,7 +88,8 @@ public class MemberService {
 	}
 	public int locketwrite(LocketListDTO dto)throws Exception {
 		
-
+		String id = (String)session.getAttribute("loginid");
+		dto.setId(id);
 		int result = mdao.locketwrite(dto);
 		
 		return result;
@@ -154,7 +155,8 @@ public class MemberService {
 	}
 	
 	public List<LocketListDTO> locketlist(int page) throws Exception{
-		return mdao.locketlist(page);
+		String id = (String)session.getAttribute("loginid");
+		return mdao.locketlist(page,id);
 	}
 
 	

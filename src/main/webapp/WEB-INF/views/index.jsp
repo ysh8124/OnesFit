@@ -26,7 +26,7 @@
    rel="stylesheet">
 <script
    src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+<link rel="shortcut icon" href="/img/onesfitcon.png">
 <script>
    $(
          function() {
@@ -156,12 +156,9 @@ div {
    width: 375px;
    height: 430px;
    padding: 8px;
-   transition-duration: 0.5s;
+   
 }
 
-.box_div img:hover {
-   opacity: 50%;
-}
 .box_li {
    float: left;
 }
@@ -193,6 +190,39 @@ div {
    text-decoration: none;
    color: black;
 }
+.grid-container {
+       display: grid;
+       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+       grid-gap: 1em;
+       }
+        .location-listing{
+        padding:8px;
+        position : absolute;
+        width: 375px;
+        height: 430px;
+        color: white;
+        }
+        
+        .location-title{
+        align-items: center;
+        display:block;
+        margin-left:8px;
+        width: 360px;
+        height: 413px;
+        font-size: 22px;
+         font-family: 'S-CoreDream-6Bold';
+         color: white;
+        background: rgba(167,167,167,0.4);
+        opacity: 0;
+       transition: opacity .5s;
+       line-height: 370px;
+        }
+        .location-listing:hover .location-title{
+         opacity: 1;
+         text-decoration: none;
+         color: white;
+         line-height: 370px;
+       }
 
 
 </style>
@@ -285,7 +315,7 @@ div {
                               style="font-size: 11px;">NOTICE</a></li>
                            <c:choose>
                               <c:when test="${loginid eq 'OSF'}">
-                                 <li><a href="/admin/productAdd">상품등록</a>
+                                 <li><a href="/admin/adminMain">관리자PAGE</a>
                               </c:when>
                               <c:otherwise>
 
@@ -325,16 +355,22 @@ div {
                      <li class="box_li ${i.category} ${i.best}">
                         <div class="box_div">
                            <input type="text" class="regist_date" style="display: none"
-                              value="${i.regist_date }"> <a
-                              href="/product/productDetail?pseq=${i.pseq}"><img
-                              src="/title/${i.title_img}"></a>
+                              value="${i.regist_date }"> 
+                              
+                              <div class="location-listing">
+                              <a class="location-title" href="/product/productDetail?pseq=${i.pseq}">상세보기</a>
+                              </div>
+                              
+                              <a href="/product/productDetail?pseq=${i.pseq}" id="n_hover" style="text-decoration: none; color: #585858">
+                        <img src="/title/${i.title_img}"></a>
+                              
                            <ul class="product_info">
                            
                            <li style="margin-left: 91%; color:#868686;">color</li>
                            <c:forEach var="j" items="${color}">
                               <c:choose>
                                  <c:when test="${i.pseq eq j.parent_seq}">
-                                    <li style="width: 15px; height: 7px; float: right; opacity: 0.6; margin-left: 2px; border-radius: 20px; background-color: ${j.color};"></li>
+                                    <li style="width: 15px; height: 7px; float: right; opacity: 0.6; margin-left: 2px; border : 0.5px solid #cdcdcd; border-radius: 20px; background-color: ${j.color};"></li>
                                     
                                  </c:when>
                                  <c:otherwise>

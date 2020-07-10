@@ -34,6 +34,7 @@ import osf.spring.dto.OrderDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.QuestionDTO;
 import osf.spring.dto.ReviewDTO;
+import osf.spring.service.MemberService;
 import osf.spring.service.ProductService;
 
 @Controller
@@ -44,7 +45,11 @@ public class ProductController {
 	private ProductService pservice;
 
 	@Autowired
+	private MemberService mservice;
+	
+	@Autowired
 	private ProductDAO pdao;
+	
 
 	@Autowired
 	private HttpSession session;
@@ -235,6 +240,22 @@ public class ProductController {
 		dto.setPoint(pservice.selectPoint(parent_id));
 		return "redirect:/";
 	}
+	
+	@RequestMapping("payMent2")
+	   public String payMent2(CartDTO cdto, Model model) throws Exception {
+	      MemberDTO mdto = (MemberDTO)session.getAttribute("loginInfo");
+	      List<CartDTO> list =  mservice.cart(cdto);
+	      model.addAttribute("mdto", mdto);
+	      model.addAttribute("list",list);
+	      int sum=0;
+	      for(CartDTO dto : list) {
+	         sum+=dto.getPrice()*dto.getCount_item();
+	      }
+	      System.out.println(sum);
+	      model.addAttribute("sum", sum);
+	      return "product/payMent2";   
+	   }
+	
 	@RequestMapping("review")
 	public String Makepayment(HttpServletRequest req, ReviewDTO rdto, MultipartFile file, Model model)
 			throws Exception {

@@ -145,14 +145,15 @@ public class MemberDAO {
 	}
 
 
-	public List<LocketListDTO> locketlist(int cpage){
+	public List<LocketListDTO> locketlist(int cpage,String id){
 
 		int start = cpage*Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE - 1);
 		int end = start + (Statics.RECORD_COUNT_PER_PAGE - 1);
 
-		Map<String,Integer> param = new HashMap();
-		param.put("start", start);
-		param.put("end", end);
+		Map<String,String> param = new HashMap();
+		param.put("id", id);
+		param.put("start", ""+start);
+		param.put("end", ""+end);
 		return mybatis.selectList("Member.locketlist", param);
 	}
 

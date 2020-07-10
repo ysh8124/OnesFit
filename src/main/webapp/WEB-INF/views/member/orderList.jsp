@@ -304,13 +304,13 @@
                </c:when>
                <c:when test="${i.status eq '입금완료/배송준비중'}">
                <div style="display:none;">${i.bseq}</div>
-               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="cancelRequest">취소요청</button></div>
-                <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="cancelRequest">취소요청</button></div>
+               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}</div>
+                <div style="width: 10%; float: left; margin-top: 27px;">전화문의</div>
                </c:when>
                <c:when test="${i.status eq '배송중'}">
                <div style="display:none;">${i.bseq}</div>
                <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="confirm">구매확정</button></div>
-                <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="refund">환불요청</button></div>
+                <div style="width: 10%; float: left; margin-top: 27px;">전화문의</div>
                </c:when>
                </c:choose>
             </c:forEach>

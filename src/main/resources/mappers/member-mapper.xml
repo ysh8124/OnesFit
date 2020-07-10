@@ -27,7 +27,7 @@
 
 	<insert id="locketwrite">
 		insert into locketlist
-		values(locketlist_seq.nextval,0,#{homename},#{takename},#{phone},#{zipcode},#{address1},#{address2})
+		values(locketlist_seq.nextval,#{id},#{homename},#{takename},#{phone},#{zipcode},#{address1},#{address2})
 	</insert>
 
 	<select id="duplcheck" resultType="int">
@@ -87,7 +87,7 @@
 	<select id="locketlist"
 		resultType="osf.spring.dto.LocketListDTO">
 		select * from (select locketlist.*,row_number() over(order
-		by homename desc) rnum from locketlist) where rnum between ${start}
+		by homename desc) rnum from locketlist where id=#{id}) where rnum between ${start}
 		and ${end}
 	</select>
 
@@ -126,5 +126,7 @@
 	<select id="getBuyList" resultType="osf.spring.dto.BuyListDTO">select * from buy_list where bseq=${value}</select>	
 
 	<update id="minusBill">update order_bill set amount=amount-${price} where oseq=${oseq}</update>
+
+	<update id="returnPoint">update member set point=point+${usePoint} where id=#{id}</update>
 
 </mapper>

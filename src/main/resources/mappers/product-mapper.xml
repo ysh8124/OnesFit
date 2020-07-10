@@ -19,7 +19,7 @@
 	</update>
 	<select id="productSelect"
 		resultType="osf.spring.dto.ProductDTO">
-		select *from product
+		select *from product order by regist_date desc
 	</select>
 	<select id="productSelectByPseq"
 		resultType="osf.spring.dto.ProductDTO">

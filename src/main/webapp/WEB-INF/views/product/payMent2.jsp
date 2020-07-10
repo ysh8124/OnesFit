@@ -26,7 +26,6 @@
    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script
    src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   <link rel="shortcut icon" href="/img/onesfitcon.png">
 <script>
    window.onload = function() { //실행될 코드 }
       $(".sum").val(${sum});
@@ -379,7 +378,7 @@ div {
 
                         <tbody>
                            <c:forEach var="i" items="${list}" varStatus="status">
-                           <input type="text" name="buy_num" value="${i.pseq}"
+                           <input type="text" name="product_num" value="${i.pseq}"
                         style="width: 0px; border: hidden">
                               <tr>
                                  <td><input type="checkbox" class='selectPro'></td>
@@ -401,7 +400,7 @@ div {
                                     readonly="readonly"></td>
                                  <td><input type="text" class="pinput" name="amount"
                                     value="${i.count_item}" style="width: 30px"
-                                    readonly="readonly">${i.count_item}</td>
+                                    readonly="readonly"></td>
                                  <td><input type="text" class="pinput point" name="point"
                                     value="${i.price*0.02 }" style="width: 30px"
                                     readonly="readonly"></td>
