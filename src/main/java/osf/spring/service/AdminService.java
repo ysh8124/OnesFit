@@ -129,6 +129,10 @@ public class AdminService {
 		
 	}
 	
+	public int unBest(int pseq) {
+		return adao.unBest(pseq);
+	}
+	
 	/////////////////////////영재씨파트///////////////////////
 	//buylist
 		public List<BuyListDTO> selectByPage(int page){

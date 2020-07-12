@@ -127,7 +127,6 @@ public class AdminController {
 		List<BestProductDTO> buyRank = aservice.itemRank();
 		List<ProductDTO> topProduct = aservice.bestProduct(buyRank);
 		List<Integer> visit = aservice.visit();
-		System.out.println("방문자 : "+visit.size());
 
 		model.addAttribute("visit",visit);
 		model.addAttribute("ranklist",buyRank);
@@ -318,6 +317,12 @@ public class AdminController {
 	public String setBest(int[] pseq) {
 		
 		aservice.setBest(pseq);
+		return "redirect:/admin/adminMain";
+	}
+	
+	@RequestMapping("unBest")
+	public String unBest(int pseq) {
+		aservice.unBest(pseq);
 		return "redirect:/admin/adminMain";
 	}
 	

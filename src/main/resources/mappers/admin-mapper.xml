@@ -57,6 +57,7 @@ union select nvl(count(*),0),3 sort from visit where <![CDATA[trunc(vdate,'MM')<
 union select nvl(count(*),0),4 sort from visit where <![CDATA[trunc(vdate,'MM')<=trunc(ADD_MONTHS(sysdate, -3),'MM')]]>
 union select nvl(count(*),0),5 sort from visit where <![CDATA[trunc(vdate,'MM')<=trunc(ADD_MONTHS(sysdate, -4),'MM')]]>) order by sort</select>
 
+<update id="unBest">update product set best='N' where pseq=${value}</update>
 
 
 <!--                                    영재씨파트                                                           -->

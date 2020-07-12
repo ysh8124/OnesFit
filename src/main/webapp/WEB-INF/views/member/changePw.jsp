@@ -13,6 +13,35 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link rel="shortcut icon" href="/img/onesfitcon.png">
+<script>
+$(function(){
+	$(".tab").on("click", function() {
+        $(".box_li").css("display", "block");
+        var tab = $(this).val();
+        var tab2 = "";
+        if (tab == 1) {
+           tab2 = "new";
+        }
+        if (tab == 2) {
+           tab2 = 'Y';
+        }
+        if (tab == 3) {
+           tab2 = "outer";
+        }
+        if (tab == 4) {
+           tab2 = "top";
+        }
+        if (tab == 5) {
+           tab2 = "bottom";
+        }
+        if (tab == 6) {
+           tab2 = "acc";
+        }
+
+        location.href="/?tab2="+tab2;
+     })
+})
+</script>
  <style>
         *{box-sizing: border-box;}
         a{color: black;}
@@ -83,55 +112,120 @@
             <!--           왼쪽메뉴, 중앙 내용, 오른쪽 메뉴 -->
             <div id="container">
 
-                <!--               사이드메뉴-->
-                <div id="sidemenu">
-                    <div id="sidefix">                
-                        <a href="/">
-                            <img src="/img/logi.png" style="width: 130px;
-                                                              position: relative; left: 45px">
-                        </a>                          
-                        <div class="memberpage"> 
-                            <ul>
-                                <li>
-                                    <a href="/member/toLogin">login</a>
-                                    <a href="/member/toSignup">join us</a>
-                                </li>
+                 <!--               사이드메뉴-->
+         <c:choose>
+            <c:when test="${loginid eq 'pzlogin'}">
+               <div id="sidemenu">
+                  <div id="sidefix">
+                     <a href="/"> <img src="/img/logo.png"
+                        style="width: 130px; position: relative; left: 45px">
+                     </a>
+                     <div class="memberpage">
+                        <ul>
+                           <li><a href="/member/toLogin">login</a> <a
+                              href="/member/toSignup">join us</a></li>
+                        </ul>
+                     </div>
 
-                            </ul>                       
-                        </div>
+                     <div id="category">
+                        <ul>
+                           <li value="1" class="tab"><a href="#">NEW ARRIVAL</a></li>
+                           <li value="2" class="tab"><a href="#">BEST ITEM</a></li>
+                           <li value="3" class="tab"><a href="#">OUTERWEAR</a></li>
+                           <li value="4" class="tab"><a href="#">TOP</a></li>
+                           <li value="5" class="tab"><a href="#">PANTS</a></li>
+                           <li value="6" class="tab"><a href="#">ACC</a></li>
+                           <li><a href="/daily/daily_list?page=1"
+                              style="font-size: 11px;">OSF DAILY LOOK</a></li>
+                           <li><a href="/notice/notice_list?page=1"
+                              style="font-size: 11px;">NOTICE</a></li>
+                        </ul>
+                     </div>
 
-                        <div id="category">
-                            <ul>
-                                <li><a href="">NEW ARRIVAL</a></li>
-                                <li><a href="">BEST ITEM</a></li>
-                                <li><a href="">OUTERWEAR</a></li>
-                                <li><a href="">TOP</a></li>
-                                <li><a href="">PANTS</a></li>
-                                <li><a href="">ACC</a></li>
-                                <li><a href="/daily/daily_list?page=1" style="font-size: 11px;">OSF DAILY LOOK</a></li>
-									<li><a href="/notice/notice_list?page=1" style="font-size: 11px;">NOTICE</a></li> 
-
-                            </ul>
-                        </div>
-
-                        <div>
-                           <ul>
-                                <li>
-                                    <a href=""><img src="/img/search.png" style="width: 15px"></a>
-                                    <input id="search" type="text">
-
-                                </li>
-                            </ul>
-                            <ul>
-                                <li><a href="https://www.instagram.com/onesfit__official/?hl=ko" onclick="window.open(this.href,'_blank'); return false;"><img src="/img/instar.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a> 
-									<a href=""><img src="/img/kakao.png" width="20px" style="position: relative; top: 6px; border-radius: 9px"></a>
-								</li>
-                            </ul>
+                     <div>
+                        <ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a href="https://open.kakao.com/me/onesfit"><img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
 
-                        </div>
-                    </div>
-                </div>
+                     </div>
+                  </div>
+               </div>
+            </c:when>
+            <c:otherwise>
+               <div id="sidemenu">
+                  <div id="sidefix">
+                     <a href="/"> <img src="/img/logo.png"
+                        style="width: 130px; position: relative; left: 45px">
+                     </a>
+                     <div class="memberpage">
+                        <ul>
+                           <li><a href="/member/logout">logout</a> <a
+                              href="/member/toProfile?id=${loginInfo.id}">PROFILE</a></li>
+                           <li><a href="/member/tomyPage">my page</a> <a
+                              href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a
+                              href="/member/orderList?id=${loginid }">order</a></li>
+
+                        </ul>
+                     </div>
+
+                     <div id="category">
+                        <ul>
+                           <li value="1" class="tab"><a href="#">NEW ARRIVAL</a></li>
+                           <li value="2" class="tab"><a href="#">BEST ITEM</a></li>
+                           <li value="3" class="tab"><a href="#">OUTERWEAR</a></li>
+                           <li value="4" class="tab"><a href="#">TOP</a></li>
+                           <li value="5" class="tab"><a href="#">PANTS</a></li>
+                           <li value="6" class="tab"><a href="#">ACC</a></li>
+                           <li><a href="/daily/daily_list?page=1"
+                              style="font-size: 11px;">OSF DAILY LOOK</a>
+                           <li><a href="/notice/notice_list?page=1"
+                              style="font-size: 11px;">NOTICE</a></li>
+                           <c:choose>
+                              <c:when test="${loginid eq 'OSF'}">
+                                 <li><a href="/admin/adminMain">관리자PAGE</a>
+                              </c:when>
+                              <c:otherwise>
+
+                              </c:otherwise>
+                           </c:choose>
+
+                        </ul>
+                     </div>
+
+                     <div>
+
+                        <ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                              <a href="https://open.kakao.com/me/onesfit"><img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                                 <a href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"onclick="window.open(this.href,'_blank'); return false;" ><img src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
+
+
+                     </div>
+                  </div>
+               </div>
+            </c:otherwise>
+         </c:choose>
 
                 <!--               중앙 내용-->
                 <div id="contents">

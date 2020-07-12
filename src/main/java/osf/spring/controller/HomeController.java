@@ -23,7 +23,7 @@ public class HomeController {
 	private ProductService pservice;
 	
 	@RequestMapping("/")
-	public String home(Model model) {
+	public String home(Model model,String tab2) {
 		List<ProductDTO> products = pservice.productSelectAll();
 		
 		if(session.getAttribute("loginInfo") == null) {
@@ -42,6 +42,12 @@ public class HomeController {
 		List<ProductDTO> color = pservice.color();
 		model.addAttribute("color",color);
 		model.addAttribute("products", products);
+		if(tab2 != "") {
+		model.addAttribute("tab2", tab2);
+		}else {
+			tab2 = "";
+			model.addAttribute("tab2",tab2);
+		}
 		return "index";
 	}
 	@RequestMapping("notice")

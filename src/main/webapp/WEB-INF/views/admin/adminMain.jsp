@@ -15,13 +15,16 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-	<link rel="shortcut icon" href="/img/onesfitcon.png">
+<link rel="shortcut icon" href="/img/onesfitcon.png">
 <script>
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+
+	
 	$(function(){
-        if(${totalSale} != undefined){
+        if("${totalSale}" != undefined){
 			var sum = ${totalSale};
 			var avg = ${totalSale/12};
 			var setA = Math.floor(avg);
@@ -36,27 +39,34 @@ var text = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;총 매출 : "+sum2+" &nbsp;&nbsp;&nbs
 		var num2 = Math.floor(num);
 		$(this).html(num2);
 	})
-	})
 	
-	$(function(){
-		$(document).on("click",".best",function(index,item){
+	
+		$(document).on("click",".bestBtn",function(index,item){
 			var arr = [];
 			var url = "/admin/setBest?"
 			$(".check").each(function(index2,item2){
+				var index = 0;
 				if($(item2).is(":checked")){
 					var seq = $(item2).parent().next().next().text();
 					url += "pseq="+seq+"&&";
+					index++;
 				}
 				
 			})
+			if(index > 0){
 			if(confirm("베스트 상품을 등록하시겠습니까?")){
 			location.href=url;
-			}else{return false;}
+			}
+			}else{alert("선택된 상품이 없습니다.");}
 		})
 		
 		
-		$(document).on("click",".bestBtn",function(){
-			alert("베스트 상품 등록 완료. 해제는 상품관리 에서 가능합니다.");
+		$(document).on("click",".best",function(){
+			var pseq = $(this).closest("tr").children().eq("2").html();
+			if(confirm("베스트 상품으로 등록 하시겠습니까?")){
+				alert("베스트 상품 등록완료. 상품관리 에서 가능합니다.");
+				location.href="/admin/setBest?pseq="+pseq;
+			}
 		})
 		
 		$("#allcheck").on("change",function(){
@@ -131,26 +141,27 @@ var text = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;총 매출 : "+sum2+" &nbsp;&nbsp;&nbs
 }
 
 #ordertable {
- border: 1px solid #dfdfdf;
-                        text-align: center;
-                        width: 1300px;
-font-size: 14px;
+	border: 1px solid #dfdfdf;
+	text-align: center;
+	width: 1300px;
+	font-size: 14px;
 }
 
 #ordertable th {
-text-align: center;
+	text-align: center;
 }
 
 #ordertable tr td {
-border: 1px solid #dfdfdf;
+	border: 1px solid #dfdfdf;
 }
 
 #point {
 	width: 100px;
 }
 
-.best:hover{cursor:pointer;}
-
+.best:hover {
+	cursor: pointer;
+}
 </style>
 <body>
 	<!--       전체 영역-->
@@ -168,7 +179,7 @@ border: 1px solid #dfdfdf;
 					<ul class="nav side-nav">
 						<li><a href="/admin/adminMain"><i
 								class="fa fa-fw fa-star"></i> DASH BOARD</a></li>
-					<li><a href="/">메인으로</a></li>
+						<li><a href="/">메인으로</a></li>
 						<li><a href="/admin/productAdmin"> 상품 관리 </a></li>
 						<li><a href="/admin/buyList"> 주문 관리 </a></li>
 						<li><a href="/admin/memberAdmin">회원 관리</a></li>
@@ -181,12 +192,11 @@ border: 1px solid #dfdfdf;
 					</ul>
 				</div>
 			</nav>
-			
+
 			<div style="margin-top: 100px; padding-left: 220px;">
-                    <h2 style="font-size: 15px;
-                               text-align: center;
-                               line-height: 30px"><b>DASH BOARD</b>
-                </div>
+				<h2 style="font-size: 15px; text-align: center; line-height: 30px">
+					<b>DASH BOARD</b>
+			</div>
 
 
 			<div id="dash">
@@ -200,14 +210,13 @@ border: 1px solid #dfdfdf;
 					</div>
 				</div>
 			</div>
-			
-			
-			
+
+
+
 			<div id="orderList">
-				<table  id="ordertable">
+				<table id="ordertable">
 					<tr align=center>
-						<td style="width: 2%"><input type="checkbox"
-							id="allcheck">
+						<td style="width: 2%"><input type="checkbox" id="allcheck">
 						<td style="width: 5%">판매순위
 						<td style="width: 5%">상품<br>번호
 						<td style="width: 25%">상품명
@@ -219,25 +228,25 @@ border: 1px solid #dfdfdf;
 					</tr>
 					<script>var check=0;</script>
 					<c:forEach var="i" items="${ranklist}" varStatus="s">
-					<c:forEach var="j" items="${topProduct}">
-					
-					<c:choose>
-					<c:when test="${i.product_num == j.pseq}">
-					<script>check++;</script>
-						<tr align=center class="print">
-							<td><input type="checkbox" class="check">
-							<td>${s.index+1}
-							<td class="pseq">${j.pseq}</td>
-							<td>${j.pname }
-							<td class="onePrice">${j.price }
-							<td>${j.category }
-							<td class="count">${i.price/j.price }
-							<td class="totalPrice">${i.price}
-							<td class="best">best
-						</tr>
-						</c:when>
-						</c:choose>
-					</c:forEach>
+						<c:forEach var="j" items="${topProduct}">
+
+							<c:choose>
+								<c:when test="${i.product_num == j.pseq}">
+									<script>check++;</script>
+									<tr align=center class="print">
+										<td><input type="checkbox" class="check">
+										<td>${s.index+1}
+										<td class="pseq">${j.pseq}</td>
+										<td>${j.pname }
+										<td class="onePrice">${j.price }
+										<td>${j.category }
+										<td class="count">${i.price/j.price }
+										<td class="totalPrice">${i.price}
+										<td class="best">best
+									</tr>
+								</c:when>
+							</c:choose>
+						</c:forEach>
 					</c:forEach>
 					<script>if(check == 0){$("table").append("<tr align=center><td colspan=9>판매 품목이 없습니다.</tr>");}</script>
 				</table>
@@ -249,8 +258,8 @@ border: 1px solid #dfdfdf;
         var ctx = document.getElementById('myChart');
         var ctx2 = document.getElementById('myChart2');
         console.log("현재 값은 : " + ${s} );
-        if(${now.last}){
-        if(${now.index} < 3){
+        if("${now.last}"){
+        if("${now.index}" < 3){
         	sale.push(${s});
         	sale.push(0);
         	sale.push(0);

@@ -32,9 +32,15 @@
          function() {
             var date = new Date();
             var month = date.getMonth() + 1;
+                	  if("${tab2}" != ""){
+                		  $(".box_li").each(function() {
+                              $(this).not("." + "${tab2}").css("display", "none");
+                           })
+                	  }
             $(".regist_date").each(
                   function() {
 
+                	  
                      var time = new Date($(this).val());
                      var dateDiff = Math.ceil((date.getTime() - time
                            .getTime())
@@ -269,7 +275,7 @@ div {
                               onclick="window.open(this.href,'_blank'); return false;">
                                  <img src="/img/instar.png" width="20px"
                                  style="position: relative; top: 6px; border-radius: 9px">
-                           </a> <a href=""><img src="/img/kakao.png" width="20px"
+                           </a> <a href="https://open.kakao.com/me/onesfit"><img src="/img/kakao.png" width="20px"
                                  style="position: relative; top: 6px; border-radius: 9px"></a>
                               <a
                               href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
@@ -287,7 +293,7 @@ div {
             <c:otherwise>
                <div id="sidemenu">
                   <div id="sidefix">
-                     <a href=""> <img src="/img/logo.png"
+                     <a href="/"> <img src="/img/logo.png"
                         style="width: 130px; position: relative; left: 45px">
                      </a>
                      <div class="memberpage">
@@ -333,7 +339,7 @@ div {
                               onclick="window.open(this.href,'_blank'); return false;"><img
                                  src="/img/instar.png" width="20px"
                                  style="position: relative; top: 6px; border-radius: 9px"></a>
-                              <a href=""><img src="/img/kakao.png" width="20px"
+                              <a href="https://open.kakao.com/me/onesfit"><img src="/img/kakao.png" width="20px"
                                  style="position: relative; top: 6px; border-radius: 9px"></a>
                                  <a href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"onclick="window.open(this.href,'_blank'); return false;" ><img src="/img/naver.png" width="20px"
                                  style="position: relative; top: 6px; border-radius: 9px"></a>

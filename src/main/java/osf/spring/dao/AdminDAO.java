@@ -159,6 +159,10 @@ public class AdminDAO {
 		return mybatis.update("admin.setBest",pseq);
 	}
 	
+	public int unBest(int pseq) {
+		return mybatis.update("admin.unBest",pseq);
+	}
+	
 	/////////////////////영재씨파트 ////////////////////////////////
 	//buyList
 		public List<BuyListDTO> selectByPageNo(int page){
