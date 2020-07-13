@@ -29,9 +29,11 @@
 <script>
    window.onload = function() { //실행될 코드 }
       $(".sum").val(${sum});
-         $(".totalPrice").val(${sum}+3000);
-      var point = Math.round($(".point").val());
-      $(".point").val(point);
+      $(".totalPrice").val(${sum}+3000);
+      $(".point").each(function(){
+         var point1 = Math.floor($(this).val());
+         $(this).val(point1);
+      })
       
    }
    </script>
@@ -285,66 +287,57 @@ div {
 
          <!--               사이드메뉴-->
          <div id="sidemenu">
-            <div id="sidefix">
-               <a href="/"> <img src="/img/logo.png"
-                  style="width: 130px; position: relative; left: 45px">
-               </a>
-               <div class="memberpage"> 
-                            <ul>
-                                <li>
-                                <c:choose>
-                                   <c:when test="${loginid eq 'pzlogin'}">
-                                      <a href="/member/toLogin">login</a>
-                                      <a href="/member/toSignup">join us</a>
-                                </li>
-                                   </c:when>
-                                   <c:otherwise>
-                                      <a href="/member/logout">logout</a> <a
-                              href="/member/toProfile?id=${loginInfo}">PROFILE</a>
-                                </li>
-                                <li>
-                                    <a href="/member/tomyPage">my page</a>
-                                    <a href="/member/cart?parent_id=${loginid}">cart </a>
-                                    <a href="">order</a>                                  
-                                </li>
-                                   </c:otherwise>
-                                </c:choose>
-                            </ul>                       
-                        </div>
+                  <div id="sidefix">
+                     <a href="/"> <img src="/img/logo.png"
+                        style="width: 130px; position: relative; left: 45px">
+                     </a>
+          <div class="memberpage">
+								<ul>
+									<li><a href="/member/logout">logout</a> <a
+										href="/member/toProfile?id=${loginInfo.id}">PROFILE</a></li>
+									<li><a href="/member/tomyPage">my page</a> <a
+										href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a
+										href="/member/orderList?id=${loginid }">order</a></li>
 
-               <div id="category">
-                  <ul>
-                     <li><a href="">NEW ARRIVAL</a></li>
-                     <li><a href="">BEST ITEM</a></li>
-                     <li><a href="">OUTERWEAR</a></li>
-                     <li><a href="">TOP</a></li>
-                     <li><a href="">PANTS</a></li>
-                     <li><a href="">ACC</a></li>
-                     <li><a href="" style="font-size: 11px;">OSF DAILY BOOK</a></li>
+								</ul>
+							</div>
 
-                  </ul>
+                     <div id="category">
+                        <ul>
+                           <li value="1" class="tab"><a href="#">NEW ARRIVAL</a></li>
+                           <li value="2" class="tab"><a href="#">BEST ITEM</a></li>
+                           <li value="3" class="tab"><a href="#">OUTERWEAR</a></li>
+                           <li value="4" class="tab"><a href="#">TOP</a></li>
+                           <li value="5" class="tab"><a href="#">PANTS</a></li>
+                           <li value="6" class="tab"><a href="#">ACC</a></li>
+                           <li><a href="/daily/daily_list?page=1"
+                              style="font-size: 11px;">OSF DAILY LOOK</a></li>
+                           <li><a href="/notice/notice_list?page=1"
+                              style="font-size: 11px;">NOTICE</a></li>
+                        </ul>
+                     </div>
+
+                     <div>
+                        <ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a href="https://open.kakao.com/me/onesfit"><img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
+
+
+                     </div>
+                  </div>
                </div>
-
-               <div>
-                  <ul>
-                     <li><a href=""><img src="/img/search.png"
-                           style="width: 15px"></a> <input id="search" type="text">
-
-                     </li>
-                  </ul>
-                  <ul>
-
-                     <li><a href=""><img src="/img/instar.png" width="20px"
-                           style="position: relative; top: 6px; border-radius: 9px"></a>
-                        <a href=""><img src="/img/kakao.png" width="20px"
-                           style="position: relative; top: 6px; border-radius: 9px"></a>
-                     </li>
-                  </ul>
-
-
-               </div>
-            </div>
-         </div>
 
          <!--               중앙 내용-->
          <form action="Makepayment" method="post" id="Makepayment">
@@ -411,7 +404,7 @@ div {
 
                         <tfoot>
                            <tr>
-                              <td colspan="7" style='text-align:right'>[적립금 사용]<input type=text id='point' name='usepoint' maxlength="5" value="0"> 보유 적립금 : ${mdto.point } 원
+                              <td colspan="7" style='text-align:right'>[적립금 사용]<input type=text id='point' name='usepoint' maxlength="5" value="0" > 보유 적립금 : ${mdto.point } 원
                            </tr>
                            <tr>
                               <td colspan="7" style="text-align: right;">[기본배송] 상품구매금액
@@ -447,10 +440,8 @@ div {
                                     <div class="address">
                                        <input type="button" class="obtn" value="회원 정보와 동일 "
                                           id='memberInput'> <input type='button'
-                                          class="obtn" value="새로운 배송지" id='newAdd'> <input
-                                          type="button" class="obtn" value="최근 배송지 "> <a
-                                          href=""><input type="button" class="obtn"
-                                          value="주소록 보기 "></a>
+                                          class="obtn" value="새로운 배송지" id='newAdd'> <input type="button" class="obtn"
+                                          value="주소록 보기 " id='addressList'></a>
                                     </div>
                                  </td>
                               </tr>
@@ -510,7 +501,14 @@ div {
                            <tbody>
                               <tr class="">
                                  <th>배송메시지</th>
-                                 <td><textarea name="msg"
+                                 <td><select id="selectMessage">
+                                 <option>배송 메세지를 선택하세요.</option>
+                                 <option>배송 전 연락바랍니다.</option>
+                                 <option>경비실에 맡겨주세요.</option>
+                                 <option>빠른 배송 부탁드립니다.</option>
+                                 <option>문앞에 놓아주세요.</option>
+                                 </select>
+                                 <textarea name="msg"
                                        style="width: 100%; height: 100px; border: 1px solid #dedede"
                                        id="msg"></textarea>
                                     <div style="color: #999; font-size: 10px;">
@@ -827,10 +825,25 @@ div {
             }
          });
       });
+      </script>
+      <script>
+      $('#selectMessage').change(function() {
+         $("#selectMessage option:selected").each(function() {
+            
+            if ($(this).val() == '1') {
+               $("#msg").val(''); //값 초기화 
+               $("#msg").attr("disabled", false); //활성화 
+            } else { //직접입력이 아닐경우 
+               $("#msg").val($(this).text()); //선택값 입력 
+            }
+         });
+      });
+      </script>
+      <script>
 
       $("#subbtn").click(function() {
          if (isChk()) {
-            alert("결제가 완료 되었습니다.");
+            alert("주문이 완료 되었습니다.");
             $("#Makepayment").submit();
          } else {
             return false;
@@ -901,7 +914,7 @@ div {
             $("#email2").val(resp.email2);
             $("#dname").val(member.name);
          })
-      })
+      });
       $("#delete").on("click", function() {
          var check = confirm("선택하신 상품을 삭제하시겠습니까?");
          if(check){
@@ -920,12 +933,12 @@ div {
                }
             })
          }
-      })
+      });
       $("#newAdd").on("click",function(){
          $("#zipcode").val('');
          $("#add1").val('');
          $("#add2").val('');
-      })
+      });
       $("#point").on("propertychange change keyup paste input",function(){
          var discount = $(".discount").val();   
          var sum = $(".sum").val();
@@ -939,7 +952,37 @@ div {
             $(".discount").val($(this).val());
             $(".totalPrice").val(sum-discount+3000);
          }
-      })
+      });
+      
+      $("#addressList").on("click",function(){
+         window.open("/member/addressList","addressList","width=1200,height=700");
+      });
+      
+      $(".tab").on("click", function() {
+          $(".box_li").css("display", "block");
+          var tab = $(this).val();
+          var tab2 = "";
+          if (tab == 1) {
+             tab2 = "new";
+          }
+          if (tab == 2) {
+             tab2 = 'Y';
+          }
+          if (tab == 3) {
+             tab2 = "outer";
+          }
+          if (tab == 4) {
+             tab2 = "top";
+          }
+          if (tab == 5) {
+             tab2 = "bottom";
+          }
+          if (tab == 6) {
+             tab2 = "acc";
+          }
+
+          location.href="/?tab2="+tab2;
+       })
    </script>
 </body>
 </html>

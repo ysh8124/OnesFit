@@ -20,6 +20,7 @@ import osf.spring.dto.BestProductDTO;
 import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.MemberDTO;
 import osf.spring.dto.OptionDTO;
+import osf.spring.dto.PopupDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
 import osf.spring.dto.QuestionDTO;
@@ -29,15 +30,15 @@ import osf.spring.service.AdminService;
 @RequestMapping("/admin/")
 public class AdminController {
 
-	public void deleteFile2(int seq,String title_img) {
+	public void deleteFile2(int seq, String title_img) {
 		String filePath = session.getServletContext().getRealPath("upload/product/title");
 		File folder = new File(filePath);
 
-		File[] folder_list = folder.listFiles(); //파일리스트 얻어오기
+		File[] folder_list = folder.listFiles(); // 파일리스트 얻어오기
 
 		for (int j = 0; j < folder_list.length; j++) {
-			if(folder_list[j].equals(title_img)) {
-				folder_list[j].delete(); //파일 삭제 
+			if (folder_list[j].equals(title_img)) {
+				folder_list[j].delete(); // 파일 삭제
 				System.out.println("대표이미지 삭제.");
 			}
 		}
@@ -45,42 +46,42 @@ public class AdminController {
 	}
 
 	public void deleteFile(int seq) {
-		String filePath = session.getServletContext().getRealPath("upload/product/"+seq);
+		String filePath = session.getServletContext().getRealPath("upload/product/" + seq);
 		File folder = new File(filePath);
 
-		File[] folder_list = folder.listFiles(); //파일리스트 얻어오기
+		File[] folder_list = folder.listFiles(); // 파일리스트 얻어오기
 
 		for (int j = 0; j < folder_list.length; j++) {
-			folder_list[j].delete(); //파일 삭제 
+			folder_list[j].delete(); // 파일 삭제
 			System.out.println("파일이 삭제되었습니다.");
 
 		}
 
 	}
 
-	public String filesUpload2(MultipartFile file,int seq) throws Exception {       
+	public String filesUpload2(MultipartFile file, int seq) throws Exception {
 		String filePath = session.getServletContext().getRealPath("upload");
 
 		String sysname = "";
 		File tempFilePath = new File(filePath);
-		System.out.println("filePath: "+filePath);
-		System.out.println("tempFilePath : "+tempFilePath);
-		if(!tempFilePath.exists()) {
+		System.out.println("filePath: " + filePath);
+		System.out.println("tempFilePath : " + tempFilePath);
+		if (!tempFilePath.exists()) {
 			tempFilePath.mkdir();
 		}
 		filePath += "/product";
 		File temp2 = new File(filePath);
-		if(!temp2.exists()) {
+		if (!temp2.exists()) {
 			System.out.println(temp2);
 			temp2.mkdir();
 		}
 		filePath += "/title";
 		File temp3 = new File(filePath);
-		if(!temp3.exists()) {
+		if (!temp3.exists()) {
 			System.out.println(temp3);
 		}
 		temp3.mkdir();
-		if(!file.isEmpty()) {
+		if (!file.isEmpty()) {
 			String systemFileName = file.getOriginalFilename();
 			File targetLoc = new File(filePath + "/" + systemFileName);
 			file.transferTo(targetLoc);
@@ -88,30 +89,27 @@ public class AdminController {
 		}
 		return sysname;
 
-	}  
+	}
 
-	public List<ProductImgDTO> filesUpload(MultipartFile[] files,int seq) throws Exception {       
-		String filePath = session.getServletContext().getRealPath("upload/product/"+seq);
+	public List<ProductImgDTO> filesUpload(MultipartFile[] files, int seq) throws Exception {
+		String filePath = session.getServletContext().getRealPath("upload/product/" + seq);
 
-		List<ProductImgDTO> pdto=new ArrayList<>();
+		List<ProductImgDTO> pdto = new ArrayList<>();
 		File tempFilePath = new File(filePath);
-		if(!tempFilePath.exists()) {
+		if (!tempFilePath.exists()) {
 			tempFilePath.mkdir();
-		}   
+		}
 
-
-
-		for(MultipartFile file : files) {
-			if(!file.isEmpty()) {
+		for (MultipartFile file : files) {
+			if (!file.isEmpty()) {
 				String systemFileName = file.getOriginalFilename();
 				File targetLoc = new File(filePath + "/" + systemFileName);
 				file.transferTo(targetLoc);
-				pdto.add(new ProductImgDTO(0,file.getOriginalFilename(),systemFileName));
+				pdto.add(new ProductImgDTO(0, file.getOriginalFilename(), systemFileName));
 			}
-		}return pdto;
-	}  
-
-
+		}
+		return pdto;
+	}
 
 	@Autowired
 	private AdminService aservice;
@@ -128,47 +126,48 @@ public class AdminController {
 		List<ProductDTO> topProduct = aservice.bestProduct(buyRank);
 		List<Integer> visit = aservice.visit();
 
-		model.addAttribute("visit",visit);
-		model.addAttribute("ranklist",buyRank);
-		model.addAttribute("topProduct",topProduct);
-		model.addAttribute("sales",num);
-		model.addAttribute("totalSale",totalSale);
+		model.addAttribute("visit", visit);
+		model.addAttribute("ranklist", buyRank);
+		model.addAttribute("topProduct", topProduct);
+		model.addAttribute("sales", num);
+		model.addAttribute("totalSale", totalSale);
 		return "/admin/adminMain";
 	}
 
 	@RequestMapping("productAdmin")
 	public String goProductAdmin(Model model) {
-		List<ProductDTO> pdto= aservice.getProduct();
+		List<ProductDTO> pdto = aservice.getProduct();
 
-		model.addAttribute("pdto",pdto);
+		model.addAttribute("pdto", pdto);
 
 		return "/admin/productAdmin";
 	}
 
 	@RequestMapping("productModify")
-	public String goProductModify(HttpServletRequest request,Model model) {
+	public String goProductModify(HttpServletRequest request, Model model) {
 		int pseq = Integer.parseInt(request.getParameter("pseq"));
 		ProductDTO pdto = aservice.productDetail(pseq);
 		List<String> img = aservice.getImg(pseq);
 		List<OptionDTO> odto = aservice.getOption(pseq);
-		model.addAttribute("pdto",pdto);
-		model.addAttribute("img",img);
-		model.addAttribute("odto",odto);
+		model.addAttribute("pdto", pdto);
+		model.addAttribute("img", img);
+		model.addAttribute("odto", odto);
 		return "/admin/productModify";
 	}
 
 	@RequestMapping("productModifyProc")
-	public String productModify(HttpServletRequest request,MultipartFile[] files,MultipartFile file) throws Exception{
+	public String productModify(HttpServletRequest request, MultipartFile[] files, MultipartFile file)
+			throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String pname = request.getParameter("pname");
 		int price = Integer.parseInt(request.getParameter("price"));
 		String content = request.getParameter("content");
 		String category = request.getParameter("category");
 		String[] colors = request.getParameterValues("color");
-		Map<String,String[]> map = new HashMap<>();
+		Map<String, String[]> map = new HashMap<>();
 
 		String[] count = null;
-		for(int i=0;i<colors.length;i++) {
+		for (int i = 0; i < colors.length; i++) {
 			count = request.getParameterValues("count");
 			String color = colors[i];
 			String[] list = request.getParameterValues(color);
@@ -177,41 +176,42 @@ public class AdminController {
 		}
 
 		int seq = Integer.parseInt(request.getParameter("pseq"));
-		System.out.println("상품번호 : "+seq);
+		System.out.println("상품번호 : " + seq);
 		String title_img = request.getParameter("title_img");
-		String sysname="";
+		String sysname = "";
 		System.out.println(file.getSize());
 		System.out.println(files.length);
-		if(!file.isEmpty()) {
-			this.deleteFile2(seq,title_img);
+		if (!file.isEmpty()) {
+			this.deleteFile2(seq, title_img);
 			sysname = this.filesUpload2(file, seq);
-		}else {sysname = title_img;}
-		
-		if(files[0].getOriginalFilename() != "") {
-			this.deleteFile(seq);
-			List<ProductImgDTO> pdto = this.filesUpload(files,seq);
-			aservice.modifyImg(pdto,seq);
+		} else {
+			sysname = title_img;
 		}
 
-		int result = aservice.productModify(seq,pname,price,content,category,sysname);
-		if(result > 0) {
+		if (files[0].getOriginalFilename() != "") {
+			this.deleteFile(seq);
+			List<ProductImgDTO> pdto = this.filesUpload(files, seq);
+			aservice.modifyImg(pdto, seq);
+		}
+
+		int result = aservice.productModify(seq, pname, price, content, category, sysname);
+		if (result > 0) {
 			List<OptionDTO> odto = new ArrayList<>();
-			int index=0;
-			for(String key : map.keySet()) {
+			int index = 0;
+			for (String key : map.keySet()) {
 				String[] list = map.get(key);
 
-				for(int i=0;i<list.length;i++) {
+				for (int i = 0; i < list.length; i++) {
 					System.out.println(key);
 					System.out.println(list[i]);
-					odto.add(new OptionDTO(seq,key,list[i],Integer.parseInt(count[index])));
+					odto.add(new OptionDTO(seq, key, list[i], Integer.parseInt(count[index])));
 				}
 				index++;
 			}
-			aservice.modifyOption(odto,seq);
+			aservice.modifyOption(odto, seq);
 		}
 		return "redirect:/admin/adminMain";
 	}
-
 
 	@RequestMapping("productAdd")
 	public String goProductAdd() {
@@ -219,28 +219,26 @@ public class AdminController {
 	}
 
 	@RequestMapping("memberAdmin")
-	public String goMembers(Model model) throws Exception{
+	public String goMembers(Model model) throws Exception {
 		List<MemberDTO> mdto = aservice.getMembers();
 
-		model.addAttribute("mdto",mdto);
+		model.addAttribute("mdto", mdto);
 		System.out.println(mdto.size());
 		return "/admin/memberAdmin";
 	}
 
-
-
 	@RequestMapping("productAddProc")
-	public String productAdd(HttpServletRequest request,MultipartFile[] files,MultipartFile file) throws Exception{
+	public String productAdd(HttpServletRequest request, MultipartFile[] files2, MultipartFile file) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String pname = request.getParameter("pname");
 		int price = Integer.parseInt(request.getParameter("price"));
 		String content = request.getParameter("content");
 		String category = request.getParameter("category");
 		String[] colors = request.getParameterValues("color");
-		Map<String,String[]> map = new HashMap<>();
+		Map<String, String[]> map = new HashMap<>();
 		System.out.println("색상 개수는 : " + colors.length);
 		String[] count = null;
-		for(int i=0;i<colors.length;i++) {
+		for (int i = 0; i < colors.length; i++) {
 			count = request.getParameterValues("count");
 			String color = colors[i];
 			String[] list = request.getParameterValues(color);
@@ -250,23 +248,22 @@ public class AdminController {
 
 		int seq = aservice.getProductSequence();
 
-
 		String sysname = this.filesUpload2(file, seq);
-		List<ProductImgDTO> pdto = this.filesUpload(files,seq);
-		aservice.addImg(pdto,seq);
+		List<ProductImgDTO> pdto = this.filesUpload(files2, seq);
+		aservice.addImg(pdto, seq);
 
-		int result = aservice.productAdd(pname,price,content,category,sysname);
-		if(result > 0) {
+		int result = aservice.productAdd(pname, price, content, category, sysname);
+		if (result > 0) {
 			List<OptionDTO> odto = new ArrayList<>();
-			int index=0;
-			for(String key : map.keySet()) {
+			int index = 0;
+			for (String key : map.keySet()) {
 				String[] list = map.get(key);
 
-				for(int i=0;i<list.length;i++) {
+				for (int i = 0; i < list.length; i++) {
 					System.out.println(key);
 					System.out.println(list[i]);
 					System.out.println(count[index]);
-					odto.add(new OptionDTO(seq,key,list[i],Integer.parseInt(count[index])));
+					odto.add(new OptionDTO(seq, key, list[i], Integer.parseInt(count[index])));
 				}
 				index++;
 			}
@@ -279,7 +276,7 @@ public class AdminController {
 	@RequestMapping("productDelete")
 	public String productDelete(int pseq) {
 		int result = aservice.productDelete(pseq);
-		if(result>0) {
+		if (result > 0) {
 			return "redirect:/admin/productAdmin";
 		}
 		return "error";
@@ -298,7 +295,7 @@ public class AdminController {
 		aservice.memberBlack(id);
 		return "redirect:/admin/memberAdmin";
 	}
-	
+
 	@RequestMapping("unBlack")
 	public String unBlack(String id) {
 		aservice.unBlack(id);
@@ -307,103 +304,128 @@ public class AdminController {
 
 	@RequestMapping("updatePoint")
 	@ResponseBody
-	public Object updatePoint(String id,int point) {
-		System.out.println(id+"/"+point);
-		int result = aservice.updatePoint(id,point);
+	public Object updatePoint(String id, int point) {
+		System.out.println(id + "/" + point);
+		int result = aservice.updatePoint(id, point);
 		return result;
 	}
 
 	@RequestMapping("setBest")
 	public String setBest(int[] pseq) {
-		
+
 		aservice.setBest(pseq);
 		return "redirect:/admin/adminMain";
 	}
-	
+
 	@RequestMapping("unBest")
 	public String unBest(int pseq) {
 		aservice.unBest(pseq);
 		return "redirect:/admin/adminMain";
 	}
-	
-	
-	/////////////////////////영재씨파트 ///////////////////////////////////////
+
+	///////////////////////// 영재씨파트 ///////////////////////////////////////
+	// buyList
 	@RequestMapping("/buyList")
-	public String buyList(HttpServletRequest req, Model model) throws Exception {
-		int page;
-		if(req.getAttribute("page") != null) {
-			System.out.println((int) req.getAttribute("page"));
-			page = (int) req.getAttribute("page");
-		}else {
-			page = 1;
-		}
-		List<BuyListDTO> list = aservice.selectByPage(page);
-		String navi = aservice.getPageNavi(page);
-		model.addAttribute("list", list);
-		model.addAttribute("navi", navi);
+	public String buyList(HttpServletRequest req, Model model, String BuylistSelected, String input) throws Exception {
+		Map<String, Object> selectParamBuylist = new HashMap<>();
+		selectParamBuylist.put("BuylistSelected", BuylistSelected);
+		selectParamBuylist.put("input", input);
+		List<BuyListDTO> bList = aservice.selectByPage(selectParamBuylist);
+		model.addAttribute("bList", bList);
 		return "admin/buylist";
 	}
-	
-	@RequestMapping("/BuyListUpdate")
+
+	@RequestMapping("BuyListUpdate")
 	@ResponseBody
-	public Map<String, Object> BuyListModify(int bseq,String status, String send_money_yn, long send_number) {
-		System.out.println("ok");
-		System.out.println(bseq + ":"+status+ ":" + send_money_yn + ":" + send_number);
+	public Map<String, Object> BuyListModify(int bseq, String status, String send_money_yn, long send_number) {
 		Map<String, Object> updateParam = new HashMap<>();
-		if(send_money_yn.contentEquals("N")) {			
-			updateParam.put("bseq", bseq);
-			updateParam.put("status", status);
-			updateParam.put("send_money_yn", send_money_yn);
-			updateParam.put("send_number", send_number);
+		updateParam.put("bseq", bseq);
+		updateParam.put("status", status);
+		updateParam.put("send_money_yn", send_money_yn);
+		updateParam.put("send_number", send_number);
+		if (send_money_yn.contentEquals("N")) {
 			aservice.updateWhenStatusN(updateParam);
-		}else if(send_money_yn.contentEquals("Y")) {
-			if(send_number == 0) {
-				updateParam.put("bseq", bseq);
-				updateParam.put("status", status);
-				updateParam.put("send_money_yn", send_money_yn);
-				updateParam.put("send_number", send_number);
+		} else if (send_money_yn.contentEquals("Y")) {
+			if (send_number == 0) {
 				aservice.updateWhenStatusY0(updateParam);
-			}else {
-				updateParam.put("bseq", bseq);
-				updateParam.put("status", status);
-				updateParam.put("send_money_yn", send_money_yn);
-				updateParam.put("send_number", send_number);
+			} else {
 				aservice.updateWhenStatusYX(updateParam);
 			}
 		}
-		
 		return updateParam;
 	}
-	
-	@RequestMapping("/question")
-	public String question(HttpServletRequest req,Model model) throws Exception {
-		int page;
-		if(req.getAttribute("page") != null) {
-			System.out.println(req.getAttribute("page"));
-			page = (int) req.getAttribute("page");
-		}else {
-			page = 1;
-		}
-		List<QuestionDTO> qlist = aservice.qSelectAll();
-		String qnavi = aservice.getQuestionPageNavi(page);
+
+	// questionAnswer
+
+	@RequestMapping("question")
+	public String question(HttpServletRequest req, Model model, String questionSelected, String input)
+			throws Exception {
+		Map<String, Object> updateParamQuestion = new HashMap<>();
+		updateParamQuestion.put("questionSelected", questionSelected);
+		updateParamQuestion.put("input", input);
+		List<QuestionDTO> qlist = aservice.qSelectAll(updateParamQuestion);
 		model.addAttribute("qList", qlist);
-		model.addAttribute("qnavi", qnavi);
 		return "admin/qnaAdmin";
 	}
-	
-	@RequestMapping("/AnswerInput")
+
+	@RequestMapping("AnswerInput")
 	@ResponseBody
 	public int AnswerInput(int bno, String aInput) {
-		System.out.println(bno + ":" + aInput);
 		Map<String, Object> inputParam = new HashMap<>();
 		inputParam.put("parent_bno", bno);
 		inputParam.put("contents", aInput);
 		return aservice.answerInput(inputParam);
-		
+
 	}
+
+	// popup
+
+	@RequestMapping("popup")
+	public String popup(HttpServletRequest req, Model model) {
+		List<BuyListDTO> PopupList = aservice.selectPopupByPage();
+		model.addAttribute("PopupList", PopupList);
+		return "admin/popup";
+	}
+
+	@RequestMapping("popupInsertPage")
+	public String popupInsertPage() {
+		return "admin/popupInsertPage";
+	}
+
+	@RequestMapping("popupInput")
+	public String popupInput(PopupDTO pdto, MultipartFile file) throws Exception {
+
+		String filePath = session.getServletContext().getRealPath("upload/popup");
+		File folder = new File(filePath);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+
+		String title = pdto.getTitle();
+		String originalFileName = file.getOriginalFilename();
+		String systemFileName = System.currentTimeMillis() + "_" + originalFileName;
+
+		File targetLoc = new File(filePath + "/" + systemFileName);
+		file.transferTo(targetLoc);
+
+		Map<String, Object> popupInsertParam = new HashMap<>();
+		popupInsertParam.put("title", title);
+		popupInsertParam.put("sysFileName", systemFileName);
+		aservice.popupInsert(popupInsertParam);
+		return "redirect:/admin/popup";
+	}
+
+	@RequestMapping("popupShow")
+	@ResponseBody
+	public Map<String, Object> popupShowUpdate(int popup_seq, String show_yn) {
+		Map<String, Object> popupShow_ynUpdate = new HashMap<>();
+		popupShow_ynUpdate.put("popup_seq", popup_seq);
+		popupShow_ynUpdate.put("show_yn", show_yn);
+		System.out.println("con :" + popup_seq + ":" + show_yn);
+		aservice.popupShowUpdate(popupShow_ynUpdate);
+		return popupShow_ynUpdate;
+	}
+
 	
-	
-	
-	
-	
+
 }

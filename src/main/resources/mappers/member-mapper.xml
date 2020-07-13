@@ -132,5 +132,7 @@
 	<select id="myBuyList" resultType="String">select status from buy_list where parent_id=#{value}</select>
 	
 	<update id="onlyBuy">update buy_list set status='배송완료' where bseq=${value}</update>
+	
+	<update id="addPoint">update member set point=point+${point} where id=#{id}</update>
 
 </mapper>

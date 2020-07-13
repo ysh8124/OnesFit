@@ -27,6 +27,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <link rel="shortcut icon" href="/img/onesfitcon.png">
+<script src="/plugins/cookie/jquery.cookie.js"></script>
 <script>
 	$(
 			function() {
@@ -81,6 +82,9 @@
 					})
 				})
 
+
+		     
+				
 			})
 </script>
 </head>
@@ -459,6 +463,29 @@ div {
 		function numberWithCommas(x) {
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
+		
+		function getCookie(cookieName) {
+			var cookieValue = null;
+			var cookieValue = $.cookie(cookieName);
+			return cookieValue;
+		}
+
+		$.ajax({
+		    url : "/cookie"
+		 }).done(
+		       function(resp) {
+		          for (var i = 0; i < resp.length; i++) {
+		             
+		             /* 테스트용 쿠키 제거 */
+		             //$.removeCookie(resp[i].sysfileName, {expires : 1});
+		             
+		             var cookieCheck = getCookie(resp[i].sysfileName);
+		             if (cookieCheck != 'N') {
+		                window.open("notice_popup?sysfileName=" + resp[i].sysfileName, 'notice_popup' + i, 'width=500, height=500, left = '
+		                      + (50 + (i * 250)) + ',top =' + (50 + (i * 250)));
+		             }
+		          }
+		       })
 	</script>
 </body>
 </html>

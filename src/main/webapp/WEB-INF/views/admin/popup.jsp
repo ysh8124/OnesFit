@@ -182,146 +182,88 @@
 
 	<div style="margin-top: 60px;">
 		<h2 style="font-size: 14px; text-align: center; margin-top: 100px;">
-			<b>Q&A BOARD</b>
+			<b>Pupup BOARD</b>
 		</h2>
 	</div>
 	<br>
 	<br>
 
-	<form action="/admin/question">
-		<select id="selectBox"
-			style="position: relative; top: 2px; margin-left: 1405px; margin-bottom: 30px; height: 25px;" name="questionSelected">
-			<option value="pseq">제품번호</option>
-			<option value="writer">작성자</option>
-			<option value="answer_yn">답변여부</option>
-		</select> &nbsp; <input id="search" type="text" name="input">&nbsp;
-		<button type="submit"
-			style="background-color: white; border: 1px solid #dfdfdf">
-			<img id="searchBtn" src="../resources/img/search.png"
-				style="width: 20px;">
-		</button>
-	</form>
-	<!-- <script type="text/javascript">
-		$("#searchBtn").on("click", function() {
-			$(".answerB_write").css("display", "none");
-
-			var select = $(this).closest("button").prev().prev().find(":selected").val();
-			var input = $(this).closest("button").prev().val();
-
-			var pseqCompare = $(this).closest("body").find(".userQuestion").find("td").eq("1").html();
-			var writerCompare = $(this).closest("body").find(".userQuestion").find("td").eq("2").html();
-			var writer_ynCompare = $(this).closest("body").find(".userQuestion").find("td").eq("6").html();
-
-			if (select == "pseq") {
-				var bnoRegex = /\d$/;
-				var result = bnoRegex.test(input);
-
-				if (!result) {
-
-				} else {
-
-				}
-			} else if (select == "writer") {
-
-			} else if (select == "answer_yn") {
-
-			}
-		})
-	</script> -->
-
 	<div id="qnadiv" style="max-height: 1000px">
 		<table id="qnatable" style="table-layout: fixed">
 			<colgroup>
 				<col style="width: 50px;">
-				<col style="width: 100px;">
-				<col style="width: 100px">
-				<col style="width: 300px;">
 				<col style="width: 500px;">
-				<col style="width: 100px">
-				<col style="width: 100px">
-				<col style="width: 100px">
+				<col style="width: 50px">
+				<col style="width: 50px;">
 			</colgroup>
 
 			<thead>
 				<tr style="height: 40px">
-					<th scope="col">글번호</th>
-					<th scope="col">제품번호</th>
-					<th scope="col">작성자</th>
-					<th scope="col">제목</th>
-					<th scope="col">내용</th>
-					<th scope="col">작성날짜</th>
-					<th scope="col">답변여부</th>
-					<th scope="col" style="border-right: 1px solid #dfdfdf">답변</th>
+					<th scope="col">글 번호
+					<th scope="col">제목
+					<th scope="col">표시여부
+					<th scope="col">수정
 				</tr>
 			</thead>
 
 			<tbody>
 				<c:choose>
-					<c:when test="${!empty qList }">
-						<c:forEach var="i" items="${qList }">
+					<c:when test="${!empty PopupList }">
+						<c:forEach var="i" items="${PopupList }">
 							<tr style="height: 40px;" class="userQuestion">
-								<td>${i.bno}
-								<td>${i.pseq }
-								<td>${i.writer }
+								<td>${i.popup_seq }
 								<td>${i.title }
-								<td style="text-overflow: ellipsis; overflow: hidden"><nobr>${i.content }</nobr></td>
-								<td>${i.write_date }
-								<td>${i.answer_yn }
-								<td><button type="button"
-										class="btn btn-outline-secondary answerB hButton"
-										style="width: 70px; height: 28px; font-size: 12px; border: 1px solid #dfdfdf; background-color: white;">답변하기</button></td>
-							</tr>
-							<tr>
-								<td colspan="8" class="answerB_write" style="display: none;">
-									<div class="chatBox"
-										style="width: 90%; margin-left: 5%; margin-top: 40px; margin-bottom: 10px;">
-										<div class="totalContent" style="height: 100px; width: 100%;">${i.content }</div>
-										<div class="editor input" style="height: 100px; width: 100%;"
-											contenteditable="true"></div>
-										<div style="width: 10%; float: right; margin-top: 20px;">
-											<input type="button" value="댓글"
-												style="width: 100%; height: 30px; border: 1px solid #dfdfdf; background-color: white;"
-												class="cbtn hButton">
-										</div>
-										<div class="parent_bno" style="display: none">${i.bno}</div>
-									</div>
-								</td>
+								<td><select class="show_yn" name="show_yn">
+										<c:choose>
+											<c:when test="${i.show_yn eq 'N'}">
+												<option value="N" selected="selected">N</option>
+												<option value="Y">Y</option>
+											</c:when>
+											<c:when test="${i.show_yn eq 'Y'}">
+												<option value="N">N</option>
+												<option value="Y" selected="selected">Y</option>
+											</c:when>
+											<c:otherwise></c:otherwise>
+										</c:choose>
+								</select>
+								<td><input type="button" value="수정"
+									class="btn btn-outline-secondary pbtn"
+									style="width: 70px; height: 28px; font-size: 12px; border: 1px solid #dfdfdf; background-color: white;">
 							</tr>
 						</c:forEach>
 					</c:when>
-					<c:when test="${empty qList }">
+					<c:when test="${empty PopupList }">
 						<tr style="height: 40px;">
-							<td colspan="8">글이 없습니다.
+							<td colspan="4">글이 없습니다.
 						</tr>
 					</c:when>
 					<c:otherwise></c:otherwise>
 				</c:choose>
 			</tbody>
 		</table>
+		<input type="button" value="팝업등록" id="popupInput"
+			class="btn btn-outline-secondary"
+			style="width: 70px; height: 28px; font-size: 12px; border: 1px solid #dfdfdf; background-color: white;margin-left: 1225px; margin-top: 10px">
 	</div>
+	<script type="text/javascript">
+		$("#popupInput").on("click", function(){
+			location.href = "/admin/popupInsertPage";
+		})
+	</script>
 	<script>
-		$(function() {
-			$(".cbtn").on("click", function() {
+		$(".pbtn").on("click", function() {
+			var popup_seq = $(this).closest("tr").find("td").eq("0").text();
+			var show_yn = $(this).closest("tr").find("td").eq("2").find(":selected").val();
 
-				var bno = $(this).closest(".chatBox").find(".parent_bno").html();
-				var aInput = $(this).closest(".chatBox").find(".input").html();
-
-				$.ajax({
-					url : "/admin/AnswerInput",
-					dataType : "Json",
-					data : {
-						bno : bno,
-						aInput : aInput
-					}
-				}).done(function(resp) {
-					$(this).closest("tr").prev().find("td").eq("6").html('Y');
-					alert("답변 등록 성공");
-				})
-			})
-
-			$(".answerB").on("click", function() {
-				$(".answerB_write").css("display", "none");
-				$(this).closest("tr").next().find(".answerB_write").css("display", "table-cell");
+			$.ajax({
+				url : "/admin/popupShow",
+				dataType : "Json",
+				data : {
+					popup_seq : popup_seq,
+					show_yn : show_yn
+				}
+			}).done(function(resp) {
+				alert("수정 성공");
 			})
 		})
 	</script>

@@ -234,4 +234,12 @@ public class MemberDAO {
 		return mybatis.update("Member.onlyBuy",bseq);
 	}
 
+	public void addPoint(String id, int point) {
+		Map<String,String> map = new HashMap();
+		map.put("id", id);
+		map.put("point",""+point);
+		mybatis.update("Member.addPoint");
+		
+	}
+
 }

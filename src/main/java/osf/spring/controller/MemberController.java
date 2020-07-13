@@ -257,16 +257,15 @@ public class MemberController {
 	}
 
 	@RequestMapping("toProfile")
-	public String toProfile(Model model, String id)throws Exception {
+	   public String toProfile(Model model)throws Exception {
+	      
+	      MemberDTO result =(MemberDTO)session.getAttribute("loginInfo");
 
-		MemberDTO result = mservice.profilego(id);
 
-		System.out.println(id);
+	      model.addAttribute("mdto",result);
 
-		model.addAttribute("mdto",result);
-
-		return "member/profile";
-	}
+	      return "member/profile";
+	   }
 
 	@RequestMapping("profile")
 	public String profile(HttpServletRequest request) throws Exception{
@@ -428,8 +427,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping("onlyBuy")
-	public String onlyBuy(int bseq) {
-		mservice.onlyBuy(bseq);
+	public String onlyBuy(int bseq,int price) {
+		mservice.onlyBuy(bseq,price);
 		return "redirect:/member/tomyPage";
 	}
 	

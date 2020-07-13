@@ -9,6 +9,12 @@
         <title>Product Add</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+       
+       <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
        <link rel="shortcut icon" href="/img/onesfitcon.png">
 
         <style>
@@ -98,6 +104,7 @@
             #shipping_info{border: 1px solid #dfdfdf; width: 1000px; font-size: 12px;}
             #shipping_info td{padding: 10px}
             #shipping_info th{text-align: center; height: 50px;}
+
         </style>
         
          <script>
@@ -179,12 +186,12 @@
             	
             	
                 $('#files').change(function(){
-                    const target = document.getElementsByName('files');
+                    const target = document.getElementsByName('files2');
 
                     var html = '';
                     $.each(target[0].files, function(index, file){
                         const fileName = file.name;
-                        html += '<img src="'+URL.createObjectURL(file)+'" onclick="document.all.files.click();">'
+                        html += '<img src="'+URL.createObjectURL(file)+'" onclick="document.all.files2.click();">'
                         const fileEx = fileName.slice(fileName.indexOf(".") + 1).toLowerCase();
                         if(fileEx != "jpg" && fileEx != "png" &&  fileEx != "gif" &&  fileEx != "bmp" && fileEx != "wmv" && fileEx != "mp4" && fileEx != "avi"){
                             alert("파일은 (jpg, png, gif, bmp, wmv, mp4, avi) 형식만 등록 가능합니다.");
@@ -312,23 +319,28 @@
         
     </head>
     <body>
-            <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div style="color: white; margin-left: 18px;"><h2>ADMIN</h2></div>
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <div>
-                    <ul class="nav side-nav">
-                        <li><a href="/admin/adminMain"><i class="fa fa-fw fa-star"></i> DASH BOARD</a></li>  
-                        <li> <a href="/admin/productAdmin"> 상품 관리 </a></li>
-                        <li> <a href="/admin/buyList"> 주문 관리 </a></li>
-                        <li><a href="/admin/memberAdmin">회원 관리</a></li>
-                        <li><a href="/admin/question">Q&A 관리</a></li>
-                        <li><a href="">DAILY 게시판</a></li>
-                        <li><a href="/notice/notice_list?page=1">공지사항 </a></li>    
-                        <li><a href="">팝업 관리</a></li>  
-                        <li><a href=""><i class="fa fa-fw fa fa-question-circle"></i> 판매자 정보</a></li>
-                    </ul>
-                </div>
-            </nav>
+           <nav class="navbar navbar-inverse navbar-fixed-top">
+				<div style="color: white; margin-left: 18px;">
+					<h2>ADMIN</h2>
+				</div>
+				<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+				<div>
+					<ul class="nav side-nav">
+						<li><a href="/admin/adminMain"><i
+								class="fa fa-fw fa-star"></i> DASH BOARD</a></li>
+						<li><a href="/">메인으로</a></li>
+						<li><a href="/admin/productAdmin"> 상품 관리 </a></li>
+						<li><a href="/admin/buyList"> 주문 관리 </a></li>
+						<li><a href="/admin/memberAdmin">회원 관리</a></li>
+						<li><a href="/admin/question">Q&A 관리</a></li>
+						<li><a href="/daily/daily_list">DAILY 게시판</a></li>
+						<li><a href="/notice/notice_list?page=1">공지사항 </a></li>
+						<li><a href="/admin/popup">팝업 관리</a></li>
+						<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>
+								판매자 정보</a></li>
+					</ul>
+				</div>
+			</nav>
             <div id="product_contents">
                     <form action="/admin/productAddProc" method="post" enctype="multipart/form-data" accept-charset="utf8">
                 <table id="shipping_info" border="1">
@@ -365,7 +377,7 @@
                             <th scope="row">
                                 Explanation</th>
                             <td>
-                                <textarea id="textArea" style="width: 100%; height: 100px; border: 1px solid #dedede" name="content"></textarea> 
+                                <textarea id="summernote" name="content"></textarea> 
                             </td>
                         </tr>
                     </tbody>
@@ -382,10 +394,9 @@
                                 <div class="img_notice">1000 x 1000 권장</div>
                                 <br> <br> 이미지
                                 <div class="xbox" id=xbox2 align=center>
-                                    <a onclick=document.all.files.click();
-                                       style="width: 200px; height: 200px; display: block; line-height: 200px; text-decoration: none; color: gray; font-size: 70px; opacity: 30%">+</a>
+                                    <a onclick=document.all.files2.click(); style="width: 200px; height: 200px; display: block; line-height: 200px; text-decoration: none; color: gray; font-size: 70px; opacity: 30%">+</a>
                                 </div>
-                                <input multiple="multiple" name="files" id="files" type="file" style="display:none;"/>
+                                <input multiple="multiple" name="files2" id="files" type="file" style="display:none;"/>
                                 <div class="img_notice">1000 x 1000 권장</div>
                             </td>
                         </tr>
@@ -395,6 +406,28 @@
                 <input type=submit value="등록하기" id=submit
                             style="margin-left: 450px; color: black;">
             </form>
-                </div>    
+                </div>   
+                <script>
+                 $(document).ready(function() {
+                    $('#summernote').summernote({
+                        placeholder: '본문을 적어주세요',
+                        height: 500,                 // set editor height
+                        minHeight: null,             // set minimum height of editor
+                        maxHeight: null,             // set maximum height of editor
+                        focus: true      ,            // set focus to editable area after initializing summernote
+                        lang: 'ko-KR', // default: 'en-US'  
+                        disableResizeEditor : true, 
+                        toolbar: [
+                       	    // [groupName, [list of button]]
+                       	    ['style', ['bold', 'italic', 'underline', 'clear']],
+                       	    ['font', ['strikethrough', 'superscript', 'subscript']],
+                       	    ['fontsize', ['fontsize']],
+                       	    ['para', ['ul', 'ol', 'paragraph']],
+                       	    ['height', ['height']]
+                       	  ]
+                    });
+                }); 
+                </script>
+
     </body>
 </html>

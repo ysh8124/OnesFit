@@ -254,11 +254,11 @@
                                 <td>
                                     <ul>
                                         <li style="width: 60%; text-align: left;">
-                                            > 가용 적립금  
+                                            > 적립금  
 
                                         </li>
                                         <li style="width: 40%;">
-                                            ${loginInfo.point } 원 &nbsp;
+                                            ${loginInfo.point} 원 &nbsp;
                                            
                                         </li>
                                     </ul>
@@ -359,7 +359,7 @@
                     <br>
                     <div class="myshop">
                         <div>
-                            <a href=""><h7><b>order</b>&nbsp; 주문내역 조회</h7></a>
+                            <a href="/member/orderList"><h7><b>order</b>&nbsp; 주문내역 조회</h7></a>
                             <br><br>
                             <p><a href="/member/orderList?id=${loginid }" style="color: #999">고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.</p>
                         </div>
@@ -369,9 +369,9 @@
                             <p><a href="">회원이신 고객님의 개인정보를 관리하는 공간입니다.<br>개인정보를 최신 정보로 유지하시면 보다 간편히 쇼핑을 즐기실 수 있습니다.</a></p>
                         </div>
                           <div>
-                             <a href=""><h7><b>MILEAGE</b>&nbsp; 적립금</h7></a>
+                             <h7><b>MILEAGE</b>&nbsp; 적립금</h7>
                             <br><br>
-                            <p><a href="">적립금은 상품 구매 시 사용하실 수 있습니다.<br>적립된 금액은 현금으로 환불되지 않습니다.</a></p>
+                            <p>적립금은 상품 구매 시 사용하실 수 있습니다.<br>적립된 금액은 현금으로 환불되지 않습니다.</p>
                         </div>
 
                           <div>

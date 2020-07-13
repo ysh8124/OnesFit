@@ -76,7 +76,7 @@
       
       $(".confirm").on("click",function(){
     	  if(confirm("구매 확정 후에는 교환/환불이 어려울 수 있습니다.")){
-    		  location.href="/member/onlyBuy?bseq="+$(this).parent().prev().html();
+    		  location.href="/member/onlyBuy?bseq="+$(this).parent().prev().html()+"&&price="+$(this).parent().prev().prev().html();
     	  }return false;
       })
    })

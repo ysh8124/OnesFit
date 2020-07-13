@@ -264,7 +264,11 @@ public class MemberService {
 		return mdao.myBuyList(id);
 	}
 
-	public int onlyBuy(int bseq) {
+	@Transactional("txManager")
+	public int onlyBuy(int bseq,int price) {
+		String id = (String)session.getAttribute("loginid");
+		int point = (int) (price * 0.02);
+		mdao.addPoint(id,point);
 		return mdao.onlyBuy(bseq);
 	}
 	

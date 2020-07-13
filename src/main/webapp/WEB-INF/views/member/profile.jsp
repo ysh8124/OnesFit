@@ -489,78 +489,82 @@ div {
        })
        </script>   -->
        
-       <script>
-    
-       function sample4_execDaumPostcode() {
-          new daum.Postcode({
-             oncomplete : function(data) {
+      <script>
+      function sample4_execDaumPostcode() {
+         new daum.Postcode({
+            oncomplete : function(data) {
 
-                var addr = '';
-                var extraAddr = '';
+               var addr = '';
+               var extraAddr = '';
 
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                   addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                   addr = data.jibunAddress;
-                }
+               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                  addr = data.roadAddress;
+               } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                  addr = data.jibunAddress;
+               }
 
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
+               var roadAddr = data.roadAddress; // 도로명 주소 변수
 
-                document.getElementById('zipcode').value = data.zonecode;
-                document.getElementById("add1").value = addr;
-             }
-          }).open();
-       }
-  
-       $("#mprofilelog").on("click", function() {
+               document.getElementById('zipcode').value = data.zonecode;
+               document.getElementById("add1").value = addr;
+            }
+         }).open();
+      }
 
-           if ($("#phone").val() == "") {
-              alert("휴대폰 번호를 입력해주세요.")
-              return false;
-           }
+      $("#mprofilelog").on("click", function() {
 
-           if ($("#add2").val() == "") {
-              alert("상세주소를 확인해주세요.");
-              return false;
-           }
+         if ($("#phone").val() == "") {
+            alert("휴대폰 번호를 입력해주세요.")
+            return false;
+         }
+         if ($("#zipcode").val() == "") {
+            alert("주소를 확인해주세요.");
+            return false;
+         }
+         if ($("#add2").val() == "") {
+            alert("상세주소를 확인해주세요.");
+            return false;
+         }
+         if ($("#email").val() == "") {
+            alert("이메일을  입력해주세요.")
+            return false;
+         }
 
-           return true;
-        })
-       
-       
-       $(document).ready(
-               function() {
-                  var phone = /^[0-9]*$/;
+         return true;
+      })
+      
+      $(document).ready(
+            function() {
+               var phone = /^[0-9]*$/;
 
-                  //휴대폰1 검사
-                  $("#phone").focusout(
-                        function() {
-                           if (!phone.test($('#phone').val())
-                                 || $("#phone").val().length < 11) {
-                              $('#phoneMsg').css("color", "red");
-                              $('#phoneMsg').text("재확인 해주십시오.");
-                              $(this).val("");
-                           } else if (!phone.test($('#phone').val())
-                                 || $("#phone").val().length > 11) {
-                              $('#phoneMsg').css("color", "red");
-                              $('#phoneMsg').text("재확인 해주십시오.");
-                              $(this).val("");
-                           } else {
-                              $('#phoneMsg').text("");
-                           }
-                        });
+               //휴대폰1 검사
+               $("#phone").focusout(
+                     function() {
+                        if (!phone.test($('#phone').val())
+                              || $("#phone").val().length < 11) {
+                           $('#phoneMsg').css("color", "red");
+                           $('#phoneMsg').text("재확인 해주십시오.");
+                           $(this).val("");
+                        } else if (!phone.test($('#phone').val())
+                              || $("#phone").val().length > 11) {
+                           $('#phoneMsg').css("color", "red");
+                           $('#phoneMsg').text("재확인 해주십시오.");
+                           $(this).val("");
+                        } else {
+                           $('#phoneMsg').text("");
+                        }
+                     });
 
-               });
-       
-       $("#leave").on(
+            });
+      
+
+      $("#leave").on(
             "click",
             function() {
                window.open("/member/pwcheckok?id=${loginid}", "",
                      "width=500,height=200");
             });
-       
-       
-       </script>
+   </script>
    
 </body>
 </html>

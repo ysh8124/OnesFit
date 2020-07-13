@@ -12,10 +12,10 @@ import osf.spring.dto.BestProductDTO;
 import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.MemberDTO;
 import osf.spring.dto.OptionDTO;
+import osf.spring.dto.PopupDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
 import osf.spring.dto.QuestionDTO;
-import osf.spring.statics.Statics;
 
 @Service
 public class AdminService {
@@ -135,42 +135,9 @@ public class AdminService {
 	
 	/////////////////////////영재씨파트///////////////////////
 	//buylist
-		public List<BuyListDTO> selectByPage(int page){
-			return adao.selectByPageNo(page);
+		public List<BuyListDTO> selectByPage(Map<String, Object> selectParamBuylist){
+			return adao.selectByPageNo(selectParamBuylist);
 		}
-		
-		public String getPageNavi(int currentPage) throws Exception {
-			int recordTotalCount = adao.getArticleCount();
-			int pageTotalCount = 0;
-			if(recordTotalCount % Statics.RECORD_COUNT_PER_PAGE > 0) {
-				pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;
-			}else {
-				pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			}
-			if(currentPage < 1) {
-				currentPage = 1;
-			}else if(currentPage > pageTotalCount) {
-				currentPage = pageTotalCount;
-			}
-			int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
-			int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
-			if(endNavi > pageTotalCount) {
-				endNavi = pageTotalCount;
-			}
-			boolean needPrev = true; // <
-			boolean needNext = true; // >
-			if(startNavi == 1) {needPrev = false;}
-			if(endNavi == pageTotalCount) {needNext = false;}
-
-			StringBuilder sb = new StringBuilder();	
-			if(needPrev) {sb.append("<li class='page-item'><a class='page-link' href='buyList?page="+(startNavi-1)+"' tabindex='-1' aria-disabled='true'>< </a></li>");}
-			for(int i = startNavi;i <= endNavi;i++) {
-				sb.append("<li class='page-item'><a class='page-link' href='buyList?page="+i+"'>" + i + "</a></li>");
-			}
-			if(needNext) {sb.append("<li class='page-item'><a class='page-link' href='buyList?page="+(endNavi+1)+"'>></a></li>");}
-			return sb.toString();
-		}
-
 
 		public Object updateWhenStatusN(Map<String, Object> updateParam) {
 			return adao.updateWhenStatusN(updateParam);
@@ -189,45 +156,32 @@ public class AdminService {
 
 		
 		//question
-		public List<QuestionDTO> qSelectAll() {
-			return adao.qSelectAll();
-		}
-
-		public String getQuestionPageNavi(int currentPage) {
-			int recordTotalCount = adao.getQuestionArticleCount();
-			int pageTotalCount = 0;
-			if(recordTotalCount % Statics.RECORD_COUNT_PER_PAGE > 0) {
-				pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE + 1;	
-			}else {
-				pageTotalCount = recordTotalCount / Statics.RECORD_COUNT_PER_PAGE;
-			}
-			if(currentPage < 1) {
-				currentPage = 1;
-			}else if(currentPage > pageTotalCount) {
-				currentPage = pageTotalCount;
-			}
-			int startNavi = (currentPage - 1) / Statics.NAVI_COUNT_PER_PAGE * Statics.NAVI_COUNT_PER_PAGE + 1;
-			int endNavi = startNavi + Statics.NAVI_COUNT_PER_PAGE - 1;
-			if(endNavi > pageTotalCount) {
-				endNavi = pageTotalCount;
-			}
-			boolean needPrev = true; // <
-			boolean needNext = true; // >
-			if(startNavi == 1) {needPrev = false;}
-			if(endNavi == pageTotalCount) {needNext = false;}
-
-			StringBuilder sb = new StringBuilder();	
-			if(needPrev) {sb.append("<li class='page-item'><a class='page-link' href='question?page="+(startNavi-1)+"' tabindex='-1' aria-disabled='true'>< </a></li>");}
-			for(int i = startNavi;i <= endNavi;i++) {
-				sb.append("<li class='page-item'><a class='page-link' href='question?page="+i+"'>" + i + "</a></li>");
-			}
-			if(needNext) {sb.append("<li class='page-item'><a class='page-link' href='question?page="+(endNavi+1)+"'>></a></li>");}
-			return sb.toString();
+		public List<QuestionDTO> qSelectAll(Map<String, Object> updateParamQuestion) {
+			return adao.qSelectAll(updateParamQuestion);
 		}
 
 		public int answerInput(Map<String, Object> inputParam) {
 			return adao.answerInput(inputParam);
 			
+		}
+		
+		//PopUp
+		public int popupInsert(Map<String, Object> popupInsertParam) {
+			return adao.popupInsert(popupInsertParam);
+			
+		}
+
+		public List<BuyListDTO> selectPopupByPage() {
+			return adao.selectPopupByPage();
+		}
+
+		public Object popupShowUpdate(Map<String, Object> popupShow_ynUpdate) {
+			return adao.popupShowUpdate(popupShow_ynUpdate);
+			
+		}
+
+		public List<PopupDTO> selectPopupByY() {
+			return adao.selectPopupByY();
 		}
 
 		public List<Integer> visit() {

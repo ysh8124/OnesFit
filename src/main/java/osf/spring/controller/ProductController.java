@@ -204,42 +204,45 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="Makepayment", method=RequestMethod.POST)
-	@Transactional("txManager")
-	public String Makepayment(HttpServletRequest req,BuyListDTO bdto) throws Exception {
-		MemberDTO dto =(MemberDTO) session.getAttribute("loginInfo");
-		String parent_id = dto.getId();
-		int oseq =pdao.getOrderNextVal();
-		String[] pname = req.getParameterValues("pname");
-		String[] pcolor=req.getParameterValues("pcolor");
-		String[] psize=req.getParameterValues("psize");
-		String[] amount=req.getParameterValues("amount");
-		String[] point = req.getParameterValues("point");
-		int totalPrice = Integer.parseInt(req.getParameter("totalPrice"));
-		int product_num = Integer.parseInt(req.getParameter("product_num"));
-		int usePoint = 0;
-		try{usePoint=Integer.parseInt(req.getParameter("usepoint"));}catch(Exception e) {usePoint=0;}
+	   @Transactional("txManager")
+	   public String Makepayment(HttpServletRequest req,BuyListDTO bdto) throws Exception {
+	      MemberDTO dto =(MemberDTO) session.getAttribute("loginInfo");
+	      System.out.println(bdto.getPrice());
+	      String parent_id = dto.getId();
+	      int oseq =pdao.getOrderNextVal();
+	      String[] pname = req.getParameterValues("pname");
+	      String[] pcolor=req.getParameterValues("pcolor");
+	      String[] psize=req.getParameterValues("psize");
+	      String[] amount=req.getParameterValues("amount");
+	      String[] point = req.getParameterValues("point");
+	      int totalPrice = Integer.parseInt(req.getParameter("totalPrice"));
+	      String[] product_num = (req.getParameterValues("product_num"));
+	      String[] price = (req.getParameterValues("price"));
+	      int usePoint = 0;
+	      try{usePoint=Integer.parseInt(req.getParameter("usepoint"));}catch(Exception e) {usePoint=0;}
 
 
-		for(int i=0; i<pcolor.length;i++) {
-			bdto.setProduct_num(product_num);
-			bdto.setPname(pname[i]);
-			bdto.setParent_id(parent_id);
-			bdto.setPcolor(pcolor[i]);
-			bdto.setPsize(psize[i]);
-			bdto.setAmount(Integer.parseInt(amount[i]));
-			bdto.setAddpoint(Integer.parseInt(point[i]));
-			bdto.setOseq(oseq);
-			pservice.BuyList(bdto);			
-		}
-		OrderDTO odto = new OrderDTO();
-		odto.setAmount(totalPrice);
-		odto.setId(parent_id);
-		odto.setOseq(oseq);
-		odto.setUsepoint(usePoint);
-		pservice.orderInsert(odto);	
-		dto.setPoint(pservice.selectPoint(parent_id));
-		return "redirect:/";
-	}
+	      for(int i=0; i<pcolor.length;i++) {
+	         bdto.setProduct_num(Integer.parseInt(product_num[i]));
+	         bdto.setPname(pname[i]);
+	         bdto.setParent_id(parent_id);
+	         bdto.setPcolor(pcolor[i]);
+	         bdto.setPsize(psize[i]);
+	         bdto.setAmount(Integer.parseInt(amount[i]));
+	         bdto.setAddpoint(Integer.parseInt(point[i]));
+	         bdto.setPrice(Integer.parseInt(price[i]));
+	         bdto.setOseq(oseq);
+	         pservice.BuyList(bdto);         
+	      }
+	      OrderDTO odto = new OrderDTO();
+	      odto.setAmount(totalPrice);
+	      odto.setId(parent_id);
+	      odto.setOseq(oseq);
+	      odto.setUsepoint(usePoint);
+	      pservice.orderInsert(odto);   
+	      dto.setPoint(pservice.selectPoint(parent_id));
+	      return "redirect:/";
+	   }
 	
 	@RequestMapping("payMent2")
 	   public String payMent2(CartDTO cdto, Model model) throws Exception {

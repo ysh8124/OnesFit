@@ -28,6 +28,8 @@
    <resources mapping="/OSF/**" location="/OSF/" />
    <resources location="/upload/product/" mapping="/product/**"/>
    <resources location="/upload/product/title/"   mapping="/title/**"/>
+   <resources location="/resources/plugins/" mapping="/plugins/**"/>
+   <resources location="/upload/popup/" mapping="/popup/**"/>
    
 
       <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -37,8 +39,8 @@
    </beans:bean>
    
    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-      <beans:property name="maxUploadSize" value="10485760"/>
-      <beans:property name="maxInMemorySize" value="10485760"></beans:property>
+      <beans:property name="maxUploadSize" value="52428800"/>
+      <beans:property name="maxInMemorySize" value="52428800"></beans:property>
    </beans:bean>
    
    <beans:bean id="logaop" class="osf.spring.aop.BlockingAspect" />

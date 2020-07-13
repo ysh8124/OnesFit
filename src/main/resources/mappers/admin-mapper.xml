@@ -62,45 +62,83 @@ union select nvl(count(*),0),5 sort from visit where <![CDATA[trunc(vdate,'MM')<
 
 <!--                                    영재씨파트                                                           -->
 
-<!-- buy_list -->
-	<select id="selectList" resultType="osf.spring.dto.BuyListDTO">
-		<!-- select * from buy_list where seq between #{start} and #{end} -->
-		select * from (select buy_list.*, row_number() over(order by bseq desc) as rnum from buy_list) where rnum between ${start} and ${end}
-	</select>
-	
-	<select id="getArticleCount" resultType="int">
-		select count(*) from buy_list
-	</select>
-	
-	<update id="updateWhenStatusN" >
-		update buy_list set status = '입금전', send_number = 0 , send_money_yn = 'N' where bseq = #{bseq}
-	</update>
-	
-	<update id="updateWhenStatusY0">
-		update buy_list set status = '입금완료/배송준비중', send_money_yn = 'Y' where bseq = #{bseq}
-	</update>
-	
-	<update id="updateWhenStatusYX">
-		update buy_list set status = '배송중', send_number = #{send_number} where bseq = #{bseq}
-	</update>
-	
-	
-	
-	<!-- question -->
-	<select id="qSelectAll" resultType = "osf.spring.dto.QuestionDTO" >
-		select * from question
-	</select>
-	<select id="getQuestionArticleCount" resultType="int">
-		select count(*) from Question
-	</select>
-	<update id="answerUpdate">
-		update question set answer_yn = 'Y' where bno = #{parent_bno}
-	</update>
-	
-	
-	<!-- answer -->
-	<insert id="answerInput">
-		insert into answer values(answer_seq.nextval, #{parent_bno}, #{contents})
-	</insert>
+ <!-- buy_list -->
+   <select id="selectList" resultType="osf.spring.dto.BuyListDTO">
+      select * from buy_list
+      <choose>
+         <when test="BuylistSelected != null">
+            where ${BuylistSelected} = #{input}
+         </when>
+         <otherwise>
+         </otherwise>
+      </choose>
+      order by bseq desc
+   </select>
+
+   <update id="updateWhenStatusN">
+      update buy_list set status =
+      '입금전', send_number = 0 ,
+      send_money_yn = 'N' where bseq = #{bseq}
+   </update>
+
+   <update id="updateWhenStatusY0">
+      update buy_list set status = '입금완료/배송준비중',
+      send_money_yn = 'Y' where bseq = #{bseq}
+   </update>
+
+   <update id="updateWhenStatusYX">
+      update buy_list set status = '배송중', send_number =
+      #{send_number} where bseq = #{bseq}
+   </update>
+
+
+
+   <!-- question -->
+   <select id="qSelectAll" resultType="osf.spring.dto.QuestionDTO">
+      select * from question
+      <choose>
+         <when test="questionSelected != null">
+            where ${questionSelected} = #{input}
+         </when>
+         <otherwise>
+         </otherwise>
+      </choose>
+      order by bno desc
+   </select>
+   <update id="answerUpdate">
+      update question set answer_yn = 'Y' where bno =
+      ${parent_bno}
+   </update>
+
+
+   <!-- answer -->
+   <insert id="answerInput">
+      insert into answer values(answer_seq.nextval,
+      ${parent_bno}, #{contents})
+   </insert>
+
+
+
+   <!-- popup -->
+   <insert id="popupInsert">
+      insert into popup
+      values(popup_seq.nextval, #{title},
+      #{sysFileName}, default)
+   </insert>
+   <select id="selectPopupByPage"
+      resultType="osf.spring.dto.PopupDTO">
+      select * from popup
+   </select>
+
+   <update id="popupShowUpdate">
+      update popup set show_yn = #{show_yn} where popup_seq
+      = ${popup_seq}
+   </update>
+
+   <select id="selectPopupByY" resultType="osf.spring.dto.PopupDTO">
+      select * from popup where
+      show_yn = 'Y'
+   </select>
+
 
 </mapper>

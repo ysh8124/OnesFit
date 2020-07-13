@@ -12,10 +12,10 @@ import osf.spring.dto.BestProductDTO;
 import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.MemberDTO;
 import osf.spring.dto.OptionDTO;
+import osf.spring.dto.PopupDTO;
 import osf.spring.dto.ProductDTO;
 import osf.spring.dto.ProductImgDTO;
 import osf.spring.dto.QuestionDTO;
-import osf.spring.statics.Statics;
 
 @Repository
 public class AdminDAO {
@@ -165,15 +165,8 @@ public class AdminDAO {
 	
 	/////////////////////영재씨파트 ////////////////////////////////
 	//buyList
-		public List<BuyListDTO> selectByPageNo(int page){
-			int start = page * Statics.RECORD_COUNT_PER_PAGE - (Statics.RECORD_COUNT_PER_PAGE-1);
-			int end = start + (Statics.RECORD_COUNT_PER_PAGE-1);
-			Map<String, Integer> param = new HashMap<>();
-			param.put("start",start);
-			param.put("end", end);
-			
-			return mybatis.selectList("admin.selectList",param);
-			
+		public List<BuyListDTO> selectByPageNo(Map<String, Object> selectParamBuylist){
+			return mybatis.selectList("admin.selectList", selectParamBuylist);		
 		}
 		
 		public int getArticleCount() {
@@ -194,17 +187,30 @@ public class AdminDAO {
 
 		
 		//Question
-		public List<QuestionDTO> qSelectAll() {
-			return mybatis.selectList("admin.qSelectAll");
+		public List<QuestionDTO> qSelectAll(Map<String, Object> updateParamQuestion) {
+			return mybatis.selectList("admin.qSelectAll", updateParamQuestion);
 		}
-
-		public int getQuestionArticleCount() {
-			return mybatis.selectOne("admin.getQuestionArticleCount");
-		}
-
+		
 		public int answerInput(Map<String, Object> inputParam) {
 			mybatis.update("admin.answerUpdate", inputParam);
 			return mybatis.insert("admin.answerInput", inputParam);
+		}
+
+		//popup
+		public int popupInsert(Map<String, Object> popupInsertParam) {
+			return mybatis.insert("admin.popupInsert", popupInsertParam);
+		}
+
+		public List<BuyListDTO> selectPopupByPage() {
+			return mybatis.selectList("admin.selectPopupByPage");
+		}
+
+		public Object popupShowUpdate(Map<String, Object> popupShow_ynUpdate) {
+			return mybatis.update("admin.popupShowUpdate", popupShow_ynUpdate);
+		}
+
+		public List<PopupDTO> selectPopupByY() {
+			return mybatis.selectList("admin.selectPopupByY");
 		}
 
 		public List<Integer> visit() {
