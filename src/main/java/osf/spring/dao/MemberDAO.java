@@ -226,4 +226,12 @@ public class MemberDAO {
 		return mybatis.update("Member.minusBill",map);
 	}
 
+	public List<String> myBuyList(String id) {
+		return mybatis.selectList("Member.myBuyList",id);
+	}
+
+	public int onlyBuy(int bseq) {
+		return mybatis.update("Member.onlyBuy",bseq);
+	}
+
 }

@@ -73,6 +73,12 @@
       $("#buybtn").on("click", function () {
          location.href = "/product/payMent2?parent_id=${loginid}";
       })
+      
+      $(".confirm").on("click",function(){
+    	  if(confirm("구매 확정 후에는 교환/환불이 어려울 수 있습니다.")){
+    		  location.href="/member/onlyBuy?bseq="+$(this).parent().prev().html();
+    	  }return false;
+      })
    })
    </script>
     </head>
@@ -385,6 +391,11 @@
                <c:when test="${i.status eq '배송중'}">
                <div style="display:none;">${i.bseq}</div>
                <div style="width: 20%; float: left; margin-top: 27px;">${i.status}<br><button type="button" class="confirm">구매확정</button></div>
+                <div style="width: 10%; float: left; margin-top: 27px;">전화문의</div>
+               </c:when>
+                <c:when test="${i.status eq '배송완료'}">
+               <div style="display:none;">${i.bseq}</div>
+               <div style="width: 20%; float: left; margin-top: 27px;">${i.status}</div>
                 <div style="width: 10%; float: left; margin-top: 27px;">전화문의</div>
                </c:when>
                </c:choose>

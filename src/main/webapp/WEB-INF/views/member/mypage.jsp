@@ -17,6 +17,8 @@
     
     <script>
     $(function(){
+    	
+    	
     	$(".tab").on("click", function() {
             $(".box_li").css("display", "block");
             var tab = $(this).val();
@@ -260,15 +262,6 @@
                                            
                                         </li>
                                     </ul>
-                                    <ul>
-                                        <li style="width: 50%; text-align: left;">
-                                            > 총 적립금 
-
-                                        </li>
-                                        <li style="width: 50%">
-                                            0,000 원
-                                        </li>
-                                    </ul>
 
                                 </td>
                                 <td>
@@ -315,21 +308,41 @@
                                     배송완료
                                 </td>
                             </tr>
+                          
                             <tr style="height: 40px">
-                                <td style="width: 25%">
+                                <td style="width: 25%" id="status1">
                                     0
                                 </td>
-                                <td style="width: 25%">
+                                <td style="width: 25%" id="status2">
                                     0
                                 </td>
-                                <td style="width: 25%">
+                                <td style="width: 25%" id="status3">
                                     0
                                 </td>
-                                <td style="width: 25%">
+                                <td style="width: 25%" id="status4">
                                     0
                                 </td>
                             </tr>
                         </tbody>
+                        <script>
+                            var status1 = 0;
+                            var status2 = 0;
+                            var status3 = 0;
+                            var status4 = 0;
+                        </script>
+                         <c:forEach var="stat" items="${mylist}" varStatus="t">
+                            <script>
+                            if("${stat}" == "입금전"){status1++;}
+                            if("${stat}" == "입금완료/배송준비중"){status2++;}
+                            if("${stat}" == "배송중"){status3++;}
+                            if("${stat}" == "배송완료"){status4++;}
+                            if("${t.last}"){
+                            $("#status1").html(status1);
+                            $("#status2").html(status2);
+                            $("#status3").html(status3);
+                            $("#status4").html(status4);}
+                            </script>
+                            </c:forEach>
                         <tfoot>
                             <tr >
                                 <td colspan="4" style="text-align: left; padding: 5px;">
@@ -348,7 +361,7 @@
                         <div>
                             <a href=""><h7><b>order</b>&nbsp; 주문내역 조회</h7></a>
                             <br><br>
-                            <p><a href="" style="color: #999">고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.<br>비회원의 경우, 주문서의 주문번호와 비밀번호로 주문조회가 가능합니다.</a></p>
+                            <p><a href="/member/orderList?id=${loginid }" style="color: #999">고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.</p>
                         </div>
                         <div>
                              <a href="/member/toProfile?id=${loginInfo.id}"><h7><b>PROFILE</b>&nbsp; 회원 정보 및 수정</h7></a>

@@ -42,7 +42,7 @@ public class HomeController {
 		List<ProductDTO> color = pservice.color();
 		model.addAttribute("color",color);
 		model.addAttribute("products", products);
-		if(tab2 != "") {
+		if(!"".equals(tab2)) {
 		model.addAttribute("tab2", tab2);
 		}else {
 			tab2 = "";

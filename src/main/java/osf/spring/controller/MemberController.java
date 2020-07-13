@@ -109,6 +109,8 @@ public class MemberController {
 		MemberDTO dto = (MemberDTO)session.getAttribute("loginInfo");
 		String id = dto.getId();
 		int useMoney = mservice.getUseMoney(id);
+		List<String> mylist = mservice.myBuyList(id);
+		model.addAttribute("mylist",mylist);
 		model.addAttribute("useMoney",useMoney);
 		return "member/mypage";
 	}
@@ -417,13 +419,18 @@ public class MemberController {
 	
 	@RequestMapping("orderCancel")
 	public String orderCancel(int bseq,int amount,int oseq) {
-		System.out.println(oseq);
 		int result = mservice.orderCancel(bseq,amount,oseq);
 		if(result > 0) {
 			return "redirect:/member/orderList";
 		}else {
 			return "notice/error";
 		}
+	}
+	
+	@RequestMapping("onlyBuy")
+	public String onlyBuy(int bseq) {
+		mservice.onlyBuy(bseq);
+		return "redirect:/member/tomyPage";
 	}
 	
 

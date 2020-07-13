@@ -128,5 +128,9 @@
 	<update id="minusBill">update order_bill set amount=amount-${price} where oseq=${oseq}</update>
 
 	<update id="returnPoint">update member set point=point+${usePoint} where id=#{id}</update>
+	
+	<select id="myBuyList" resultType="String">select status from buy_list where parent_id=#{value}</select>
+	
+	<update id="onlyBuy">update buy_list set status='배송완료' where bseq=${value}</update>
 
 </mapper>

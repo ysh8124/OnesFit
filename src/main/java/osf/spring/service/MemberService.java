@@ -259,5 +259,13 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	public List<String> myBuyList(String id) {
+		return mdao.myBuyList(id);
+	}
+
+	public int onlyBuy(int bseq) {
+		return mdao.onlyBuy(bseq);
+	}
 	
 }
