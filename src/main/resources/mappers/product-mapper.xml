@@ -84,4 +84,6 @@
 	<select id="color" resultType="osf.spring.dto.OptionDTO">
       select distinct parent_seq, color from product_option order by parent_seq
    </select>
+   
+   <select id="getAnswer" resultType="osf.spring.dto.AnswerDTO">select * from answer where parent_bno=${value}</select>
 </mapper>

@@ -24,6 +24,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import osf.spring.dao.ProductDAO;
+import osf.spring.dto.AnswerDTO;
 import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.ImageDTO;
@@ -126,9 +127,11 @@ public class ProductController {
 		List<QuestionDTO> qdto = pservice.QuestionByPseq(pseq);
 		model.addAttribute("qdto", qdto);
 		for(OptionDTO dto:options) {
-			color.add(dto.getColor());			
+			color.add(dto.getColor());
 		}
-		model.addAttribute("color", color);	
+		model.addAttribute("color", color);
+		List<AnswerDTO> alist = pservice.getAnswer(qdto);
+		model.addAttribute("alist",alist);
 		//		model.addAttribute("options", null);
 		return "product/productDetail";		
 	}

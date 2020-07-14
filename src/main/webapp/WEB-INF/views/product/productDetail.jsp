@@ -1232,7 +1232,7 @@ p{line-height: 5px;}
                                  <c:when test="${loginInfo.id eq i.writer}">
                                     <tr class="answer" style="height: 30px; padding: 10px;">
                                        <td style="border-right: hidden">${i.bno }</td>
-                                       <td style="border-right: hidden">${i.title }</td>
+                                       <td style="border-right: hidden" class="qtitle">${i.title }</td>
                                        <td style="border-right: hidden">${i.writer }</td>
                                        <td>${i.write_date }</td>
                                     </tr>
@@ -1257,20 +1257,24 @@ p{line-height: 5px;}
                                     <div style="height: 100px;">${i.content }</div>
 
 
-                                    <div id="answerBox" style="height: 80px; display: none;">
+                                    <div class="answerBox" style="height: 80px; display: none;">
                                        <p
                                           style="border-top: 1px solid #dfdfdf; border-bottom: 1px solid #dfdfdf; padding: 5px">
                                           <b>원에스핏 (ONESFIT)</b>
                                        </p>
-                                    
-                                       <div class="OSF_qanswer"></div>
-                                       
+                                   <c:forEach var="a" items="${alist}">
+                                    <c:choose>
+                                    <c:when test="${a.parent_bno == i.bno}">
+                                       <div class="OSF_qanswer">${a.contents}</div>
+                                       </c:when>
+                                       </c:choose>
+                                       </c:forEach>
                                     </div> 
                                     
                                     
                                     <c:choose>
                                        <c:when test="${loginInfo.id eq i.writer}">
-                                          <div style="text-align: right; margin-top: 50px;">
+                                        <div style="text-align: right; margin-top: 50px;">
                                              <input type="button" value="삭제"
                                                 style="background-color: white;"
                                                 onclick="questiondelete(${i.bno})">
@@ -1419,6 +1423,12 @@ p{line-height: 5px;}
                                return false;
                             }
                         })
+                        
+                        $(".qtitle").on("click",function(){
+                        	$(this).closest("tr").next().children().children(".answerBox").css("display","block");
+                        })
+                        
+                        
                 </script>
    <script> 
                         function changeColor() {

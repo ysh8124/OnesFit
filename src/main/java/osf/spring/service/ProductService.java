@@ -1,5 +1,6 @@
 package osf.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import osf.spring.dao.ProductDAO;
+import osf.spring.dto.AnswerDTO;
 import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.ImageDTO;
@@ -96,4 +98,15 @@ public class ProductService {
 	   public List<ProductDTO> color() {
 	      return pdao.color();
 	   }
+
+	 @Transactional("txManager")
+	public List<AnswerDTO> getAnswer(List<QuestionDTO> qdto) {
+		List<AnswerDTO> alist = new ArrayList<>();
+		for(QuestionDTO q : qdto) {
+			if(q.getAnswer_yn().contentEquals("Y")) {
+			alist.add((AnswerDTO) pdao.getAnswer(q.getBno()));
+			}
+		}
+		return alist;
+	}
 }

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import osf.spring.dto.AnswerDTO;
 import osf.spring.dto.BuyListDTO;
 import osf.spring.dto.CartDTO;
 import osf.spring.dto.ImageDTO;
@@ -100,4 +101,8 @@ public class ProductDAO {
 	  public List<ProductDTO> color(){
 	      return mybatis.selectList("Product.color");
 	   }
+	  
+	  public AnswerDTO getAnswer(int pseq){
+		  return mybatis.selectOne("Product.getAnswer",pseq);
+	  }
 }
