@@ -62,7 +62,6 @@
     			 			amount = $(item).html();
     			 		}else if($(item).attr("class") == "oseq"){
     			 			oseq = $(item).html();
-    			 			alert(oseq);
     			 		}
     			 	})
     			 	

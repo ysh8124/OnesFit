@@ -203,7 +203,7 @@ border: 1px solid #dfdfdf;
 						<li><a href="/admin/buyList"> 주문 관리 </a></li>
 						<li><a href="/admin/memberAdmin">회원 관리</a></li>
 						<li><a href="/admin/question">Q&A 관리</a></li>
-						<li><a href="/daily/daily_list">DAILY 게시판</a></li>
+						<li><a href="/daily/daily_list?page=1">DAILY 게시판</a></li>
 						<li><a href="/notice/notice_list?page=1">공지사항 </a></li>
 						<li><a href="/admin/popup">팝업 관리</a></li>
 						<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>

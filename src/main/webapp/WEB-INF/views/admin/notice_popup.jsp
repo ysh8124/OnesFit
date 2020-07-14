@@ -19,7 +19,7 @@
 
 #check {
 	position: fixed;
-	right: 0px;
+	right: 10px;
 	bottom: 0px;
 }
 </style>

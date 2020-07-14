@@ -1257,13 +1257,18 @@ p{line-height: 5px;}
                                     <div style="height: 100px;">${i.content }</div>
 
 
-                                    <div style="height: 80px; display: none;">
+                                    <div id="answerBox" style="height: 80px; display: none;">
                                        <p
                                           style="border-top: 1px solid #dfdfdf; border-bottom: 1px solid #dfdfdf; padding: 5px">
                                           <b>원에스핏 (ONESFIT)</b>
                                        </p>
+                                    
                                        <div class="OSF_qanswer"></div>
-                                    </div> <c:choose>
+                                       
+                                    </div> 
+                                    
+                                    
+                                    <c:choose>
                                        <c:when test="${loginInfo.id eq i.writer}">
                                           <div style="text-align: right; margin-top: 50px;">
                                              <input type="button" value="삭제"

@@ -213,7 +213,7 @@ div {
 	padding: 8px;
 	position: absolute;
 	width: 375px;
-	height: 430px;
+	height: 410px;
 	color: white;
 }
 
@@ -222,7 +222,7 @@ div {
 	display: block;
 	margin-left: 8px;
 	width: 360px;
-	height: 413px;
+	height: 383px;
 	font-size: 22px;
 	font-family: 'S-CoreDream-6Bold';
 	color: white;
@@ -382,7 +382,7 @@ div {
 
 									<a href="/product/productDetail?pseq=${i.pseq}" id="n_hover"
 										style="text-decoration: none; color: #585858"> <img
-										src="/title/${i.title_img}"></a>
+										src="/title/${i.title_img}" style="height: 400px"></a>
 
 									<ul class="product_info">
 
@@ -420,7 +420,7 @@ div {
 					<div>
 						COMPANY : ONESFIT <br> PHONE : 010-7777-7777 <br> 사업자 번호
 						: 145-51-00571 <br> 주소 : 강원도 원주시 우산동 상지대길 9 (402호) <br>
-						OWNER : 원에스핏 | WEB MANAGER : 잊재웡 <br> @ OSF ONESFIT
+						OWNER : 원에스핏 | WEB MANAGER : 이재원 <br> @ OSF ONESFIT
 
 					</div>
 				</div>

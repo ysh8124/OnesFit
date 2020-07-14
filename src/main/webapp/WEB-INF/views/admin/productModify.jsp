@@ -230,8 +230,8 @@
                         const fileName = file.name;
                         html += '<img src="'+URL.createObjectURL(file)+'" onclick="document.all.files2.click();">'
                         const fileEx = fileName.slice(fileName.indexOf(".") + 1).toLowerCase();
-                        if(fileEx != "jpg" && fileEx != "png" &&  fileEx != "gif" &&  fileEx != "bmp" && fileEx != "wmv" && fileEx != "mp4" && fileEx != "avi"){
-                            alert("파일은 (jpg, png, gif, bmp, wmv, mp4, avi) 형식만 등록 가능합니다.");
+                        if(fileEx != "jpg" && fileEx != "png" &&  fileEx != "gif" &&  fileEx != "bmp" && fileEx != "wmv" && fileEx != "mp4" && fileEx != "avi" && fileEx != "jpeg"){
+                            alert("파일은 (jpg, png, gif, bmp, wmv, mp4, avi, jpeg) 형식만 등록 가능합니다.");
                             resetFile();
                             return false;
                         }
@@ -337,7 +337,7 @@
 						<li><a href="/admin/buyList"> 주문 관리 </a></li>
 						<li><a href="/admin/memberAdmin">회원 관리</a></li>
 						<li><a href="/admin/question">Q&A 관리</a></li>
-						<li><a href="/daily/daily_list">DAILY 게시판</a></li>
+						<li><a href="/daily/daily_list?page=1">DAILY 게시판</a></li>
 						<li><a href="/notice/notice_list?page=1">공지사항 </a></li>
 						<li><a href="/admin/popup">팝업 관리</a></li>
 						<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>
@@ -429,7 +429,7 @@
 										<script>$("#xbox2").css("border","none");</script>
 										<c:forEach var="i" items="${img }">
 											<img src="/product/${pdto.pseq}/${i}"
-												onclick=document.all.files.click();>
+												onclick=document.all.files2.click();>
 										</c:forEach>
 									</c:when>
 									<c:otherwise>

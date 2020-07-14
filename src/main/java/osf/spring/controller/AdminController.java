@@ -156,7 +156,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("productModifyProc")
-	public String productModify(HttpServletRequest request, MultipartFile[] files, MultipartFile file)
+	public String productModify(HttpServletRequest request, MultipartFile[] files2, MultipartFile file)
 			throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String pname = request.getParameter("pname");
@@ -180,7 +180,7 @@ public class AdminController {
 		String title_img = request.getParameter("title_img");
 		String sysname = "";
 		System.out.println(file.getSize());
-		System.out.println(files.length);
+		System.out.println(files2.length);
 		if (!file.isEmpty()) {
 			this.deleteFile2(seq, title_img);
 			sysname = this.filesUpload2(file, seq);
@@ -188,9 +188,9 @@ public class AdminController {
 			sysname = title_img;
 		}
 
-		if (files[0].getOriginalFilename() != "") {
+		if (!"".contentEquals(files2[0].getOriginalFilename())) {
 			this.deleteFile(seq);
-			List<ProductImgDTO> pdto = this.filesUpload(files, seq);
+			List<ProductImgDTO> pdto = this.filesUpload(files2, seq);
 			aservice.modifyImg(pdto, seq);
 		}
 
@@ -253,7 +253,7 @@ public class AdminController {
 		aservice.addImg(pdto, seq);
 
 		int result = aservice.productAdd(pname, price, content, category, sysname);
-		if (result > 0) {
+		
 			List<OptionDTO> odto = new ArrayList<>();
 			int index = 0;
 			for (String key : map.keySet()) {
@@ -268,9 +268,8 @@ public class AdminController {
 				index++;
 			}
 			aservice.addOption(odto);
-		}
-		return "redirect:/admin/adminMain";
 
+		return "redirect:/admin/adminMain";
 	}
 
 	@RequestMapping("productDelete")
@@ -337,7 +336,10 @@ public class AdminController {
 
 	@RequestMapping("BuyListUpdate")
 	@ResponseBody
-	public Map<String, Object> BuyListModify(int bseq, String status, String send_money_yn, long send_number) {
+	public Object BuyListModify(int bseq, String status, String send_money_yn, long send_number) {
+		
+		System.out.println(bseq + status + send_money_yn + send_number);
+		
 		Map<String, Object> updateParam = new HashMap<>();
 		updateParam.put("bseq", bseq);
 		updateParam.put("status", status);
@@ -370,7 +372,7 @@ public class AdminController {
 
 	@RequestMapping("AnswerInput")
 	@ResponseBody
-	public int AnswerInput(int bno, String aInput) {
+	public Object AnswerInput(int bno, String aInput) {
 		Map<String, Object> inputParam = new HashMap<>();
 		inputParam.put("parent_bno", bno);
 		inputParam.put("contents", aInput);
@@ -417,7 +419,7 @@ public class AdminController {
 
 	@RequestMapping("popupShow")
 	@ResponseBody
-	public Map<String, Object> popupShowUpdate(int popup_seq, String show_yn) {
+	public Object popupShowUpdate(int popup_seq, String show_yn) {
 		Map<String, Object> popupShow_ynUpdate = new HashMap<>();
 		popupShow_ynUpdate.put("popup_seq", popup_seq);
 		popupShow_ynUpdate.put("show_yn", show_yn);

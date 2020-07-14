@@ -241,6 +241,7 @@ public class ProductController {
 	      odto.setUsepoint(usePoint);
 	      pservice.orderInsert(odto);   
 	      dto.setPoint(pservice.selectPoint(parent_id));
+	    	            
 	      return "redirect:/";
 	   }
 	

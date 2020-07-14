@@ -170,7 +170,7 @@
 						<li><a href="/admin/buyList"> 주문 관리 </a></li>
 						<li><a href="/admin/memberAdmin">회원 관리</a></li>
 						<li><a href="/admin/question">Q&A 관리</a></li>
-						<li><a href="/daily/daily_list">DAILY 게시판</a></li>
+						<li><a href="/daily/daily_list?page=1">DAILY 게시판</a></li>
 						<li><a href="/notice/notice_list?page=1">공지사항 </a></li>
 						<li><a href="/admin/popup">팝업 관리</a></li>
 						<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>
@@ -276,7 +276,7 @@
 									<div class="chatBox"
 										style="width: 90%; margin-left: 5%; margin-top: 40px; margin-bottom: 10px;">
 										<div class="totalContent" style="height: 100px; width: 100%;">${i.content }</div>
-										<div class="editor input" style="height: 100px; width: 100%;"
+										<div class="editor input" style="height: 100px; width: 100%; text-align :left;"
 											contenteditable="true"></div>
 										<div style="width: 10%; float: right; margin-top: 20px;">
 											<input type="button" value="댓글"
