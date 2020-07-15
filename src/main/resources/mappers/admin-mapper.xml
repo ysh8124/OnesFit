@@ -12,11 +12,11 @@
 <update id="updatePoint">update member set point=${point} where id=#{id}</update>
 
 
-<insert id="addProduct">insert into product values(product_seq.nextval,#{pname},${price},#{category},default,#{content},#{img},default,default,default)</insert>
+<insert id="addProduct">insert into product values(${product_seq},#{pname},${price},#{category},default,#{content},#{img},default,default,default)</insert>
 
 <insert id="addImg">insert into product_img values(${img_seq},#{oriName},#{sysName})</insert>
 	
-	<select id="getSequence" resultType="int">select max(pseq) from product</select>
+	<select id="getSequence" resultType="int">select product_seq.nextval from dual</select>
 
 <select id="getProduct" resultType="osf.spring.dto.ProductDTO">select * from product order by pseq</select>
 
@@ -29,6 +29,7 @@
 <select id="getImg" resultType="String">select sysname from product_img where product_seq=${value}</select>
  
  <delete id="deleteImg">delete from product_img where product_seq=${value}</delete>
+
  
  <delete id="deleteOption">delete from product_option where parent_seq=${value}</delete>
  
@@ -139,6 +140,15 @@ union select nvl(count(*),0),5 sort from visit where <![CDATA[trunc(vdate,'MM')<
       select * from popup where
       show_yn = 'Y'
    </select>
+   
+   <delete id="pupupDelete">
+      delete from popup where popup_seq =
+      #{popup_seq}
+   </delete>
+   
+   <delete id="buyListDelete">
+      delete from buy_list where bseq = #{bseq}
+   </delete>
 
 
 </mapper>
