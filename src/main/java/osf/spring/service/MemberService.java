@@ -239,20 +239,21 @@ public class MemberService {
 		int result = 0;
 		int usePoint = 0;
 		int price = 0;
-		if(YN.contentEquals("N")) {
-			boolean buylistYN = mdao.buylistYN(oseq);
+		if("N".contentEquals(YN)) {
+			int buylistYN = mdao.buylistYN(oseq);
 			usePoint = mdao.getUsePoint(oseq); // 사용포인트 가져오기
 			if(usePoint != 0) {
-				mdao.returnPoint(id,usePoint);//포인트 돌려주기	
-				
+				mdao.returnPoint(id,usePoint);//포인트 돌려주기		
 			}
-			if(buylistYN) {
+
+			if(buylistYN > 1) {
 				BuyListDTO bdto = mdao.getBuyList(bseq);
 				int product_num = bdto.getProduct_num();
 				ProductDTO pdto = pdao.productSelectByPseq(product_num);
 				price = pdto.getPrice();
 				result = mdao.minusBill(oseq,price);
 			}else {
+				System.out.println(oseq);
 			mdao.billCancel(oseq);//빌지삭제
 			}
 			result = mdao.orderCancel(bseq);//바이리스트삭제

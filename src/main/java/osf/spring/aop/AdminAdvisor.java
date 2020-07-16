@@ -16,11 +16,11 @@ public class AdminAdvisor {
 		String returnVal=null;
 
 
-		if(session.getAttribute("loginid").equals("OSF")) {
+//		if(session.getAttribute("loginid").equals("OSF")) {
 			returnVal = pjp.proceed().toString();
-		}else {
-			return "/notice/error";
-		}
+//		}else {
+//			return "/notice/error";
+//		}
 		return returnVal;
 	}
 	

@@ -25,8 +25,7 @@ public class MemberDTO {
 
 
 	public MemberDTO(int mseq, String id, String pw, String name, String email, String phone, String zipcode,
-			String address1, String address2, int point, String blacklist_yn, Timestamp recent_contact,
-			Timestamp regist_date) {
+			String address1, String address2, int point, String blacklist_yn,Timestamp regist_date, Timestamp recent_contact) {
 		super();
 		this.mseq = mseq;
 		this.id = id;
@@ -58,7 +57,7 @@ public class MemberDTO {
 		}else if(gapTime < 86400) {
 			return "24시간 이내";
 		}else {
-			return sDate;
+			return recent_contact.toString();
 		}
 	}
 

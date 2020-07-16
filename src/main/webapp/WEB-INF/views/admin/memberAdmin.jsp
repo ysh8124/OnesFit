@@ -251,7 +251,14 @@ border: 1px solid #dfdfdf;
 								<td class="phone">${m.phone }</td>
 								<td>${m.email }</td>
 								<td class="date">${m.regist_date }</td>
+								<c:choose>
+								<c:when test="${m.sDate eq ''}">
+								<td class="date">${m.sDate}</td>
+								</c:when>
+								<c:otherwise>
 								<td>${m.sDate}</td>
+								</c:otherwise>
+								</c:choose>
 								<td><input type="text" class="point" value="${m.point }"
 									style="width: 80px"></td>
 								<td align=center>${m.blacklist_yn }</td>

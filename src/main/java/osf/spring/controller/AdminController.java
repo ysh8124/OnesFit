@@ -120,9 +120,6 @@ if(folder_list != null) {
 
 	@Autowired
 	private HttpSession session;
-	
-	@Autowired
-	private DataSourceTransactionManager txManager;
 
 	@RequestMapping("adminMain")
 	public String goAdminMain(Model model) {
@@ -257,10 +254,11 @@ if(folder_list != null) {
 
 		int seq = aservice.getProductSequence();
 
-		String sysname = this.filesUpload2(file, seq);
-		System.out.println("상품번호가? " + seq);
-		List<ProductImgDTO> pdto = this.filesUpload(files2, seq);
-		aservice.addImg(pdto, seq);
+//		String sysname = this.filesUpload2(file, seq);
+//		System.out.println("상품번호가? " + seq);
+//		List<ProductImgDTO> pdto = this.filesUpload(files2, seq);
+//		aservice.addImg(pdto, seq);
+		String sysname = "img.jsp";
 
 		aservice.productAdd(seq,pname, price, content, category, sysname);
 		
@@ -300,7 +298,6 @@ if(folder_list != null) {
 
 	@RequestMapping("memberBlack")
 	public String memberBlack(String id) {
-		System.out.println(id);
 		aservice.memberBlack(id);
 		return "redirect:/admin/memberAdmin";
 	}

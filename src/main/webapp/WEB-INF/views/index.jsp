@@ -452,9 +452,8 @@ div {
 					<br>
 					<li>국민 5591-010-4168-906</li>
 					<li>ONESFIT (권성택)</li>
-				</ul>
-			</div>
-
+				</ul>			
+			</div>	
 		</div>
 	</div>
 	<script>

@@ -365,7 +365,7 @@ div {
 
 								<thead>
 									<tr>
-										<th scope="col" class=""><input type="checkbox" id="allcheck"></th>
+										<th scope="col"><input type="checkbox" id="allCheck"></th>
 										<th scope="col">이미지</th>
 										<th scope="col">상품정보</th>
 										<th scope="col">판매가</th>
@@ -633,8 +633,8 @@ div {
 													<td><input type="text" readonly="readonly"
 														value="국민 5591-010-4168-906 ONESFIT (권성택)"
 														style="width: 215px"> <br> <br> <a
-														href=""><input type="button" class="btn"
-															value="은행사이트 바로가기 "></a></td>
+														href="#"><input type="button" class="btn"
+															value="은행사이트 바로가기 " id="bank"></a></td>
 												</tr>
 											</tbody>
 
@@ -989,16 +989,20 @@ div {
 
             location.href="/?tab2="+tab2;
          })
-         <script>
+
       
-		$("#allcheck").on("change",function(){
+		$("#allCheck").on("change",function(){
          if($(this).is(":checked")){
             $(".selectPro").prop("checked",true);
          }else{
             $(".selectPro").prop("checked",false);
          }
       })
+      
+      $("#bank").on("click",function(){
+         window.open("https://www.kbstar.com/");
+      })
    </script>
-	</script>
+
 </body>
 </html>

@@ -632,8 +632,8 @@ div {
                                        <td><input type="text" readonly="readonly"
                                           value="국민 5591-010-4168-906 ONESFIT (권성택)"
                                           style="width: 215px"> <br> <br> <a
-                                          href=""><input type="button" class="btn"
-                                             value="은행사이트 바로가기 "></a></td>
+                                          href="#"><input type="button" class="btn"
+                                             value="은행사이트 바로가기 " id="bank"></a></td>
                                     </tr>
                                  </tbody>
 
@@ -988,6 +988,10 @@ div {
 
           location.href="/?tab2="+tab2;
        })
+       
+       $("#bank").on("click",function(){
+         window.open("https://www.kbstar.com/");
+      })
    </script>
 </body>
 </html>

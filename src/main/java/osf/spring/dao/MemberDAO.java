@@ -202,13 +202,9 @@ public class MemberDAO {
 		return mybatis.selectOne("Member.getYN",bseq);
 	}
 
-	public boolean buylistYN(int oseq) {
+	public int buylistYN(int oseq) {
 		int result = mybatis.selectOne("Member.buylistYN",oseq);
-		if(result > 0) {
-			return true;
-		}else {
-			return false;
-		}
+		return result;
 	}
 	
 	public OrderBillDTO getOrderBill(int oseq) {

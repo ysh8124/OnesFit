@@ -41,22 +41,26 @@ public class MemberController {
 
 
 	@RequestMapping("login")
-	public String login(String id,String pw)throws Exception{
-		boolean login = mservice.login(id, pw);
+	   public String login(String id,String pw)throws Exception{
+	      boolean login = mservice.login(id, pw);
 
-		if(login) {
+	      if(login) {
 
-			MemberDTO dto = mservice.mypage(id);
-			session.setAttribute("loginInfo", dto);
-			session.setAttribute("loginid", dto.getId());
+	         MemberDTO dto = mservice.mypage(id);
+	         String blackCheck = dto.getBlacklist_yn();
+	         if(blackCheck.contentEquals("Y")) {
+	            return "blackList";
+	         }else {
+	            session.setAttribute("loginInfo", dto);
+	            session.setAttribute("loginid", dto.getId());
+	         }
 
-			System.out.println("member loginid : " + session.getAttribute("loginid"));
 
-		}else {return "loginFailed";}
-		mservice.joinCount();
+	      }else {return "loginFailed";}
+	      mservice.joinCount();
 
-		return "redirect:/";
-	}	
+	      return "redirect:/";
+	   }   
 
 	@RequestMapping("logout")
 	public String logout() throws Exception{
@@ -175,7 +179,6 @@ public class MemberController {
 		String phone2 = req.getParameter("phone2");
 		String phone3 = req.getParameter("phone3");
 		StringBuilder sb = new StringBuilder(phone1+phone2+phone3);
-		System.out.println(sb.toString());
 		mdto.setId(id);
 		mdto.setPw(pw);
 		mdto.setName(name);
@@ -244,8 +247,6 @@ public class MemberController {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw1");
 
-		System.out.println(id);
-		System.out.println(pw);
 
 		int result = mservice.updatePw(pw,id);
 
@@ -279,14 +280,7 @@ public class MemberController {
 		String email = request.getParameter("email");
 
 
-		System.out.println(id);
-		System.out.println(name);
-		System.out.println(phone);
-		System.out.println(zipcode);
-		System.out.println(address1);
-		System.out.println(address2);
-		System.out.println(email);
-
+		
 		int result = mservice.memberupdate(id,name,phone,zipcode,address1,address2,email);
 		session.setAttribute("loginInfo", mservice.mypage(id));
 		if(result>0) {
@@ -343,10 +337,8 @@ public class MemberController {
 		if(check) {
 			code=Mail.gmailSend(email);
 		}
-		System.out.println(check);
 		obj.addProperty("result", check);
 		obj.addProperty("code", code);
-		System.out.println(obj.toString());
 		return obj.toString();
 	}
 
@@ -362,7 +354,6 @@ public class MemberController {
 		code=Mail2.gmailSend(email);
 
 		obj.addProperty("code", code); 
-		System.out.println(obj.toString()); 
 		return obj.toString();
 	}
 
@@ -378,7 +369,6 @@ public class MemberController {
 		code=Mail3.gmailSend(email);
 
 		obj.addProperty("code", code); 
-		System.out.println(obj.toString()); 
 		return obj.toString();
 	}
 	
@@ -389,7 +379,6 @@ public class MemberController {
 		List<Integer> pseq = new ArrayList<>();
 		List<Integer> oseq = new ArrayList<>();
 		for(BuyListDTO b : blist) {
-			System.out.println(b.getProduct_num());
 			pseq.add(b.getProduct_num());
 			if(!oseq.contains(b.getOseq())) {
 			oseq.add(b.getOseq());
@@ -419,6 +408,7 @@ public class MemberController {
 	@RequestMapping("orderCancel")
 	public String orderCancel(int bseq,int amount,int oseq) {
 		int result = mservice.orderCancel(bseq,amount,oseq);
+		session.setAttribute("loginInfo", mservice.mypage((String)session.getAttribute("loginid")));
 		if(result > 0) {
 			return "redirect:/member/orderList";
 		}else {

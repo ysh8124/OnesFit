@@ -52,18 +52,18 @@
               location.href="/?tab2="+tab2;
            })
     	  
-    	  $(".cancel").on("click",function(){
+    	  $(".cancel").on("click",function(index2,item2){
     		  if(confirm("주문을 취소하시겠습니까? 되돌릴 수 없습니다.")){
     			  var bseq = $(this).parent().prev().html();
     			  var amount = "";
-    			  var oseq = "";
+    			  var oseq = Number($(this).next().val());
+    			  
     			 	$(this).parent().prevAll().each(function(index,item){
     			 		if($(item).attr("class") == "amount"){
     			 			amount = $(item).html();
-    			 		}else if($(item).attr("class") == "oseq"){
-    			 			oseq = $(item).html();
-    			 		}
-    			 	})
+    			 	}
+    			 		})
+    			 		
     			 	
     			  location.href="/member/orderCancel?bseq="+bseq+"&&amount="+amount+"&&oseq="+oseq;
     		  }
@@ -361,7 +361,7 @@
               	<div style="width: 10%; float:left">취소/환불 신청</div>
                 </div>
                 
-                <div style="width: 1000px; text-align: center; color:#a1a1a1;">
+                <div class="productBox" style="width: 1000px; text-align: center; color:#a1a1a1;">
                 <c:forEach items="${blist}" var="i" varStatus="b">
                    <hr style="width: 95%; margin-left: 1px; margin-bottom: 18px; float: left;">
                 
@@ -378,7 +378,7 @@
                </c:forEach>
 	
                </div>
-               <div style="width: 5%; float: left; margin-top: 27px;" class="oseq">${i.oseq}</div>
+               <div class="oseq" style="width: 5%; float: left; margin-top: 27px;" class="oseq">${i.oseq}</div>
                <div style="width: 25%; float: left; margin-top: 27px;line-height: 10px;" class='t'><a href="" style="text-decoration: none; color:#a1a1a1;">
                ${i.pname}</a><br>옵션 : ${i.pcolor}/${i.psize}</div>
                <div style="width: 5%; float: left; margin-top: 27px;">${i.amount}</div>
@@ -393,7 +393,7 @@
                <c:when test="${i.status eq '입금전'}">
                <div style="width: 20%; float: left; margin-top: 27px;">${i.status}</div>
                <div style="display:none;">${i.bseq}</div>
-               <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="cancel">주문취소</button></div>
+               <div style="width: 10%; float: left; margin-top: 27px;"><button type="button" class="cancel">주문취소</button><input type='number' value="${i.oseq }" class="sendOseq" style="display:none;"></div>
                </c:when>
                <c:when test="${i.status eq '입금완료/배송준비중'}">
                <div style="display:none;">${i.bseq}</div>
