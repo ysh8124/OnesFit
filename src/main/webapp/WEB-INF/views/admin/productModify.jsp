@@ -340,8 +340,9 @@
 						<li><a href="/daily/daily_list?page=1">DAILY 게시판</a></li>
 						<li><a href="/notice/notice_list?page=1">공지사항 </a></li>
 						<li><a href="/admin/popup">팝업 관리</a></li>
-						<li><a href=""><i class="fa fa-fw fa fa-question-circle"></i>
-								판매자 정보</a></li>
+						<li><a href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkcphmv62%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Df566e9542f2950498afd4ac837f452101fa48c9d"
+						onclick="window.open(this.href,'_blank'); return false;"><i class="fa fa-fw fa fa-question-circle"></i>
+								스토어 팜</a></li>
 					</ul>
 				</div>
 			</nav>

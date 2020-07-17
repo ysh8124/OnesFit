@@ -44,7 +44,7 @@
 <body>
 	<img alt="" src="/popup/${sysfileName}" id="notice" style="width: 485px; height: 455px;">
 	<div id="filename" hidden="">${sysfileName}</div>
-	<div id="check">
+	<div id="check" style="background-color: #dfdfdf; width:100%; opacity: 80%;" align=right>
 		<p style="font-size: 12px;"><input type="checkbox" id="checkBoxId"
 			style='width: 12px; height: 12px;'>24시간동안 띄우지 않기</p>
 	</div>

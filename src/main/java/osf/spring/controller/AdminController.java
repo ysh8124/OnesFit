@@ -254,11 +254,10 @@ if(folder_list != null) {
 
 		int seq = aservice.getProductSequence();
 
-//		String sysname = this.filesUpload2(file, seq);
-//		System.out.println("상품번호가? " + seq);
-//		List<ProductImgDTO> pdto = this.filesUpload(files2, seq);
-//		aservice.addImg(pdto, seq);
-		String sysname = "img.jsp";
+		String sysname = this.filesUpload2(file, seq);
+		System.out.println("상품번호가? " + seq);
+		List<ProductImgDTO> pdto = this.filesUpload(files2, seq);
+		aservice.addImg(pdto, seq);
 
 		aservice.productAdd(seq,pname, price, content, category, sysname);
 		
@@ -333,6 +332,11 @@ if(folder_list != null) {
 	// buyList
 	@RequestMapping("/buyList")
 	public String buyList(HttpServletRequest req, Model model, String BuylistSelected, String input) throws Exception {
+		if(input == "") {
+	         input = null;
+	      }
+
+		
 		Map<String, Object> selectParamBuylist = new HashMap<>();
 		selectParamBuylist.put("BuylistSelected", BuylistSelected);
 		selectParamBuylist.put("input", input);
@@ -369,6 +373,9 @@ if(folder_list != null) {
 	@RequestMapping("question")
 	public String question(HttpServletRequest req, Model model, String questionSelected, String input)
 			throws Exception {
+		if(input == "") {
+	         input = null;
+	      }
 		Map<String, Object> updateParamQuestion = new HashMap<>();
 		updateParamQuestion.put("questionSelected", questionSelected);
 		updateParamQuestion.put("input", input);

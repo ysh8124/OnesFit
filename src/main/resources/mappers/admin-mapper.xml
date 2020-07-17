@@ -67,7 +67,7 @@ union select nvl(count(*),0),5 sort from visit where <![CDATA[trunc(vdate,'MM')<
    <select id="selectList" resultType="osf.spring.dto.BuyListDTO">
       select * from buy_list
       <choose>
-         <when test="BuylistSelected != null">
+         <when test="input != null">
             where ${BuylistSelected} = #{input}
          </when>
          <otherwise>
@@ -94,11 +94,11 @@ union select nvl(count(*),0),5 sort from visit where <![CDATA[trunc(vdate,'MM')<
 
 
 
-   <!-- question -->
+<!-- question -->
    <select id="qSelectAll" resultType="osf.spring.dto.QuestionDTO">
       select * from question
       <choose>
-         <when test="questionSelected != null">
+         <when test="input != null">
             where ${questionSelected} = #{input}
          </when>
          <otherwise>
@@ -106,6 +106,8 @@ union select nvl(count(*),0),5 sort from visit where <![CDATA[trunc(vdate,'MM')<
       </choose>
       order by bno desc
    </select>
+ 
+ 
    <update id="answerUpdate">
       update question set answer_yn = 'Y' where bno =
       ${parent_bno}

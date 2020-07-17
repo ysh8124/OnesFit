@@ -380,7 +380,13 @@
                </div>
                <div class="oseq" style="width: 5%; float: left; margin-top: 27px;" class="oseq">${i.oseq}</div>
                <div style="width: 25%; float: left; margin-top: 27px;line-height: 10px;" class='t'><a href="" style="text-decoration: none; color:#a1a1a1;">
-               ${i.pname}</a><br><br>옵션 : ${i.pcolor}/${i.psize}<br><br>송장번호 : ${i.send_number}</div>
+               ${i.pname}</a><br><br>옵션 : ${i.pcolor}/${i.psize}
+               <c:choose>
+               <c:when test="${i.send_number != 0}">
+               <br><br>송장번호 : <a href="https://www.lotteglogis.com/open/tracking?invno=${i.send_number}"
+               onclick="window.open(this.href,'_blank','width=600,height=300'); return false;">${i.send_number}</a>
+               </c:when>
+               </c:choose></div>
                <div style="width: 5%; float: left; margin-top: 27px;">${i.amount}</div>
                <c:forEach var="o" items="${olist }">
                <c:choose>
