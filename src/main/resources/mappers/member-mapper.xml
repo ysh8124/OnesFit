@@ -133,5 +133,7 @@
 	<update id="onlyBuy">update buy_list set status='배송완료' where bseq=${value}</update>
 	
 	<update id="addPoint">update member set point=point+${point} where id=#{id}</update>
+	
+	<update id="setUsePoint">update order_bill set usepoint=0 where oseq=${value}</update>
 
 </mapper>

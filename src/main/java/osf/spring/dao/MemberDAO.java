@@ -239,4 +239,8 @@ public class MemberDAO {
 		
 	}
 
+	public void setUsePoint(int oseq) {
+		mybatis.update("Member.setUsePoint",oseq);
+	}
+
 }

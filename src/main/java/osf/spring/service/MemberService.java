@@ -244,6 +244,7 @@ public class MemberService {
 			usePoint = mdao.getUsePoint(oseq); // 사용포인트 가져오기
 			if(usePoint != 0) {
 				mdao.returnPoint(id,usePoint);//포인트 돌려주기		
+				mdao.setUsePoint(oseq);
 			}
 
 			if(buylistYN > 1) {

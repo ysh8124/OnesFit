@@ -380,7 +380,7 @@
                </div>
                <div class="oseq" style="width: 5%; float: left; margin-top: 27px;" class="oseq">${i.oseq}</div>
                <div style="width: 25%; float: left; margin-top: 27px;line-height: 10px;" class='t'><a href="" style="text-decoration: none; color:#a1a1a1;">
-               ${i.pname}</a><br>옵션 : ${i.pcolor}/${i.psize}</div>
+               ${i.pname}</a><br><br>옵션 : ${i.pcolor}/${i.psize}<br><br>송장번호 : ${i.send_number}</div>
                <div style="width: 5%; float: left; margin-top: 27px;">${i.amount}</div>
                <c:forEach var="o" items="${olist }">
                <c:choose>
