@@ -19,11 +19,11 @@
 
 <script>
 $(function(){
-	function dateFormat(argDate){
+   function dateFormat(argDate){
 
         if(argDate !== undefined){
-			var a = argDate;
-			var setA = a.substring(0,16);
+         var a = argDate;
+         var setA = a.substring(0,16);
 
         }
 
@@ -31,10 +31,10 @@ $(function(){
    }
 
 $(".date").each(function(){
-    			var date1 = $(this).html();
-    			var date2 = dateFormat(date1);
-    			$(this).html(date2);
-    		})
+             var date1 = $(this).html();
+             var date2 = dateFormat(date1);
+             $(this).html(date2);
+          })
 })
 </script>
 
@@ -194,8 +194,8 @@ $(".date").each(function(){
             <li><a href="/notice/notice_list?page=1">공지사항 </a></li>
             <li><a href="/admin/popup">팝업 관리</a></li>
            <li><a href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkcphmv62%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3Df566e9542f2950498afd4ac837f452101fa48c9d"
-						onclick="window.open(this.href,'_blank'); return false;"><i class="fa fa-fw fa fa-question-circle"></i>
-								스토어 팜</a></li>
+                  onclick="window.open(this.href,'_blank'); return false;"><i class="fa fa-fw fa fa-question-circle"></i>
+                        스토어 팜</a></li>
          </ul>
       </div>
    </nav>
@@ -220,38 +220,22 @@ $(".date").each(function(){
          <option value="send_money_yn">입금여부</option>
       </select> &nbsp; <input id="search" type="text" name="input">&nbsp;
       <button type="submit"
-         style="background-color: white; border: 1px solid #dfdfdf">
+         style="background-color: white; border: 1px solid #dfdfdf" id="searchBtn1">
          <img id="searchBtn" src="../resources/img/search.png"
             style="width: 20px;">
       </button>
    </form>
-   <!-- <script type="text/javascript">
-      $("#searchBtn").on("click", function() {
-         $(".answerB_write").css("display", "none");
-
-         var select = $(this).closest("button").prev().prev().find(":selected").val();
-         var input = $(this).closest("button").prev().val();
-
-         var pseqCompare = $(this).closest("body").find(".userQuestion").find("td").eq("1").html();
-         var writerCompare = $(this).closest("body").find(".userQuestion").find("td").eq("2").html();
-         var writer_ynCompare = $(this).closest("body").find(".userQuestion").find("td").eq("6").html();
-
-         if (select == "pseq") {
-            var bnoRegex = /\d$/;
-            var result = bnoRegex.test(input);
-
-            if (!result) {
-
-            } else {
-
+   <script type="text/javascript">
+         $("#searchBtn1").on("click", function(){
+            var a = $("#search");
+            var regex = /\s/g;      
+            var result = regex.test(a);
+            if(result){
+               return false;
             }
-         } else if (select == "writer") {
-
-         } else if (select == "answer_yn") {
-
-         }
-      })
-   </script> -->
+            alert("공백사용금지");
+         })
+   </script>
 
    <div id="qnadiv"
       style="max-height: 1000px; max-width: 1000; overflow-y: :auto;">
@@ -311,7 +295,7 @@ $(".date").each(function(){
                         <td>${i.msg }
                         <td>${i.status }
                         <td>${i.product_num }
-                        <td class="date">${i.buy_date }
+                        <td>${i.buy_date }
                         <td><select class="send_money_yn" name="send_money_yn">
                               <c:choose>
                                  <c:when test="${i.send_money_yn eq 'N' }">
@@ -454,7 +438,6 @@ $(".date").each(function(){
                location.reload();
             })
          }
-         
       })
       
    </script>

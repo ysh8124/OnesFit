@@ -370,7 +370,7 @@
 				<c:forEach var="img" items="${imgs}" varStatus="m">
 				<c:choose>
 				<c:when test="${m.index == b.index}">
-               <a href="">
+               <a href="/product/productDetail?pseq=${i.product_num}">
                <img src="/title/${img}" style="width: 70px; height: 70px;">
                </a>
                </c:when>
@@ -379,7 +379,7 @@
 	
                </div>
                <div class="oseq" style="width: 5%; float: left; margin-top: 27px;" class="oseq">${i.oseq}</div>
-               <div style="width: 25%; float: left; margin-top: 27px;line-height: 10px;" class='t'><a href="" style="text-decoration: none; color:#a1a1a1;">
+               <div style="width: 25%; float: left; margin-top: 27px;line-height: 10px;" class='t'><a href="/product/productDetail?pseq=${i.product_num}" style="text-decoration: none; color:#a1a1a1;">
                ${i.pname}</a><br><br>옵션 : ${i.pcolor}/${i.psize}
                <c:choose>
                <c:when test="${i.send_number != 0}">
@@ -444,7 +444,7 @@
                     <br> PHONE : 010-7777-7777
                     <br> 사업자 번호 : 145-51-00571
                     <br> 주소 : 강원도 원주시 우산동 상지대길 9 (402호)
-                    <br> OWNER : 원에스핏 | WEB MANAGER : 잊재웡
+                    <br> OWNER : 원에스핏 | WEB MANAGER : 이재원
                     <br> @ OSF ONESFIT
                 </div>
             </div>

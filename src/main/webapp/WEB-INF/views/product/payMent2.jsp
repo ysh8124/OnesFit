@@ -34,7 +34,7 @@
          var point1 = Math.floor($(this).val());
          $(this).val(point1);
       })
-      
+      totalPoint();      
    }
    </script>
 </head>
@@ -278,6 +278,9 @@ div {
    border: 0px;
    outline: 0;
 }
+#totalPoint:focus{
+   outline:none;
+}
 </style>
 <body>
    <!--       전체 영역-->
@@ -292,15 +295,15 @@ div {
                         style="width: 130px; position: relative; left: 45px">
                      </a>
           <div class="memberpage">
-								<ul>
-									<li><a href="/member/logout">logout</a> <a
-										href="/member/toProfile?id=${loginInfo.id}">PROFILE</a></li>
-									<li><a href="/member/tomyPage">my page</a> <a
-										href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a
-										href="/member/orderList?id=${loginid }">order</a></li>
+                        <ul>
+                           <li><a href="/member/logout">logout</a> <a
+                              href="/member/toProfile?id=${loginInfo.id}">PROFILE</a></li>
+                           <li><a href="/member/tomyPage">my page</a> <a
+                              href="/member/cart?parent_id=${loginInfo.id}">cart </a> <a
+                              href="/member/orderList?id=${loginid }">order</a></li>
 
-								</ul>
-							</div>
+                        </ul>
+                     </div>
 
                      <div id="category">
                         <ul>
@@ -319,25 +322,25 @@ div {
 
                      <div>
                        <ul>
-									<li><a
-										href="https://www.instagram.com/onesfit__official/?hl=ko"
-										onclick="window.open(this.href,'_blank'); return false;">
-											<img src="/img/instar.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a> <a
-										href="https://open.kakao.com/me/onesfit"
-										onclick="window.open(this.href,'_blank'); return false;"
-										id='kakaotest'>
-											<img src="/img/kakao.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a>
-										<a
-										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
-										onclick="window.open(this.href,'_blank'); return false;"><img
-											src="/img/naver.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px"></a>
-									</li>
-								</ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a
+                              href="https://open.kakao.com/me/onesfit"
+                              onclick="window.open(this.href,'_blank'); return false;"
+                              id='kakaotest'>
+                                 <img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
 
                      </div>
@@ -386,13 +389,14 @@ div {
                                     </div>
                                  </td>
                                  <td><input type="text" class="pinput" name="pname"
-                                    value="${i.pname}" style="width: 50px;"
-                                    readonly="readonly"> <br> <br> Size : <input
+                                    value="${i.pname}" style="width: 150px;"
+                                    readonly="readonly"> <br> <br> Size&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input
                                     type="text" class="pinput" name="psize"
-                                    value="${i.option1}" style="width: 15px"
-                                    readonly="readonly"><br> Color : <input
+                                    value="${i.option1}" style="width: 30px; position: relative; right: 10px;"
+                                    readonly="readonly"><br> Color&nbsp;: <input
                                     type="text" class="pinput" name="pcolor" value="${i.option2}"
-                                    style="width: 30px" readonly="readonly"></td>
+                                    style="width: 60px;" readonly="readonly"></td>
                                  <td><input type="text" class="pinput" name="price"
                                     value="${i.price}" style="width: 40px"
                                     readonly="readonly"></td>
@@ -593,11 +597,11 @@ div {
 
                               <br>
                               <div style="text-align: center">
-                                 <div style="border-top: 1px solid #999;">
-                                    <br> <strong>총 적립예정금액</strong>
-                                    <dd>0원</dd>
-                                    <dt>상품별 적립금</dt>
-                                    <dd>0원</dd>
+                                <div style="border-top: 1px solid #999;">
+                                    <br> <strong>총 적립예정금액
+                                    </strong>
+                                    <dd><input type=text readonly id='totalPoint' style='border:hidden;text-align:center;'>원</dd>
+                                    
                                  </div>
 
                               </div>
@@ -765,7 +769,7 @@ div {
                         <div>
                            COMPANY : ONESFIT <br> PHONE : 010-7777-7777 <br> 사업자
                            번호 : 145-51-00571 <br> 주소 : 강원도 원주시 우산동 상지대길 9 (402호) <br>
-                           OWNER : 원에스핏 | WEB MANAGER : 잊재웡 <br> @ OSF ONESFIT
+                           OWNER : 원에스핏 | WEB MANAGER : 이재원 <br> @ OSF ONESFIT
 
                         </div>
                      </div>
@@ -992,6 +996,13 @@ div {
        $("#bank").on("click",function(){
          window.open("https://www.kbstar.com/");
       })
+      function totalPoint(){
+         var sum = 0;
+         $(".point").each(function(index,item){
+            sum+=Number($(this).val());
+         })
+         $("#totalPoint").val(sum);
+      }
    </script>
 </body>
 </html>

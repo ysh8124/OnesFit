@@ -356,7 +356,7 @@
                     <br> PHONE : 010-7777-7777
                     <br> 사업자 번호 : 145-51-00571
                     <br> 주소 : 강원도 원주시 우산동 상지대길 9 (402호)
-                    <br> OWNER : 원에스핏 | WEB MANAGER : 잊재웡
+                    <br> OWNER : 원에스핏 | WEB MANAGER : 이재원
                     <br> @ OSF ONESFIT
 
                 </div>

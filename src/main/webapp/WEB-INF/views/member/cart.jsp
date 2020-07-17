@@ -25,7 +25,13 @@
    <script>
       $(function() {
       $("#buybtn").on("click", function () {
-         location.href = "../product/payMent2?parent_id=${loginid}";
+         var cartlist = $("#carts").html();
+         if(cartlist != "장바구니가 비었습니다."){
+            location.href = "../product/payMent2?parent_id=${loginid}";  
+         }
+         else{
+            alert("장바구니가 비었습니다.");
+         }
       })
       
       $(".tab").on("click", function() {
@@ -223,25 +229,25 @@
 
                      <div>
                         <ul>
-									<li><a
-										href="https://www.instagram.com/onesfit__official/?hl=ko"
-										onclick="window.open(this.href,'_blank'); return false;">
-											<img src="/img/instar.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a> <a
-										href="https://open.kakao.com/me/onesfit"
-										onclick="window.open(this.href,'_blank'); return false;"
-										id='kakaotest'>
-											<img src="/img/kakao.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a>
-										<a
-										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
-										onclick="window.open(this.href,'_blank'); return false;"><img
-											src="/img/naver.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px"></a>
-									</li>
-								</ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a
+                              href="https://open.kakao.com/me/onesfit"
+                              onclick="window.open(this.href,'_blank'); return false;"
+                              id='kakaotest'>
+                                 <img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
 
                      </div>
@@ -292,25 +298,25 @@
                      <div>
 
                         <ul>
-									<li><a
-										href="https://www.instagram.com/onesfit__official/?hl=ko"
-										onclick="window.open(this.href,'_blank'); return false;">
-											<img src="/img/instar.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a> <a
-										href="https://open.kakao.com/me/onesfit"
-										onclick="window.open(this.href,'_blank'); return false;"
-										id='kakaotest'>
-											<img src="/img/kakao.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a>
-										<a
-										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
-										onclick="window.open(this.href,'_blank'); return false;"><img
-											src="/img/naver.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px"></a>
-									</li>
-								</ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a
+                              href="https://open.kakao.com/me/onesfit"
+                              onclick="window.open(this.href,'_blank'); return false;"
+                              id='kakaotest'>
+                                 <img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
 
                      </div>
@@ -333,6 +339,16 @@
                <div style="width: 10%; float: left;">PRICE</div>
                 </div>
                 
+                <c:choose>
+                   <c:when test="${empty list}">
+                      <div style="width: 1000px; text-align: center; color:#a1a1a1;">
+                       <hr style="width: 95%; margin-left: 1px; margin-bottom: 18px; float: left;">
+                       <div style="width: 92%; float: left; text-align: center;" id="carts">장바구니가 비었습니다.</div>
+                         
+                      </div>
+                   </c:when>
+                
+                <c:otherwise>
                 <div style="width: 1000px; text-align: center; color:#a1a1a1;">
                 <c:forEach items="${list}" var="i">
                    <hr style="width: 95%; margin-left: 1px; margin-bottom: 18px; float: left;">
@@ -351,6 +367,9 @@
                <div style="width: 5%; float: left; margin-top: 27px;"><a href="/member/productDelete?parent_id=${i.parent_id}&pseq=${i.pseq}&c_seq=${i.c_seq}" style="color: #d43b3b; text-decoration: none;">x</a></div>
             </c:forEach>
               </div>
+              
+              </c:otherwise>
+              </c:choose>
               
               <div style="width: 1000px; float: left; margin-bottom: 50px; ">
               <hr style="width: 95%; margin-left: 1px; float: left;">
@@ -377,7 +396,7 @@
                     <br> PHONE : 010-7777-7777
                     <br> 사업자 번호 : 145-51-00571
                     <br> 주소 : 강원도 원주시 우산동 상지대길 9 (402호)
-                    <br> OWNER : 원에스핏 | WEB MANAGER : 잊재웡
+                    <br> OWNER : 원에스핏 | WEB MANAGER : 이재원
                     <br> @ OSF ONESFIT
                 </div>
             </div>

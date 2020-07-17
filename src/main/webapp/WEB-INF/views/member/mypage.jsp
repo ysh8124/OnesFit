@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -17,9 +17,9 @@
     
     <script>
     $(function(){
-    	
-    	
-    	$(".tab").on("click", function() {
+       
+       
+       $(".tab").on("click", function() {
             $(".box_li").css("display", "block");
             var tab = $(this).val();
             var tab2 = "";
@@ -161,25 +161,25 @@
 
                      <div>
                       <ul>
-									<li><a
-										href="https://www.instagram.com/onesfit__official/?hl=ko"
-										onclick="window.open(this.href,'_blank'); return false;">
-											<img src="/img/instar.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a> <a
-										href="https://open.kakao.com/me/onesfit"
-										onclick="window.open(this.href,'_blank'); return false;"
-										id='kakaotest'>
-											<img src="/img/kakao.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a>
-										<a
-										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
-										onclick="window.open(this.href,'_blank'); return false;"><img
-											src="/img/naver.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px"></a>
-									</li>
-								</ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a
+                              href="https://open.kakao.com/me/onesfit"
+                              onclick="window.open(this.href,'_blank'); return false;"
+                              id='kakaotest'>
+                                 <img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
                      </div>
                   </div>
@@ -229,25 +229,25 @@
                      <div>
 
                        <ul>
-									<li><a
-										href="https://www.instagram.com/onesfit__official/?hl=ko"
-										onclick="window.open(this.href,'_blank'); return false;">
-											<img src="/img/instar.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a> <a
-										href="https://open.kakao.com/me/onesfit"
-										onclick="window.open(this.href,'_blank'); return false;"
-										id='kakaotest'>
-											<img src="/img/kakao.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a>
-										<a
-										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
-										onclick="window.open(this.href,'_blank'); return false;"><img
-											src="/img/naver.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px"></a>
-									</li>
-								</ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a
+                              href="https://open.kakao.com/me/onesfit"
+                              onclick="window.open(this.href,'_blank'); return false;"
+                              id='kakaotest'>
+                                 <img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
 
                      </div>
@@ -376,7 +376,7 @@
                           <div>
                              <h7><b>MILEAGE</b>&nbsp; 적립금</h7>
                             <br><br>
-                            <p>적립금은 상품 구매 시 사용하실 수 있습니다.<br>적립된 금액은 현금으로 환불되지 않습니다.</p>
+                            <p style="color: #999">적립금은 상품 구매 시 사용하실 수 있습니다.<br>적립된 금액은 현금으로 환불되지 않습니다.</p>
                         </div>
 
                           <div>
@@ -427,7 +427,7 @@
                     <br> PHONE : 010-7777-7777
                     <br> 사업자 번호 : 145-51-00571
                     <br> 주소 : 강원도 원주시 우산동 상지대길 9 (402호)
-                    <br> OWNER : 원에스핏 | WEB MANAGER : 잊재웡
+                    <br> OWNER : 원에스핏 | WEB MANAGER : 이재원
                     <br> @ OSF ONESFIT
 
                 </div>

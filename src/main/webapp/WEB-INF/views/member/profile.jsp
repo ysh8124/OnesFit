@@ -30,7 +30,7 @@
    
    <script>
    $(function(){
-	   $(".tab").on("click", function() {
+      $(".tab").on("click", function() {
            $(".box_li").css("display", "block");
            var tab = $(this).val();
            var tab2 = "";
@@ -242,25 +242,25 @@ div {
 
                      <div>
                        <ul>
-									<li><a
-										href="https://www.instagram.com/onesfit__official/?hl=ko"
-										onclick="window.open(this.href,'_blank'); return false;">
-											<img src="/img/instar.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a> <a
-										href="https://open.kakao.com/me/onesfit"
-										onclick="window.open(this.href,'_blank'); return false;"
-										id='kakaotest'>
-											<img src="/img/kakao.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a>
-										<a
-										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
-										onclick="window.open(this.href,'_blank'); return false;"><img
-											src="/img/naver.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px"></a>
-									</li>
-								</ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a
+                              href="https://open.kakao.com/me/onesfit"
+                              onclick="window.open(this.href,'_blank'); return false;"
+                              id='kakaotest'>
+                                 <img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
 
                      </div>
@@ -311,25 +311,25 @@ div {
                      <div>
 
                         <ul>
-									<li><a
-										href="https://www.instagram.com/onesfit__official/?hl=ko"
-										onclick="window.open(this.href,'_blank'); return false;">
-											<img src="/img/instar.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a> <a
-										href="https://open.kakao.com/me/onesfit"
-										onclick="window.open(this.href,'_blank'); return false;"
-										id='kakaotest'>
-											<img src="/img/kakao.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a>
-										<a
-										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
-										onclick="window.open(this.href,'_blank'); return false;"><img
-											src="/img/naver.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px"></a>
-									</li>
-								</ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a
+                              href="https://open.kakao.com/me/onesfit"
+                              onclick="window.open(this.href,'_blank'); return false;"
+                              id='kakaotest'>
+                                 <img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
 
                      </div>
@@ -423,7 +423,10 @@ div {
                               <tr>
                                  <th scope="row">EMAIL</th>
                                  <td><input type="text" id="email" name="email"
-                                    value="${mdto.email}" style="width: 200px;"></td>
+                                    value="${mdto.email}" style="width: 200px;"><br>
+                                    <span id="emailMsg"></span>
+                                    </td>
+                                     
                               </tr>
                            </tbody>
 
@@ -542,6 +545,11 @@ div {
             alert("이메일을  입력해주세요.")
             return false;
          }
+         if ($("#emailMsg").text()=="옳지않은 이메일 형식입니다.") {
+             alert("옳지않은 이메일 형식입니다.");
+             $("#email").focus();
+             return false;
+          } 
 
          return true;
       })
@@ -549,6 +557,7 @@ div {
       $(document).ready(
             function() {
                var phone = /^[0-9]*$/;
+               var email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
                //휴대폰1 검사
                $("#phone").focusout(
@@ -567,6 +576,21 @@ div {
                            $('#phoneMsg').text("");
                         }
                      });
+               // 이메일 검사
+               $('#email')
+                     .focusout(
+                           function() {
+                              if (!email.test($(
+                                    '#email').val())) {
+                                 $('#emailMsg').css("color",
+                                       "red");
+                                 $('#emailMsg').text(
+                                       "옳지않은 이메일 형식입니다.");
+                                 $(this).val("");
+                              } else {
+                                 $('#emailMsg').text("");
+                              }
+                           });
 
             });
       

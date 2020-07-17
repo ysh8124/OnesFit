@@ -211,58 +211,58 @@ border: 1px solid #f7f7f7;
 
          <!--               사이드메뉴-->
         <div id="sidemenu">
-						<div id="sidefix">
-							<a href="/"> <img src="/img/logo.png"
-								style="width: 130px; position: relative; left: 45px">
-							</a>
-							<div class="memberpage">
-								<ul>
-									<li><a href="/member/toLogin">login</a> <a
-										href="/member/toSignup">join us</a></li>
-								</ul>
-							</div>
+                  <div id="sidefix">
+                     <a href="/"> <img src="/img/logo.png"
+                        style="width: 130px; position: relative; left: 45px">
+                     </a>
+                     <div class="memberpage">
+                        <ul>
+                           <li><a href="/member/toLogin">login</a> <a
+                              href="/member/toSignup">join us</a></li>
+                        </ul>
+                     </div>
 
-							<div id="category">
-								<ul>
-									<li value="1" class="tab"><a href="#">NEW ARRIVAL</a></li>
-									<li value="2" class="tab"><a href="#">BEST ITEM</a></li>
-									<li value="3" class="tab"><a href="#">OUTERWEAR</a></li>
-									<li value="4" class="tab"><a href="#">TOP</a></li>
-									<li value="5" class="tab"><a href="#">PANTS</a></li>
-									<li value="6" class="tab"><a href="#">ACC</a></li>
-									<li><a href="/daily/daily_list?page=1"
-										style="font-size: 11px;">OSF DAILY LOOK</a></li>
-									<li><a href="/notice/notice_list?page=1"
-										style="font-size: 11px;">NOTICE</a></li>
-								</ul>
-							</div>
+                     <div id="category">
+                        <ul>
+                           <li value="1" class="tab"><a href="#">NEW ARRIVAL</a></li>
+                           <li value="2" class="tab"><a href="#">BEST ITEM</a></li>
+                           <li value="3" class="tab"><a href="#">OUTERWEAR</a></li>
+                           <li value="4" class="tab"><a href="#">TOP</a></li>
+                           <li value="5" class="tab"><a href="#">PANTS</a></li>
+                           <li value="6" class="tab"><a href="#">ACC</a></li>
+                           <li><a href="/daily/daily_list?page=1"
+                              style="font-size: 11px;">OSF DAILY LOOK</a></li>
+                           <li><a href="/notice/notice_list?page=1"
+                              style="font-size: 11px;">NOTICE</a></li>
+                        </ul>
+                     </div>
 
-							<div>
-								<ul>
-									<li><a
-										href="https://www.instagram.com/onesfit__official/?hl=ko"
-										onclick="window.open(this.href,'_blank'); return false;">
-											<img src="/img/instar.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a> <a
-										href="https://open.kakao.com/me/onesfit"
-										onclick="window.open(this.href,'_blank'); return false;"
-										id='kakaotest'>
-											<img src="/img/kakao.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px">
-									</a>
-										<a
-										href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
-										onclick="window.open(this.href,'_blank'); return false;"><img
-											src="/img/naver.png" width="20px"
-											style="position: relative; top: 6px; border-radius: 9px"></a>
-									</li>
-								</ul>
+                     <div>
+                        <ul>
+                           <li><a
+                              href="https://www.instagram.com/onesfit__official/?hl=ko"
+                              onclick="window.open(this.href,'_blank'); return false;">
+                                 <img src="/img/instar.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a> <a
+                              href="https://open.kakao.com/me/onesfit"
+                              onclick="window.open(this.href,'_blank'); return false;"
+                              id='kakaotest'>
+                                 <img src="/img/kakao.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px">
+                           </a>
+                              <a
+                              href="https://smartstore.naver.com/onesfit?NaPm=ct%3Dkccxj1zn%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3D%7Chk%3D53dd1f37c78f4e235605b9617da325dbbf14a4a1"
+                              onclick="window.open(this.href,'_blank'); return false;"><img
+                                 src="/img/naver.png" width="20px"
+                                 style="position: relative; top: 6px; border-radius: 9px"></a>
+                           </li>
+                        </ul>
 
 
-							</div>
-						</div>
-					</div>
+                     </div>
+                  </div>
+               </div>
 
          <!--               중앙 내용-->
          <div id="contents">
@@ -316,8 +316,9 @@ border: 1px solid #f7f7f7;
                            <button type="button" class="emailBtn1" id="sendmail"
                                  style="width: 60px; height: 20px; margin-right: 10px; background-color: white; border-radius: 5px;">인증하기</button>
                                  <br>
+                                <span id="emailMsg"></span>
                                  <input
-                              id="code" class="ecode" style="width: 100px; height: 20px; margin-top: 3px; text-align: center;" placeholder="인증코드 입력" >
+                              id="code" class="ecode" style="width: 100px; height: 20px; display:none; margin-top: 3px; text-align: center;" placeholder="인증코드 입력">
                                  
                            
 
@@ -724,7 +725,7 @@ o 로그 기록
                 }).done(function(resp) {
                      if (resp.result==true) {
                           alert("인증번호가 발송되었습니다.");
-                          $(".code").css("display", "block");
+                          $("#code").css("display", "block");
                           code = resp.code;
                        } else  {
                           alert("이미 가입된 계정입니다.");
@@ -777,8 +778,6 @@ o 로그 기록
          return false;
       }
       
-      
-      
       if ($("#idbox").html() != "사용가능 한 아이디 입니다.") {
          alert("아이디가 중복되었습니다. 확인해주세요..");
          return false;
@@ -790,6 +789,11 @@ o 로그 기록
          $("#customerPw").focus();
          return false;
       }
+      if ($("#pwreMsg").text()=="비밀번호가 일치하지 않습니다.") {
+          alert("비밀번호가 일치하지 않습니다.");
+          $("#customerPw").focus();
+          return false;
+       } 
       // 이름
       if (isEmpty($("#customerName").val())) {
          alert("이름을 입력해 주세요.");
@@ -802,6 +806,12 @@ o 로그 기록
          $("#email").focus();
          return false;
       }
+       if ($("#emailMsg").text()=="옳지않은 이메일 형식입니다.") {
+          alert("옳지않은 이메일 형식입니다.");
+          $("#email").focus();
+          return false;
+       } 
+      
       if(isEmpty($("#code").val())){
          alert("인증번호를 입력해주세요.");
           $("#code").focus();
@@ -812,6 +822,7 @@ o 로그 기록
             $("#code").focus();
             return false;
       }
+     
       //휴대폰
       if (isEmpty($("#phone").val())) {
          alert("휴대폰번호 입력해 주세요.");
@@ -856,7 +867,8 @@ o 로그 기록
                   var customerPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
                   var phone = /^[0-9]*$/;
                   var customerId = /^[a-zA-Z0-9]{6,12}$/;
-                  
+                  var email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+                 
                   //아이디 검사
                
                   
@@ -878,6 +890,23 @@ o 로그 기록
                         });
                   
                   
+                  // 이메일 검사
+                  $('#email')
+                        .focusout(
+                              function() {
+                                 if (!email.test($(
+                                       '#email').val())) {
+                                    $('#emailMsg').css("color",
+                                          "red");
+                                    $('#emailMsg').text(
+                                          "옳지않은 이메일 형식입니다.");
+                                    $(this).val("");
+                                 } else {
+                                    $('#emailMsg').text("");
+                                 }
+                              });
+                  
+                  
 
                   // 이름 검사
                   $('#customerName')
@@ -895,6 +924,10 @@ o 로그 기록
                                  }
                               });
                   // 비밀번호 검사
+                  $("#customerPw").on("keyup",function(){
+                     $("#customerPwre").val("");
+                     $("#pwreMsg").text("");
+                  })
                   $('#customerPw')
                         .focusout(
                               function() {
@@ -944,7 +977,21 @@ o 로그 기록
                                     $(this).val("");
                                  }
                               });
-                  
+                  $("#phone")
+                  .focusout(
+                        function() {
+                           if (!phone.test($('#phone')
+                                 .val())
+                                 || $("#phone").val().length < 3) {
+                              $('#phoneMsg').css("color",
+                                    "red");
+                              $('#phoneMsg').text(
+                                    "재확인 해주십시오.");
+                              $(this).val("");
+                           } else {
+                              $('#phoneMsg').text("");
+                           }
+                        });
                   //휴대폰1 검사
                   $("#phone1")
                         .focusout(

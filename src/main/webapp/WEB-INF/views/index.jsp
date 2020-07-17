@@ -179,7 +179,7 @@ div {
 	float: left;
 	width: 250px;
 	position: fixed;
-	right: 130px;
+	right: 100px;
 	padding: 49px 80px 0px 0px;
 	text-align: right;
 }
